@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="firstChangeSet" author="Kenneth Garcia">
+    <createTable tableName="profiles" >
+
+
+        <column name="name" type="varchar(40)" >
+            <constraints primaryKey="true" nullable="false" unique="true"/>
+        </column>
+
+        <column name="status"  type="tinyint(1)"/>
+
+    </createTable>
+    </changeSet>
+
+    <changeSet id="secondChangeSet" author="Kenneth Garcia">
+        <createTable tableName="users">
+
+
+            <column name="email" type="varchar(80)" >
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+
+            <column name="name" type="varchar(40)" />
+
+            <column name="status" type="tinyint(1)"/>
+
+            <column name="profile" type="varchar(40)"/>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="thirdChangeSet" author="Kenneth Garcia">
+        <addForeignKeyConstraint baseTableName="users" baseColumnNames="profile" constraintName="users2profiles"
+                                 referencedTableName="profiles" referencedColumnNames="name" />
+    </changeSet>
+
+
+</databaseChangeLog>
