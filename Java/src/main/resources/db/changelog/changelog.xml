@@ -6,38 +6,46 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
 
     <changeSet id="firstChangeSet" author="Kenneth Garcia">
-    <createTable tableName="profiles" >
+    <createTable tableName="PROFILES" remarks="PROFILES_TABLE">
 
 
-        <column name="name" type="varchar(40)" >
+        <column name="NAME" type="varchar(40)" remarks="NAME_COLUMN">
             <constraints primaryKey="true" nullable="false" unique="true"/>
         </column>
 
-        <column name="status"  type="tinyint(1)"/>
+        <column name="STATUS"  type="tinyint(1)" remarks="STATUS_COLUMN"/>
 
     </createTable>
     </changeSet>
 
     <changeSet id="secondChangeSet" author="Kenneth Garcia">
-        <createTable tableName="users">
+        <createTable tableName="USERS" remarks="USERS_TABLE">
 
 
-            <column name="email" type="varchar(80)" >
+            <column name="EMAIL" type="varchar(80)" remarks="EMAIL_COLUMN" >
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
 
-            <column name="name" type="varchar(40)" />
+            <column name="NAME" type="varchar(40)" remarks="NAME_COLUMN" />
 
-            <column name="status" type="tinyint(1)"/>
+            <column name="STATUS" type="tinyint(1)" remarks="STATUS_COLUMN"/>
 
-            <column name="profile" type="varchar(40)"/>
+            <column name="PROFILE" type="varchar(40)" remarks="PROFILE_COLUMN"/>
 
         </createTable>
     </changeSet>
 
     <changeSet id="thirdChangeSet" author="Kenneth Garcia">
-        <addForeignKeyConstraint baseTableName="users" baseColumnNames="profile" constraintName="users2profiles"
-                                 referencedTableName="profiles" referencedColumnNames="name" />
+        <addForeignKeyConstraint baseTableName="USERS" baseColumnNames="PROFILE" constraintName="USERS2PROFILES"
+                                 referencedTableName="PROFILES" referencedColumnNames="NAME" />
+    </changeSet>
+    
+    <changeSet id="fourthChangeset" author="Kenneth Garcia">
+        <createTable tableName="ENTERPRISES" remarks="ENTERPRISES_TABLE">
+            <column name="NAME" type="varchar(40)" remarks="NAME_COLUMN">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+        </createTable>
     </changeSet>
 
 

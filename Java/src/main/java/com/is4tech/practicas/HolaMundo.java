@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin("*")
 public class HolaMundo {
 
+
     @GetMapping("/saludo")
     public String holaMundo(){
         return "Hola mundo";
