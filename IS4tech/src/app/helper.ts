@@ -1,3 +1,3 @@
-let url="http://localhost:8080/api/practicas/"
+let url="http://localhost:8080/"
 
 export default url;

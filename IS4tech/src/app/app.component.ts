@@ -13,11 +13,6 @@ export class AppComponent {
   constructor(private _servicio: ServicioService) {}
 
   ngOnInit() {
-    this._servicio.holaMundo().subscribe({
-      next: (response: any) => {
-        this.title = response;
-        console.log(response);
-      },
-    });
+
   }
 }
