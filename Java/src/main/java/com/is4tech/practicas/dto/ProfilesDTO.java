@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class ProfilesDTO {
     private String name;
+    private Byte status;
 }

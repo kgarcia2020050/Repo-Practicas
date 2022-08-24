@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProfileRepository extends JpaRepository<ProfilesModel,String> {
+public interface ProfileRepository extends JpaRepository<ProfilesModel,Integer> {
     public abstract ProfilesModel findByName(String name);
     public abstract List<ProfilesModel> findByStatus(Byte status);
 }

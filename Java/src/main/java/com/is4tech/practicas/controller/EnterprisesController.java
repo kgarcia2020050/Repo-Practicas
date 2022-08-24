@@ -3,7 +3,6 @@ package com.is4tech.practicas.controller;
 import com.is4tech.practicas.dto.EnterpriseDTO;
 import com.is4tech.practicas.models.EnterprisesModel;
 import com.is4tech.practicas.service.EntrerprisesService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping("/enterprise")
 public class EnterprisesController {
 
-    @Autowired
-    private EntrerprisesService enterpriseServices;
+    private final EntrerprisesService enterpriseServices;
+
+    public EnterprisesController(EntrerprisesService enterpriseServices) {
+        this.enterpriseServices = enterpriseServices;
+    }
 
     @PostMapping("/new")
     public void save(@RequestBody EnterpriseDTO enterprisesModel){

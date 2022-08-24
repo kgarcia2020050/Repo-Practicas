@@ -7,7 +7,6 @@ import com.is4tech.practicas.models.EnterprisesModel;
 import com.is4tech.practicas.service.repository.EnterpriseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +16,14 @@ public class EntrerprisesService {
 
     private final Logger logger= LoggerFactory.getLogger(EntrerprisesService.class);
 
-    @Autowired
-    private EnterpriseRepository enterpriseRepository;
+    private final EnterpriseRepository enterpriseRepository;
 
-    @Autowired
-    private Mapper mapper;
+    private final Mapper mapper;
+
+    public EntrerprisesService(EnterpriseRepository enterpriseRepository, Mapper mapper) {
+        this.enterpriseRepository = enterpriseRepository;
+        this.mapper = mapper;
+    }
 
     public EnterprisesModel findByName(String name){
         return enterpriseRepository.findByName(name);
