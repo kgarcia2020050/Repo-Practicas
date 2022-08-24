@@ -1,6 +1,7 @@
 package com.is4tech.practicas.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users", schema = "practicas", catalog = "")
@@ -65,30 +66,18 @@ public class UsersModel {
         this.profile = profile;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof UsersModel)) return false;
         UsersModel that = (UsersModel) o;
-
-        if (id != that.id) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
-        if (profile != null ? !profile.equals(that.profile) : that.profile != null) return false;
-
-        return true;
+        return getId() == that.getId() && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getName(), that.getName()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getProfile(), that.getProfile()) && Objects.equals(getProfilesByProfile(), that.getProfilesByProfile());
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (profile != null ? profile.hashCode() : 0);
-        return result;
+        return Objects.hash(getId(), getEmail(), getName(), getStatus(), getProfile(), getProfilesByProfile());
     }
 
     public ProfilesModel getProfilesByProfile() {

@@ -1,9 +1,7 @@
 package com.is4tech.practicas.dto;
 
-import com.sun.istack.NotNull;
 
 public class EnterpriseDTO {
-    @NotNull
     private String name;
 
     public String getName() {

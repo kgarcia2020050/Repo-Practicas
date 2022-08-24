@@ -1,6 +1,7 @@
 package com.is4tech.practicas.models;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "enterprises", schema = "practicas", catalog = "")
@@ -29,23 +30,17 @@ public class EnterprisesModel {
         this.name = name;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
+        if (!(o instanceof EnterprisesModel)) return false;
         EnterprisesModel that = (EnterprisesModel) o;
-
-        if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-
-        return true;
+        return getId() == that.getId() && Objects.equals(getName(), that.getName());
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return Objects.hash(getId(), getName());
     }
 }
