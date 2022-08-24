@@ -3,7 +3,7 @@ package com.is4tech.practicas.service;
 import com.is4tech.practicas.dto.ProfilesDTO;
 import com.is4tech.practicas.mapper.MapperProfile;
 import com.is4tech.practicas.models.ProfilesModel;
-import com.is4tech.practicas.repository.ProfileRepository;
+import com.is4tech.practicas.service.repository.ProfileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

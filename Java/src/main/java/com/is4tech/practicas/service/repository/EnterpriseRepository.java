@@ -1,4 +1,4 @@
-package com.is4tech.practicas.repository;
+package com.is4tech.practicas.service.repository;
 
 import com.is4tech.practicas.models.EnterprisesModel;
 import org.springframework.data.jpa.repository.JpaRepository;

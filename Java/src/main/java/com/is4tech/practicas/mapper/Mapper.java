@@ -13,4 +13,6 @@ public class Mapper implements MapperDTO<EnterpriseDTO, EnterprisesModel>{
         model.setName(objeto.getName());
         return model;
     }
+
+
 }

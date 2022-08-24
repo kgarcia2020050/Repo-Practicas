@@ -4,7 +4,7 @@ import com.is4tech.practicas.dto.EnterpriseDTO;
 import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.Mapper;
 import com.is4tech.practicas.models.EnterprisesModel;
-import com.is4tech.practicas.repository.EnterpriseRepository;
+import com.is4tech.practicas.service.repository.EnterpriseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class EntrerprisesService {
         if(findByName(enterprisesModeDto.getName())!=null){
             logger.info("Ya existe una empresa con este nombre, intenta con uno diferente.");
         }else if(enterprisesModeDto.getName().length()>40){
-            logger.info("La longitud maxima es de 40 caracteres.");
+            logger.info("La longitud maxima es de 40 caracteres.")          ;
         }else if(enterprisesModeDto.getName().length()<8){
             logger.info("La longitud minima es de 8 caracteres.");
         }
