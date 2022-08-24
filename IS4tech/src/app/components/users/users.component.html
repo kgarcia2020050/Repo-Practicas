@@ -1,5 +1,8 @@
 <router-outlet></router-outlet>
 
+<body class="princ"> 
+    
+
 <div class="container-fluid ">
     <div class="row">
         <div class="col-sm-auto bg-light sticky-top">
@@ -66,10 +69,14 @@
            <!--Area de funcionalidad-->     
 
 
-        <div class="col-sm p-3 min-vh-100 dimen">
+        <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 30rem;">
             <div>
                 <h1 class="title">Usuarios</h1><br>
-                <div class="input-group rounded">
+
+           <!--Buscador-->     
+
+
+                <div class="input-group rounded" style="max-width: 15rem;">
                     <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                         <mat-icon>search</mat-icon>
@@ -94,21 +101,21 @@
        
               
         </div>
-        <div class="col-sm p-3 min-vh-100 dim2">
-            <br><br>
-            <div class="card cardUs">
+        <div class="col-sm p-3 min-vh-100 dim2" >
+            <div class="card border-primary " >
                 <div class="card-body">
 
                 <!--Titulos y nombres-->     
 
 
-                    <p class="fs-1">Agregar</p> <br>
+                    <p class="fs-1">Agregar</p> 
                     <p class="text-decoration-underline">Administrador</p><br>
-                    <p class="fs-2">Acessos</p><br>
+                    <p class="fs-2">Acessos</p>
                         <div class="card-header">
                           Configuración
                         </div>
-                        <div class="card-body">
+                            
+                        <div class="card-body border-primary">
                           <blockquote class="blockquote mb-0">
                             <table class="table table-bordered tabod">
 
@@ -242,3 +249,5 @@
         </div>
     </div>
 </div>
+
+</body>

@@ -40,3 +40,9 @@
     .btnn:hover{
         background-color: rgb(199, 202, 202);
         transition: background-color .5s;  }
+
+
+
+.princ{
+    background-color: #F0F0F0;
+}

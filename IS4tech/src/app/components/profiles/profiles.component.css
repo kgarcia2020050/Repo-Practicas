@@ -1,0 +1,58 @@
+
+.example-button-container{
+    padding-top: 50%;
+}
+
+.positionn{
+    position: relative;
+}
+ 
+.title{
+    padding: 3%;
+    font-size: 50px;
+    color: #2B638C;
+}
+
+.coll{
+    color: #2B638C;
+
+}
+
+.card-body{
+    padding-top: 5%;
+}
+
+.perf{
+    padding-top: 100%;
+}
+.img-profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .dimen{
+    padding: 100%;
+  }
+
+  .tabod{
+    border-radius: 50%;
+  }
+
+  .hoved:hover{
+    background-color: rgb(199, 202, 202);
+    transition: background-color .5s;  }
+
+    .btnn:hover{
+        background-color: rgb(199, 202, 202);
+        transition: background-color .5s;  }
+
+        .hoved{
+            font-size: medium;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+
+.princ{
+    background-color: #F0F0F0;
+}
