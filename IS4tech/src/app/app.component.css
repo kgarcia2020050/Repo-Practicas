@@ -1,0 +1,21 @@
+
+.example-button-container{
+    padding-top: 50%;
+}
+
+.positionn{
+    position: relative;
+}
+ 
+.title{
+    padding: 3%;
+    font-size: 50px;
+}
+
+.card-body{
+    padding-top: 5%;
+}
+
+.perf{
+    padding-top: 100%;
+}

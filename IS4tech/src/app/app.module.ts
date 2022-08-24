@@ -6,17 +6,40 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UsersComponent } from './components/users/users.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon'
+import {MatDividerModule} from '@angular/material/divider'
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    ProfilesComponent
+    ProfilesComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
