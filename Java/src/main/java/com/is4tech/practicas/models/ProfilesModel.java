@@ -5,12 +5,24 @@ import javax.persistence.*;
 @Entity
 @Table(name = "profiles", schema = "practicas", catalog = "")
 public class ProfilesModel {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "NAME", nullable = false, length = 40)
+    @Column(name = "ID", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "NAME", nullable = true, length = 40)
     private String name;
     @Basic
     @Column(name = "STATUS", nullable = true)
     private Byte status;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -35,6 +47,7 @@ public class ProfilesModel {
 
         ProfilesModel that = (ProfilesModel) o;
 
+        if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
 
@@ -43,7 +56,8 @@ public class ProfilesModel {
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }

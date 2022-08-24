@@ -5,8 +5,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users", schema = "practicas", catalog = "")
 public class UsersModel {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "EMAIL", nullable = false, length = 80)
+    @Column(name = "ID", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "EMAIL", nullable = true, length = 80)
     private String email;
     @Basic
     @Column(name = "NAME", nullable = true, length = 40)
@@ -15,11 +19,19 @@ public class UsersModel {
     @Column(name = "STATUS", nullable = true)
     private Byte status;
     @Basic
-    @Column(name = "PROFILE", nullable = true, length = 40,insertable = false,updatable = false)
-    private String profile;
+    @Column(name = "PROFILE", nullable = true,insertable = false,updatable = false)
+    private Integer profile;
     @ManyToOne
-    @JoinColumn(name = "PROFILE", referencedColumnName = "NAME")
+    @JoinColumn(name = "PROFILE", referencedColumnName = "ID")
     private ProfilesModel profilesByProfile;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEmail() {
         return email;
@@ -45,11 +57,11 @@ public class UsersModel {
         this.status = status;
     }
 
-    public String getProfile() {
+    public Integer getProfile() {
         return profile;
     }
 
-    public void setProfile(String profile) {
+    public void setProfile(Integer profile) {
         this.profile = profile;
     }
 
@@ -60,6 +72,7 @@ public class UsersModel {
 
         UsersModel that = (UsersModel) o;
 
+        if (id != that.id) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (status != null ? !status.equals(that.status) : that.status != null) return false;
@@ -70,7 +83,8 @@ public class UsersModel {
 
     @Override
     public int hashCode() {
-        int result = email != null ? email.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (profile != null ? profile.hashCode() : 0);

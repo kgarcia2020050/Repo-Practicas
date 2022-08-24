@@ -5,9 +5,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "enterprises", schema = "practicas", catalog = "")
 public class EnterprisesModel {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "NAME", nullable = false, length = 40)
+    @Column(name = "ID", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "NAME", nullable = true, length = 40)
     private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -24,6 +36,7 @@ public class EnterprisesModel {
 
         EnterprisesModel that = (EnterprisesModel) o;
 
+        if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
 
         return true;
@@ -31,6 +44,8 @@ public class EnterprisesModel {
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }
