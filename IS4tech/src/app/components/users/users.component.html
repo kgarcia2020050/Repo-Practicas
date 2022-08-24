@@ -1,70 +1,13 @@
 <router-outlet></router-outlet>
 
-<body class="princ"> 
-    
 
-<div class="container-fluid ">
+   
+    <div>
+        <app-sidenav></app-sidenav>
+
+
     <div class="row">
-        <div class="col-sm-auto bg-light sticky-top">
-            <div class="d-flex flex-sm-column flex-row flex-nowrap  align-items-center sticky-top">
-
-              <!--Rutas para navegar-->     
-
-               
-                <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
-                   
-                    <li>
-                        <a routerLink="/users" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-                                <mat-icon>account_circle</mat-icon>
-                            </button>                        
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-                                <mat-icon>group</mat-icon>
-                            </button>                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-                                <mat-icon> local_see</mat-icon>
-                            </button>
-                        </a>
-                    </li>
-                   
-                    <li>
-                        <a routerLink="/users" href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-                                <mat-icon>group</mat-icon>
-                            </button>                        </a>
-                    </li>
-                </ul>
-
-           <!--Imagen de perfil-->     
-
-                <ul class="navbar-nav d-flex" >
-                    <li class="nav-item dropstart">
-                        <a class="nav-link " id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            
-                            <img class="ms-1 img-profile"  crossorigin="anonymous" src="../../../assets/img/perfildefecto.jpg" alt="user image">
-                        </a>
       
-                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" routerLink="/myProfile">Mi perfil</a></li>
-                            <li><a class="dropdown-item" >Cerrar Sesión</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                           
-                        </ul>
-                    </li>
-                </ul>
-                
-            </div>
-        </div>
 
            <!--Area de funcionalidad-->     
 
@@ -250,4 +193,4 @@
     </div>
 </div>
 
-</body>
+

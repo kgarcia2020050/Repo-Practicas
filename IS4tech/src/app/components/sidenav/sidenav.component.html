@@ -1,26 +1,35 @@
-<div class="container-fluid ">
+<router-outlet></router-outlet>
+
+
+<div class="container-fluid " style="background-color: #F0F0F0;">
     <div class="row">
-        <div class="col-sm-auto bg-light sticky-top">
+        <div class="col-sm-auto sidenav sticky-top">
             <div class="d-flex flex-sm-column flex-row flex-nowrap  align-items-center sticky-top">
+
+              <!--Rutas para navegar-->     
+
                
                 <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
                    
                     <li>
                         <a routerLink="/users" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" type="button" class="btn btn-light">
                                 <mat-icon>account_circle</mat-icon>
                             </button>                        
                         </a>
                     </li>
+
                     <li>
-                        <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                        <a routerLink="/profiles" href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" type="button" class="btn btn-light">
                                 <mat-icon>group</mat-icon>
-                            </button>                        </a>
+                            </button>                 
+                        </a>
                     </li>
+
                     <li>
                         <a href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" type="button" class="btn btn-light">
                                 <mat-icon> local_see</mat-icon>
                             </button>
                         </a>
@@ -28,29 +37,49 @@
                    
                     <li>
                         <a routerLink="/users" href="#" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                            <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" type="button" class="btn btn-light">
                                 <mat-icon>group</mat-icon>
-                            </button>                        </a>
+                            </button>                        
+                        </a>
                     </li>
                 </ul>
 
-                <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi-person-circle h2">hola</i>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                    </ul>
-                </div>
+           <!--Imagen de perfil-->     
+
+                <ul class="navbar-nav d-flex" >
+                    <li class="nav-item dropstart">
+                        <a class="nav-link " id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            
+                            <img class="ms-1 img-profile"  crossorigin="anonymous" src="../../../assets/img/perfildefecto.jpg" alt="user image">
+                        </a>
+      
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" routerLink="/myProfile">Mi perfil</a></li>
+                            <li><a class="dropdown-item" >Cerrar Sesión</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                           
+                        </ul>
+                    </li>
+                </ul>
                 
             </div>
         </div>
-        <div class="col-sm p-3 min-vh-100">
+
+           <!--Area de funcionalidad-->     
+
+
+           <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 30rem;">
             
+       
               
         </div>
         
+                   
+
+
+                
     </div>
 </div>

@@ -49,10 +49,13 @@
 
         .hoved{
             font-size: medium;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
         }
 
 
 .princ{
     background-color: #F0F0F0;
+}
+
+.sidenav{
+    background-color: #12579C;
 }
