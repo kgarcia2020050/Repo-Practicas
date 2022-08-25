@@ -1,21 +1,31 @@
 
-.example-button-container{
+.example-button-container {
     padding-top: 50%;
-}
-
-.positionn{
+  }
+  
+  .positionn {
     position: relative;
-}
- 
-.title{
+  }
+  
+  .title {
     padding: 3%;
     font-size: 50px;
-}
-
-.card-body{
+  }
+  
+  .card-body {
     padding-top: 5%;
-}
-
-.perf{
+  }
+  
+  .perf {
     padding-top: 100%;
-}
+  }
+  
+  .layout-router {
+    width: calc(100vw - 70px);
+    height: 100vh;
+    position: fixed;
+    z-index: 0;
+    left: 65px;
+    background-color: #EFEFEF;
+  }
+  

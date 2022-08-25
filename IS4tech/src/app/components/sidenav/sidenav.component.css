@@ -1,62 +1,71 @@
 
-.example-button-container{
+.example-button-container {
     padding-top: 50%;
-}
-
-.positionn{
+  }
+  
+  .positionn {
     position: relative;
-}
- 
-.title{
+  }
+  
+  .title {
     padding: 3%;
     font-size: 50px;
     color: #2B638C;
-}
-
-.coll{
+  }
+  
+  .coll {
     color: #2B638C;
-
-}
-
-.card-body{
+  
+  }
+  
+  .card-body {
     padding-top: 5%;
-}
-
-.perf{
+  }
+  
+  .perf {
     padding-top: 100%;
-}
-.img-profile {
+  }
+  
+  .img-profile {
     width: 40px;
     height: 40px;
     border-radius: 50%;
   }
   
-  .dimen{
+  .dimen {
     padding: 100%;
   }
-
-  .tabod{
+  
+  .tabod {
     border-radius: 50%;
   }
-
-  .hoved:hover{
+  
+  .hoved:hover {
     background-color: rgb(199, 202, 202);
-    transition: background-color .5s;  }
-
-    .btnn:hover{
-        background-color: rgb(199, 202, 202);
-        transition: background-color .5s;  }
-
-        .hoved{
-            font-size: medium;
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-        }
-
-
-.princ{
+    transition: background-color .5s;
+  }
+  
+  .btnn:hover {
+    background-color: rgb(199, 202, 202);
+    transition: background-color .5s;
+  }
+  
+  .hoved {
+    font-size: medium;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  
+  .princ {
     background-color: #F0F0F0;
-}
-
-.sidenav{
+  }
+  
+  .sidenav {
+    width: 65px;
     background-color: #12579C;
-}
+    height: 100vh;
+    position: absolute;
+    padding: 1rem .5rem;
+    z-index: 9;
+  }
+  
