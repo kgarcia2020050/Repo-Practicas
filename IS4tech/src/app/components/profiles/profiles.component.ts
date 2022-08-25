@@ -22,7 +22,7 @@ export class ProfilesComponent implements OnInit {
   }
 
   getProfiles() {
-    this.profileService.getProfiles(0, 10, 'name', true).subscribe({
+    this.profileService.getProfiles(0, 6, 'name', true).subscribe({
       next: (response: any) => {
         this.profiles = response.content;
       },
@@ -32,6 +32,7 @@ export class ProfilesComponent implements OnInit {
   newProfile(addForm) {
     this.profileService.postProfile(this.postProfile).subscribe({
       next: (response: any) => {
+        console.log(response);
         addForm.reset();
         Swal.fire({
           icon: 'success',
@@ -40,10 +41,18 @@ export class ProfilesComponent implements OnInit {
         this.getProfiles();
       },
       error: (error: any) => {
-        Swal.fire({
-          icon: 'error',
-          text: error.error.errors[0].defaultMessage,
-        });
+        console.log(error);
+        if (error.error.errors) {
+          Swal.fire({
+            icon: 'error',
+            text: error.error.errors[0].defaultMessage,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            text: error.error,
+          });
+        }
       },
     });
   }

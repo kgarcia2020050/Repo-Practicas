@@ -8,12 +8,12 @@ import { Profile } from '../models/profile';
   providedIn: 'root',
 })
 export class ProfileService {
-  constructor(private http: HttpClient) {}
+  constructor(public http: HttpClient) {}
 
   getProfiles(
-    page: Number,
-    size: Number,
-    order: String,
+    page: number,
+    size: number,
+    order: string,
     asc: boolean
   ): Observable<any> {
     return this.http.get(

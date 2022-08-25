@@ -23,36 +23,29 @@ public class UserService {
 
     private final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    public UserService(MapperUser mapper, UsersRepository usersRepository,ProfilesService profilesService) {
+    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService) {
         this.mapper = mapper;
         this.usersRepository = usersRepository;
-        this.profilesService=profilesService;
+        this.profilesService = profilesService;
     }
 
-    public Users findByName(String name){
+    public Users findByName(String name) {
         return usersRepository.findByName(name);
     }
 
-    public List<Users> findAll(){
+    public List<Users> findAll() {
         return usersRepository.findAll();
     }
 
 
-    public void saveUser(UserDTO userdto){
-        if(findByName(userdto.getName())!= null){
-            logger.info("Nombre de usuario ya utilizado, prueba con otro");
-        }else if(userdto.getName().length()>40 || userdto.getName().length()<8){
-            logger.info("La longitud máxima es de 40 caracteres");
-        }
-        else {
-            Users model = mapper.mapeo(userdto);
-            usersRepository.save(model);
-            logger.info("Usuario guardado exitosamente");
-        }
+    public void saveUser(UserDTO userdto) {
+        Users model = mapper.mapeo(userdto);
+        usersRepository.save(model);
+        logger.info("Usuario guardado exitosamente");
     }
 
-    public void editUser(Integer id,UserDTO userDTO){
-        Users model=usersRepository.findById(id).orElseThrow(()->new NotFoundException("No se encuentra al usuario con el ID "+id));
+    public void editUser(Integer id, UserDTO userDTO) {
+        Users model = usersRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra al usuario con el ID " + id));
         model.setName(userDTO.getName());
         model.setEmail(userDTO.getEmail());
         model.setStatus(userDTO.getStatus());
@@ -60,8 +53,6 @@ public class UserService {
         model.setProfilesByProfile(profilesService.findById(userDTO.getProfile()));
         usersRepository.save(model);
     }
-
-    
 
 
 }

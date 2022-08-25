@@ -23,27 +23,24 @@ public class EntrerprisesService {
         this.mapper = mapper;
     }
 
-    public Enterprises findByName(String name){
+    public Enterprises findByName(String name) {
         return enterpriseRepository.findByName(name);
     }
 
-    public void save(EnterpriseDTO enterprisesModeDto){
-            Enterprises model=mapper.mapeo(enterprisesModeDto);
-            enterpriseRepository.save(model);
-
-    }
-
-    public Page<Enterprises> findAll(Pageable pageable){
-        return enterpriseRepository.findAll(pageable);
-    }
-
-    public void editEnterprise(Integer id,EnterpriseDTO enterpriseDTO){
-        Enterprises model=enterpriseRepository.findById(id).orElseThrow(()->new NotFoundException("No se encontro a la empresa con el ID "+id));
-        model.setName(enterpriseDTO.getName());
+    public void save(EnterpriseDTO enterprisesModeDto) {
+        Enterprises model = mapper.mapeo(enterprisesModeDto);
         enterpriseRepository.save(model);
     }
 
+    public Page<Enterprises> findAll(Pageable pageable) {
+        return enterpriseRepository.findAll(pageable);
+    }
 
+    public void editEnterprise(Integer id, EnterpriseDTO enterpriseDTO) {
+        Enterprises model = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encontro a la empresa con el ID " + id));
+        model.setName(enterpriseDTO.getName());
+        enterpriseRepository.save(model);
+    }
 
 
 }

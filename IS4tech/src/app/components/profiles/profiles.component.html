@@ -1,280 +1,276 @@
+<div class="row">
+  <!--Area de funcionalidad-->
 
+  <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 30rem">
+    <div>
+      <h1 class="title">Perfiles</h1>
+      <br />
 
-  <div class="row" >
-   
+      <!--Buscador-->
 
-    <!--Area de funcionalidad-->
-
-    <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 30rem">
-      <div>
-        <h1 class="title">Perfiles</h1>
-        <br />
-
-        <!--Buscador-->
-
-        <div class="input-group rounded" style="max-width: 15rem">
-          <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="search-addon"
-          />
-          <span class="input-group-text border-0 sear" id="search-addon">
-            <mat-icon>search</mat-icon>
-          </span>
+      <div class="input-group rounded" style="max-width: 15rem">
+        <input
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="search-addon"
+        />
+        <span class="input-group-text border-0 sear" id="search-addon">
+          <mat-icon>search</mat-icon>
+        </span>
+      </div>
+      <br />
+    </div>
+    <div>
+      <div class="card" *ngFor="let profile of profiles">
+        <div style="text-align: center" class="card-body hoved">
+          {{ profile.name }}
         </div>
-        <br />
       </div>
       <div>
-        <div class="card" *ngFor="let profile of profiles">
-          <div class="card-body hoved">{{ profile.name }}</div>
-        </div>
-        <div>
-          <!--           <pagination-controls
+        <!--           <pagination-controls
             previousLabel=""
             nextLabel=""
           ></pagination-controls> -->
-        </div>
-      </div>
-    </div>
-    <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
-      <div class="card border-primary">
-        <form class="card-body" #addForm="ngForm">
-          <!--Titulos y nombres-->
-
-          <p class="fs-1 coll">Agregar</p>
-          <br />
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <mat-label *ngIf="!name.valid && name.touched">
-              requerido</mat-label
-            >
-            <input
-              #name="ngModel"
-              [(ngModel)]="postProfile.name"
-              matInput
-              placeholder="Nombre"
-              name="nombre"
-              required="true"
-            />
-          </mat-form-field>
-          <br />
-          <p class="fs-2 coll">Acessos</p>
-          <div class="card-header coll">Configuración</div>
-
-          <div class="card-body border-primary">
-            <blockquote class="blockquote mb-0">
-              <table class="table table-bordered tabod">
-                <tbody>
-                  <!--Opciones-->
-
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </blockquote>
-          </div>
-          <div class="card-header coll">Operaciones</div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <table class="table table-bordered">
-                <tbody>
-                  <!--Opciones-->
-
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"
-                          >Opción 1</label
-                        >
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </blockquote>
-          </div>
-          <div>
-            <button
-              [disabled]="!addForm.form.valid"
-              type="button"
-              (click)="newProfile(addForm)"
-              class="btn btn-primary butt2"
-            >
-              Guardar
-            </button>
-            <button
-              mat-mini-fab
-              color="black"
-              type="button"
-              class="btn btn-primary butt"
-            >
-              <mat-icon>note_add</mat-icon>
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   </div>
+  <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
+    <div class="card border-primary">
+      <form class="card-body" #addForm="ngForm">
+        <!--Titulos y nombres-->
+
+        <p class="fs-1 coll">Agregar</p>
+        <br />
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <mat-label *ngIf="!name.valid && name.touched"> requerido</mat-label>
+          <input
+            #name="ngModel"
+            [(ngModel)]="postProfile.name"
+            matInput
+            placeholder="Nombre"
+            name="nombre"
+            required="true"
+          />
+        </mat-form-field>
+        <br />
+        <p class="fs-2 coll">Acessos</p>
+        <div class="card-header coll">Configuración</div>
+
+        <div class="card-body border-primary">
+          <blockquote class="blockquote mb-0">
+            <table class="table table-bordered tabod">
+              <tbody>
+                <!--Opciones-->
+
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </blockquote>
+        </div>
+        <div class="card-header coll">Operaciones</div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <table class="table table-bordered">
+              <tbody>
+                <!--Opciones-->
+
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input
+                        type="checkbox"
+                        class="form-check-input"
+                        value=""
+                        id="check1"
+                      />
+                      <label for="check1" class="form-check-label"
+                        >Opción 1</label
+                      >
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </blockquote>
+        </div>
+        <div>
+          <button
+            [disabled]="!addForm.form.valid"
+            type="button"
+            (click)="newProfile(addForm)"
+            class="btn btn-primary butt2"
+          >
+            Guardar
+          </button>
+          <button
+            mat-mini-fab
+            color="black"
+            type="button"
+            class="btn btn-primary butt"
+          >
+            <mat-icon>note_add</mat-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
