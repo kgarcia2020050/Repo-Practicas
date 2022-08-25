@@ -9,12 +9,16 @@
  
 .title{
     padding: 3%;
-    font-size: 50px;
+    font-size: 65px;
     color: #2B638C;
+    font-family: 'Lato', sans-serif;
+
 }
 
 .coll{
     color: #2B638C;
+    font-family: 'Lato', sans-serif;
+
 
 }
 
@@ -58,4 +62,20 @@
 
 .sidenav{
     background-color: #12579C;
+}
+
+.butt{
+    position: absolute;
+left: 85%;
+background-color: #12579C   ;
+
+}
+
+.butt2{
+    background-color: #12579C   ;
+}
+
+.sear:hover{
+    background-color: rgb(51, 98, 226);
+    transition: background-color .5s;  
 }

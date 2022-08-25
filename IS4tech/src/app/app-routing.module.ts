@@ -5,7 +5,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
-  { path: '', component: UsersComponent },
+  { path: '', component: ProfilesComponent },
   {path: 'users', component: UsersComponent},
   {path: 'profiles', component: ProfilesComponent},
   {path: 'sidenav', component: SidenavComponent}
