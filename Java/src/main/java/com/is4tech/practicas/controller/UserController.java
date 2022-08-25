@@ -1,7 +1,7 @@
 package com.is4tech.practicas.controller;
 
 import com.is4tech.practicas.dto.UserDTO;
-import com.is4tech.practicas.models.UsersModel;
+import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public List<UsersModel> findAll(){
+    public List<Users> findAll(){
         return userService.findAll();
     }
 

@@ -1,11 +1,11 @@
-package com.is4tech.practicas.models;
+package com.is4tech.practicas.bo;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "users", schema = "practicas", catalog = "")
-public class UsersModel {
+public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID", nullable = false)
@@ -24,7 +24,7 @@ public class UsersModel {
     private Integer profile;
     @ManyToOne
     @JoinColumn(name = "PROFILE", referencedColumnName = "ID")
-    private ProfilesModel profilesByProfile;
+    private Profiles profilesByProfile;
 
     public int getId() {
         return id;
@@ -70,8 +70,8 @@ public class UsersModel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UsersModel)) return false;
-        UsersModel that = (UsersModel) o;
+        if (!(o instanceof Users)) return false;
+        Users that = (Users) o;
         return getId() == that.getId() && Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getName(), that.getName()) && Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getProfile(), that.getProfile()) && Objects.equals(getProfilesByProfile(), that.getProfilesByProfile());
     }
 
@@ -80,11 +80,11 @@ public class UsersModel {
         return Objects.hash(getId(), getEmail(), getName(), getStatus(), getProfile(), getProfilesByProfile());
     }
 
-    public ProfilesModel getProfilesByProfile() {
+    public Profiles getProfilesByProfile() {
         return profilesByProfile;
     }
 
-    public void setProfilesByProfile(ProfilesModel profilesByProfile) {
+    public void setProfilesByProfile(Profiles profilesByProfile) {
         this.profilesByProfile = profilesByProfile;
     }
 }

@@ -1,7 +1,10 @@
 <router-outlet></router-outlet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+  rel="stylesheet"
+/>
 
 <div class="container-fluid" style="background-color: #f0f0f0">
   <div class="row">
@@ -72,8 +75,8 @@
                 type="button"
                 class="btn btn-light"
               >
-              <mat-icon>add_shopping_cart</mat-icon>
-            </button>
+                <mat-icon>add_shopping_cart</mat-icon>
+              </button>
             </a>
           </li>
 
@@ -161,22 +164,40 @@
       </div>
       <div>
         <div class="card" *ngFor="let profile of profiles">
-          <input  autocomplete="off" name="repeatPassword" type="password" id="form3Example4cd" class="form-control" required/>
           <div class="card-body hoved">{{ profile.name }}</div>
+        </div>
+        <div>
+          <!--           <pagination-controls
+            previousLabel=""
+            nextLabel=""
+          ></pagination-controls> -->
         </div>
       </div>
     </div>
     <br />
-    <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem" >
+    <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
       <br />
       <div class="card border-primary">
         <br />
-        <div class="card-body">
+        <form class="card-body" #addForm="ngForm">
           <!--Titulos y nombres-->
 
           <p class="fs-1 coll">Agregar</p>
           <br />
-          <p class="text-decoration-underline coll">Administrador</p>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <mat-label *ngIf="!name.valid && name.touched">
+              requerido</mat-label
+            >
+            <input
+              #name="ngModel"
+              [(ngModel)]="postProfile.name"
+              matInput
+              placeholder="Nombre"
+              name="nombre"
+              required="true"
+            />
+          </mat-form-field>
           <br />
           <p class="fs-2 coll">Acessos</p>
           <div class="card-header coll">Configuración</div>
@@ -375,13 +396,24 @@
             </blockquote>
           </div>
           <div>
-          <button type="button" class="btn btn-primary butt2">Guardar</button>
-          <button mat-mini-fab color="black"  type="button" class="btn btn-primary butt " >
-            <mat-icon>note_add</mat-icon>
-          </button>
-      </div>
-
-        </div>
+            <button
+              [disabled]="!addForm.form.valid"
+              type="button"
+              (click)="newProfile(addForm)"
+              class="btn btn-primary butt2"
+            >
+              Guardar
+            </button>
+            <button
+              mat-mini-fab
+              color="black"
+              type="button"
+              class="btn btn-primary butt"
+            >
+              <mat-icon>note_add</mat-icon>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

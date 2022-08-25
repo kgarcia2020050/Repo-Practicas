@@ -1,11 +1,11 @@
-package com.is4tech.practicas.models;
+package com.is4tech.practicas.bo;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "enterprises", schema = "practicas", catalog = "")
-public class EnterprisesModel {
+@Table(name = "profiles", schema = "practicas", catalog = "")
+public class Profiles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID", nullable = false)
@@ -13,6 +13,9 @@ public class EnterprisesModel {
     @Basic
     @Column(name = "NAME", nullable = true, length = 40)
     private String name;
+    @Basic
+    @Column(name = "STATUS", nullable = true)
+    private Byte status;
 
     public int getId() {
         return id;
@@ -30,17 +33,25 @@ public class EnterprisesModel {
         this.name = name;
     }
 
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof EnterprisesModel)) return false;
-        EnterprisesModel that = (EnterprisesModel) o;
-        return getId() == that.getId() && Objects.equals(getName(), that.getName());
+        if (!(o instanceof Profiles)) return false;
+        Profiles that = (Profiles) o;
+        return getId() == that.getId() && Objects.equals(getName(), that.getName()) && Objects.equals(getStatus(), that.getStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName());
+        return Objects.hash(getId(), getName(), getStatus());
     }
 }

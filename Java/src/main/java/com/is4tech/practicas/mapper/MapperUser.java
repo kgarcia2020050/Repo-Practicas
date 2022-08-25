@@ -1,12 +1,12 @@
 package com.is4tech.practicas.mapper;
 
 import com.is4tech.practicas.dto.UserDTO;
-import com.is4tech.practicas.models.UsersModel;
+import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.service.ProfilesService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MapperUser implements MapperDTO<UserDTO, UsersModel>{
+public class MapperUser implements MapperDTO<UserDTO, Users>{
 
     private final ProfilesService profilesService;
 
@@ -15,8 +15,8 @@ public class MapperUser implements MapperDTO<UserDTO, UsersModel>{
     }
 
     @Override
-    public UsersModel mapeo(UserDTO objeto) {
-        UsersModel model = new UsersModel();
+    public Users mapeo(UserDTO objeto) {
+        Users model = new Users();
         model.setName(objeto.getName());
         model.setEmail(objeto.getEmail());
         model.setProfile(objeto.getProfile());
