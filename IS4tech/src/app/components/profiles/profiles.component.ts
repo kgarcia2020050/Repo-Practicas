@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class ProfilesComponent implements OnInit {
   public profiles: Profile;
   public postProfile: Profile;
+  public asc: boolean = true;
 
   constructor(private profileService: ProfileService) {
     this.postProfile = new Profile('', 1);
@@ -22,7 +23,7 @@ export class ProfilesComponent implements OnInit {
   }
 
   getProfiles() {
-    this.profileService.getProfiles(0, 6, 'name', true).subscribe({
+    this.profileService.getProfiles(0, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
         this.profiles = response.content;
       },
@@ -31,8 +32,7 @@ export class ProfilesComponent implements OnInit {
 
   newProfile(addForm) {
     this.profileService.postProfile(this.postProfile).subscribe({
-      next: (response: any) => {
-        console.log(response);
+      next: () => {
         addForm.reset();
         Swal.fire({
           icon: 'success',
@@ -41,7 +41,6 @@ export class ProfilesComponent implements OnInit {
         this.getProfiles();
       },
       error: (error: any) => {
-        console.log(error);
         if (error.error.errors) {
           Swal.fire({
             icon: 'error',

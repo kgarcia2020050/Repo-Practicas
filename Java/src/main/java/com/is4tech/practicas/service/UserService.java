@@ -6,8 +6,6 @@ import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperUser;
 import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.repository.UsersRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,12 +19,14 @@ public class UserService {
 
     private final ProfilesService profilesService;
 
-    private final Logger logger = LoggerFactory.getLogger(UserService.class);
+    private final UserEnterpriseService userEnterpriseService;
 
-    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService) {
+
+    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService,UserEnterpriseService userEnterpriseService) {
         this.mapper = mapper;
         this.usersRepository = usersRepository;
         this.profilesService = profilesService;
+        this.userEnterpriseService=userEnterpriseService;
     }
 
     public Users findByName(String name) {
@@ -41,7 +41,6 @@ public class UserService {
     public void saveUser(UserDTO userdto) {
         Users model = mapper.mapeo(userdto);
         usersRepository.save(model);
-        logger.info("Usuario guardado exitosamente");
     }
 
     public void editUser(Integer id, UserDTO userDTO) {

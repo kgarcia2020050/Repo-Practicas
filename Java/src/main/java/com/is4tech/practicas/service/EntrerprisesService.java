@@ -2,7 +2,7 @@ package com.is4tech.practicas.service;
 
 import com.is4tech.practicas.dto.EnterpriseDTO;
 import com.is4tech.practicas.exception.NotFoundException;
-import com.is4tech.practicas.mapper.Mapper;
+import com.is4tech.practicas.mapper.MapperEnterprises;
 import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.repository.EnterpriseRepository;
 import org.springframework.data.domain.Page;
@@ -16,11 +16,11 @@ public class EntrerprisesService {
 
     private final EnterpriseRepository enterpriseRepository;
 
-    private final Mapper mapper;
+    private final MapperEnterprises mapperEnterprises;
 
-    public EntrerprisesService(EnterpriseRepository enterpriseRepository, Mapper mapper) {
+    public EntrerprisesService(EnterpriseRepository enterpriseRepository, MapperEnterprises mapperEnterprises) {
         this.enterpriseRepository = enterpriseRepository;
-        this.mapper = mapper;
+        this.mapperEnterprises = mapperEnterprises;
     }
 
     public Enterprises findByName(String name) {
@@ -28,7 +28,7 @@ public class EntrerprisesService {
     }
 
     public void save(EnterpriseDTO enterprisesModeDto) {
-        Enterprises model = mapper.mapeo(enterprisesModeDto);
+        Enterprises model = mapperEnterprises.mapeo(enterprisesModeDto);
         enterpriseRepository.save(model);
     }
 

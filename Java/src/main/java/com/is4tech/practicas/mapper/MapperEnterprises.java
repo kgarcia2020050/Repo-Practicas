@@ -5,7 +5,7 @@ import com.is4tech.practicas.bo.Enterprises;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Mapper implements MapperDTO<EnterpriseDTO, Enterprises>{
+public class MapperEnterprises implements MapperDTO<EnterpriseDTO, Enterprises>{
 
     @Override
     public Enterprises mapeo(EnterpriseDTO objeto) {

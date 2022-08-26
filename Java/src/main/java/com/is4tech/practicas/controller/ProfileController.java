@@ -39,7 +39,7 @@ public class ProfileController {
     @GetMapping("/all")
     public Page<Profiles> findAll(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "6") int size,
             @RequestParam(defaultValue = "name") String order,
             @RequestParam(defaultValue = "true") boolean asc
 

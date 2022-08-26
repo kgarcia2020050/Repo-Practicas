@@ -14,7 +14,7 @@
 
             <column name="NAME" type="varchar(40)" remarks="NAME_COLUMN"/>
 
-            <column name="STATUS"  type="tinyint(1)" remarks="STATUS_COLUMN" />
+            <column name="STATUS" type="tinyint(1)" remarks="STATUS_COLUMN"/>
         </createTable>
         <addAutoIncrement tableName="PROFILES" columnName="ID" startWith="0" incrementBy="1" columnDataType="int"/>
     </changeSet>
@@ -28,11 +28,11 @@
 
             <column name="EMAIL" type="varchar(80)" remarks="EMAIL_COLUMN"/>
 
-            <column name="NAME" type="varchar(40)" remarks="NAME_COLUMN" />
+            <column name="NAME" type="varchar(40)" remarks="NAME_COLUMN"/>
 
-            <column name="STATUS" type="tinyint(1)" remarks="STATUS_COLUMN" />
+            <column name="STATUS" type="tinyint(1)" remarks="STATUS_COLUMN"/>
 
-            <column name="PROFILE" type="int" remarks="PROFILE_COLUMN" />
+            <column name="PROFILE" type="int" remarks="PROFILE_COLUMN"/>
 
         </createTable>
         <addAutoIncrement tableName="USERS" columnName="ID" startWith="0" incrementBy="1" columnDataType="int"/>
@@ -40,19 +40,37 @@
 
     <changeSet id="thirdChangeSet" author="Kenneth Garcia">
         <addForeignKeyConstraint baseTableName="USERS" baseColumnNames="PROFILE" constraintName="USERS2PROFILES"
-                                 referencedTableName="PROFILES" referencedColumnNames="ID" />
+                                 referencedTableName="PROFILES" referencedColumnNames="ID"/>
     </changeSet>
 
     <changeSet id="fourthChangeset" author="Kenneth Garcia">
         <createTable tableName="ENTERPRISES" remarks="ENTERPRISES_TABLE">
             <column name="ID" type="int" remarks="ID_ENTERPRISE_COLUMN" autoIncrement="true">
-                <constraints primaryKey="true" primaryKeyName="ID_PK" />
+                <constraints primaryKey="true" primaryKeyName="ID_PK"/>
             </column>
             <column name="NAME" type="varchar(40)" remarks="NAME_COLUMN"/>
         </createTable>
-        <addAutoIncrement tableName="ENTERPRISES" columnName="ID" columnDataType="int" incrementBy="1" startWith="0" />
+        <addAutoIncrement tableName="ENTERPRISES" columnName="ID" columnDataType="int" incrementBy="1" startWith="0"/>
     </changeSet>
 
+    <changeSet id="fifthChangeSet" author="Kenneth Garcia">
+        <createTable tableName="USERS_ENTERPRISES" remarks="USERS_ENTERPRISES_TABLE">
+            <column name="ID" type="int" remarks="ID_USERS_ENTERPRISE_COLUMN">
+                <constraints primaryKey="true" primaryKeyName="ID_PK"/>
+            </column>
+            <column name="USER_ID" type="int" remarks="USER_ID_COLUMN"/>
+            <column name="ENTERPRISE_ID" type="int" remarks="ENTERPRISE_ID_COLUMN"/>
+        </createTable>
+        <addAutoIncrement tableName="USERS_ENTERPRISES" columnName="ID" columnDataType="int" startWith="0"
+                          incrementBy="1"/>
+        <addForeignKeyConstraint baseTableName="USERS_ENTERPRISES" baseColumnNames="USER_ID" constraintName="USER_ID_FK"
+                                 referencedTableName="USERS"
+                                 referencedColumnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="USERS_ENTERPRISES" baseColumnNames="ENTERPRISE_ID"
+                                 constraintName="ENTERPRISE_ID_COLUMN"
+                                 referencedTableName="ENTERPRISES"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
 
 
 </databaseChangeLog>
