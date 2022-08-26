@@ -22,11 +22,11 @@ public class UserService {
     private final UserEnterpriseService userEnterpriseService;
 
 
-    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService,UserEnterpriseService userEnterpriseService) {
+    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService, UserEnterpriseService userEnterpriseService) {
         this.mapper = mapper;
         this.usersRepository = usersRepository;
         this.profilesService = profilesService;
-        this.userEnterpriseService=userEnterpriseService;
+        this.userEnterpriseService = userEnterpriseService;
     }
 
     public Users findByName(String name) {

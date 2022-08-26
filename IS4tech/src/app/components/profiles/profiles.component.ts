@@ -13,6 +13,9 @@ export class ProfilesComponent implements OnInit {
   public profiles: Profile;
   public postProfile: Profile;
   public asc: boolean = true;
+  public isFirst: boolean;
+  public isLast: boolean;
+  public page: number = 0;
 
   constructor(private profileService: ProfileService) {
     this.postProfile = new Profile('', 1);
@@ -23,11 +26,36 @@ export class ProfilesComponent implements OnInit {
   }
 
   getProfiles() {
-    this.profileService.getProfiles(0, 6, 'name', this.asc).subscribe({
+    this.profileService.getProfiles(this.page, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
         this.profiles = response.content;
+        this.isFirst = response.first;
+        this.isLast = response.last;
       },
     });
+  }
+
+  goBack() {
+    if (!this.isFirst) {
+      this.page--;
+      this.getProfiles();
+    }
+  }
+
+  goAhead() {
+    if (!this.isLast) {
+      this.page++;
+      this.getProfiles();
+    }
+  }
+
+  filter() {
+    if (this.asc) {
+      this.asc = false;
+    } else {
+      this.asc = true;
+    }
+    this.getProfiles();
   }
 
   newProfile(addForm) {

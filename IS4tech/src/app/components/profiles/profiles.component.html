@@ -23,16 +23,15 @@
       <br />
     </div>
     <div>
+      <div><em (click)="filter()" class="fa-solid fa-sort"></em></div>
       <div class="card" *ngFor="let profile of profiles">
         <div style="text-align: center" class="card-body hoved">
           {{ profile.name }}
         </div>
       </div>
       <div>
-        <!--           <pagination-controls
-            previousLabel=""
-            nextLabel=""
-          ></pagination-controls> -->
+        <em (click)="goBack()" class="fas fa-angle-double-left fa-2x"></em>
+        <em (click)="goAhead()" class="fas fa-angle-double-right fa-2x"></em>
       </div>
     </div>
   </div>
