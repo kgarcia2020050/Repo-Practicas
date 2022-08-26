@@ -29,7 +29,15 @@ export class ProfileService {
     );
   }
 
+  getProfile(id: number): Observable<any> {
+    return this.http.get(url + 'profile/profile/' + id);
+  }
+
   postProfile(model: Profile): Observable<any> {
     return this.http.post(url + 'profile/new', model);
+  }
+
+  putProfile(model: Profile, id: number): Observable<any> {
+    return this.http.put(url + 'profile/editProfile/' + id, model);
   }
 }

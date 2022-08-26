@@ -48,8 +48,13 @@ public class ProfilesService {
 
     public void editProfile(Integer id, ProfilesDTO profilesDTO) {
         Profiles model = profileRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra el perfil con el ID " + id));
+
         model.setName(profilesDTO.getName());
-        model.setStatus(profilesDTO.getStatus());
+        if (profilesDTO.isStatus()) {
+            model.setStatus((byte) 1);
+        } else {
+            model.setStatus((byte) 0);
+        }
         profileRepository.save(model);
     }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,8 +21,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SearchPipe } from './pipes/search.pipe';
-import {DragDropModule} from '@angular/cdk/drag-drop'
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
     ProfilesComponent,
     SidenavComponent,
     SearchPipe,
+    ProfileDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
     NgxPaginationModule,
     MatSelectModule,
     MatSlideToggleModule,
-    DragDropModule
+    DragDropModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

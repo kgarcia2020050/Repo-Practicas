@@ -1,17 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
+  providers: [UserService],
 })
 export class UsersComponent implements OnInit {
-  public users: any;
+  public users: User;
   public listNumbers1;
   public listNumbers2;
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.listNumbers1 = [];
@@ -26,15 +33,22 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  drop($event: CdkDragDrop<number[]>){
+  getUsers() {
+    this.userService.getUsers().subscribe({
+      next: (response: any) => {
+        this.users = response;
+      },
+    });
+  }
 
-    if($event.previousContainer === $event.container){
+  drop($event: CdkDragDrop<number[]>) {
+    if ($event.previousContainer === $event.container) {
       moveItemInArray(
         $event.container.data,
         $event.previousIndex,
         $event.currentIndex
-      )
-    }else{
+      );
+    } else {
       transferArrayItem(
         $event.previousContainer.data,
         $event.container.data,
@@ -42,9 +56,5 @@ export class UsersComponent implements OnInit {
         $event.currentIndex
       );
     }
-
-
   }
-
-
 }

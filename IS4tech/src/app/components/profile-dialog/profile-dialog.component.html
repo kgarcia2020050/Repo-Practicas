@@ -5,83 +5,22 @@
 ></script>
 
 <div class="row">
-  <!--Area de funcionalidad-->
-
-  <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 30rem">
-    <div>
-      <h1 class="title">Perfiles</h1>
-      <br />
-
-      <!--Buscador-->
-
-      <div class="input-group rounded" style="max-width: 15rem">
-        <input
-          type="search"
-          class="form-control rounded"
-          placeholder="Search"
-          aria-label="Search"
-          aria-describedby="search-addon"
-          [(ngModel)]="search"
-        />
-        <span class="input-group-text border-0 sear" id="search-addon">
-          <mat-icon>search</mat-icon>
-        </span>
-      </div>
-      <br />
-    </div>
-    <div>
-      <div><em (click)="filter()" class="fa-solid fa-sort filt"></em></div>
-      <div class="card" *ngFor="let profile of profiles | search: search">
-        <div
-          style="text-align: center"
-          class="card-body hoved"
-          (click)="findById(profile.id)"
-        >
-          <em
-            *ngIf="profile.status == 1"
-            class="fa-solid fa-circle text-success"
-          ></em>
-          <em
-            *ngIf="profile.status == 0"
-            class="fa-solid fa-circle text-secondary"
-          ></em>
-          {{ profile.name }}
-        </div>
-      </div>
-      <div>
-        <em
-          (click)="goBack()"
-          class="fas fa-angle-double-left fa-2x"
-          style="color: #12579c"
-        ></em>
-        <em
-          (click)="goAhead()"
-          class="fas fa-angle-double-right fa-2x heed"
-        ></em>
-      </div>
-    </div>
-  </div>
   <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
     <div class="card border-primary">
       <form class="card-body" #addForm="ngForm">
         <!--Titulos y nombres-->
 
         <p class="fs-1 coll">Agregar</p>
-        <mat-slide-toggle
-          name="status"
-          #status="ngModel"
-          [(ngModel)]="getProfile.status"
+        <mat-slide-toggle [checked]="true" [disabled]="true">
+          <div>Activo</div></mat-slide-toggle
         >
-          <div *ngIf="getProfile.status == 1">Activo</div>
-          <div *ngIf="getProfile.status == 0">Inactivo</div>
-        </mat-slide-toggle>
         <br />
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Nombre</mat-label>
           <mat-label *ngIf="!name.valid && name.touched"> requerido</mat-label>
           <input
             #name="ngModel"
-            [(ngModel)]="getProfile.name"
+            [(ngModel)]="postProfile.name"
             matInput
             placeholder="Nombre"
             name="nombre"
@@ -289,21 +228,20 @@
         </div>
         <div>
           <button
-            (click)="putProfile(getProfile.id)"
             [disabled]="!addForm.form.valid"
             type="button"
+            (click)="newProfile(addForm)"
             class="btn btn-primary butt2"
           >
             Guardar
           </button>
           <button
-            mat-mini-fab
-            (click)="openDialog()"
-            color="black"
+            mat-button
+            mat-dialog-close
             type="button"
-            class="btn btn-primary butt"
+            class="btn btn-secondary butt2"
           >
-            <mat-icon>note_add</mat-icon>
+            Cancelar
           </button>
         </div>
       </form>

@@ -36,6 +36,11 @@ public class ProfileController {
         }
     }
 
+    @GetMapping("/profile/{id}")
+    public Profiles getById(@PathVariable("id") Integer id) {
+        return profilesService.findById(id);
+    }
+
     @GetMapping("/all")
     public Page<Profiles> findAll(
             @RequestParam(defaultValue = "0") int page,
