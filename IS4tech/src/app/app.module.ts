@@ -17,6 +17,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatDividerModule,
     MatInputModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

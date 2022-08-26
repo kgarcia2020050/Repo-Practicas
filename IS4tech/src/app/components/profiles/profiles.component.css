@@ -79,3 +79,16 @@ background-color: #12579C   ;
     background-color: rgb(51, 98, 226);
     transition: background-color .5s;  
 }
+
+.heed{
+    position: absolute;
+left: 35%;
+color: #12579C;
+
+}
+
+.fa-sort{
+    position: relative;
+    left: 95%;
+    color: #12579C;
+}
