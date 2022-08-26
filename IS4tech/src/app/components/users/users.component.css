@@ -61,3 +61,35 @@
 }
 /*Comentario*/
 
+
+
+.block {
+    height: 50px;
+    font-size: 19px;
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+.butt{
+    position: absolute;
+left: 85%;
+background-color: #12579C   ;
+
+}
+
+.butt2{
+    background-color: #12579C   ;
+}
+
+.dragd{
+    text-align: center;
+    color: #12579C;
+    font-family: 'Lato', sans-serif;
+}
+
+.botdrag{
+    background-color: #12579C   ;
+}
+
+
+

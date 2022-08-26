@@ -20,6 +20,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SearchPipe } from './pipes/search.pipe';
+import {DragDropModule} from '@angular/cdk/drag-drop'
+
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { SearchPipe } from './pipes/search.pipe';
     NgxPaginationModule,
     MatSelectModule,
     MatSlideToggleModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent],
