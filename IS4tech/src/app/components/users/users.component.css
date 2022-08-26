@@ -9,7 +9,10 @@
  
 .title{
     padding: 3%;
-    font-size: 50px;
+    font-size: 65px;
+    color: #2B638C;
+    font-family: 'Lato', sans-serif;
+
 }
 
 .card-body{
@@ -49,3 +52,12 @@
 .sidenav{
     background-color: #12579C;
 }
+
+.coll{
+    color: #2B638C;
+    font-family: 'Lato', sans-serif;
+
+
+}
+/*Comentario*/
+
