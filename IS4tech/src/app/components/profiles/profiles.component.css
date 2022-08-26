@@ -20,6 +20,13 @@
     font-family: 'Lato', sans-serif;
 
 
+} 
+
+.colla{
+    color: #2B638C;
+    font-family: 'Lato', sans-serif;
+    font-size: 65px;
+
 }
 
 .card-body{
@@ -82,13 +89,24 @@ background-color: #12579C   ;
 
 .heed{
     position: absolute;
-left: 35%;
+left: 20%;
 color: #12579C;
 
+}
+.heed2{
+    position: absolute;
+left: 16%;
+color: #12579C;
 }
 
 .fa-sort{
     position: relative;
     left: 95%;
     color: #12579C;
+}
+
+.slide{
+color: #12579C;
+position: absolute;
+left: 75%;
 }

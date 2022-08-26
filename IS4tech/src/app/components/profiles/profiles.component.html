@@ -51,7 +51,7 @@
       <div>
         <em
           (click)="goBack()"
-          class="fas fa-angle-double-left fa-2x"
+          class="fas fa-angle-double-left fa-2x heed2"
           style="color: #12579c"
         ></em>
         <em
@@ -66,15 +66,17 @@
       <form class="card-body" #addForm="ngForm">
         <!--Titulos y nombres-->
 
-        <p class="fs-1 coll">Agregar</p>
+        <div>
+        <p class="fs-1 colla">Editar</p>
         <mat-slide-toggle
           name="status"
           #status="ngModel"
-          [(ngModel)]="getProfile.status"
+          [(ngModel)]="getProfile.status" class="slide"
         >
           <div *ngIf="getProfile.status == 1">Activo</div>
           <div *ngIf="getProfile.status == 0">Inactivo</div>
         </mat-slide-toggle>
+      </div>
         <br />
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Nombre</mat-label>
@@ -123,7 +125,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 2</label
                       >
                     </div>
                   </td>
@@ -137,7 +139,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 3</label
                       >
                     </div>
                   </td>
@@ -152,7 +154,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 4</label
                       >
                     </div>
                   </td>
@@ -166,7 +168,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 5</label
                       >
                     </div>
                   </td>
@@ -180,7 +182,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 6</label
                       >
                     </div>
                   </td>
@@ -221,7 +223,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 2</label
                       >
                     </div>
                   </td>
@@ -235,7 +237,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 3</label
                       >
                     </div>
                   </td>
@@ -250,7 +252,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 4</label
                       >
                     </div>
                   </td>
@@ -264,7 +266,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 5</label
                       >
                     </div>
                   </td>
@@ -278,7 +280,7 @@
                         id="check1"
                       />
                       <label for="check1" class="form-check-label"
-                        >Opción 1</label
+                        >Opción 6</label
                       >
                     </div>
                   </td>
