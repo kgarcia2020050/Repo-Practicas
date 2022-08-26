@@ -16,6 +16,7 @@ export class ProfilesComponent implements OnInit {
   public isFirst: boolean;
   public isLast: boolean;
   public page: number = 0;
+  public search;
 
   constructor(private profileService: ProfileService) {
     this.postProfile = new Profile('', 1);

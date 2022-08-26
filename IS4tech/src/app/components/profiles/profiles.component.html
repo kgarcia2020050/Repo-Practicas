@@ -1,4 +1,8 @@
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"
+></script>
 
 <div class="row">
   <!--Area de funcionalidad-->
@@ -17,6 +21,7 @@
           placeholder="Search"
           aria-label="Search"
           aria-describedby="search-addon"
+          [(ngModel)]="search"
         />
         <span class="input-group-text border-0 sear" id="search-addon">
           <mat-icon>search</mat-icon>
@@ -26,14 +31,29 @@
     </div>
     <div>
       <div><em (click)="filter()" class="fa-solid fa-sort filt"></em></div>
-      <div class="card" *ngFor="let profile of profiles">
+      <div class="card" *ngFor="let profile of profiles | search: search">
         <div style="text-align: center" class="card-body hoved">
+          <em
+            *ngIf="profile.status == 1"
+            class="fa-solid fa-circle text-success"
+          ></em>
+          <em
+            *ngIf="profile.status == 0"
+            class="fa-solid fa-circle text-secondary"
+          ></em>
           {{ profile.name }}
         </div>
       </div>
-      <div >
-        <em (click)="goBack()" class="fas fa-angle-double-left fa-2x " style="color: #12579c ;"></em>
-        <em (click)="goAhead()" class="fas fa-angle-double-right fa-2x heed"></em>
+      <div>
+        <em
+          (click)="goBack()"
+          class="fas fa-angle-double-left fa-2x"
+          style="color: #12579c"
+        ></em>
+        <em
+          (click)="goAhead()"
+          class="fas fa-angle-double-right fa-2x heed"
+        ></em>
       </div>
     </div>
   </div>
@@ -43,6 +63,9 @@
         <!--Titulos y nombres-->
 
         <p class="fs-1 coll">Agregar</p>
+        <mat-slide-toggle [checked]="true" [disabled]="true">
+          <div>Activo</div></mat-slide-toggle
+        >
         <br />
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Nombre</mat-label>

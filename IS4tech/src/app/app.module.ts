@@ -17,8 +17,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {MatSelectModule} from '@angular/material/select';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {MatSelectModule} from '@angular/material/select';
     UsersComponent,
     ProfilesComponent,
     SidenavComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     FormsModule,
     NgxPaginationModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
