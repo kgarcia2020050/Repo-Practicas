@@ -28,7 +28,8 @@
         <br />
       </div>
       <div class="card" *ngFor="let user of users">
-        <div class="card-body hoved">{{ user.name }}</div>
+        <div class="card-body hoved" (click)="findById(user.id)"
+        >{{ user.name }}</div>
       </div>
     </div>
     <div class="col-sm p-3 min-vh-100 dim2">
@@ -56,13 +57,18 @@
                 </div>
 
                 <div class="col-sm-6">
-                  <input
-                    placeholder="Nombre de usuario"
-                    type="text"
-                    id="date-picker-example"
-                    class="form-control datepicker"
-                    style="font-family: Arial, FontAwesome"
-                  />
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched" > requerido</mat-label>
+                    <input
+                    #name="ngModel"
+                    [(ngModel)]="getUser.name"
+                      matInput
+                      placeholder="Nombre"
+                      name="nombre"
+                      required="true"
+                    />
+                  </mat-form-field>
                 </div>
 
                 <div class="col-sm-6 fort">

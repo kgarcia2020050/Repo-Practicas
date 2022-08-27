@@ -67,4 +67,14 @@ export class UsersComponent implements OnInit {
       );
     }
   }
+
+  findById(id) {
+    this.userService.getUser(id).subscribe({
+      next: (response: any) => {
+        this.getUser = response;
+      },
+    });
+  }
+
+
 }

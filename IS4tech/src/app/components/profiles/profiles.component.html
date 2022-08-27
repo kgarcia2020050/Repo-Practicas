@@ -80,10 +80,9 @@
         <br />
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Nombre</mat-label>
-          <mat-label *ngIf="!name.valid && name.touched"> requerido</mat-label>
+          <mat-label > requerido</mat-label>
           <input
-            #name="ngModel"
-            [(ngModel)]="getProfile.name"
+           
             matInput
             placeholder="Nombre"
             name="nombre"
