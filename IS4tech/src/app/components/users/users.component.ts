@@ -8,6 +8,9 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
+import { Profile } from 'src/app/models/profile';
+
 
 @Component({
   selector: 'app-users',
@@ -20,6 +23,16 @@ export class UsersComponent implements OnInit {
   public listNumbers1;
   public listNumbers2;
   public getUser: User;
+  public profiles: Profile;
+  public asc: boolean = true;
+  public isFirst: boolean;
+  public isLast: boolean;
+  public page: number = 0;
+  public search: any;
+
+
+
+
 
   constructor(private userService: UserService, public dialog: MatDialog) {
     this.getUser = new User(0, '', '', 1, 0);
@@ -44,9 +57,11 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe({
+    this.userService.getUsers(this.page, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
         this.users = response.content;
+        this.isFirst = response.first;
+        this.isLast = response.last;
       },
     });
   }
@@ -74,6 +89,55 @@ export class UsersComponent implements OnInit {
         this.getUser = response;
       },
     });
+  }
+
+  putProfile(id) {
+    this.userService.putUser(this.getUser, id).subscribe({
+      next: () => {
+        Swal.fire({
+          icon: 'success',
+          text: 'Usuario modificado exitosamente.',
+        }).then(() => {
+          this.getUsers();
+        });
+      },
+      error: (error: any) => {
+        if (error.error.errors) {
+          Swal.fire({
+            icon: 'error',
+            text: error.error.errors[0].defaultMessage,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            text: error.error,
+          });
+        }
+      },
+    });
+  }
+
+  goBack() {
+    if (!this.isFirst) {
+      this.page--;
+      this.getUsers();
+    }
+  }
+
+  goAhead() {
+    if (!this.isLast) {
+      this.page++;
+      this.getUsers();
+    }
+  }
+
+  filter() {
+    if (this.asc) {
+      this.asc = false;
+    } else {
+      this.asc = true;
+    }
+    this.getUsers();
   }
 
 

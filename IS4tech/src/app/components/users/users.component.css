@@ -91,5 +91,23 @@ background-color: #12579C   ;
     background-color: #12579C   ;
 }
 
+.heed{
+    position: absolute;
+left: 20%;
+color: #12579C;
+
+}
+.heed2{
+    position: absolute;
+left: 16%;
+color: #12579C;
+}
+
+.fa-sort{
+    position: relative;
+    left: 95%;
+    color: #12579C;
+}
+
 
 

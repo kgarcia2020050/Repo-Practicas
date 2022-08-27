@@ -15,11 +15,12 @@
         <!--Buscador-->
         <div class="input-group rounded" style="max-width: 15rem">
           <input
-            type="search"
-            class="form-control rounded"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="search-addon"
+          type="search"
+          class="form-control rounded"
+          placeholder="Search"
+          aria-label="Search"
+          aria-describedby="search-addon"
+          [(ngModel)]="search"
           />
           <span class="input-group-text border-0" id="search-addon">
             <mat-icon>search</mat-icon>
@@ -27,9 +28,21 @@
         </div>
         <br />
       </div>
-      <div class="card" *ngFor="let user of users">
-        <div class="card-body hoved" (click)="findById(user.id)"
-        >{{ user.name }}</div>
+      <div><em (click)="filter()" class="fa-solid fa-sort filt"></em></div>
+
+      <div class="card" *ngFor="let user of users | search: search">
+        <div class="card-body hoved" (click)="findById(user.id)">{{ user.name }}</div>
+      </div>
+      <div>
+        <em
+          (click)="goBack()"
+          class="fas fa-angle-double-left fa-2x heed2"
+          style="color: #12579c"
+        ></em>
+        <em
+          (click)="goAhead()"
+          class="fas fa-angle-double-right fa-2x heed"
+        ></em>
       </div>
     </div>
     <div class="col-sm p-3 min-vh-100 dim2">
@@ -47,13 +60,18 @@
             <div class="container card-0 justify-content-center" dir="rtl">
               <div class="row">
                 <div class="col-sm-6">
-                  <input
-                    placeholder="Correo"
-                    type="text"
-                    id="date-picker-example"
-                    class="form-control datepicker mb-4"
-                    style="font-family: Arial, FontAwesome"
-                  />
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>correo</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched" > requerido</mat-label>
+                    <input
+                    #name="ngModel"
+                    [(ngModel)]="getUser.email"
+                      matInput
+                      placeholder="Email"
+                      name="email"
+                      required="true"
+                    />
+                  </mat-form-field>
                 </div>
 
                 <div class="col-sm-6">
@@ -72,16 +90,20 @@
                 </div>
 
                 <div class="col-sm-6 fort">
-                  <mat-form-field appearance="fill">
-                    <mat-label>Seleccionar perfil</mat-label>
-                    <select matNativeControl required="true">
-                      <option value="" selected>Selecciona tu perfil</option>
-                      <option value="saab">Perfil 1</option>
-                      <option value="volvo">Perfil 2</option>
-                      <option value="mercedes">Perfil 3</option>
-                      <option value="audi">Perfil 4</option>
-                    </select>
-                  </mat-form-field>
+     <mat-form-field appearance="fill">
+                  <mat-label>Selecciona tu perfil</mat-label>
+                  <mat-select
+                    required="true"
+                    name="status"
+                    #status="ngModel"
+                    [(ngModel)]="getUser.profile"
+                  >
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let info of profiles" [value]="info.id">
+                      {{ info.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
                 </div>
               </div>
             </div>

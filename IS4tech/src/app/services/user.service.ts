@@ -10,9 +10,20 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
   constructor(public http: HttpClient) {}
 
-  getUsers(): Observable<any> {
-    return this.http.get(url + 'user/all');
+  getUsers(page: number,
+    size: number,
+    order: string,
+    asc: boolean): Observable<any> {
+    return this.http.get(url + 'user/all?page=' +
+    page +
+    '&size=' +
+    size +
+    '&order=' +
+    order +
+    '&asc=' +
+    asc);
   }
+
 
   postUser(model: User): Observable<any> {
     return this.http.post(url + 'user/saveUser', model);
