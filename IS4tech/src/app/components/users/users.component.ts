@@ -6,6 +6,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { UserDialogComponent } from '../user-dialog/user-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -17,8 +19,11 @@ export class UsersComponent implements OnInit {
   public users: User;
   public listNumbers1;
   public listNumbers2;
+  public getUser: User;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, public dialog: MatDialog) {
+    this.getUser = new User(0, '', '', 1, 0);
+  }
 
   ngOnInit(): void {
     this.listNumbers1 = [];
@@ -31,12 +36,17 @@ export class UsersComponent implements OnInit {
     for (let index = 5; index < 10; index++) {
       this.listNumbers2.push(index);
     }
+    this.getUsers();
+  }
+
+  openDialog() {
+    this.dialog.open(UserDialogComponent);
   }
 
   getUsers() {
     this.userService.getUsers().subscribe({
       next: (response: any) => {
-        this.users = response;
+        this.users = response.content;
       },
     });
   }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile-dialog',
@@ -17,24 +17,17 @@ export class ProfileDialogComponent implements OnInit {
   public page: number = 0;
   constructor(
     private profileService: ProfileService,
-    public dialog: MatDialog
+    public dialog: MatDialogRef<ProfileDialogComponent>,
   ) {
-    this.postProfile = new Profile(0,'', 1);
+    this.postProfile = new Profile(0, '', 1);
   }
 
-  ngOnInit(): void {}
-
-  getProfiles() {
-    this.profileService.getProfiles(this.page, 6, 'name', this.asc).subscribe({
-      next: (response: any) => {
-        this.profiles = response.content;
-      },
-    });
+  ngOnInit(): void {
+    /* TODO document why this method 'ngOnInit' is empty */
   }
 
   closeDialog() {
-    this.getProfiles();
-    this.dialog.closeAll();
+    this.dialog.close();
   }
 
   newProfile(addForm) {

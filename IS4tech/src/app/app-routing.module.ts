@@ -6,11 +6,9 @@ import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   { path: '', component: ProfilesComponent },
-  {path: 'users', component: UsersComponent},
-  {path: 'profiles', component: ProfilesComponent},
-  {path: 'sidenav', component: SidenavComponent}
-
-
+  { path: 'users', component: UsersComponent },
+  { path: 'profiles', component: ProfilesComponent },
+  { path: 'sidenav', component: SidenavComponent },
 ];
 
 @NgModule({

@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-
-import { AppComponent } from './app.component';
+import { AppComponent } from './app.component'; 
 import { AppRoutingModule } from './app-routing.module';
 import { UsersComponent } from './components/users/users.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
@@ -21,8 +20,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SearchPipe } from './pipes/search.pipe';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
+import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProfileDialogComponent } from './components/profile-dialog/profile-dial
     SidenavComponent,
     SearchPipe,
     ProfileDialogComponent,
+    UserDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,8 @@ import { ProfileDialogComponent } from './components/profile-dialog/profile-dial
     MatSlideToggleModule,
     DragDropModule,
     MatDialogModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

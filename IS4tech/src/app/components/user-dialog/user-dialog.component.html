@@ -1,0 +1,109 @@
+<form #addForm="ngForm">
+  <div class="col-sm p-3 min-vh-100 dim2">
+    <div class="card border-primary">
+      <div class="card-body">
+        <!--Titulos y nombres-->
+
+        <p class="fs-1 coll">Agregar</p>
+        <mat-slide-toggle [checked]="true" [disabled]="true">
+          <div>Activo</div></mat-slide-toggle
+        >
+        <br />
+
+        <div>
+          <div class="container card-0 justify-content-center" dir="rtl">
+            <div class="row">
+              <div class="col-sm-6">
+                <input
+                  name="email"
+                  #email="ngModel"
+                  [(ngModel)]="postUser.email"
+                  placeholder="Correo"
+                  type="text"
+                  required="true"
+                  id="date-picker-example"
+                  class="form-control datepicker mb-4"
+                  style="font-family: Arial, FontAwesome"
+                />
+              </div>
+
+              <div class="col-sm-6">
+                <input
+                  name="name"
+                  #name="ngModel"
+                  [(ngModel)]="postUser.name"
+                  placeholder="Nombre de usuario"
+                  type="text"
+                  id="date-picker-example"
+                  required="true"
+                  class="form-control datepicker"
+                  style="font-family: Arial, FontAwesome"
+                />
+              </div>
+
+              <div class="col-sm-6 fort">
+                <mat-form-field appearance="fill">
+                  <mat-label>Selecciona tu perfil</mat-label>
+                  <mat-select
+                    required="true"
+                    name="status"
+                    #status="ngModel"
+                    [(ngModel)]="postUser.profile"
+                  >
+                    <mat-option></mat-option>
+                    <mat-option *ngFor="let info of profiles" [value]="info.id">
+                      {{ info.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="fs-4 dragd">Asignación de empresas</p>
+        </div>
+        <div class="row">
+          <div
+            cdkDropList
+            class="col-6"
+            #ln1="cdkDropList"
+            [cdkDropListData]="listNumbers1"
+            [cdkDropListConnectedTo]="[ln2]"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div cdkDrag class="block block-1" *ngFor="let n of listNumbers1">
+              <span>{{ n }}</span>
+            </div>
+            <button type="button" class="btn btn-primary botdrag">
+              Agregar Empresa
+            </button>
+          </div>
+          <div
+            cdkDropList
+            class="col-6"
+            #ln2="cdkDropList"
+            [cdkDropListData]="listNumbers2"
+            [cdkDropListConnectedTo]="[ln1]"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div cdkDrag class="block block-2" *ngFor="let n of listNumbers2">
+              <span>{{ n }}</span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div>
+          <button
+            [disabled]="!addForm.form.valid"
+            (click)="postUsers(addForm)"
+            type="button"
+            class="btn btn-primary butt2"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

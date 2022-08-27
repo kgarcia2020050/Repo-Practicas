@@ -6,7 +6,7 @@ import com.is4tech.practicas.service.ProfilesService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MapperUser implements MapperDTO<UserDTO, Users>{
+public class MapperUser implements MapperDTO<UserDTO, Users> {
 
     private final ProfilesService profilesService;
 
@@ -20,8 +20,9 @@ public class MapperUser implements MapperDTO<UserDTO, Users>{
         model.setName(objeto.getName());
         model.setEmail(objeto.getEmail());
         model.setProfile(objeto.getProfile());
+        System.out.println(objeto.getProfile());
         model.setProfilesByProfile(profilesService.findById(objeto.getProfile()));
-        model.setStatus((byte)1);
+        model.setStatus((byte) 1);
         return model;
     }
 }

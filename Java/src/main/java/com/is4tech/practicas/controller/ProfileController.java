@@ -58,12 +58,19 @@ public class ProfileController {
 
     @PutMapping("/editProfile/{id}")
     public ResponseEntity<String> editProfile(@PathVariable("id") Integer id, @RequestBody ProfilesDTO profilesDTO) {
-        if (profilesService.findByName(profilesDTO.getName()) != null) {
+        Profiles profile = profilesService.findById(id);
+        Byte status = (profilesDTO.isStatus() ? (byte) 1 : (byte) 0);
+        String name = profilesDTO.getName();
+        if (name.equals(profile.getName()) && profile.getStatus().equals(status)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No has cambiado la informacion del perfil");
+        } else if (name.equals(profile.getName())) {
+            profilesService.editProfile(id, profilesDTO);
+        } else if (profilesService.findByName(profilesDTO.getName()) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un perfil con el mismo nombre.");
         } else {
             profilesService.editProfile(id, profilesDTO);
-            return null;
         }
+        return null;
     }
 
 }

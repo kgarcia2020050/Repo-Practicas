@@ -6,9 +6,10 @@ import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperUser;
 import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.repository.UsersRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class UserService {
@@ -33,8 +34,8 @@ public class UserService {
         return usersRepository.findByName(name);
     }
 
-    public List<Users> findAll() {
-        return usersRepository.findAll();
+    public Page<Users> findAll(Pageable pageable) {
+        return usersRepository.findAll(pageable);
     }
 
 
@@ -47,7 +48,11 @@ public class UserService {
         Users model = usersRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra al usuario con el ID " + id));
         model.setName(userDTO.getName());
         model.setEmail(userDTO.getEmail());
-        model.setStatus(userDTO.getStatus());
+        if (userDTO.isStatus()) {
+            model.setStatus((byte) 1);
+        } else {
+            model.setStatus((byte) 0);
+        }
         model.setProfile(userDTO.getProfile());
         model.setProfilesByProfile(profilesService.findById(userDTO.getProfile()));
         usersRepository.save(model);

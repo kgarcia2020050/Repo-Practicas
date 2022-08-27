@@ -3,6 +3,9 @@ package com.is4tech.practicas.controller;
 import com.is4tech.practicas.dto.UserDTO;
 import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("http://localhost:4200/")
 public class UserController {
 
     private final UserService userService;
@@ -31,8 +35,15 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public List<Users> findAll() {
-        return userService.findAll();
+    public Page<Users> findAll(@RequestParam(defaultValue = "0") int page,
+                               @RequestParam(defaultValue = "6") int size,
+                               @RequestParam(defaultValue = "name") String order,
+                               @RequestParam(defaultValue = "true") boolean asc) {
+        Page<Users> users = userService.findAll(PageRequest.of(page, size, Sort.by(order)));
+        if (!asc) {
+            users = userService.findAll(PageRequest.of(page, size, Sort.by(order).descending()));
+        }
+        return users;
     }
 
     @PutMapping("/editUser/{id}")
