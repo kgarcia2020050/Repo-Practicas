@@ -38,6 +38,10 @@ public class UserService {
         return usersRepository.findAll(pageable);
     }
 
+    public Users findById(Integer id) {
+        return usersRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra al usuario con el ID " + id));
+    }
+
 
     public void saveUser(UserDTO userdto) {
         Users model = mapper.mapeo(userdto);
