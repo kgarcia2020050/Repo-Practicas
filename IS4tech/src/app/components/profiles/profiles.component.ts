@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profiles',
@@ -20,10 +19,7 @@ export class ProfilesComponent implements OnInit {
   public page: number = 0;
   public search: any;
 
-  constructor(
-    private profileService: ProfileService,
-    public dialog: MatDialog
-  ) {
+  constructor(private profileService: ProfileService, private router: Router) {
     this.getProfile = new Profile(0, '', 1);
   }
 
@@ -32,7 +28,7 @@ export class ProfilesComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(ProfileDialogComponent);
+    this.router.navigate(['/openProfile']);
   }
 
   findById(id) {

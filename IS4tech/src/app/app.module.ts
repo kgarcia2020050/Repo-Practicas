@@ -24,6 +24,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
+import { OpenProfileComponent } from './components/open-profile/open-profile.component';
+import { OpenUserComponent } from './components/open-user/open-user.component';
+import { OpenEnterpriseComponent } from './components/open-enterprise/open-enterprise.component';
+import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterprise-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,10 @@ import { UserDialogComponent } from './components/user-dialog/user-dialog.compon
     SearchPipe,
     ProfileDialogComponent,
     UserDialogComponent,
+    OpenProfileComponent,
+    OpenUserComponent,
+    OpenEnterpriseComponent,
+    EnterpriseDialogComponent,
   ],
   imports: [
     BrowserModule,

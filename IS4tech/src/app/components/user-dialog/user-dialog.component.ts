@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -28,12 +29,11 @@ export class UserDialogComponent implements OnInit {
   constructor(
     private userService: UserService,
     private profileService: ProfileService,
-    public dialogRef: MatDialogRef<UserDialogComponent>
+    public dialogRef: MatDialogRef<UserDialogComponent>,
+    private router: Router
   ) {
     this.postUser = new User(0, '', '', 1, 0);
   }
-
-  public defaultValue: any;
 
   selectFormControl = new FormControl('', Validators.required);
   ngOnInit(): void {
@@ -54,13 +54,18 @@ export class UserDialogComponent implements OnInit {
     this.profileService.getProfiles(this.page, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
         this.profiles = response.content;
-        this.defaultValue = this.profiles[0].name;
+        console.log(this.profiles);
       },
     });
   }
 
+  addEnterprise(){
+    this.router.navigate(["/openEnterprise"])
+  }
+
   closeDialog() {
     this.dialogRef.close();
+    this.router.navigate(['/users']);
   }
 
   drop($event: CdkDragDrop<number[]>) {

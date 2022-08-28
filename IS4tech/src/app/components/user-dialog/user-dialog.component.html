@@ -21,7 +21,6 @@
                   placeholder="Correo"
                   type="text"
                   required="true"
-                  id="date-picker-example"
                   class="form-control datepicker mb-4"
                   style="font-family: Arial, FontAwesome"
                 />
@@ -44,17 +43,20 @@
               <div class="col-sm-6 fort">
                 <mat-form-field appearance="fill">
                   <mat-label>Selecciona tu perfil</mat-label>
-                  <mat-select
-                    required="true"
+                  <select
+                    matNativeControl
                     name="status"
                     #status="ngModel"
                     [(ngModel)]="postUser.profile"
                   >
-                    <mat-option></mat-option>
-                    <mat-option *ngFor="let info of profiles" [value]="info.id">
+                    <option
+                      *ngFor="let info of profiles"
+                      [value]="info.id"
+                      [selected]="info.name"
+                    >
                       {{ info.name }}
-                    </mat-option>
-                  </mat-select>
+                    </option>
+                  </select>
                 </mat-form-field>
               </div>
             </div>
@@ -101,6 +103,13 @@
             class="btn btn-primary butt2"
           >
             Guardar
+          </button>
+          <button
+            type="button"
+            (click)="closeDialog()"
+            class="btn btn-primary butt2"
+          >
+            Cancelar
           </button>
         </div>
       </div>

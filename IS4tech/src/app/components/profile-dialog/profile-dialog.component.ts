@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-dialog',
@@ -18,6 +19,7 @@ export class ProfileDialogComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     public dialog: MatDialogRef<ProfileDialogComponent>,
+    private router: Router
   ) {
     this.postProfile = new Profile(0, '', 1);
   }
@@ -30,6 +32,10 @@ export class ProfileDialogComponent implements OnInit {
     this.dialog.close();
   }
 
+  cancel(){
+    this.router.navigate(["/profiles"])
+  }
+
   newProfile(addForm) {
     this.profileService.postProfile(this.postProfile).subscribe({
       next: () => {
@@ -38,6 +44,7 @@ export class ProfileDialogComponent implements OnInit {
           icon: 'success',
           text: 'Perfil agregado exitosamente.',
         }).then(() => {
+          this.router.navigate(['/profiles']);
           this.closeDialog();
         });
       },

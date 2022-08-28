@@ -6,36 +6,37 @@ import {
 } from '@angular/cdk/drag-drop';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import { UserDialogComponent } from '../user-dialog/user-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
-
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  providers: [UserService],
+  providers: [UserService, ProfileService],
 })
 export class UsersComponent implements OnInit {
   public users: User;
   public listNumbers1;
   public listNumbers2;
-  public getUser: User;
+  public getUser: any;
   public profiles: Profile;
   public asc: boolean = true;
   public isFirst: boolean;
   public isLast: boolean;
   public page: number = 0;
   public search: any;
+  public myProfile: Profile;
 
-
-
-
-
-  constructor(private userService: UserService, public dialog: MatDialog) {
+  constructor(
+    private userService: UserService,
+    private profileService: ProfileService,
+    private router: Router
+  ) {
     this.getUser = new User(0, '', '', 1, 0);
+    this.myProfile = new Profile(0, '', 0);
   }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class UsersComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(UserDialogComponent);
+    this.router.navigate(["/openUser"])
   }
 
   getUsers() {
@@ -64,6 +65,10 @@ export class UsersComponent implements OnInit {
         this.isLast = response.last;
       },
     });
+  }
+
+  addEnterprise(){
+    this.router.navigate(["/openEnterprise"])
   }
 
   drop($event: CdkDragDrop<number[]>) {
@@ -87,6 +92,11 @@ export class UsersComponent implements OnInit {
     this.userService.getUser(id).subscribe({
       next: (response: any) => {
         this.getUser = response;
+        this.profileService.getProfile(this.getUser.profile).subscribe({
+          next: (res: any) => {
+            this.myProfile = res;
+          },
+        });
       },
     });
   }
@@ -139,6 +149,4 @@ export class UsersComponent implements OnInit {
     }
     this.getUsers();
   }
-
-
 }

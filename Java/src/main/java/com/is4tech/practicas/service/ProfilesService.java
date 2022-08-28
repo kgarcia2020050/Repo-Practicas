@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class ProfilesService {
@@ -41,9 +40,7 @@ public class ProfilesService {
         return profileRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra al perfil con el ID " + id));
     }
 
-    public List<Profiles> getProfiles() {
-        return profileRepository.findAll();
-    }
+
 
     public void saveProfile(ProfilesDTO profilesDTO) {
 

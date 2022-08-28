@@ -29,7 +29,7 @@ export class UserService {
     return this.http.post(url + 'user/saveUser', model);
   }
 
-  putUser(model:User, id: Number): Observable<any> {
+  putUser(model:User, id: number): Observable<any> {
     return this.http.put(url + 'user/editUser/' + id, model);
   }
   getUser(id: number): Observable<any> {

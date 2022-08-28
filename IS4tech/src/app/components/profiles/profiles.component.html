@@ -33,7 +33,7 @@
       <div><em (click)="filter()" class="fa-solid fa-sort filt"></em></div>
       <div class="card" *ngFor="let profile of profiles | search: search">
         <div
-          style="text-align: center"
+
           class="card-body hoved"
           (click)="findById(profile.id)"
         >
@@ -67,25 +67,28 @@
         <!--Titulos y nombres-->
 
         <div>
-        <p class="fs-1 colla">Editar</p>
-        <mat-slide-toggle
-          name="status"
-          #status="ngModel"
-          [(ngModel)]="getProfile.status" class="slide"
-        >
-          <div *ngIf="getProfile.status == 1">Activo</div>
-          <div *ngIf="getProfile.status == 0">Inactivo</div>
-        </mat-slide-toggle>
-      </div>
+          <p class="fs-1 colla">Editar</p>
+          <mat-slide-toggle
+            name="status"
+            #status="ngModel"
+            [(ngModel)]="getProfile.status"
+            class="slide"
+          >
+            <div *ngIf="getProfile.status == 1">Activo</div>
+            <div *ngIf="getProfile.status == 0">Inactivo</div>
+          </mat-slide-toggle>
+        </div>
         <br />
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Nombre</mat-label>
-          <mat-label > requerido</mat-label>
+          <mat-label> requerido</mat-label>
           <input
-           
+            [disabled]="!getProfile.name"
             matInput
             placeholder="Nombre"
-            name="nombre"
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="getProfile.name"
             required="true"
           />
         </mat-form-field>
@@ -291,7 +294,7 @@
         <div>
           <button
             (click)="putProfile(getProfile.id)"
-            [disabled]="!addForm.form.valid"
+            [disabled]="!addForm.form.valid || !getProfile.name"
             type="button"
             class="btn btn-primary butt2"
           >

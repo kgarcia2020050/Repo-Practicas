@@ -52,12 +52,22 @@ public class UserController {
 
     @PutMapping("/editUser/{id}")
     public ResponseEntity<String> editUser(@PathVariable("id") Integer id, @RequestBody UserDTO userDTO) {
-        if (userService.findByName(userDTO.getName()) != null) {
+        Users user = userService.findById(id);
+        Byte status = (userDTO.isStatus() ? (byte) 1 : (byte) 0);
+        String name = userDTO.getName();
+        String emai = userDTO.getEmail();
+        Integer profile = user.getProfile();
+        if (name.equals(user.getName()) && status.equals(user.getStatus()) &&
+                emai.equals(userDTO.getEmail()) && profile.equals(userDTO.getProfile())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No has cambiado la informacion del usuario.");
+        } else if (name.equals(user.getName())) {
+            userService.editUser(id, userDTO);
+        } else if (userService.findByName(userDTO.getName()) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con el mismo nombre.");
         } else {
             userService.editUser(id, userDTO);
-            return null;
         }
+        return null;
     }
 
 

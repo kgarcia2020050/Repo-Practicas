@@ -15,12 +15,12 @@
         <!--Buscador-->
         <div class="input-group rounded" style="max-width: 15rem">
           <input
-          type="search"
-          class="form-control rounded"
-          placeholder="Search"
-          aria-label="Search"
-          aria-describedby="search-addon"
-          [(ngModel)]="search"
+            type="search"
+            class="form-control rounded"
+            placeholder="Search"
+            aria-label="Search"
+            aria-describedby="search-addon"
+            [(ngModel)]="search"
           />
           <span class="input-group-text border-0" id="search-addon">
             <mat-icon>search</mat-icon>
@@ -31,7 +31,17 @@
       <div><em (click)="filter()" class="fa-solid fa-sort filt"></em></div>
 
       <div class="card" *ngFor="let user of users | search: search">
-        <div class="card-body hoved" (click)="findById(user.id)">{{ user.name }}</div>
+        <div class="card-body hoved" (click)="findById(user.id)">
+          <em
+            *ngIf="user.status == 1"
+            class="fa-solid fa-circle text-success"
+          ></em>
+          <em
+            *ngIf="user.status == 0"
+            class="fa-solid fa-circle text-secondary"
+          ></em>
+          {{ user.name }}
+        </div>
       </div>
       <div>
         <em
@@ -51,9 +61,15 @@
           <!--Titulos y nombres-->
 
           <p class="fs-1 coll">Editar</p>
-          <mat-slide-toggle [checked]="true" [disabled]="true">
-            <div>Activo</div></mat-slide-toggle
+          <mat-slide-toggle
+            name="status"
+            #status="ngModel"
+            [(ngModel)]="getUser.status"
+            class="slide"
           >
+            <div *ngIf="getUser.status == 1">Activo</div>
+            <div *ngIf="getUser.status == 0">Inactivo</div>
+          </mat-slide-toggle>
           <br />
 
           <div>
@@ -61,11 +77,14 @@
               <div class="row">
                 <div class="col-sm-6">
                   <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>correo</mat-label>
-                    <mat-label *ngIf="!name.valid && name.touched" > requerido</mat-label>
+                    <mat-label>Correo</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched">
+                      requerido</mat-label
+                    >
                     <input
-                    #name="ngModel"
-                    [(ngModel)]="getUser.email"
+                      [disabled]="!getUser.email"
+                      #email="ngModel"
+                      [(ngModel)]="getUser.email"
                       matInput
                       placeholder="Email"
                       name="email"
@@ -77,10 +96,13 @@
                 <div class="col-sm-6">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Nombre</mat-label>
-                    <mat-label *ngIf="!name.valid && name.touched" > requerido</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched">
+                      requerido</mat-label
+                    >
                     <input
-                    #name="ngModel"
-                    [(ngModel)]="getUser.name"
+                      [disabled]="!getUser.name"
+                      #name="ngModel"
+                      [(ngModel)]="getUser.name"
                       matInput
                       placeholder="Nombre"
                       name="nombre"
@@ -90,20 +112,23 @@
                 </div>
 
                 <div class="col-sm-6 fort">
-     <mat-form-field appearance="fill">
-                  <mat-label>Selecciona tu perfil</mat-label>
-                  <mat-select
-                    required="true"
-                    name="status"
-                    #status="ngModel"
-                    [(ngModel)]="getUser.profile"
-                  >
-                    <mat-option></mat-option>
-                    <mat-option *ngFor="let info of profiles" [value]="info.id">
-                      {{ info.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Mi perfil</mat-label>
+                    <select
+                      matNativeControl
+                      name="profile"
+                      #profile="ngModel"
+                      [(ngModel)]="getUser.profile"
+                    >
+                      <option
+                        [disabled]="true"
+                        [value]="myProfile.id"
+                        [selected]="myProfile.name"
+                      >
+                        {{ myProfile.name }}
+                      </option>
+                    </select>
+                  </mat-form-field>
                 </div>
               </div>
             </div>
@@ -123,7 +148,11 @@
               <div cdkDrag class="block block-1" *ngFor="let n of listNumbers1">
                 <span>{{ n }}</span>
               </div>
-              <button type="button" class="btn btn-primary botdrag">
+              <button
+                (click)="addEnterprise()"
+                type="button"
+                class="btn btn-primary botdrag"
+              >
                 Agregar Empresa
               </button>
             </div>
@@ -142,7 +171,14 @@
           </div>
           <br />
           <div>
-            <button type="button" class="btn btn-primary butt2">Guardar</button>
+            <button
+              (click)="putProfile(getUser.id)"
+              [disabled]="!name.valid || !email.valid || !profile.valid"
+              type="button"
+              class="btn btn-primary butt2"
+            >
+              Guardar
+            </button>
             <button
               mat-mini-fab
               color="black"
