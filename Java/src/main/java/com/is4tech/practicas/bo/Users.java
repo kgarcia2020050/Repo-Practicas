@@ -26,6 +26,7 @@ public class Users {
     @JoinColumn(name = "PROFILE", referencedColumnName = "ID")
     private Profiles profilesByProfile;
 
+
     public int getId() {
         return id;
     }

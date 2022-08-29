@@ -59,8 +59,8 @@ export class UserDialogComponent implements OnInit {
     });
   }
 
-  addEnterprise(){
-    this.router.navigate(["/openEnterprise"])
+  addEnterprise() {
+    this.router.navigate(['/openEnterprise']);
   }
 
   closeDialog() {
