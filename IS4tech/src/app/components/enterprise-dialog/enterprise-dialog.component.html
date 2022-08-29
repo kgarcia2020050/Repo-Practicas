@@ -1,7 +1,47 @@
-<h1 mat-dialog-title>Dialog with elements</h1>
-<div mat-dialog-content>
-  This dialog showcases the title, close, content and actions elements.
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="closeDialog()">Close</button>
-</div>
+<form #addForm="ngForm" class="padd">
+  <div class="col-sm  min-vh-100 dim2">
+    <div class="card border-primary othercard">
+      <div class="card-body">
+        <!--Titulos y nombres-->
+
+        <br><p class="fs-1 coll">Agregar  Empresa</p><br>
+        
+      
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <mat-label *ngIf="!name.valid && name.touched"> requerido</mat-label>
+          <input
+            #name="ngModel"
+            [(ngModel)]="postEnterprise.name"
+            matInput
+            placeholder="Nombre"
+            name="nombre"
+            required="true"
+          />
+        </mat-form-field>
+       
+     
+        <br />
+        <div>
+          <button
+            [disabled]="!addForm.form.valid"
+            type="button"
+            class="btn btn-primary butt"
+            type="button"
+            (click)="newEnterprise(addForm)"
+          >
+            Guardar
+          </button>
+          <button
+            type="button"
+            (click)="closeDialog()"
+            class="btn btn-primary butt2"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
