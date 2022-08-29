@@ -29,6 +29,7 @@ export class UsersComponent implements OnInit {
   public page: number = 0;
   public search: any;
   public myProfile: Profile;
+  public editProfile = false;
 
   constructor(
     private userService: UserService,
@@ -88,6 +89,15 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  cambiarPerfil() {
+    this.profileService.getProfiles(this.page, 6, 'name', this.asc).subscribe({
+      next: (response: any) => {
+        this.profiles = response.content;
+        this.editProfile=true;
+      },
+    });
+  }
+
   findById(id) {
     this.userService.getUser(id).subscribe({
       next: (response: any) => {
@@ -95,6 +105,7 @@ export class UsersComponent implements OnInit {
         this.profileService.getProfile(this.getUser.profile).subscribe({
           next: (res: any) => {
             this.myProfile = res;
+            this.editProfile = false;
           },
         });
       },
