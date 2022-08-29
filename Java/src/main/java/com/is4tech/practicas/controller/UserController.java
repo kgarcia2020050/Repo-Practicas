@@ -32,6 +32,8 @@ public class UserController {
     public ResponseEntity<String> saveUser(@RequestBody @Valid UserDTO userModel) {
         if (userService.findByName(userModel.getName()) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con el mismo nombre.");
+        } else if (userModel.getProfile() == 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Debes asignarte un perfil.");
         } else {
             userService.saveUser(userModel);
             return null;
