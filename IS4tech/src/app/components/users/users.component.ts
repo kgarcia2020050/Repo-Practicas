@@ -44,11 +44,11 @@ export class UsersComponent implements OnInit {
     this.listNumbers1 = [];
     this.listNumbers2 = [];
 
-    for (let index = 0; index < 5; index++) {
+    for (let index = 0; index < 4; index++) {
       this.listNumbers1.push(index);
     }
 
-    for (let index = 5; index < 10; index++) {
+    for (let index = 4; index < 8; index++) {
       this.listNumbers2.push(index);
     }
     this.getUsers();

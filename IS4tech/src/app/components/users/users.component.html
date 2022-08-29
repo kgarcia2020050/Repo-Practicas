@@ -60,7 +60,7 @@
         <div class="card-body">
           <!--Titulos y nombres-->
 
-          <p class="fs-1 coll">Editar</p>
+          <p class="coll">Editar</p>
           <mat-slide-toggle
             name="status"
             #status="ngModel"
@@ -151,6 +151,8 @@
                       </option>
                     </select>
                   </mat-form-field>
+                  <button mat-raised-button class="pat">Basic</button>
+
                 </div>
               </div>
             </div>
@@ -169,7 +171,7 @@
             >
               <div cdkDrag class="block block-1" *ngFor="let n of listNumbers1">
                 <span>{{ n }}</span>
-              </div>
+              </div><br>
               <button
                 (click)="addEnterprise()"
                 type="button"
@@ -204,7 +206,7 @@
             <button
               (click)="cambiarPerfil()"
               type="button"
-              class="btn btn-primary butt2"
+              class="btn btn-primary butt3"
             >
               Cambiar perfil
             </button>

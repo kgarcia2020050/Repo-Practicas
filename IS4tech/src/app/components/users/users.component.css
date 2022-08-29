@@ -56,8 +56,15 @@
 .coll{
     color: #2B638C;
     font-family: 'Lato', sans-serif;
+    font-size: 50px;
 
 
+}
+
+.pat{
+    position: absolute;
+    height: 9%;
+    right: 50%;
 }
 /*Comentario*/
 
@@ -80,6 +87,12 @@ background-color: #12579C   ;
 .butt2{
     background-color: #12579C   ;
 }
+.butt3{
+    background-color: #12579C   ;
+    position: absolute;
+    left: 15%;
+}
+
 
 .dragd{
     text-align: center;
@@ -109,5 +122,12 @@ color: #12579C;
     color: #12579C;
 }
 
+
+.slide{
+    color: #12579C;
+    position: absolute;
+    left: 75%;
+    }
+    
 
 
