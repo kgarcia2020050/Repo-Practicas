@@ -54,7 +54,7 @@ export class UsersComponent implements OnInit {
   }
 
   openDialog() {
-    this.router.navigate(["/openUser"])
+    this.router.navigate(['/openUser']);
   }
 
   getUsers() {
@@ -67,8 +67,8 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  addEnterprise(){
-    this.router.navigate(["/openEnterprise"])
+  addEnterprise() {
+    this.router.navigate(['/openEnterprise']);
   }
 
   drop($event: CdkDragDrop<number[]>) {

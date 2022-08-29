@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/enterprise")
+@CrossOrigin("*")
 public class EnterprisesController {
 
     private final EntrerprisesService enterpriseServices;
