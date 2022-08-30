@@ -128,6 +128,14 @@ color: #12579C;
     position: absolute;
     left: 75%;
     }
-    
 
+.back{
+    position: absolute;
+    right: 50%;
 
+    }
+
+.ahead{
+    position: absolute;
+    right: 50%;
+}

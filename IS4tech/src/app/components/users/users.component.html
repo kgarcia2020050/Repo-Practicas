@@ -43,17 +43,7 @@
           {{ user.name }}
         </div>
       </div>
-      <div>
-        <em
-          (click)="goBack()"
-          class="fas fa-angle-double-left fa-2x heed2"
-          style="color: #12579c"
-        ></em>
-        <em
-          (click)="goAhead()"
-          class="fas fa-angle-double-right fa-2x heed"
-        ></em>
-      </div>
+     
     </div>
     <div class="col-sm p-3 min-vh-100 dim2">
       <div class="card border-primary">
@@ -109,8 +99,21 @@
                       required="true"
                     />
                   </mat-form-field>
+                  <div>
+                    <em
+                    class="back"
+                    (click)="goBack()"
+                    class="fas fa-angle-double-left fa-2x heed2"
+                    
+                  ></em>
+                  <em
+                    class="ahead"
+                    (click)="goAhead()"
+                    class="fas fa-angle-double-right fa-2x heed"
+                    style="color: #12579c"
+                  ></em>
+              </div>
                 </div>
-
                 <div class="col-sm-6 fort">
                   <mat-form-field
                     appearance="fill"
@@ -151,8 +154,6 @@
                       </option>
                     </select>
                   </mat-form-field>
-                  <button mat-raised-button class="pat">Basic</button>
-
                 </div>
               </div>
             </div>
