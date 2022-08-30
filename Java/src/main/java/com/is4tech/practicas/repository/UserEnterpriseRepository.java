@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface UserEnterpriseRepository extends JpaRepository<UsersEnterprises, Integer> {
-    public abstract List<UsersEnterprises> findByUserId(Integer id);
+    public abstract List<UsersEnterprises> findAllByUserId(Integer id);
 }

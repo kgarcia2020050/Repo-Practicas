@@ -46,6 +46,10 @@ public class UserService {
     public void saveUser(UserDTO userdto) {
         Users model = mapper.mapeo(userdto);
         usersRepository.save(model);
+
+        if (!userdto.getEmpresas().isEmpty()) {
+            userEnterpriseService.save(model, userdto.getEmpresas());
+        }
     }
 
     public void editUser(Integer id, UserDTO userDTO) {
@@ -60,6 +64,12 @@ public class UserService {
         model.setProfile(userDTO.getProfile());
         model.setProfilesByProfile(profilesService.findById(userDTO.getProfile()));
         usersRepository.save(model);
+        /*
+        if (!userDTO.getEmpresas().isEmpty()) {
+            userEnterpriseService.edit(model, userDTO.getEmpresas());
+        }*/
+
+
     }
 
 

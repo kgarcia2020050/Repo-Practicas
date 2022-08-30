@@ -60,6 +60,8 @@
             </column>
             <column name="USER_ID" type="int" remarks="USER_ID_COLUMN"/>
             <column name="ENTERPRISE_ID" type="int" remarks="ENTERPRISE_ID_COLUMN"/>
+            <column name="USER_NAME" type="varchar(40)" remarks="USER_NAME_COLUMN"/>
+            <column name="ENTERPRISE_NAME" type="varchar(40)" remarks="ENTERPRISE_NAME_COLUMN"/>
         </createTable>
         <addAutoIncrement tableName="USERS_ENTERPRISES" columnName="ID" columnDataType="int" startWith="0"
                           incrementBy="1"/>

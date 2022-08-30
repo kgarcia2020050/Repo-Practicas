@@ -16,6 +16,12 @@ public class UsersEnterprises {
     @Basic
     @Column(name = "ENTERPRISE_ID", nullable = true)
     private Integer enterpriseId;
+    @Basic
+    @Column(name = "USER_NAME", nullable = true, length = 40)
+    private String userName;
+    @Basic
+    @Column(name = "ENTERPRISE_NAME", nullable = true, length = 40)
+    private String enterpriseName;
 
     public int getId() {
         return id;
@@ -52,5 +58,21 @@ public class UsersEnterprises {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getUserId(), getEnterpriseId());
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEnterpriseName() {
+        return enterpriseName;
+    }
+
+    public void setEnterpriseName(String enterpriseName) {
+        this.enterpriseName = enterpriseName;
     }
 }

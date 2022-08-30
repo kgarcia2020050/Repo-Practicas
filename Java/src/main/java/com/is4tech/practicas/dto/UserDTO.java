@@ -1,10 +1,12 @@
 package com.is4tech.practicas.dto;
 
 
+import com.is4tech.practicas.bo.Enterprises;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 public class UserDTO {
@@ -17,6 +19,7 @@ public class UserDTO {
     private String name;
     private boolean status;
     private Integer profile;
+    List<Enterprises> empresas;
 
 
 }
