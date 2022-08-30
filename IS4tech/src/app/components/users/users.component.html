@@ -43,6 +43,20 @@
           {{ user.name }}
         </div>
       </div>
+      <div>
+        <em
+        class="back"
+        (click)="goBack()"
+        class="fas fa-angle-double-left fa-2x heed2"
+        
+      ></em>
+      <em
+        class="ahead"
+        (click)="goAhead()"
+        class="fas fa-angle-double-right fa-2x heed"
+        style="color: #12579c"
+      ></em>
+  </div>
      
     </div>
     <div class="col-sm p-3 min-vh-100 dim2">
@@ -102,13 +116,11 @@
                   <div>
                     <em
                     class="back"
-                    (click)="goBack()"
                     class="fas fa-angle-double-left fa-2x heed2"
                     
                   ></em>
                   <em
                     class="ahead"
-                    (click)="goAhead()"
                     class="fas fa-angle-double-right fa-2x heed"
                     style="color: #12579c"
                   ></em>
@@ -159,8 +171,8 @@
             </div>
           </div>
           <div>
-            <p class="fs-4 dragd">Asignación de empresas</p>
-          </div>
+            <p class=" dragd">Asignación de empresas</p>
+          </div><br>
           <div class="row">
             <div
               cdkDropList
@@ -170,9 +182,14 @@
               [cdkDropListConnectedTo]="[ln2]"
               (cdkDropListDropped)="drop($event)"
             >
-              <div cdkDrag class="block block-1" *ngFor="let n of listNumbers1">
+
+              <!--DRAG-->
+
+            <option cdkDrag class="block block-1" *ngFor="let n of listNumbers1" name="profile">
                 <span>{{ n }}</span>
-              </div><br>
+            </option><br>
+
+
               <button
                 (click)="addEnterprise()"
                 type="button"
@@ -189,9 +206,12 @@
               [cdkDropListConnectedTo]="[ln1]"
               (cdkDropListDropped)="drop($event)"
             >
-              <div cdkDrag class="block block-2" *ngFor="let n of listNumbers2">
-                <span>{{ n }}</span>
-              </div>
+
+              <!--DRAG-->
+
+            <option cdkDrag class="block block-2" *ngFor="let n of listNumbers2">
+              <span>{{ n }}</span>
+            </option>
             </div>
           </div>
           <br />
