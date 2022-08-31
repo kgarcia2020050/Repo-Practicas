@@ -47,7 +47,6 @@ export class UserDialogComponent implements OnInit {
       enterpriseName: 'Coca Cola';
     }
   ];
-  
 
   selectFormControl = new FormControl('', Validators.required);
   ngOnInit(): void {

@@ -25,8 +25,9 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public Users findById(@PathVariable("id") Integer id) {
-        return userService.usuarioId(id);
+        return userService.userId(id);
     }
+
 
     @PostMapping("/saveUser")
     public ResponseEntity<String> saveUser(@RequestBody @Valid UserDTO userModel) {
@@ -54,12 +55,12 @@ public class UserController {
 
     @PutMapping("/editUser/{id}")
     public ResponseEntity<String> editUser(@PathVariable("id") Integer id, @RequestBody UserDTO userDTO) {
-        Users user = userService.usuarioId(id);
-        Byte status = (userDTO.isStatus() ? (byte) 1 : (byte) 0);
-        String name = userDTO.getName();
-        String emai = userDTO.getEmail();
+        UserDTO user = userService.findById(id);
+        boolean status = (userDTO.isStatus() ? true : false);
+        String name = user.getName();
+        String emai = user.getEmail();
         Integer profile = user.getProfile();
-        if (name.equals(user.getName()) && status.equals(user.getStatus()) &&
+        if (name.equals(userDTO.getName()) && status == user.isStatus() &&
                 emai.equals(userDTO.getEmail()) && profile.equals(userDTO.getProfile())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No has cambiado la informacion del usuario.");
         } else if (name.equals(user.getName())) {

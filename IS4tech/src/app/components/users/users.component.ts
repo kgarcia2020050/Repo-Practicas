@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
   public users: User;
   public listNumbers1 = [];
   public listNumbers2 = [];
-  public getUser: any;
+  public getUser: User;
   public profiles: Profile;
   public asc: boolean = true;
   public isFirst: boolean;
@@ -145,6 +145,7 @@ export class UsersComponent implements OnInit {
   }
 
   putProfile(id) {
+    console.log(id)
     this.userService.putUser(this.getUser, id).subscribe({
       next: () => {
         Swal.fire({

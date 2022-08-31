@@ -9,7 +9,6 @@ import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.bo.UsersEnterprises;
 import com.is4tech.practicas.repository.UserEnterpriseRepository;
 import com.is4tech.practicas.repository.UsersRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,14 +27,13 @@ public class UserService {
 
     private final ProfilesService profilesService;
     private final UserEnterpriseRepository userEnterpriseRepository;
-    private final UserEnterpriseService userEnterpriseService;
 
 
-    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService, UserEnterpriseService userEnterpriseService, UserEnterpriseRepository userEnterpriseRepository) {
+    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService, UserEnterpriseRepository userEnterpriseRepository) {
         this.mapper = mapper;
         this.usersRepository = usersRepository;
         this.profilesService = profilesService;
-        this.userEnterpriseService = userEnterpriseService;
+
         this.userEnterpriseRepository = userEnterpriseRepository;
     }
 
@@ -52,8 +50,15 @@ public class UserService {
         UserDTO userDTO = new UserDTO();
 
         if (users.isPresent()) {
-            BeanUtils.copyProperties(users, userDTO);
             List<UsersEnterprisesDTO> enterprisesDTOS = this.userEnterpriseRepository.findAllDtoByUserId(users.get().getId());
+            userDTO.setName(users.get().getName());
+            userDTO.setProfile(users.get().getProfile());
+            userDTO.setEmail(users.get().getEmail());
+            if (users.get().getStatus() == (byte) 1) {
+                userDTO.setStatus(true);
+            } else {
+                userDTO.setStatus(false);
+            }
             userDTO.setEmpresas(enterprisesDTOS);
             return userDTO;
         } else {
@@ -62,7 +67,7 @@ public class UserService {
 
     }
 
-    public Users usuarioId(Integer id){
+    public Users userId(Integer id){
         return this.usersRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
@@ -73,7 +78,7 @@ public class UserService {
 
         if (userdto.getEmpresas() != null && !userdto.getEmpresas().isEmpty()) {
             List<UsersEnterprises> enterpirses = new ArrayList<>();
-            for (int i=0;i<userdto.getEmpresas().size();i++) {
+            for (int i = 0; i < userdto.getEmpresas().size(); i++) {
                 UsersEnterprises usersEnterprises = new UsersEnterprises();
                 usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
                 usersEnterprises.setUserId(bo.getId());
@@ -83,10 +88,6 @@ public class UserService {
             }
             this.userEnterpriseRepository.saveAll(enterpirses);
         }
-
-//        if (!userdto.getEmpresas().isEmpty()) {
-//            userEnterpriseService.save(model, userdto.getEmpresas());
-//        }
     }
 
     public void editUser(Integer id, UserDTO userDTO) {
@@ -104,19 +105,16 @@ public class UserService {
 
         if (userDTO.getEmpresas() != null && !userDTO.getEmpresas().isEmpty()) {
             List<UsersEnterprises> enterpirses = new ArrayList<>();
-            for (UsersEnterprisesDTO usersEnterprisesDTO: userDTO.getEmpresas()) {
+            for (int i = 0; i < userDTO.getEmpresas().size(); i++) {
                 UsersEnterprises usersEnterprises = new UsersEnterprises();
-                BeanUtils.copyProperties(usersEnterprisesDTO, usersEnterprises);
+                usersEnterprises.setUserId(model.getId());
+                usersEnterprises.setUserName(model.getName());
+                usersEnterprises.setEnterpriseId(userDTO.getEmpresas().get(i).getEnterpriseId());
+                usersEnterprises.setEnterpriseName(userDTO.getEmpresas().get(i).getEnterpriseName());
                 enterpirses.add(usersEnterprises);
             }
             this.userEnterpriseRepository.saveAll(enterpirses);
         }
-
-        /*
-        if (!userDTO.getEmpresas().isEmpty()) {
-            userEnterpriseService.edit(model, userDTO.getEmpresas());
-        }*/
-
 
     }
 
