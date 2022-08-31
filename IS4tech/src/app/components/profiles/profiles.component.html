@@ -73,6 +73,7 @@
             #status="ngModel"
             [(ngModel)]="getProfile.status"
             class="slide"
+            *ngIf="getProfile.name"
           >
             <div *ngIf="getProfile.status == 1">Activo</div>
             <div *ngIf="getProfile.status == 0">Inactivo</div>

@@ -32,7 +32,7 @@ export class UserDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<UserDialogComponent>,
     private router: Router
   ) {
-    this.postUser = new User(0, '', '', 1, 0,[]);
+    this.postUser = new User(0, '', '', 1, 0, []);
   }
 
   selectFormControl = new FormControl('', Validators.required);

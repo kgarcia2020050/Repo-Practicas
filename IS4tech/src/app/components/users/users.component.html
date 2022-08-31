@@ -45,19 +45,17 @@
       </div>
       <div>
         <em
-        class="back"
-        (click)="goBack()"
-        class="fas fa-angle-double-left fa-2x heed2"
-        
-      ></em>
-      <em
-        class="ahead"
-        (click)="goAhead()"
-        class="fas fa-angle-double-right fa-2x heed"
-        style="color: #12579c"
-      ></em>
-  </div>
-     
+          class="back"
+          (click)="goBack()"
+          class="fas fa-angle-double-left fa-2x heed2"
+        ></em>
+        <em
+          class="ahead"
+          (click)="goAhead()"
+          class="fas fa-angle-double-right fa-2x heed"
+          style="color: #12579c"
+        ></em>
+      </div>
     </div>
     <div class="col-sm p-3 min-vh-100 dim2">
       <div class="card border-primary">
@@ -70,6 +68,7 @@
             #status="ngModel"
             [(ngModel)]="getUser.status"
             class="slide"
+            *ngIf="getUser.name && getUser.email"
           >
             <div *ngIf="getUser.status == 1">Activo</div>
             <div *ngIf="getUser.status == 0">Inactivo</div>
@@ -113,18 +112,19 @@
                       required="true"
                     />
                   </mat-form-field>
-                  <div>
+                  <div *ngIf="this.editProfile == true">
                     <em
-                    class="back"
-                    class="fas fa-angle-double-left fa-2x heed2"
-                    
-                  ></em>
-                  <em
-                    class="ahead"
-                    class="fas fa-angle-double-right fa-2x heed"
-                    style="color: #12579c"
-                  ></em>
-              </div>
+                      (click)="goBackProfiles()"
+                      class="back"
+                      class="fas fa-angle-double-left fa-2x heed2"
+                    ></em>
+                    <em 
+                      class="ahead"
+                      (click)="goAheadProfiles()"
+                      class="fas fa-angle-double-right fa-2x heed"
+                      style="color: #12579c"
+                    ></em>
+                  </div>
                 </div>
                 <div class="col-sm-6 fort">
                   <mat-form-field
@@ -171,8 +171,9 @@
             </div>
           </div>
           <div>
-            <p class=" dragd">Asignación de empresas</p>
-          </div><br>
+            <p class="dragd">Asignación de empresas</p>
+          </div>
+          <br />
           <div class="row">
             <div
               cdkDropList
@@ -182,13 +183,17 @@
               [cdkDropListConnectedTo]="[ln2]"
               (cdkDropListDropped)="drop($event)"
             >
-
               <!--DRAG-->
 
-            <option cdkDrag class="block block-1" *ngFor="let n of listNumbers1" name="profile">
+              <option
+                cdkDrag
+                class="block block-1"
+                *ngFor="let n of listNumbers1"
+                name="profile"
+              >
                 <span>{{ n }}</span>
-            </option><br>
-
+              </option>
+              <br />
 
               <button
                 (click)="addEnterprise()"
@@ -206,12 +211,15 @@
               [cdkDropListConnectedTo]="[ln1]"
               (cdkDropListDropped)="drop($event)"
             >
-
               <!--DRAG-->
 
-            <option cdkDrag class="block block-2" *ngFor="let n of listNumbers2">
-              <span>{{ n }}</span>
-            </option>
+              <option
+                cdkDrag
+                class="block block-2"
+                *ngFor="let n of listNumbers2"
+              >
+                <span>{{ n }}</span>
+              </option>
             </div>
           </div>
           <br />
@@ -226,6 +234,7 @@
             </button>
             <button
               (click)="cambiarPerfil()"
+              [disabled]="!name.valid || !email.valid"
               type="button"
               class="btn btn-primary butt3"
             >
