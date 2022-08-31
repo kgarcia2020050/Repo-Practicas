@@ -9,6 +9,7 @@ import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.bo.UsersEnterprises;
 import com.is4tech.practicas.repository.UserEnterpriseRepository;
 import com.is4tech.practicas.repository.UsersRepository;
+import liquibase.pro.packaged.P;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -67,7 +68,7 @@ public class UserService {
 
     }
 
-    public Users userId(Integer id){
+    public Users userId(Integer id) {
         return this.usersRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
@@ -88,6 +89,10 @@ public class UserService {
             }
             this.userEnterpriseRepository.saveAll(enterpirses);
         }
+    }
+
+    public void deleteUserEnterpriseRegister(Integer id) {
+        this.userEnterpriseRepository.deleteById(id);
     }
 
     public void editUser(Integer id, UserDTO userDTO) {

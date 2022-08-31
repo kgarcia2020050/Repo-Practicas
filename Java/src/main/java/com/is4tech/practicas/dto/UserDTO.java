@@ -1,8 +1,6 @@
 package com.is4tech.practicas.dto;
 
 
-import com.is4tech.practicas.bo.Enterprises;
-import com.is4tech.practicas.bo.UsersEnterprises;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;

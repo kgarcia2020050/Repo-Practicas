@@ -56,14 +56,10 @@ public class UserController {
     @PutMapping("/editUser/{id}")
     public ResponseEntity<String> editUser(@PathVariable("id") Integer id, @RequestBody UserDTO userDTO) {
         UserDTO user = userService.findById(id);
-        boolean status = (userDTO.isStatus() ? true : false);
-        String name = user.getName();
-        String emai = user.getEmail();
-        Integer profile = user.getProfile();
-        if (name.equals(userDTO.getName()) && status == user.isStatus() &&
-                emai.equals(userDTO.getEmail()) && profile.equals(userDTO.getProfile())) {
+        if (user.getName().equals(userDTO.getName()) && userDTO.isStatus() == user.isStatus() &&
+                user.getEmail().equals(userDTO.getEmail()) && user.getProfile().equals(userDTO.getProfile())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No has cambiado la informacion del usuario.");
-        } else if (name.equals(user.getName())) {
+        } else if (user.getName().equals(userDTO.getName())) {
             userService.editUser(id, userDTO);
         } else if (userService.findByName(userDTO.getName()) != null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con el mismo nombre.");
@@ -72,6 +68,12 @@ public class UserController {
         }
         return null;
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable("id")Integer id){
+        this.userService.deleteUserEnterpriseRegister(id);
+    }
+
 
 
 }
