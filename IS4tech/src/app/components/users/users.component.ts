@@ -145,7 +145,6 @@ export class UsersComponent implements OnInit {
   }
 
   putProfile(id) {
-    console.log(id)
     this.userService.putUser(this.getUser, id).subscribe({
       next: () => {
         Swal.fire({
