@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router
   ) {
-    this.getUser = new User(0, '', '', 1, 0);
+    this.getUser = new User(0, '', '', 1, 0,[]);
     this.myProfile = new Profile(0, '', 0);
   }
 
@@ -93,7 +93,7 @@ export class UsersComponent implements OnInit {
     this.profileService.getProfiles(this.page, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
         this.profiles = response.content;
-        this.editProfile=true;
+        this.editProfile = true;
       },
     });
   }
