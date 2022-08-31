@@ -10,12 +10,14 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
+import { EnterpriseService } from 'src/app/services/enterprise.service';
+import { Enterprise } from 'src/app/models/enterprise';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  providers: [UserService, ProfileService],
+  providers: [UserService, ProfileService, EnterpriseService],
 })
 export class UsersComponent implements OnInit {
   public users: User;
@@ -30,13 +32,15 @@ export class UsersComponent implements OnInit {
   public search: any;
   public myProfile: Profile;
   public editProfile = false;
+  public enterprises: Enterprise;
 
   constructor(
     private userService: UserService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private enterpriseService: EnterpriseService
   ) {
-    this.getUser = new User(0, '', '', 1, 0,[]);
+    this.getUser = new User(0, '', '', 1, 0, []);
     this.myProfile = new Profile(0, '', 0);
   }
 
@@ -87,6 +91,14 @@ export class UsersComponent implements OnInit {
         $event.currentIndex
       );
     }
+  }
+
+  getEnterprises() {
+    this.enterpriseService.getEnterprises().subscribe({
+      next: (response: any) => {
+        this.getEnterprises = response.content;
+      },
+    });
   }
 
   cambiarPerfil() {
