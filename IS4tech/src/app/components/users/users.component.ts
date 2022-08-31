@@ -21,8 +21,8 @@ import { Enterprise } from 'src/app/models/enterprise';
 })
 export class UsersComponent implements OnInit {
   public users: User;
-  public listNumbers1;
-  public listNumbers2;
+  public listNumbers1 = [];
+  public listNumbers2 = [];
   public getUser: any;
   public profiles: Profile;
   public asc: boolean = true;
@@ -32,7 +32,6 @@ export class UsersComponent implements OnInit {
   public search: any;
   public myProfile: Profile;
   public editProfile = false;
-  public enterprises: Enterprise;
 
   public pageProfile = 0;
   public ascProfile = true;
@@ -50,9 +49,6 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listNumbers1 = [];
-    this.listNumbers2 = [];
-
     for (let index = 0; index < 4; index++) {
       this.listNumbers1.push(index);
     }
@@ -61,6 +57,7 @@ export class UsersComponent implements OnInit {
       this.listNumbers2.push(index);
     }
     this.getUsers();
+    this.getEnterprises()
   }
 
   openDialog() {
@@ -101,7 +98,7 @@ export class UsersComponent implements OnInit {
   getEnterprises() {
     this.enterpriseService.getEnterprises().subscribe({
       next: (response: any) => {
-        this.getEnterprises = response.content;
+        this.listNumbers1=response.content;
       },
     });
   }

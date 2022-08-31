@@ -37,7 +37,7 @@ public class EntrerprisesService {
     }
 
     public void editEnterprise(Integer id, EnterpriseDTO enterpriseDTO) {
-        Enterprises model = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encontro a la empresa con el ID " + id));
+        Enterprises model = enterpriseRepository.findById(id).orElseThrow(NotFoundException::new);
         model.setName(enterpriseDTO.getName());
         enterpriseRepository.save(model);
     }

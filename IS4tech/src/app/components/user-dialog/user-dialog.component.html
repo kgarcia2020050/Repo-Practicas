@@ -71,9 +71,15 @@
             [cdkDropListConnectedTo]="[ln2]"
             (cdkDropListDropped)="drop($event)"
           >
-            <div cdkDrag class="block block-1" *ngFor="let n of listNumbers1">
-              <span>{{ n }}</span>
-            </div>
+            <option
+              cdkDrag
+              class="block block-1"
+              *ngFor="let n of listNumbers1"
+              name=""
+
+            >
+              <span>{{ n.name }}</span>
+            </option>
             <br />
             <button type="button" class="btn btn-primary botdrag">
               Agregar Empresa

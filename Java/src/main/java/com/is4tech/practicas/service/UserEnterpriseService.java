@@ -36,14 +36,14 @@ public class UserEnterpriseService {
     }
 
     public void edit(Users users, List<Enterprises> empresas) {
-/*            List<UsersEnterprises> enterprises = findByUserId(users.getId());
-            for (int i = 0; i < empresas.size(); i++) {
-                enterprises.get(i).setUserId(users.getId());
-                enterprises.get(i).setEnterpriseId(empresas.get(i).getId());
-                enterprises.get(i).setEnterpriseName(empresas.get(i).getName());
-                enterprises.get(i).setUserName(users.getName());
-            }
-            userEnterpriseRepository.saveAll(enterprises);*/
+        List<UsersEnterprises> enterprises = findByUserId(users.getId());
+        for (int i = 0; i < empresas.size(); i++) {
+            enterprises.get(i).setUserId(users.getId());
+            enterprises.get(i).setEnterpriseId(empresas.get(i).getId());
+            enterprises.get(i).setEnterpriseName(empresas.get(i).getName());
+            enterprises.get(i).setUserName(users.getName());
+        }
+        userEnterpriseRepository.saveAll(enterprises);
 
 
     }

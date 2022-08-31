@@ -25,7 +25,7 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public Users findById(@PathVariable("id") Integer id) {
-        return userService.findById(id);
+        return userService.usuarioId(id);
     }
 
     @PostMapping("/saveUser")
@@ -54,7 +54,7 @@ public class UserController {
 
     @PutMapping("/editUser/{id}")
     public ResponseEntity<String> editUser(@PathVariable("id") Integer id, @RequestBody UserDTO userDTO) {
-        Users user = userService.findById(id);
+        Users user = userService.usuarioId(id);
         Byte status = (userDTO.isStatus() ? (byte) 1 : (byte) 0);
         String name = userDTO.getName();
         String emai = userDTO.getEmail();

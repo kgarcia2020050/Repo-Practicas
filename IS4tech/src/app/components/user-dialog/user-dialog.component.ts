@@ -12,17 +12,18 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { MatDialogRef } from '@angular/material/dialog';
+import { EnterpriseService } from 'src/app/services/enterprise.service';
 
 @Component({
   selector: 'app-user-dialog',
   templateUrl: './user-dialog.component.html',
   styleUrls: ['./user-dialog.component.css'],
-  providers: [UserService, ProfileService],
+  providers: [UserService, ProfileService, EnterpriseService],
 })
 export class UserDialogComponent implements OnInit {
   public postUser: User;
-  public listNumbers1;
-  public listNumbers2;
+  public listNumbers1 = [];
+  public listNumbers2 = [];
   public profiles: Profile;
   public asc: boolean = true;
   public page: number = 0;
@@ -30,17 +31,28 @@ export class UserDialogComponent implements OnInit {
     private userService: UserService,
     private profileService: ProfileService,
     public dialogRef: MatDialogRef<UserDialogComponent>,
-    private router: Router
+    private router: Router,
+    private enterpriseService: EnterpriseService
   ) {
     this.postUser = new User(0, '', '', 1, 0, []);
   }
 
+  public 'empresas': [
+    {
+      enterpriseId: 2;
+      enterpriseName: 'Colgate Inc';
+    },
+    {
+      enterpriseId: 1;
+      enterpriseName: 'Coca Cola';
+    }
+  ];
+  
+
   selectFormControl = new FormControl('', Validators.required);
   ngOnInit(): void {
-    this.listNumbers1 = [];
-    this.listNumbers2 = [];
-
-    for (let index = 0; index < 4; index++) {
+    this.getEnterprises();
+    for (let index = 0; index < this.listNumbers1.length; index++) {
       this.listNumbers1.push(index);
     }
 
@@ -83,6 +95,14 @@ export class UserDialogComponent implements OnInit {
         $event.currentIndex
       );
     }
+  }
+
+  getEnterprises() {
+    this.enterpriseService.getEnterprises().subscribe({
+      next: (response: any) => {
+        this.listNumbers1 = response.content;
+      },
+    });
   }
 
   postUsers(addForm) {

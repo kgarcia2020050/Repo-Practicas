@@ -37,7 +37,7 @@ public class ProfilesService {
     }
 
     public Profiles findById(Integer id) {
-        return profileRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra al perfil con el ID " + id));
+        return profileRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
 
@@ -50,7 +50,7 @@ public class ProfilesService {
     }
 
     public void editProfile(Integer id, ProfilesDTO profilesDTO) {
-        Profiles model = profileRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra el perfil con el ID " + id));
+        Profiles model = profileRepository.findById(id).orElseThrow(NotFoundException::new);
             model.setName(profilesDTO.getName());
             if (profilesDTO.isStatus()) {
                 model.setStatus((byte) 1);

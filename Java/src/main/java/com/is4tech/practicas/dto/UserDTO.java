@@ -2,6 +2,7 @@ package com.is4tech.practicas.dto;
 
 
 import com.is4tech.practicas.bo.Enterprises;
+import com.is4tech.practicas.bo.UsersEnterprises;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -19,7 +20,7 @@ public class UserDTO {
     private String name;
     private boolean status;
     private Integer profile;
-    List<Enterprises> empresas;
+    List<UsersEnterprisesDTO> empresas;
 
 
 }
