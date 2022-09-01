@@ -97,8 +97,8 @@
                 </div>
 
                 <div class="col-sm-6">
-                  <mat-form-field class="ott"   appearance="outline">
-                    <mat-label >Nombre</mat-label>
+                  <mat-form-field class="ott" appearance="outline">
+                    <mat-label>Nombre</mat-label>
                     <mat-label *ngIf="!name.valid && name.touched">
                       requerido</mat-label
                     >
@@ -186,7 +186,8 @@
             <span class="input-group-text border-0 sear" id="search-addon">
               <mat-icon>search</mat-icon>
             </span>
-          </div><br>
+          </div>
+          <br />
           <div class="row">
             <div
               cdkDropList
@@ -229,6 +230,7 @@
                 cdkDrag
                 class="block block-2"
                 *ngFor="let n of listNumbers2"
+                name
               >
                 <span>{{ n }}</span>
               </option>

@@ -44,7 +44,9 @@ export class UsersComponent implements OnInit {
     private router: Router,
     private enterpriseService: EnterpriseService
   ) {
-    this.getUser = new User(0, '', '', 1, 0, []);
+    this.getUser = new User(0, '', '', 1, 0, [
+      { enterpriseId: 0, enterpriseName: '' },
+    ]);
     this.myProfile = new Profile(0, '', 0);
   }
 
@@ -57,7 +59,7 @@ export class UsersComponent implements OnInit {
       this.listNumbers2.push(index);
     }
     this.getUsers();
-    this.getEnterprises()
+    this.getEnterprises();
   }
 
   openDialog() {
@@ -98,7 +100,7 @@ export class UsersComponent implements OnInit {
   getEnterprises() {
     this.enterpriseService.getEnterprises().subscribe({
       next: (response: any) => {
-        this.listNumbers1=response.content;
+        this.listNumbers1 = response.content;
       },
     });
   }
