@@ -59,5 +59,9 @@ export class EnterpriseDialogComponent implements OnInit {
     });
   }
 
+  editEnterprise(){
+
+  }
+
 
 }

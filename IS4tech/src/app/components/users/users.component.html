@@ -117,12 +117,13 @@
                     <em
                       (click)="goBackProfiles()"
                       class="back"
-                      class="fas fa-angle-double-left fa-2x heed2"
+                      class="fas fa-angle-double-left fa-2x heed2, top-right"
+                      style="color: #12579c"
                     ></em>
                     <em
                       class="ahead"
                       (click)="goAheadProfiles()"
-                      class="fas fa-angle-double-right fa-2x heed"
+                      class="fas fa-angle-double-right fa-2x heed, top-right"
                       style="color: #12579c"
                     ></em>
                   </div>
@@ -220,7 +221,7 @@
                 class="block block-2"
                 *ngFor="let n of listNumbers2"
               >
-                <span>{{ n }}</span>
+                <span>{{ n.name }}</span>
               </option>
             </div>
           </div>

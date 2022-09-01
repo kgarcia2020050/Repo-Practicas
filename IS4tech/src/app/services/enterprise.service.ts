@@ -17,4 +17,8 @@ export class EnterpriseService {
   postEnterprise(model: Enterprise): Observable<any> {
     return this.http.post(url + 'enterprise/new', model);
   }
+
+  editEnterprise(id, model: Enterprise):Observable<any>{
+    return this.http.put(url + 'enterprise/edit/' +id, model);
+  }
 }
