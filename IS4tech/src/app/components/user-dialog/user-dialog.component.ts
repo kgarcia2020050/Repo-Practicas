@@ -34,7 +34,9 @@ export class UserDialogComponent implements OnInit {
     private router: Router,
     private enterpriseService: EnterpriseService
   ) {
-    this.postUser = new User(0, '', '', 1, 0, []);
+    this.postUser = new User(0, '', '', 1, 0, [
+      { enterpriseId: 0, enterpriseName: '' },
+    ]);
   }
 
   public 'empresas': [
