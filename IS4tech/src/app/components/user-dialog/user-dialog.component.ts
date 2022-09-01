@@ -23,7 +23,7 @@ import { EnterpriseService } from 'src/app/services/enterprise.service';
 export class UserDialogComponent implements OnInit {
   public postUser: User;
   public listNumbers1 = [];
-  public listNumbers2 = [];
+  public empresas = [];
   public profiles: Profile;
   public asc: boolean = true;
   public page: number = 0;
@@ -34,21 +34,8 @@ export class UserDialogComponent implements OnInit {
     private router: Router,
     private enterpriseService: EnterpriseService
   ) {
-    this.postUser = new User(0, '', '', 1, 0, [
-      { enterpriseId: 0, enterpriseName: '' },
-    ]);
+    this.postUser = new User(0, '', '', 1, 0, []);
   }
-
-  public 'empresas': [
-    {
-      enterpriseId: 2;
-      enterpriseName: 'Colgate Inc';
-    },
-    {
-      enterpriseId: 1;
-      enterpriseName: 'Coca Cola';
-    }
-  ];
 
   selectFormControl = new FormControl('', Validators.required);
   ngOnInit(): void {
@@ -57,8 +44,8 @@ export class UserDialogComponent implements OnInit {
       this.listNumbers1.push(index);
     }
 
-    for (let index = 4; index < this.listNumbers2.length; index++) {
-      this.listNumbers2.push(index);
+    for (let index = 4; index < this.empresas.length; index++) {
+      this.empresas.push(index);
     }
     this.getProfiles();
   }
@@ -107,6 +94,10 @@ export class UserDialogComponent implements OnInit {
   }
 
   postUsers(addForm) {
+    this.empresas.forEach((empresa)=>{
+      this.postUser.empresas.push({enterpriseId:empresa.id})
+    })
+    console.log(this.postUser);
     this.userService.postUser(this.postUser).subscribe({
       next: () => {
         addForm.reset();

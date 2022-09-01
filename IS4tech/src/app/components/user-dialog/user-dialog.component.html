@@ -11,7 +11,7 @@
         <br />
 
         <div>
-          <div class="container card-0 justify-content-center" dir="rtl">
+          <div class="container card-0 justify-content-center">
             <div class="row">
               <div class="col-sm-6">
                 <input
@@ -87,11 +87,11 @@
             cdkDropList
             class="col-6"
             #ln2="cdkDropList"
-            [cdkDropListData]="listNumbers2"
+            [cdkDropListData]="empresas"
             [cdkDropListConnectedTo]="[ln1]"
             (cdkDropListDropped)="drop($event)"
           >
-            <option cdkDrag class="block block-2" *ngFor="let n of listNumbers2">
+            <option cdkDrag class="block block-2" *ngFor="let n of empresas">
               <span>{{ n.name }}</span>
             </option>
           </div>

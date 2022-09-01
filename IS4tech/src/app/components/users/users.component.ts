@@ -45,7 +45,6 @@ export class UsersComponent implements OnInit {
     private enterpriseService: EnterpriseService
   ) {
     this.getUser = new User(0, '', '', 1, 0, [
-      { enterpriseId: 0, enterpriseName: '' },
     ]);
     this.myProfile = new Profile(0, '', 0);
   }
