@@ -57,7 +57,7 @@ export class UserDialogComponent implements OnInit {
       this.listNumbers1.push(index);
     }
 
-    for (let index = 4; index < 8; index++) {
+    for (let index = 4; index < this.listNumbers2.length; index++) {
       this.listNumbers2.push(index);
     }
     this.getProfiles();

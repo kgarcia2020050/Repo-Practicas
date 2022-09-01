@@ -91,9 +91,9 @@
             [cdkDropListConnectedTo]="[ln1]"
             (cdkDropListDropped)="drop($event)"
           >
-            <div cdkDrag class="block block-2" *ngFor="let n of listNumbers2">
-              <span>{{ n }}</span>
-            </div>
+            <option cdkDrag class="block block-2" *ngFor="let n of listNumbers2">
+              <span>{{ n.name }}</span>
+            </option>
           </div>
         </div>
         <br />
