@@ -114,11 +114,13 @@ export class UserDialogComponent implements OnInit {
             icon: 'error',
             text: error.error.errors[0].defaultMessage,
           });
+          this.postUser.empresas=[]
         } else {
           Swal.fire({
             icon: 'error',
             text: error.error,
           });
+          this.postUser.empresas=[]
         }
       },
     });

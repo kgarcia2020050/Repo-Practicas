@@ -3,7 +3,6 @@ import { User } from '../models/user';
 import url from '../helper';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { UserDialog } from '../components/user-dialog/user-dialog';
 
 @Injectable({
   providedIn: 'root',

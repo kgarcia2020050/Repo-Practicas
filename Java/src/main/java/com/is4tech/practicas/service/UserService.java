@@ -11,7 +11,7 @@ import com.is4tech.practicas.bo.UsersEnterprises;
 import com.is4tech.practicas.repository.EnterpriseRepository;
 import com.is4tech.practicas.repository.UserEnterpriseRepository;
 import com.is4tech.practicas.repository.UsersRepository;
-import liquibase.pro.packaged.P;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -115,10 +115,16 @@ public class UserService {
         model.setProfilesByProfile(profilesService.findById(userDTO.getProfile()));
         usersRepository.save(model);
 
+
         if (userDTO.getEmpresas() != null && !userDTO.getEmpresas().isEmpty()) {
             List<UsersEnterprises> enterpirses = new ArrayList<>();
-            for (int i = 0; i < userDTO.getEmpresas().size(); i++) {
+            for (int i=0;i<userDTO.getEmpresas().size();i++) {
                 UsersEnterprises usersEnterprises = new UsersEnterprises();
+                if(userDTO.getEmpresas().get(i).getId()==null){
+                    usersEnterprises.setId(0);
+                }else{
+                    usersEnterprises.setId(userDTO.getEmpresas().get(i).getId());
+                }
                 usersEnterprises.setUserId(model.getId());
                 usersEnterprises.setUserName(model.getName());
                 usersEnterprises.setEnterpriseId(userDTO.getEmpresas().get(i).getEnterpriseId());
