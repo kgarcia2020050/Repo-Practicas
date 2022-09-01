@@ -73,11 +73,30 @@
             <div *ngIf="getUser.status == 1">Activo</div>
             <div *ngIf="getUser.status == 0">Inactivo</div>
           </mat-slide-toggle>
-          <br />
+          <br /><br>
 
           <div>
             <div class="container card-0 justify-content-center">
               <div class="row">
+                <div class="col-sm-6">
+                 
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched">
+                      requerido</mat-label
+                    >
+                    <input
+                      [disabled]="!getUser.name"
+                      #name="ngModel"
+                      [(ngModel)]="getUser.name"
+                      matInput
+                      placeholder="Nombre"
+                      name="nombre"
+                      required="true"
+                    />
+                  </mat-form-field>
+                </div>
+
                 <div class="col-sm-6">
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Correo</mat-label>
@@ -91,24 +110,6 @@
                       matInput
                       placeholder="Email"
                       name="email"
-                      required="true"
-                    />
-                  </mat-form-field>
-                </div>
-
-                <div class="col-sm-6">
-                  <mat-form-field class="full-width" appearance="outline">
-                    <mat-label>Nombre</mat-label>
-                    <mat-label *ngIf="!name.valid && name.touched">
-                      requerido</mat-label
-                    >
-                    <input
-                      [disabled]="!getUser.name"
-                      #name="ngModel"
-                      [(ngModel)]="getUser.name"
-                      matInput
-                      placeholder="Nombre"
-                      name="nombre"
                       required="true"
                     />
                   </mat-form-field>
@@ -215,6 +216,7 @@
 
               <option
                 cdkDrag
+                cdkDragDisabled
                 class="block block-2"
                 *ngFor="let n of listNumbers2"
               >
