@@ -21,7 +21,7 @@
   }
   
   .layout-router {
-    width: calc(100vw - 70px);
+    width: calc(100vw - 65px);
     height: 100vh;
     position: fixed;
     z-index: 0;

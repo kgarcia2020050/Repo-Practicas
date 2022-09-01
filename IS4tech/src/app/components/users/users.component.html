@@ -199,13 +199,17 @@
             >
               <!--DRAG-->
 
-              <option
-                cdkDrag
-                class="block block-1"
-                *ngFor="let n of listNumbers1"
-              >
-                <span>{{ n.name }}</span>
-              </option>
+             
+
+              <form action="" cdkDrag
+              class="block block-2"
+              *ngFor="let n of listNumbers1"
+              name="profile"
+              #profile="ngModel"
+              [(ngModel)]="getUser.profile"> 
+                             <span>{{ n.name }}</span>
+            </form>
+
               <br />
 
               <button
@@ -226,14 +230,18 @@
             >
               <!--DRAG-->
 
-              <option
-                cdkDrag
-                class="block block-2"
-                *ngFor="let n of listNumbers2"
-                name
-              >
-                <span>{{ n }}</span>
-              </option>
+             
+
+              <form action="" cdkDrag
+              class="block block-2"
+              *ngFor="let n of listNumbers2"
+              name="profile"
+              #profile="ngModel"
+              [(ngModel)]="getUser.profile"> 
+                             <span>{{ n }}</span>
+            </form>
+
+             
             </div>
           </div>
           <br />
