@@ -1,5 +1,6 @@
 package com.is4tech.practicas.service;
 
+import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.dto.UserDTO;
 
 import com.is4tech.practicas.dto.UsersEnterprisesDTO;
@@ -7,6 +8,7 @@ import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperUser;
 import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.bo.UsersEnterprises;
+import com.is4tech.practicas.repository.EnterpriseRepository;
 import com.is4tech.practicas.repository.UserEnterpriseRepository;
 import com.is4tech.practicas.repository.UsersRepository;
 import liquibase.pro.packaged.P;
@@ -29,11 +31,15 @@ public class UserService {
     private final ProfilesService profilesService;
     private final UserEnterpriseRepository userEnterpriseRepository;
 
+    private final EnterpriseRepository enterpriseRepository;
 
-    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService, UserEnterpriseRepository userEnterpriseRepository) {
+
+    public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService,
+                       UserEnterpriseRepository userEnterpriseRepository,EnterpriseRepository enterpriseRepository) {
         this.mapper = mapper;
         this.usersRepository = usersRepository;
         this.profilesService = profilesService;
+        this.enterpriseRepository=enterpriseRepository;
 
         this.userEnterpriseRepository = userEnterpriseRepository;
     }
@@ -81,10 +87,11 @@ public class UserService {
             List<UsersEnterprises> enterpirses = new ArrayList<>();
             for (int i = 0; i < userdto.getEmpresas().size(); i++) {
                 UsersEnterprises usersEnterprises = new UsersEnterprises();
+                Enterprises enterpriseName=enterpriseRepository.findById(userdto.getEmpresas().get(i).getEnterpriseId()).orElseThrow(NotFoundException::new);
                 usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
                 usersEnterprises.setUserId(bo.getId());
                 usersEnterprises.setUserName(bo.getName());
-                usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
+                usersEnterprises.setEnterpriseName(enterpriseName.getName());
                 enterpirses.add(usersEnterprises);
             }
             this.userEnterpriseRepository.saveAll(enterpirses);
