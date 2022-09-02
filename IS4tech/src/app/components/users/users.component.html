@@ -330,7 +330,7 @@
                 <em class="fa-solid fa-sort filt"></em>
               </option>
               <pagination-controls
-                *ngIf="getUser.empresas !== [] || getUser.empresas != null&&!getUser.empresas"
+                *ngIf="getUser.empresas!=[]"
                 id="misEmpresas"
                 (pageChange)="p2 = $event"
                 responsive="true"
