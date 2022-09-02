@@ -163,3 +163,7 @@
 .flex-container {
     display: flex;
 justify-content: space-between;  }
+
+.havv:hover{
+    background-color: rgb(156, 171, 241);
+    transition: background-color .5s;}
