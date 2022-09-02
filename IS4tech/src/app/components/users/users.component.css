@@ -82,8 +82,7 @@
 }
 
 .butt {
-    position: absolute;
-    left: 85%;
+  
     background-color: #12579C;
 
 }
@@ -94,8 +93,7 @@
 
 .butt3 {
     background-color: #12579C;
-    position: absolute;
-    left: 15%;
+  
 }
 
 
@@ -157,3 +155,11 @@
 .dragd {
     font-size: 30px;
 }
+
+.asignEnt{
+ background-color: #12579C;
+}
+
+.flex-container {
+    display: flex;
+justify-content: space-between;  }
