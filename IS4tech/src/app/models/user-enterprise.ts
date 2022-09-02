@@ -1,5 +1,7 @@
 export class UserEnterprise {
   constructor(
-    public enterpriseId:number
+    public id:number,
+    public enterpriseId:number,
+    public enterpriseName:string,
   ){}
 }

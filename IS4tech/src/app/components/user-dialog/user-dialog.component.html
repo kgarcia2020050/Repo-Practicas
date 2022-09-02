@@ -54,7 +54,20 @@
                     </option>
                   </select>
                 </mat-form-field>
-                <button mat-raised-button class="pat">Basic</button>
+                <div>
+                  <em
+                    (click)="goBackProfiles()"
+                    class="back"
+                    class="fas fa-angle-double-left fa-2x heed2, top-right"
+                    style="color: #12579c"
+                  ></em>
+                  <em
+                    class="ahead"
+                    (click)="goAheadProfiles()"
+                    class="fas fa-angle-double-right fa-2x heed, top-right"
+                    style="color: #12579c"
+                  ></em>
+                </div>
               </div>
             </div>
           </div>
@@ -79,9 +92,6 @@
               <span>{{ n.name }}</span>
             </option>
             <br />
-            <button type="button" class="btn btn-primary botdrag">
-              Agregar Empresa
-            </button>
           </div>
           <div
             cdkDropList

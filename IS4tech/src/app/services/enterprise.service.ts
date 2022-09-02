@@ -10,15 +10,15 @@ import { HttpClient } from '@angular/common/http';
 export class EnterpriseService {
   constructor(public http: HttpClient) {}
 
-  getEnterprises(): Observable<any> {
-    return this.http.get(url + 'enterprise/all');
+  getEnterprises(page: number, size: number): Observable<any> {
+    return this.http.get(url + 'enterprise/all?page=' + page + '&size=' + size);
   }
 
   postEnterprise(model: Enterprise): Observable<any> {
     return this.http.post(url + 'enterprise/new', model);
   }
 
-  editEnterprise(id, model: Enterprise):Observable<any>{
-    return this.http.put(url + 'enterprise/edit/' +id, model);
+  editEnterprise(id, model: Enterprise): Observable<any> {
+    return this.http.put(url + 'enterprise/edit/' + id, model);
   }
 }

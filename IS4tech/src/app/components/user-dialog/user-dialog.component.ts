@@ -26,6 +26,17 @@ export class UserDialogComponent implements OnInit {
   public empresas = [];
   public profiles: Profile;
   public asc: boolean = true;
+  public editEnterprises: boolean = false;
+
+  public firstEnterprise: boolean;
+
+  public lastEnterprise: boolean;
+
+  public ascProfile = true;
+  public isFirstProfile: boolean;
+  public isLastProfile: boolean;
+
+  public pageEnterprise = 0;
   public page: number = 0;
   constructor(
     private userService: UserService,
@@ -54,7 +65,6 @@ export class UserDialogComponent implements OnInit {
     this.profileService.getProfiles(this.page, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
         this.profiles = response.content;
-        console.log(this.profiles);
       },
     });
   }
@@ -85,19 +95,51 @@ export class UserDialogComponent implements OnInit {
     }
   }
 
+  goBackProfiles() {
+    if (!this.isFirstProfile) {
+      this.page--;
+      this.getProfiles();
+    }
+  }
+
+  goAheadProfiles() {
+    if (!this.isLastProfile) {
+      this.page++;
+      this.getProfiles();
+    }
+  }
+
   getEnterprises() {
-    this.enterpriseService.getEnterprises().subscribe({
+    this.enterpriseService.getEnterprises(this.pageEnterprise, 4).subscribe({
       next: (response: any) => {
         this.listNumbers1 = response.content;
       },
     });
   }
 
+  goBackEnterprise() {
+    if (!this.firstEnterprise) {
+      this.pageEnterprise--;
+      this.getEnterprises();
+    }
+  }
+
+  goAheadEnterprise() {
+    if (!this.lastEnterprise) {
+      this.pageEnterprise++;
+      this.getEnterprises();
+    }
+  }
+
   postUsers(addForm) {
-    this.empresas.forEach((empresa)=>{
-      this.postUser.empresas.push({enterpriseId:empresa.id})
-    })
-    console.log(this.postUser);
+    console.log(this.postUser.empresas);
+    this.empresas.forEach((empresa) => {
+      this.postUser.empresas.push({
+        enterpriseId: empresa.id,
+        id: 0,
+        enterpriseName: empresa.name,
+      });
+    });
     this.userService.postUser(this.postUser).subscribe({
       next: () => {
         addForm.reset();
@@ -114,13 +156,13 @@ export class UserDialogComponent implements OnInit {
             icon: 'error',
             text: error.error.errors[0].defaultMessage,
           });
-          this.postUser.empresas=[]
+          this.postUser.empresas = [];
         } else {
           Swal.fire({
             icon: 'error',
             text: error.error,
           });
-          this.postUser.empresas=[]
+          this.postUser.empresas = [];
         }
       },
     });

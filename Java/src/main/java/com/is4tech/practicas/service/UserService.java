@@ -35,11 +35,11 @@ public class UserService {
 
 
     public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService,
-                       UserEnterpriseRepository userEnterpriseRepository,EnterpriseRepository enterpriseRepository) {
+                       UserEnterpriseRepository userEnterpriseRepository, EnterpriseRepository enterpriseRepository) {
         this.mapper = mapper;
         this.usersRepository = usersRepository;
         this.profilesService = profilesService;
-        this.enterpriseRepository=enterpriseRepository;
+        this.enterpriseRepository = enterpriseRepository;
 
         this.userEnterpriseRepository = userEnterpriseRepository;
     }
@@ -87,11 +87,10 @@ public class UserService {
             List<UsersEnterprises> enterpirses = new ArrayList<>();
             for (int i = 0; i < userdto.getEmpresas().size(); i++) {
                 UsersEnterprises usersEnterprises = new UsersEnterprises();
-                Enterprises enterpriseName=enterpriseRepository.findById(userdto.getEmpresas().get(i).getEnterpriseId()).orElseThrow(NotFoundException::new);
                 usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
                 usersEnterprises.setUserId(bo.getId());
                 usersEnterprises.setUserName(bo.getName());
-                usersEnterprises.setEnterpriseName(enterpriseName.getName());
+                usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
                 enterpirses.add(usersEnterprises);
             }
             this.userEnterpriseRepository.saveAll(enterpirses);
@@ -118,11 +117,11 @@ public class UserService {
 
         if (userDTO.getEmpresas() != null && !userDTO.getEmpresas().isEmpty()) {
             List<UsersEnterprises> enterpirses = new ArrayList<>();
-            for (int i=0;i<userDTO.getEmpresas().size();i++) {
+            for (int i = 0; i < userDTO.getEmpresas().size(); i++) {
                 UsersEnterprises usersEnterprises = new UsersEnterprises();
-                if(userDTO.getEmpresas().get(i).getId()==null){
+                if (userDTO.getEmpresas().get(i).getId() == null) {
                     usersEnterprises.setId(0);
-                }else{
+                } else {
                     usersEnterprises.setId(userDTO.getEmpresas().get(i).getId());
                 }
                 usersEnterprises.setUserId(model.getId());

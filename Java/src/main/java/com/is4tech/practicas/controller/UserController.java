@@ -28,6 +28,10 @@ public class UserController {
         return userService.userId(id);
     }
 
+    @GetMapping("/users/{id}")
+    public UserDTO findBy(@PathVariable("id") Integer id) {
+        return userService.findById(id);
+    }
 
     @PostMapping("/saveUser")
     public ResponseEntity<String> saveUser(@RequestBody @Valid UserDTO userModel) {

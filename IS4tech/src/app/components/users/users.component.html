@@ -73,13 +73,12 @@
             <div *ngIf="getUser.status == 1">Activo</div>
             <div *ngIf="getUser.status == 0">Inactivo</div>
           </mat-slide-toggle>
-          <br /><br>
+          <br /><br />
 
           <div>
             <div class="container card-0 justify-content-center">
               <div class="row">
                 <div class="col-sm-6">
-                 
                   <mat-form-field class="full-width" appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <mat-label *ngIf="!name.valid && name.touched">
@@ -176,7 +175,7 @@
             <p class="dragd">Asignación de empresas</p>
           </div>
           <br />
-          <div class="row">
+          <div class="row" *ngIf="this.editEnterprises == true">
             <div
               cdkDropList
               class="col-6"
@@ -209,7 +208,52 @@
               cdkDropList
               class="col-6"
               #ln2="cdkDropList"
-              [cdkDropListData]="listNumbers2"
+              [cdkDropListData]="empresas"
+              [cdkDropListConnectedTo]="[ln1]"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <!--DRAG-->
+
+              <option cdkDrag class="block block-2" *ngFor="let n of empresas">
+                <span>{{ n.name }}</span>
+              </option>
+            </div>
+          </div>
+          <div class="row" *ngIf="this.editEnterprises == false">
+            <div
+              cdkDropList
+              class="col-6"
+              #ln1="cdkDropList"
+              [cdkDropListData]="listNumbers1"
+              [cdkDropListConnectedTo]="[ln2]"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <!--DRAG-->
+
+              <option
+                cdkDrag
+                cdkDragDisabled
+                class="block block-1"
+                *ngFor="let n of listNumbers1"
+                name="profile"
+              >
+                <span>{{ n.name }}</span>
+              </option>
+              <br />
+
+              <button
+                (click)="addEnterprise()"
+                type="button"
+                class="btn btn-primary botdrag"
+              >
+                Agregar Empresa
+              </button>
+            </div>
+            <div
+              cdkDropList
+              class="col-6"
+              #ln2="cdkDropList"
+              [cdkDropListData]="empresas"
               [cdkDropListConnectedTo]="[ln1]"
               (cdkDropListDropped)="drop($event)"
             >
@@ -219,9 +263,12 @@
                 cdkDrag
                 cdkDragDisabled
                 class="block block-2"
-                *ngFor="let n of listNumbers2"
+                *ngFor="let n of getUser.empresas"
               >
-                <span>{{ n.name }}</span>
+                <span class="fa-solid fa-sort filt">{{
+                  n.enterpriseName
+                }}</span>
+                <em class="fa-solid fa-sort filt"></em>
               </option>
             </div>
           </div>
@@ -242,6 +289,14 @@
               class="btn btn-primary butt3"
             >
               Cambiar perfil
+            </button>
+            <button
+              (click)="asignarEmpresas()"
+              [disabled]="!name.valid || !email.valid"
+              type="button"
+              class="btn btn-primary butt3"
+            >
+              Asignarme empresas
             </button>
             <button
               mat-mini-fab

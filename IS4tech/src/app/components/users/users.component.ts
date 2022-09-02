@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
-import { Enterprise } from 'src/app/models/enterprise';
 
 @Component({
   selector: 'app-users',
@@ -22,7 +21,7 @@ import { Enterprise } from 'src/app/models/enterprise';
 export class UsersComponent implements OnInit {
   public users: User;
   public listNumbers1 = [];
-  public listNumbers2 = [];
+  public empresas = [];
   public getUser: User;
   public profiles: Profile;
   public asc: boolean = true;
@@ -33,10 +32,18 @@ export class UsersComponent implements OnInit {
   public myProfile: Profile;
   public editProfile = false;
 
+  public pageEnterprise = 0;
+
   public pageProfile = 0;
   public ascProfile = true;
   public isFirstProfile: boolean;
   public isLastProfile: boolean;
+
+  public editEnterprises: boolean = false;
+
+  public firstEnterprise: boolean;
+
+  public lastEnterprise: boolean;
 
   constructor(
     private userService: UserService,
@@ -44,18 +51,17 @@ export class UsersComponent implements OnInit {
     private router: Router,
     private enterpriseService: EnterpriseService
   ) {
-    this.getUser = new User(0, '', '', 1, 0, [
-    ]);
+    this.getUser = new User(0, '', '', 1, 0, []);
     this.myProfile = new Profile(0, '', 0);
   }
 
   ngOnInit(): void {
-    for (let index = 0; index < 4; index++) {
+    for (let index = 0; index < this.listNumbers1.length; index++) {
       this.listNumbers1.push(index);
     }
 
-    for (let index = 4; index < 8; index++) {
-      this.listNumbers2.push(index);
+    for (let index = 4; index < this.empresas.length; index++) {
+      this.empresas.push(index);
     }
     this.getUsers();
     this.getEnterprises();
@@ -79,6 +85,10 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/openEnterprise']);
   }
 
+  asignarEmpresas() {
+    this.editEnterprises = true;
+  }
+
   drop($event: CdkDragDrop<number[]>) {
     if ($event.previousContainer === $event.container) {
       moveItemInArray(
@@ -97,7 +107,7 @@ export class UsersComponent implements OnInit {
   }
 
   getEnterprises() {
-    this.enterpriseService.getEnterprises().subscribe({
+    this.enterpriseService.getEnterprises(this.pageProfile, 4).subscribe({
       next: (response: any) => {
         this.listNumbers1 = response.content;
       },
@@ -131,14 +141,35 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  goBackEnterprise() {
+    if (!this.firstEnterprise) {
+      this.pageEnterprise--;
+      this.getEnterprises();
+    }
+  }
+
+  goAheadEnterprise() {
+    if (!this.lastEnterprise) {
+      this.pageEnterprise++;
+      this.getEnterprises();
+    }
+  }
+
   findById(id) {
+    this.getEnterprises();
     this.userService.getUser(id).subscribe({
       next: (response: any) => {
+        this.editEnterprises = false;
         this.getUser = response;
         this.profileService.getProfile(this.getUser.profile).subscribe({
           next: (res: any) => {
             this.myProfile = res;
             this.editProfile = false;
+            this.userService.getInfoUser(id).subscribe({
+              next: (response: any) => {
+                this.getUser.empresas = response.empresas;
+              },
+            });
           },
         });
       },
@@ -146,6 +177,16 @@ export class UsersComponent implements OnInit {
   }
 
   putProfile(id) {
+    if (this.editEnterprises) {
+      this.empresas.forEach((empresa) => {
+        this.getUser.empresas.push({
+          enterpriseId: empresa.id,
+          id: 0,
+          enterpriseName: empresa.name,
+        });
+      });
+    }
+
     this.userService.putUser(this.getUser, id).subscribe({
       next: () => {
         Swal.fire({
@@ -161,11 +202,13 @@ export class UsersComponent implements OnInit {
             icon: 'error',
             text: error.error.errors[0].defaultMessage,
           });
+          this.empresas = [];
         } else {
           Swal.fire({
             icon: 'error',
             text: error.error,
           });
+          this.empresas = [];
         }
       },
     });
