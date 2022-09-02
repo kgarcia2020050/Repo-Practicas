@@ -1,6 +1,7 @@
 package com.is4tech.practicas.service;
 
 import com.is4tech.practicas.dto.EnterpriseDTO;
+import com.is4tech.practicas.exception.ExistingRegisterException;
 import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperEnterprises;
 import com.is4tech.practicas.bo.Enterprises;
@@ -28,8 +29,12 @@ public class EntrerprisesService {
     }
 
     public void save(EnterpriseDTO enterprisesModeDto) {
-        Enterprises model = mapperEnterprises.mapeo(enterprisesModeDto);
-        enterpriseRepository.save(model);
+        if (findByName(enterprisesModeDto.getName()) != null) {
+            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
+        } else {
+            Enterprises model = mapperEnterprises.mapeo(enterprisesModeDto);
+            enterpriseRepository.save(model);
+        }
     }
 
     public Page<Enterprises> findAll(Pageable pageable) {
@@ -37,9 +42,13 @@ public class EntrerprisesService {
     }
 
     public void editEnterprise(Integer id, EnterpriseDTO enterpriseDTO) {
-        Enterprises model = enterpriseRepository.findById(id).orElseThrow(NotFoundException::new);
-        model.setName(enterpriseDTO.getName());
-        enterpriseRepository.save(model);
+        if (findByName(enterpriseDTO.getName()) != null) {
+            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
+        } else {
+            Enterprises model = enterpriseRepository.findById(id).orElseThrow(NotFoundException::new);
+            model.setName(enterpriseDTO.getName());
+            enterpriseRepository.save(model);
+        }
     }
 
 

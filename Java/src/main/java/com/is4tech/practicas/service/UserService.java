@@ -4,6 +4,9 @@ import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.dto.UserDTO;
 
 import com.is4tech.practicas.dto.UsersEnterprisesDTO;
+import com.is4tech.practicas.exception.EmptyProfileException;
+import com.is4tech.practicas.exception.ExistingRegisterException;
+import com.is4tech.practicas.exception.InformationNotChangedException;
 import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperUser;
 import com.is4tech.practicas.bo.Users;
@@ -78,22 +81,42 @@ public class UserService {
         return this.usersRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
+    public void verification(Integer id, UserDTO userDTO) {
+        UserDTO user = findById(id);
+        if (user.getName().equals(userDTO.getName()) && userDTO.isStatus() == user.isStatus() &&
+                user.getEmail().equals(userDTO.getEmail()) && user.getProfile().equals(userDTO.getProfile())) {
+            throw new InformationNotChangedException("No has cambiado la informacion del usuario.");
+        } else if (user.getName().equals(userDTO.getName())) {
+            editUser(id, userDTO);
+        } else if (findByName(userDTO.getName()) != null) {
+            throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
+        } else {
+            editUser(id, userDTO);
+        }
+
+    }
 
     public void saveUser(UserDTO userdto) {
-        Users bo = mapper.mapeo(userdto);
-        bo = this.usersRepository.save(bo);
+        if (findByName(userdto.getName()) != null) {
+            throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
+        } else if (userdto.getProfile() == 0) {
+            throw new EmptyProfileException("Debes asignarte un perfil.");
+        } else {
+            Users bo = mapper.mapeo(userdto);
+            bo = this.usersRepository.save(bo);
 
-        if (userdto.getEmpresas() != null && !userdto.getEmpresas().isEmpty()) {
-            List<UsersEnterprises> enterpirses = new ArrayList<>();
-            for (int i = 0; i < userdto.getEmpresas().size(); i++) {
-                UsersEnterprises usersEnterprises = new UsersEnterprises();
-                usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
-                usersEnterprises.setUserId(bo.getId());
-                usersEnterprises.setUserName(bo.getName());
-                usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
-                enterpirses.add(usersEnterprises);
+            if (userdto.getEmpresas() != null && !userdto.getEmpresas().isEmpty()) {
+                List<UsersEnterprises> enterpirses = new ArrayList<>();
+                for (int i = 0; i < userdto.getEmpresas().size(); i++) {
+                    UsersEnterprises usersEnterprises = new UsersEnterprises();
+                    usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
+                    usersEnterprises.setUserId(bo.getId());
+                    usersEnterprises.setUserName(bo.getName());
+                    usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
+                    enterpirses.add(usersEnterprises);
+                }
+                this.userEnterpriseRepository.saveAll(enterpirses);
             }
-            this.userEnterpriseRepository.saveAll(enterpirses);
         }
     }
 

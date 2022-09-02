@@ -2,7 +2,6 @@ package com.is4tech.practicas.controller;
 
 import com.is4tech.practicas.dto.EnterpriseDTO;
 import com.is4tech.practicas.bo.Enterprises;
-import com.is4tech.practicas.exception.ExistingRegisterException;
 import com.is4tech.practicas.service.EntrerprisesService;
 
 import org.springframework.data.domain.Page;
@@ -27,13 +26,7 @@ public class EnterprisesController {
 
     @PostMapping("/new")
     public void save(@RequestBody @Valid EnterpriseDTO enterprisesModel) {
-
-        if (enterpriseServices.findByName(enterprisesModel.getName()) != null) {
-            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-        } else {
-            enterpriseServices.save(enterprisesModel);
-        }
-
+        enterpriseServices.save(enterprisesModel);
     }
 
     @GetMapping("/all")
@@ -52,14 +45,6 @@ public class EnterprisesController {
 
     @PutMapping("/edit/{id}")
     public void editEnterprise(@PathVariable("id") Integer id, @RequestBody @Valid EnterpriseDTO enterpriseDTO) {
-
-        if (enterpriseServices.findByName(enterpriseDTO.getName()) != null) {
-            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-        } else {
-            enterpriseServices.editEnterprise(id, enterpriseDTO);
-
-        }
-
-
+        enterpriseServices.editEnterprise(id, enterpriseDTO);
     }
 }
