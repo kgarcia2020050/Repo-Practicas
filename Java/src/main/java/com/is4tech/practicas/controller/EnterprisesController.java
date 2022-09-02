@@ -42,9 +42,4 @@ public class EnterprisesController {
         }
         return enterprises;
     }
-
-    @PutMapping("/edit/{id}")
-    public void editEnterprise(@PathVariable("id") Integer id, @RequestBody @Valid EnterpriseDTO enterpriseDTO) {
-        enterpriseServices.editEnterprise(id, enterpriseDTO);
-    }
 }

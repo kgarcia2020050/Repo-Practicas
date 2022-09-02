@@ -41,15 +41,4 @@ public class EntrerprisesService {
         return enterpriseRepository.findAll(pageable);
     }
 
-    public void editEnterprise(Integer id, EnterpriseDTO enterpriseDTO) {
-        if (findByName(enterpriseDTO.getName()) != null) {
-            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-        } else {
-            Enterprises model = enterpriseRepository.findById(id).orElseThrow(NotFoundException::new);
-            model.setName(enterpriseDTO.getName());
-            enterpriseRepository.save(model);
-        }
-    }
-
-
 }
