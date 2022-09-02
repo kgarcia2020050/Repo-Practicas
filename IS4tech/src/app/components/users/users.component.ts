@@ -212,7 +212,7 @@ export class UsersComponent implements OnInit {
         } else {
           Swal.fire({
             icon: 'error',
-            text: error.error,
+            text: error.error.message,
           });
           this.empresas = [];
         }

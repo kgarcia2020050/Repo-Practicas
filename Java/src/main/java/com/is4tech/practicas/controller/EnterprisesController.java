@@ -2,13 +2,12 @@ package com.is4tech.practicas.controller;
 
 import com.is4tech.practicas.dto.EnterpriseDTO;
 import com.is4tech.practicas.bo.Enterprises;
+import com.is4tech.practicas.exception.ExistingRegisterException;
 import com.is4tech.practicas.service.EntrerprisesService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,14 +26,12 @@ public class EnterprisesController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<String> save(@RequestBody @Valid EnterpriseDTO enterprisesModel) {
+    public void save(@RequestBody @Valid EnterpriseDTO enterprisesModel) {
 
         if (enterpriseServices.findByName(enterprisesModel.getName()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe una empresa con el mismo nombre.");
+            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
         } else {
             enterpriseServices.save(enterprisesModel);
-            return null;
-
         }
 
     }
@@ -54,13 +51,13 @@ public class EnterprisesController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<String> editEnterprise(@PathVariable("id") Integer id, @RequestBody EnterpriseDTO enterpriseDTO) {
+    public void editEnterprise(@PathVariable("id") Integer id, @RequestBody @Valid EnterpriseDTO enterpriseDTO) {
 
         if (enterpriseServices.findByName(enterpriseDTO.getName()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe una empresa con el mismo nombre.");
+            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
         } else {
             enterpriseServices.editEnterprise(id, enterpriseDTO);
-            return null;
+
         }
 
 

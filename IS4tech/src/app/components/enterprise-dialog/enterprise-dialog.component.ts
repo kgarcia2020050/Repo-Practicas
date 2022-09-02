@@ -52,7 +52,7 @@ export class EnterpriseDialogComponent implements OnInit {
         } else {
           Swal.fire({
             icon: 'error',
-            text: error.error,
+            text: error.error.message,
           });
         }
       },

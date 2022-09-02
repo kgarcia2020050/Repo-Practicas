@@ -2,12 +2,12 @@ package com.is4tech.practicas.controller;
 
 import com.is4tech.practicas.dto.ProfilesDTO;
 import com.is4tech.practicas.bo.Profiles;
+import com.is4tech.practicas.exception.ExistingRegisterException;
+import com.is4tech.practicas.exception.InformationNotChangedException;
 import com.is4tech.practicas.service.ProfilesService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,13 +26,11 @@ public class ProfileController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<String> saveProfile(@RequestBody @Valid ProfilesDTO profilesDTO) {
+    public void saveProfile(@RequestBody @Valid ProfilesDTO profilesDTO) {
         if (profilesService.findByName(profilesDTO.getName()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un perfil con el mismo nombre.");
+            throw new ExistingRegisterException("Ya existe un perfil con el mismo nombre.");
         } else {
             profilesService.saveProfile(profilesDTO);
-            return null;
-
         }
     }
 
@@ -57,20 +55,18 @@ public class ProfileController {
     }
 
     @PutMapping("/editProfile/{id}")
-    public ResponseEntity<String> editProfile(@PathVariable("id") Integer id, @RequestBody ProfilesDTO profilesDTO) {
+    public void editProfile(@PathVariable("id") Integer id, @RequestBody @Valid ProfilesDTO profilesDTO) {
         Profiles profile = profilesService.findById(id);
         Byte status = (profilesDTO.isStatus() ? (byte) 1 : (byte) 0);
-        String name = profilesDTO.getName();
-        if (name.equals(profile.getName()) && profile.getStatus().equals(status)) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No has cambiado la informacion del perfil");
-        } else if (name.equals(profile.getName())) {
+        if (profilesDTO.getName().equals(profile.getName()) && profile.getStatus().equals(status)) {
+            throw new InformationNotChangedException("No has cambiado la informacion dle perfil.");
+        } else if (profilesDTO.getName().equals(profile.getName())) {
             profilesService.editProfile(id, profilesDTO);
         } else if (profilesService.findByName(profilesDTO.getName()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un perfil con el mismo nombre.");
+            throw new ExistingRegisterException("Ya existe un perfil con el mismo nombre.");
         } else {
             profilesService.editProfile(id, profilesDTO);
         }
-        return null;
     }
 
 }

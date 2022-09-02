@@ -2,12 +2,13 @@ package com.is4tech.practicas.controller;
 
 import com.is4tech.practicas.dto.UserDTO;
 import com.is4tech.practicas.bo.Users;
+import com.is4tech.practicas.exception.EmptyProfileException;
+import com.is4tech.practicas.exception.ExistingRegisterException;
+import com.is4tech.practicas.exception.InformationNotChangedException;
 import com.is4tech.practicas.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -34,14 +35,13 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    public ResponseEntity<String> saveUser(@RequestBody @Valid UserDTO userModel) {
+    public void saveUser(@RequestBody @Valid UserDTO userModel) {
         if (userService.findByName(userModel.getName()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con el mismo nombre.");
+            throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
         } else if (userModel.getProfile() == 0) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Debes asignarte un perfil.");
+          throw new EmptyProfileException("Debes asignarte un perfil.");
         } else {
             userService.saveUser(userModel);
-            return null;
         }
     }
 
@@ -58,19 +58,18 @@ public class UserController {
     }
 
     @PutMapping("/editUser/{id}")
-    public ResponseEntity<String> editUser(@PathVariable("id") Integer id, @RequestBody UserDTO userDTO) {
+    public void editUser(@PathVariable("id") Integer id, @RequestBody @Valid UserDTO userDTO) {
         UserDTO user = userService.findById(id);
         if (user.getName().equals(userDTO.getName()) && userDTO.isStatus() == user.isStatus() &&
                 user.getEmail().equals(userDTO.getEmail()) && user.getProfile().equals(userDTO.getProfile())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No has cambiado la informacion del usuario.");
+            throw new InformationNotChangedException("No has cambiado la informacion del usuario.");
         } else if (user.getName().equals(userDTO.getName())) {
             userService.editUser(id, userDTO);
         } else if (userService.findByName(userDTO.getName()) != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya existe un usuario con el mismo nombre.");
+            throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
         } else {
             userService.editUser(id, userDTO);
         }
-        return null;
     }
 
     @DeleteMapping("/delete/{id}")
