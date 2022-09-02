@@ -42,7 +42,7 @@ public class EnterprisesController {
     @GetMapping("/all")
     public Page<Enterprises> findAll(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "6") int size,
+            @RequestParam(defaultValue = "4") int size,
             @RequestParam(defaultValue = "name") String order,
             @RequestParam(defaultValue = "true") boolean asc
     ) {

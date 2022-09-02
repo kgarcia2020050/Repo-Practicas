@@ -27,6 +27,8 @@ export class UsersComponent implements OnInit {
   public asc: boolean = true;
   public isFirst: boolean;
   public isLast: boolean;
+  public p:number=1;
+  public p2:number=1;
   public page: number = 0;
   public search: any;
   public myProfile: Profile;
@@ -107,11 +109,15 @@ export class UsersComponent implements OnInit {
   }
 
   getEnterprises() {
-    this.enterpriseService.getEnterprises(this.pageProfile, 4).subscribe({
-      next: (response: any) => {
-        this.listNumbers1 = response.content;
-      },
-    });
+    this.enterpriseService
+      .getEnterprises(this.pageEnterprise, 4, 'name', true)
+      .subscribe({
+        next: (response: any) => {
+          this.listNumbers1 = response.content;
+          this.firstEnterprise = response.first;
+          this.lastEnterprise = response.last;
+        },
+      });
   }
 
   cambiarPerfil() {

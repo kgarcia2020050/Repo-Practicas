@@ -47,14 +47,13 @@
         <em
           class="back"
           (click)="goBack()"
-          class="fas fa-angle-double-left fa-2x "
+          class="fas fa-angle-double-left fa-2x"
           style="color: #12579c"
-
         ></em>
         <em
           class="ahead"
           (click)="goAhead()"
-          class="fas fa-angle-double-right fa-2x "
+          class="fas fa-angle-double-right fa-2x"
           style="color: #12579c"
         ></em>
       </div>
@@ -78,7 +77,7 @@
           <br /><br />
 
           <div class="flex-container">
-            <div class="container card-0 ">
+            <div class="container card-0">
               <div class="row">
                 <div class="col-sm-6">
                   <mat-form-field class="full-width" appearance="outline">
@@ -114,7 +113,6 @@
                 </div>
 
                 <div class="col-sm-6">
-             
                   <div *ngIf="this.editProfile == true">
                     <em
                       (click)="goBackProfiles()"
@@ -129,7 +127,7 @@
                       style="color: #12579c"
                     ></em>
                   </div>
-                  <div class="col-sm-6 fort" style="float: left;">
+                  <div class="col-sm-6 fort" style="float: left">
                     <mat-form-field
                       appearance="fill"
                       *ngIf="this.editProfile == false"
@@ -171,7 +169,6 @@
                     </mat-form-field>
                   </div>
                 </div>
-               
               </div>
             </div>
           </div>
@@ -198,9 +195,25 @@
               >
                 <span>{{ n.name }}</span>
               </option>
+              <div class="flex-container">
+                <div>
+                  <em
+                    class="back"
+                    (click)="goBackEnterprise()"
+                    class="fas fa-angle-double-left fa-2x drag1"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+                <div>
+                  <em
+                    class="ahead"
+                    (click)="goAheadEnterprise()"
+                    class="fas fa-angle-double-right fa-2x drag2"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+              </div>
               <br />
-
-              
 
               <button
                 (click)="addEnterprise()"
@@ -209,10 +222,8 @@
               >
                 Agregar Empresa
               </button>
-
-              
             </div>
-             
+
             <div
               cdkDropList
               class="col-6"
@@ -223,11 +234,26 @@
             >
               <!--DRAG-->
 
-              <option cdkDrag class="block block-2" *ngFor="let n of empresas">
+              <option
+                cdkDrag
+                class="block block-2"
+                *ngFor="
+                  let n of empresas
+                    | paginate
+                      : { id: 'empresas', itemsPerPage: 4, currentPage: p }
+                "
+              >
                 <span>{{ n.name }}</span>
               </option>
+              <pagination-controls
+                id="empresas"
+                (pageChange)="p = $event"
+                responsive="true"
+                previousLabel="Previous"
+                nextLabel="Next"
+              >
+              </pagination-controls>
             </div>
-            
           </div>
           <div class="row" *ngIf="this.editEnterprises == false">
             <div
@@ -249,28 +275,26 @@
               >
                 <span>{{ n.name }}</span>
               </option>
-              
+
               <div class="flex-container">
                 <div>
-                <em
-                  class="back"
-                  (click)="goBack()"
-                  class="fas fa-angle-double-left fa-2x drag1"
-                  style="color: #12579c"
-
-                ></em>
+                  <em
+                    class="back"
+                    (click)="goBackEnterprise()"
+                    class="fas fa-angle-double-left fa-2x drag1"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+                <div>
+                  <em
+                    class="ahead"
+                    (click)="goAheadEnterprise()"
+                    class="fas fa-angle-double-right fa-2x drag2"
+                    style="color: #12579c"
+                  ></em>
+                </div>
               </div>
-              <div>
-
-                <em
-                  class="ahead"
-                  (click)="goAhead()"
-                  class="fas fa-angle-double-right fa-2x drag2"
-                  style="color: #12579c"
-                ></em>
-              </div>
-
-              </div><br>
+              <br />
 
               <button
                 (click)="addEnterprise()"
@@ -279,7 +303,6 @@
               >
                 Agregar Empresa
               </button>
-              
             </div>
             <div
               cdkDropList
@@ -295,13 +318,26 @@
                 cdkDrag
                 cdkDragDisabled
                 class="block block-2"
-                *ngFor="let n of getUser.empresas"
+                *ngFor="
+                  let n of getUser.empresas
+                    | paginate
+                      : { id: 'misEmpresas', itemsPerPage: 4, currentPage: p2 }
+                "
               >
                 <span class="fa-solid fa-sort filt">{{
                   n.enterpriseName
                 }}</span>
                 <em class="fa-solid fa-sort filt"></em>
               </option>
+              <pagination-controls
+                *ngIf="getUser.empresas !== [] || getUser.empresas != null&&!getUser.empresas"
+                id="misEmpresas"
+                (pageChange)="p2 = $event"
+                responsive="true"
+                previousLabel="Previous"
+                nextLabel="Next"
+              >
+              </pagination-controls>
             </div>
           </div>
           <br />
@@ -319,7 +355,6 @@
               [disabled]="!name.valid || !email.valid"
               type="button"
               class="btn btn-primary butt3"
-
             >
               Cambiar perfil
             </button>

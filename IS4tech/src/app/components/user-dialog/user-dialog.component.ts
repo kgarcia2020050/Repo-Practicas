@@ -65,6 +65,8 @@ export class UserDialogComponent implements OnInit {
     this.profileService.getProfiles(this.page, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
         this.profiles = response.content;
+        this.isFirstProfile = response.first;
+        this.isLastProfile = response.last;
       },
     });
   }
@@ -110,11 +112,15 @@ export class UserDialogComponent implements OnInit {
   }
 
   getEnterprises() {
-    this.enterpriseService.getEnterprises(this.pageEnterprise, 4).subscribe({
-      next: (response: any) => {
-        this.listNumbers1 = response.content;
-      },
-    });
+    this.enterpriseService
+      .getEnterprises(this.pageEnterprise, 4, 'name', true)
+      .subscribe({
+        next: (response: any) => {
+          this.listNumbers1 = response.content;
+          this.firstEnterprise = response.first;
+          this.lastEnterprise = response.last;
+        },
+      });
   }
 
   goBackEnterprise() {
