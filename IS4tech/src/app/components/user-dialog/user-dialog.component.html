@@ -12,6 +12,22 @@
           <div class="container card-0 justify-content-center">
             <div class="row">
               <div class="col-sm-6">
+               
+                <input
+                name="name"
+                #name="ngModel"
+                [(ngModel)]="postUser.name"
+                placeholder="Nombre de usuario"
+                type="text"
+                id="date-picker-example"
+                required="true"
+                class="form-control datepicker"
+                style="font-family: Arial, FontAwesome"
+              />
+              </div>
+
+              <div class="col-sm-6">
+             
                 <input
                   name="email"
                   #email="ngModel"
@@ -20,20 +36,6 @@
                   type="text"
                   required="true"
                   class="form-control datepicker mb-4"
-                  style="font-family: Arial, FontAwesome"
-                />
-              </div>
-
-              <div class="col-sm-6">
-                <input
-                  name="name"
-                  #name="ngModel"
-                  [(ngModel)]="postUser.name"
-                  placeholder="Nombre de usuario"
-                  type="text"
-                  id="date-picker-example"
-                  required="true"
-                  class="form-control datepicker"
                   style="font-family: Arial, FontAwesome"
                 />
               </div>
