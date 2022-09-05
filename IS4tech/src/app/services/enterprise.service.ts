@@ -33,7 +33,7 @@ export class EnterpriseService {
     return this.http.post(url + 'enterprise/new', model);
   }
 
-  editEnterprise(id, model: Enterprise): Observable<any> {
-    return this.http.put(url + 'enterprise/edit/' + id, model);
+  deleteUserEnterprise(id: number): Observable<any> {
+    return this.http.delete(url + 'enterprise/delete/' + id);
   }
 }

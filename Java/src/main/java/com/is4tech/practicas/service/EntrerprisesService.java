@@ -5,6 +5,7 @@ import com.is4tech.practicas.exception.ExistingRegisterException;
 import com.is4tech.practicas.mapper.MapperEnterprises;
 import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.repository.EnterpriseRepository;
+import com.is4tech.practicas.repository.UserEnterpriseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,12 @@ public class EntrerprisesService {
 
     private final MapperEnterprises mapperEnterprises;
 
-    public EntrerprisesService(EnterpriseRepository enterpriseRepository, MapperEnterprises mapperEnterprises) {
+    private final UserEnterpriseRepository userEnterpriseRepository;
+
+    public EntrerprisesService(EnterpriseRepository enterpriseRepository, MapperEnterprises mapperEnterprises, UserEnterpriseRepository userEnterpriseRepository) {
         this.enterpriseRepository = enterpriseRepository;
         this.mapperEnterprises = mapperEnterprises;
+        this.userEnterpriseRepository = userEnterpriseRepository;
     }
 
     public Enterprises findByName(String name) {
@@ -38,6 +42,10 @@ public class EntrerprisesService {
 
     public Page<Enterprises> findAll(Pageable pageable) {
         return enterpriseRepository.findAll(pageable);
+    }
+
+    public void deleteById(Integer id) {
+        userEnterpriseRepository.deleteById(id);
     }
 
 }

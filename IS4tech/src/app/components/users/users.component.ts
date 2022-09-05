@@ -27,8 +27,8 @@ export class UsersComponent implements OnInit {
   public asc: boolean = true;
   public isFirst: boolean;
   public isLast: boolean;
-  public p:number=1;
-  public p2:number=1;
+  public p: number = 1;
+  public p2: number = 1;
   public page: number = 0;
   public search: any;
   public myProfile: Profile;
@@ -241,5 +241,36 @@ export class UsersComponent implements OnInit {
       this.asc = true;
     }
     this.getUsers();
+  }
+
+  deleteUserEnterprise(id, name, userId) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Ya no estarás asignado a la empresa ' + name + '.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Borrar asignación.',
+      cancelButtonText: 'Cancelar.',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.enterpriseService.deleteUserEnterprise(id).subscribe({
+          next: () => {
+            Swal.fire({
+              icon: 'success',
+              text: 'Asignación eliminada exitosamente.',
+            });
+            this.findById(userId);
+          },
+          error: (error: any) => {
+            Swal.fire({
+              icon: 'error',
+              text: error.error.message,
+            });
+          },
+        });
+      }
+    });
   }
 }

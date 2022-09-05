@@ -9,7 +9,7 @@
     <!--Area de funcionalidad-->
     <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 24rem">
       <div>
-        <h1 class="title">Usuarios </h1>
+        <h1 class="title">Usuarios</h1>
         <br />
 
         <!--Buscador-->
@@ -173,223 +173,178 @@
             </div>
           </div>
           <div>
-            <p class="dragd">Asignación de empresas </p>
+            <p class="dragd">Asignación de empresas</p>
           </div>
           <br />
           <div class="row" *ngIf="this.editEnterprises == true">
-           
             <div cdkDropListGroup>
-
-                          <!--OTRO DRAG-->
-                          <div class="example-container">
-        
-                            <div
-                            cdkDropList
-                            [cdkDropListData]="listNumbers1"
-                            [cdkDropListConnectedTo]="[ln2]"
-                            class="example-list"
-                            (cdkDropListDropped)="drop($event)">
-                            <div class="example-box"    *ngFor="let n of listNumbers1"cdkDrag>{{ n.name }} <mat-icon>delete_forever</mat-icon>
-                            </div>
-                          </div>
-                          <div class="flex-container">
-                            <div>
-                              <em
-                                class="back"
-                                (click)="goBackEnterprise()"
-                                class="fas fa-angle-double-left fa-2x drag1"
-                                style="color: #12579c"
-                              ></em>
-                            </div>
-                            <div>
-                              <em
-                                class="ahead"
-                                (click)="goAheadEnterprise()"
-                                class="fas fa-angle-double-right fa-2x drag2"
-                                style="color: #12579c"
-                              ></em>
-                            </div>
-                          </div>
-
-                          <button
-                            (click)="addEnterprise()"
-                            type="button"
-                            class="btn btn-primary botdrag"
-                          >
-                            Agregar Empresa
-                          </button>
-                          </div>
-
-                                                    <!--OTRO DRAG-->
-                      <div class="example-container">
-                              
-                                  <div
-                                    cdkDropList
-                                    [cdkDropListData]="empresas"
-                                    [cdkDropListConnectedTo]="[ln1]"
-
-                                    class="example-list"
-                                    (cdkDropListDropped)="drop($event)">
-                                    <div class="example-box" *ngFor="let n of empresas paginate : { id: 'empresas', itemsPerPage: 4, currentPage: p }"
-                                    cdkDrag>{{ n.name }}</div>
-                                  </div>
-                                  <pagination-controls
-                                  id="empresas"
-                                  (pageChange)="p = $event"
-                                  responsive="true"
-                                  previousLabel="Previous"
-                                  nextLabel="Next"
-                                >
-                                </pagination-controls>
-                                </div>
-
-
-
-            </div>
-
-       <!-----------------------------------------------DRAG NUEVO------------------------------->
-
-              <div class="row" *ngIf="this.editEnterprises == false">
-                <div cdkDropListGroup>
-                  <div class="example-container">
-        
-                    <div
-                    cdkDropList
-                    [cdkDropListData]="listNumbers1"
-                    #ln1="cdkDropList"
-
-                    class="example-list"
-                    (cdkDropListDropped)="drop($event)">
-                    <div class="example-box"    *ngFor="let n of listNumbers1"cdkDrag>{{ n.name }} <mat-icon>delete_forever</mat-icon>
-                    </div>
+              <!--OTRO DRAG-->
+              <div class="example-container">
+                <div
+                  cdkDropList
+                  [cdkDropListData]="listNumbers1"
+                  [cdkDropListConnectedTo]="[ln2]"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <div
+                    class="example-box"
+                    *ngFor="let n of listNumbers1"
+                    cdkDrag
+                  >
+                    {{ n.name }}
                   </div>
-                  <div class="flex-container">
-                    <div>
-                      <em
-                        class="back"
-                        (click)="goBackEnterprise()"
-                        class="fas fa-angle-double-left fa-2x drag1"
-                        style="color: #12579c"
-                      ></em>
-                    </div>
-                    <div>
-                      <em
-                        class="ahead"
-                        (click)="goAheadEnterprise()"
-                        class="fas fa-angle-double-right fa-2x drag2"
-                        style="color: #12579c"
-                      ></em>
-                    </div>
-                  </div>
-                  </div>
-
-
-
                 </div>
+                <div class="flex-container">
+                  <div>
+                    <em
+                      class="back"
+                      (click)="goBackEnterprise()"
+                      class="fas fa-angle-double-left fa-2x drag1"
+                      style="color: #12579c"
+                    ></em>
+                  </div>
+                  <div>
+                    <em
+                      class="ahead"
+                      (click)="goAheadEnterprise()"
+                      class="fas fa-angle-double-right fa-2x drag2"
+                      style="color: #12579c"
+                    ></em>
+                  </div>
+                </div>
+
+                <button
+                  (click)="addEnterprise()"
+                  type="button"
+                  class="btn btn-primary botdrag"
+                >
+                  Agregar Empresa
+                </button>
               </div>
-            
 
-
-        </div>
-          <div class="row" *ngIf="this.editEnterprises == false">
-            <div
-              cdkDropList
-              class="col-6"
-              #ln1="cdkDropList"
-              [cdkDropListData]="listNumbers1"
-              [cdkDropListConnectedTo]="[ln2]"
-              (cdkDropListDropped)="drop($event)"
-            >
-              <!--DRAG-->
-
-
-              <option
-                cdkDrag
-                cdkDragDisabled
-                class="block block-2 havv "
-                *ngFor="let n of listNumbers1"
-                name="profile"
-
-              >
-
-                <p>
-
-                  
-
-                  {{ n.name }} 
-
-
-
-                </p>
-                
-
-              </option>
-
-              <div class="flex-container">
-                <div>
-                  <em
-                    class="back"
-                    (click)="goBackEnterprise()"
-                    class="fas fa-angle-double-left fa-2x drag1"
-                    style="color: #12579c"
-                  ></em>
+              <!--OTRO DRAG-->
+              <div class="example-container">
+                <div
+                  cdkDropList
+                  [cdkDropListData]="empresas"
+                  [cdkDropListConnectedTo]="[ln1]"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <div
+                    class="example-box"
+                    *ngFor="
+                      let n of empresas;
+                      paginate: {
+                        id: 'empresas',
+                        itemsPerPage: 3,
+                        currentPage: p
+                      }
+                    "
+                    cdkDrag
+                  >
+                    {{ n.name }}
+                  </div>
                 </div>
-                <div>
-                  <em
-                    class="ahead"
-                    (click)="goAheadEnterprise()"
-                    class="fas fa-angle-double-right fa-2x drag2"
-                    style="color: #12579c"
-                  ></em>
-                </div>
+                <pagination-controls
+                  id="empresas"
+                  (pageChange)="p = $event"
+                  responsive="true"
+                  previousLabel="Previous"
+                  nextLabel="Next"
+                >
+                </pagination-controls>
               </div>
-              <br />
-
-              <button
-                (click)="addEnterprise()"
-                type="button"
-                class="btn btn-primary botdrag"
-              >
-                Agregar Empresa
-              </button>
-            </div>
-            <div
-              cdkDropList
-              class="col-6"
-              #ln2="cdkDropList"
-              [cdkDropListData]="empresas"
-              [cdkDropListConnectedTo]="[ln1]"
-              (cdkDropListDropped)="drop($event)"
-            >
-              <!--DRAG-->
-
-              <option
-                cdkDrag
-                cdkDragDisabled
-                class="block block-2 havv"
-                *ngFor="
-                  let n of getUser.empresas
-                    | paginate
-                      : { id: 'misEmpresas', itemsPerPage: 4, currentPage: p2 }
-                "
-              >
-                <span class="fa-solid fa-sort filt">{{
-                  n.enterpriseName
-                }}</span>
-                <em class="fa-solid fa-sort filt"></em>
-              </option>
-              <pagination-controls
-                *ngIf="getUser.empresas!=[]"
-                id="misEmpresas"
-                (pageChange)="p2 = $event"
-                responsive="true"
-                previousLabel="Previous"
-                nextLabel="Next"
-              >
-              </pagination-controls>
             </div>
           </div>
-  
+          <div class="row" *ngIf="this.editEnterprises == false">
+            <div cdkDropListGroup>
+              <!--OTRO DRAG-->
+              <div class="example-container">
+                <div
+                  cdkDropList
+                  [cdkDropListData]="listNumbers1"
+                  [cdkDropListConnectedTo]="[ln2]"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <div
+                    cdkDragDisabled
+                    class="example-box"
+                    *ngFor="let n of listNumbers1"
+                    cdkDrag
+                  >
+                    {{ n.name }}
+                  </div>
+                </div>
+                <div class="flex-container">
+                  <div>
+                    <em
+                      class="back"
+                      (click)="goBackEnterprise()"
+                      class="fas fa-angle-double-left fa-2x drag1"
+                      style="color: #12579c"
+                    ></em>
+                  </div>
+                  <div>
+                    <em
+                      class="ahead"
+                      (click)="goAheadEnterprise()"
+                      class="fas fa-angle-double-right fa-2x drag2"
+                      style="color: #12579c"
+                    ></em>
+                  </div>
+                </div>
+
+                <button
+                  (click)="addEnterprise()"
+                  type="button"
+                  class="btn btn-primary botdrag"
+                >
+                  Agregar Empresa
+                </button>
+              </div>
+
+              <!--OTRO DRAG-->
+              <div class="example-container">
+                <div
+                  cdkDropList
+                  [cdkDropListData]="getUser.empresas"
+                  [cdkDropListConnectedTo]="[ln1]"
+                  class="example-list"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <div
+                    cdkDragDisabled
+                    class="example-box"
+                    *ngFor="
+                      let n of getUser.empresas
+                        | paginate
+                          : {
+                              id: 'empresas',
+                              itemsPerPage: 4,
+                              currentPage: p
+                            }
+                    "
+                    cdkDrag
+                  >
+                    {{ n.enterpriseName }}
+                    <div (click)="deleteUserEnterprise(n.id,n.enterpriseName,n.userId)"><mat-icon>delete_forever</mat-icon></div>
+                  </div>
+                </div>
+                <pagination-controls
+                  id="empresas"
+                  (pageChange)="p = $event"
+                  responsive="true"
+                  previousLabel="Previous"
+                  nextLabel="Next"
+                >
+                </pagination-controls>
+              </div>
+            </div>
+          </div>
+
           <div class="flex-container">
             <button
               (click)="putProfile(getUser.id)"

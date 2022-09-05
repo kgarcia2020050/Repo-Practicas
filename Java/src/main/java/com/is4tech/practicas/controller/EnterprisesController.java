@@ -42,4 +42,10 @@ public class EnterprisesController {
         }
         return enterprises;
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(@PathVariable("id") Integer id) {
+        enterpriseServices.deleteById(id);
+    }
+
 }
