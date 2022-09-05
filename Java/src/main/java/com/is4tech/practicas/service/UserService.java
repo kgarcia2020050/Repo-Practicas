@@ -1,6 +1,5 @@
 package com.is4tech.practicas.service;
 
-import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.dto.UserDTO;
 
 import com.is4tech.practicas.dto.UsersEnterprisesDTO;
@@ -11,10 +10,8 @@ import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperUser;
 import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.bo.UsersEnterprises;
-import com.is4tech.practicas.repository.EnterpriseRepository;
 import com.is4tech.practicas.repository.UserEnterpriseRepository;
 import com.is4tech.practicas.repository.UsersRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,24 +23,16 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     private final MapperUser mapper;
-
     private final UsersRepository usersRepository;
-
     private final ProfilesService profilesService;
     private final UserEnterpriseRepository userEnterpriseRepository;
 
-    private final EnterpriseRepository enterpriseRepository;
-
-
     public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService,
-                       UserEnterpriseRepository userEnterpriseRepository, EnterpriseRepository enterpriseRepository) {
+                       UserEnterpriseRepository userEnterpriseRepository) {
         this.mapper = mapper;
         this.usersRepository = usersRepository;
         this.profilesService = profilesService;
-        this.enterpriseRepository = enterpriseRepository;
-
         this.userEnterpriseRepository = userEnterpriseRepository;
     }
 
@@ -74,7 +63,6 @@ public class UserService {
         } else {
             throw new NotFoundException();
         }
-
     }
 
     public Users userId(Integer id) {
@@ -85,7 +73,7 @@ public class UserService {
         UserDTO user = findById(id);
         if (user.getName().equals(userDTO.getName()) && userDTO.isStatus() == user.isStatus() &&
                 user.getEmail().equals(userDTO.getEmail()) && user.getProfile().equals(userDTO.getProfile())) {
-            throw new InformationNotChangedException("No has cambiado la informacion del usuario.");
+            throw new InformationNotChangedException("No has cambiado la información del usuario.");
         } else if (user.getName().equals(userDTO.getName())) {
             editUser(id, userDTO);
         } else if (findByName(userDTO.getName()) != null) {
@@ -93,7 +81,6 @@ public class UserService {
         } else {
             editUser(id, userDTO);
         }
-
     }
 
     public void saveUser(UserDTO userdto) {
@@ -104,7 +91,6 @@ public class UserService {
         } else {
             Users bo = mapper.mapeo(userdto);
             bo = this.usersRepository.save(bo);
-
             if (userdto.getEmpresas() != null && !userdto.getEmpresas().isEmpty()) {
                 List<UsersEnterprises> enterpirses = new ArrayList<>();
                 for (int i = 0; i < userdto.getEmpresas().size(); i++) {
@@ -136,8 +122,6 @@ public class UserService {
         model.setProfile(userDTO.getProfile());
         model.setProfilesByProfile(profilesService.findById(userDTO.getProfile()));
         usersRepository.save(model);
-
-
         if (userDTO.getEmpresas() != null && !userDTO.getEmpresas().isEmpty()) {
             List<UsersEnterprises> enterpirses = new ArrayList<>();
             for (int i = 0; i < userDTO.getEmpresas().size(); i++) {
@@ -155,8 +139,5 @@ public class UserService {
             }
             this.userEnterpriseRepository.saveAll(enterpirses);
         }
-
     }
-
-
 }

@@ -54,7 +54,7 @@ public class ProfilesService {
         Profiles profile = findById(id);
         Byte status = (profilesDTO.isStatus() ? (byte) 1 : (byte) 0);
         if (profilesDTO.getName().equals(profile.getName()) && profile.getStatus().equals(status)) {
-            throw new InformationNotChangedException("No has cambiado la informacion dle perfil.");
+            throw new InformationNotChangedException("No has cambiado la información del perfil.");
         } else if (profilesDTO.getName().equals(profile.getName())) {
             editProfile(id, profilesDTO);
         } else if (findByName(profilesDTO.getName()) != null) {

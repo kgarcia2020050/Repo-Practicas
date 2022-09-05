@@ -2,7 +2,6 @@ package com.is4tech.practicas.service;
 
 import com.is4tech.practicas.dto.EnterpriseDTO;
 import com.is4tech.practicas.exception.ExistingRegisterException;
-import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperEnterprises;
 import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.repository.EnterpriseRepository;
