@@ -5,9 +5,7 @@
         <!--Titulos y nombres-->
 
         <p class="fs-1 coll">Agregar</p>
-        <mat-slide-toggle [checked]="true" [disabled]="true">
-          <div>Activo</div>
-        </mat-slide-toggle>
+        
         <br />
 
         <div>
@@ -75,53 +73,51 @@
         <div>
           <p class="fs-4 dragd">Asignación de empresas</p>
         </div>
-        <div class="row">
-          <div
+       
+
+
+        <div cdkDropListGroup>
+          <div class="example-container">
+        
+            <div
             cdkDropList
-            class="col-6"
-            #ln1="cdkDropList"
             [cdkDropListData]="listNumbers1"
-            [cdkDropListConnectedTo]="[ln2]"
-            (cdkDropListDropped)="drop($event)"
-          >
-            <option
-              cdkDrag
-              class="block block-1"
-              *ngFor="let n of listNumbers1"
-            >
-              <span>{{ n.name }}</span>
-            </option>
-            <div class="flex-container">
-              <div>
-                <em
-                  class="back"
-                  (click)="goBackEnterprise()"
-                  class="fas fa-angle-double-left fa-2x drag1"
-                  style="color: #12579c"
-                ></em>
-              </div>
-              <div>
-                <em
-                  class="ahead"
-                  (click)="goAheadEnterprise()"
-                  class="fas fa-angle-double-right fa-2x drag2"
-                  style="color: #12579c"
-                ></em>
-              </div>
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box"    *ngFor="let n of listNumbers1"cdkDrag>{{ n.name }} <mat-icon>delete_forever</mat-icon>
             </div>
-            <br />
           </div>
-          <div
-            cdkDropList
-            class="col-6"
-            #ln2="cdkDropList"
-            [cdkDropListData]="empresas"
-            [cdkDropListConnectedTo]="[ln1]"
-            (cdkDropListDropped)="drop($event)"
-          >
-            <option cdkDrag class="block block-2" *ngFor="let n of empresas">
-              <span>{{ n.name }}</span>
-            </option>
+          <div class="flex-container">
+            <div>
+              <em
+                class="back"
+                (click)="goBackEnterprise()"
+                class="fas fa-angle-double-left fa-2x drag1"
+                style="color: #12579c"
+              ></em>
+            </div>
+            <div>
+              <em
+                class="ahead"
+                (click)="goAheadEnterprise()"
+                class="fas fa-angle-double-right fa-2x drag2"
+                style="color: #12579c"
+              ></em>
+            </div>
+          </div>
+          </div>
+          
+        
+          <div class="example-container">
+        
+            <div
+              cdkDropList
+              [cdkDropListData]="empresas"
+
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box"  *ngFor="let n of empresas" cdkDrag>{{ n.name }}</div>
+            </div>
             <div class="flex-container">
               <div>
                 <em
@@ -140,8 +136,12 @@
             </div>
           </div>
         </div>
-        <br />
-        <div>
+        
+
+
+
+      
+        <div class="flex-container">
           <button
             [disabled]="!addForm.form.valid"
             (click)="postUsers(addForm)"

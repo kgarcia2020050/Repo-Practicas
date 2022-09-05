@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit {
       this.listNumbers1.push(index);
     }
 
-    for (let index = 4; index < this.empresas.length; index++) {
+    for (let index = 3; index < this.empresas.length; index++) {
       this.empresas.push(index);
     }
     this.getUsers();

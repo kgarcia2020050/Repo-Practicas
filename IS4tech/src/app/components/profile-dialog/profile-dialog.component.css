@@ -22,6 +22,10 @@
 
 }
 
+.flex-container {
+    display: flex;
+justify-content: space-between;  }
+
 .card-body{
     padding-top: 5%;
 }
