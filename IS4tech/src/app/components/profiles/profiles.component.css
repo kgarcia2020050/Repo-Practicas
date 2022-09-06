@@ -110,3 +110,8 @@ color: #12579C;
 position: absolute;
 left: 75%;
 }
+
+.mat-form-field {
+    width: 50%;
+  }
+
