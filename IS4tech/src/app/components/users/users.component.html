@@ -13,12 +13,12 @@
         <br />
 
         <!--Buscador-->
-        <div class="input-group rounded" style="max-width: 15rem">
+        <div class="input-group rounded" style="max-width: 20rem">
           <input
-            type="search"
+            type="Buscar"
             class="form-control rounded"
-            placeholder="Search"
-            aria-label="Search"
+            placeholder="Buscar"
+            aria-label="Buscar"
             aria-describedby="search-addon"
             [(ngModel)]="search"
           />
@@ -76,11 +76,10 @@
           </mat-slide-toggle>
           <br /><br />
 
-          <div class="flex-container">
             <div class="container card-0">
               <div class="row">
                 <div class="col-sm-6">
-                  <mat-form-field class="full-width" appearance="outline">
+                  <mat-form-field class="other" appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <mat-label *ngIf="!name.valid && name.touched">
                       requerido</mat-label
@@ -95,7 +94,7 @@
                       required="true"
                     />
                   </mat-form-field>
-                  <mat-form-field class="full-width" appearance="outline">
+                  <mat-form-field class="" appearance="outline">
                     <mat-label>Correo</mat-label>
                     <mat-label *ngIf="!name.valid && name.touched">
                       requerido</mat-label
@@ -170,7 +169,6 @@
                   </div>
                 </div>
               </div>
-            </div>
           </div>
           <div>
             <p class="dragd">Asignación de empresas</p>
