@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { AppComponent } from './app.component'; 
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UsersComponent } from './components/users/users.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
@@ -22,10 +23,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SearchPipe } from './pipes/search.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ProfileDialogComponent } from './components/profile-dialog/profile-dialog.component';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
-import { OpenProfileComponent } from './components/open-profile/open-profile.component';
-import { OpenUserComponent } from './components/open-user/open-user.component';
 import { OpenEnterpriseComponent } from './components/open-enterprise/open-enterprise.component';
 import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterprise-dialog.component';
 
@@ -36,10 +34,7 @@ import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterp
     ProfilesComponent,
     SidenavComponent,
     SearchPipe,
-    ProfileDialogComponent,
     UserDialogComponent,
-    OpenProfileComponent,
-    OpenUserComponent,
     OpenEnterpriseComponent,
     EnterpriseDialogComponent,
   ],
@@ -66,6 +61,7 @@ import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterp
     DragDropModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatTooltipModule,
     ReactiveFormsModule,
   ],
   providers: [],

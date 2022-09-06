@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class ProfilesComponent implements OnInit {
   public profiles: Profile;
+  public postProfile: Profile;
+  public addProfile: boolean = false;
   public getProfile: Profile;
   public asc: boolean = true;
   public isFirst: boolean;
@@ -21,6 +23,7 @@ export class ProfilesComponent implements OnInit {
 
   constructor(private profileService: ProfileService, private router: Router) {
     this.getProfile = new Profile(0, '', 1);
+    this.postProfile = new Profile(0, '', 1);
   }
 
   ngOnInit(): void {
@@ -28,13 +31,41 @@ export class ProfilesComponent implements OnInit {
   }
 
   openDialog() {
-    this.router.navigate(['/openProfile']);
+    this.addProfile = true;
   }
 
   findById(id) {
     this.profileService.getProfile(id).subscribe({
       next: (response: any) => {
+        this.addProfile = false;
+
         this.getProfile = response;
+      },
+    });
+  }
+
+  newProfile(addForm) {
+    this.profileService.postProfile(this.postProfile).subscribe({
+      next: () => {
+        addForm.reset();
+        this.getProfiles();
+        Swal.fire({
+          icon: 'success',
+          text: 'Perfil agregado exitosamente.',
+        });
+      },
+      error: (error: any) => {
+        if (error.error.errors) {
+          Swal.fire({
+            icon: 'error',
+            text: error.error.errors[0].defaultMessage,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            text: error.error.message,
+          });
+        }
       },
     });
   }
