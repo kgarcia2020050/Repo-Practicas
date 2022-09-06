@@ -13,13 +13,15 @@ import { Router } from '@angular/router';
 export class ProfilesComponent implements OnInit {
   public profiles: Profile;
   public postProfile: Profile;
-  public addProfile: boolean = false;
+  public addProfile: boolean = true;
   public getProfile: Profile;
   public asc: boolean = true;
   public isFirst: boolean;
   public isLast: boolean;
   public page: number = 0;
   public search: any;
+  public changeForm: boolean = false;
+  public dataServiceProfile: Profile;
 
   constructor(private profileService: ProfileService, private router: Router) {
     this.getProfile = new Profile(0, '', 1);
@@ -32,6 +34,9 @@ export class ProfilesComponent implements OnInit {
 
   openDialog() {
     this.addProfile = true;
+    this.dataServiceProfile = null;
+    this.getProfile = null;
+    this.changeForm = false;
   }
 
   findById(id) {
@@ -39,7 +44,10 @@ export class ProfilesComponent implements OnInit {
       next: (response: any) => {
         this.addProfile = false;
 
-        this.getProfile = response;
+        this.dataServiceProfile = Object.assign({}, response);
+        this.getProfile = Object.assign({}, response);
+        
+        this.validChangeForm();
       },
     });
   }
@@ -132,4 +140,21 @@ export class ProfilesComponent implements OnInit {
     }
     this.getProfiles();
   }
+
+  equals(source: Profile, target: Profile): boolean{
+    return source.id === target.id && 
+           source.name === target.name &&
+           source.status === target.status   
+  }
+
+  validChangeForm(){
+    if(!this.addProfile ){
+      this.changeForm = this.equals(this.getProfile, this.dataServiceProfile)
+      console.log (this.changeForm)
+      console.log (this.dataServiceProfile)
+      console.log (this.getProfile);
+    }
+  }
+
 }
+

@@ -334,6 +334,7 @@
             [(ngModel)]="getProfile.status"
             class="slide"
             *ngIf="getProfile.name"
+            (change)="validChangeForm()"
           >
             <div *ngIf="getProfile.status == 1">Activo</div>
             <div *ngIf="getProfile.status == 0">Inactivo</div>
@@ -351,6 +352,7 @@
             #name="ngModel"
             [(ngModel)]="getProfile.name"
             required="true"
+            (change)="validChangeForm()"
           />
         </mat-form-field>
         <br />
@@ -555,18 +557,21 @@
         <div>
           <button
             (click)="putProfile(getProfile.id)"
-            [disabled]="!addForm.form.valid || !getProfile.name"
+            [disabled]="!addForm.form.valid || !getProfile.name || changeForm"
             type="button"
             class="btn btn-primary butt2"
+
           >
             Guardar
           </button>
+
           <button
             mat-mini-fab
             (click)="openDialog()"
             color="black"
             type="button"
             class="btn btn-primary butt"
+          
           >
             <mat-icon>note_add</mat-icon>
           </button>
