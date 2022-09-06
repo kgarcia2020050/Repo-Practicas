@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
   public myProfile: Profile;
   public editProfile = false;
 
+
   public pageEnterprise = 0;
 
   public pageProfile = 0;
@@ -46,6 +47,9 @@ export class UsersComponent implements OnInit {
   public firstEnterprise: boolean;
 
   public lastEnterprise: boolean;
+
+  public changeForm: boolean = false;
+  public dataServiceChange: User;
 
   constructor(
     private userService: UserService,
@@ -273,4 +277,17 @@ export class UsersComponent implements OnInit {
       }
     });
   }
+
+equals(source: User, target: User): boolean{
+  return source.id === target.id &&
+         source.name === target.name &&
+         source.status === target.status &&
+         source.email === target.email &&
+         source.profile === target.profile &&
+         source.empresas === target.empresas
+}
+
+
+
+
 }
