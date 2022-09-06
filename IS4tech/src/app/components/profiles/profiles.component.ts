@@ -22,6 +22,7 @@ export class ProfilesComponent implements OnInit {
   public search: any;
   public changeForm: boolean = false;
   public dataServiceProfile: Profile;
+  public itemSelected: number;
 
   constructor(private profileService: ProfileService, private router: Router) {
     this.getProfile = new Profile(0, '', 1);
@@ -43,7 +44,7 @@ export class ProfilesComponent implements OnInit {
     this.profileService.getProfile(id).subscribe({
       next: (response: any) => {
         this.addProfile = false;
-
+        this.itemSelected = id;
         this.dataServiceProfile = Object.assign({}, response);
         this.getProfile = Object.assign({}, response);
         

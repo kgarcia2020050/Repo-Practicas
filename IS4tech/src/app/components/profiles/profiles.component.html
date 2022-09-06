@@ -45,7 +45,7 @@
         ></em>
       </div>
       <div class="card" *ngFor="let profile of profiles | search: search">
-        <div class="card-body hoved" (click)="findById(profile.id)">
+        <div class="card-body hoved" (click)="findById(profile.id)" [ngClass]="{'itemSelected': profile?.id === itemSelected}">
           <em
             *ngIf="profile.status == 1"
             class="fa-solid fa-circle text-success"

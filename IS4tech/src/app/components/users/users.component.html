@@ -45,13 +45,13 @@
       </div>
       <div class="flex-container">
         <em
-          class="back"
+          class="back bacc"
           (click)="goBack()"
           class="fas fa-angle-double-left fa-2x"
           style="color: #12579c"
         ></em>
         <em
-          class="ahead"
+          class="ahead bacc"
           (click)="goAhead()"
           class="fas fa-angle-double-right fa-2x"
           style="color: #12579c"
@@ -128,7 +128,7 @@
                   </div>
                   <div class="col-sm-6 fort" style="float: left">
                     <mat-form-field
-                      appearance="fill"
+                      appearance="outline"
                       *ngIf="this.editProfile == false"
                     >
                       <mat-label>Mi perfil</mat-label>
@@ -328,7 +328,7 @@
                     cdkDrag
                   >
                     {{ n.enterpriseName }}
-                    <div (click)="deleteUserEnterprise(n.id,n.enterpriseName,n.userId)"><mat-icon class="dragg">delete_forever</mat-icon></div>
+                    <div (click)="deleteUserEnterprise(n.id,n.enterpriseName,n.userId)" class="forev"><mat-icon class="dragg">delete_forever</mat-icon></div>
                   </div>
                 </div>
                 <pagination-controls

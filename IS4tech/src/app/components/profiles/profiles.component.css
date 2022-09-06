@@ -52,7 +52,14 @@
 
   .hoved:hover{
     background-color: rgb(199, 202, 202);
-    transition: background-color .5s;  }
+    transition: background-color .5s;  
+}
+
+.itemSelected{
+    background-color: rgb(199, 202, 202);
+    transition: background-color .5s;  
+}
+
 
     .btnn:hover{
         background-color: rgb(199, 202, 202);
@@ -115,3 +122,8 @@ left: 75%;
     width: 50%;
   }
 
+  .flex-container {
+    display: flex;
+justify-content: space-between; 
+
+}
