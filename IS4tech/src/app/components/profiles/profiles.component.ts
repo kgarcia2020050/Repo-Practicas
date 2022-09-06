@@ -70,6 +70,10 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
+  cancelar(){
+    this.addProfile=false;
+  }
+
   putProfile(id) {
     this.profileService.putProfile(this.getProfile, id).subscribe({
       next: () => {
