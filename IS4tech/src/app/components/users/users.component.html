@@ -28,7 +28,20 @@
         </div>
         <br />
       </div>
-      <div><em (click)="filter()" class="fa-solid fa-sort filt"></em></div>
+      <div>
+        <em
+          *ngIf="asc == false"
+          matTooltip="Ordenar de manera ascendente."
+          (click)="filter()"
+          class="fa-solid fa-sort filt"
+        ></em>
+        <em
+          *ngIf="asc == true"
+          matTooltip="Ordenar de manera descendente."
+          (click)="filter()"
+          class="fa-solid fa-sort filt"
+        ></em>
+      </div>
 
       <div class="card" *ngFor="let user of users | search: search">
         <div class="card-body hoved" (click)="findById(user.id)">
@@ -58,7 +71,180 @@
         ></em>
       </div>
     </div>
-    <div class="col-sm p-3 min-vh-100 dim2">
+    <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == true">
+      <div class="card border-primary">
+        <div class="card-body">
+          <p class="fs-1 coll">Agregar</p>
+
+          <br />
+
+          <form #addForm="ngForm">
+            <div class="container card-0 justify-content-center">
+              <div class="row">
+                <div class="col-sm-6">
+                  <input
+                    name="name"
+                    #name="ngModel"
+                    [(ngModel)]="postUser.name"
+                    placeholder="Nombre de usuario"
+                    type="text"
+                    id="date-picker-example"
+                    required="true"
+                    class="form-control datepicker"
+                    style="font-family: Arial, FontAwesome"
+                  />
+                </div>
+
+                <div class="col-sm-6">
+                  <input
+                    name="email"
+                    #email="ngModel"
+                    [(ngModel)]="postUser.email"
+                    placeholder="Correo"
+                    type="text"
+                    required="true"
+                    class="form-control datepicker mb-4"
+                    style="font-family: Arial, FontAwesome"
+                  />
+                </div>
+
+                <div class="col-sm-6 fort">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Selecciona tu perfil</mat-label>
+                    <select
+                      matNativeControl
+                      name="status"
+                      #status="ngModel"
+                      [(ngModel)]="postUser.profile"
+                    >
+                      <option *ngFor="let info of profiles" [value]="info.id">
+                        {{ info.name }}
+                      </option>
+                    </select>
+                  </mat-form-field>
+                  <div>
+                    <em
+                      (click)="goBackProfiles()"
+                      class="back"
+                      class="fas fa-angle-double-left fa-2x heed2, top-right"
+                      style="color: #12579c"
+                    ></em>
+                    <em
+                      class="ahead"
+                      (click)="goAheadProfiles()"
+                      class="fas fa-angle-double-right fa-2x heed, top-right"
+                      style="color: #12579c"
+                    ></em>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div>
+            <p class="fs-4 dragd">Asignación de empresas</p>
+          </div>
+
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <div
+                cdkDropList
+                [cdkDropListData]="listNumbers1"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)"
+              >
+                <div class="example-box" *ngFor="let n of listNumbers1" cdkDrag>
+                  {{ n.name }}
+                </div>
+              </div>
+              <div class="flex-container">
+                <div>
+                  <em
+                    class="back"
+                    (click)="goBackEnterprise()"
+                    class="fas fa-angle-double-left fa-2x drag1"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+                <div>
+                  <em
+                    class="ahead"
+                    (click)="goAheadEnterprise()"
+                    class="fas fa-angle-double-right fa-2x drag2"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+              </div>
+            </div>
+
+            <div class="example-container">
+              <div
+                cdkDropList
+                [cdkDropListData]="empresas"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)"
+              >
+                <div class="example-box" *ngFor="let n of empresas" cdkDrag>
+                  {{ n.name }}
+                </div>
+              </div>
+              <div class="flex-container">
+                <div>
+                  <em
+                    class="back"
+                    class="fas fa-angle-double-left fa-2x drag1"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+                <div>
+                  <em
+                    class="ahead"
+                    class="fas fa-angle-double-right fa-2x drag2"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-container">
+            <button
+              (click)="postUsers(addForm)"
+              [disabled]="!name.valid || !email.valid"
+              type="button"
+              class="btn btn-primary butt2"
+            >
+              Guardar
+            </button>
+            <button
+              (click)="cambiarPerfil()"
+              [disabled]="!name.valid || !email.valid"
+              type="button"
+              class="btn btn-primary butt3"
+            >
+              Cambiar perfil
+            </button>
+            <button
+              (click)="asignarEmpresas()"
+              [disabled]="!name.valid || !email.valid"
+              type="button"
+              class="btn btn-primary asignEnt"
+            >
+              Asignarme empresas
+            </button>
+            <button
+              mat-mini-fab
+              color="black"
+              type="button"
+              class="btn btn-primary butt"
+              (click)="openDialog()"
+            >
+              <mat-icon>note_add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == false">
       <div class="card border-primary">
         <div class="card-body">
           <!--Titulos y nombres-->
@@ -76,99 +262,99 @@
           </mat-slide-toggle>
           <br /><br />
 
-            <div class="container card-0">
-              <div class="row">
-                <div class="col-sm-6">
-                  <mat-form-field class="other" appearance="outline">
-                    <mat-label>Nombre</mat-label>
-                    <mat-label *ngIf="!name.valid && name.touched">
-                      requerido</mat-label
-                    >
-                    <input
-                      [disabled]="!getUser.name"
-                      #name="ngModel"
-                      [(ngModel)]="getUser.name"
-                      matInput
-                      placeholder="Nombre"
-                      name="nombre"
-                      required="true"
-                    />
-                  </mat-form-field>
-                  <mat-form-field class="" appearance="outline">
-                    <mat-label>Correo</mat-label>
-                    <mat-label *ngIf="!name.valid && name.touched">
-                      requerido</mat-label
-                    >
-                    <input
-                      [disabled]="!getUser.email"
-                      #email="ngModel"
-                      [(ngModel)]="getUser.email"
-                      matInput
-                      placeholder="Email"
-                      name="email"
-                      required="true"
-                    />
-                  </mat-form-field>
-                </div>
+          <div class="container card-0">
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field class="other" appearance="outline">
+                  <mat-label>Nombre</mat-label>
+                  <mat-label *ngIf="!name.valid && name.touched">
+                    requerido</mat-label
+                  >
+                  <input
+                    [disabled]="!getUser.name"
+                    #name="ngModel"
+                    [(ngModel)]="getUser.name"
+                    matInput
+                    placeholder="Nombre"
+                    name="nombre"
+                    required="true"
+                  />
+                </mat-form-field>
+                <mat-form-field class="" appearance="outline">
+                  <mat-label>Correo</mat-label>
+                  <mat-label *ngIf="!name.valid && name.touched">
+                    requerido</mat-label
+                  >
+                  <input
+                    [disabled]="!getUser.email"
+                    #email="ngModel"
+                    [(ngModel)]="getUser.email"
+                    matInput
+                    placeholder="Email"
+                    name="email"
+                    required="true"
+                  />
+                </mat-form-field>
+              </div>
 
-                <div class="col-sm-6">
-                  <div *ngIf="this.editProfile == true">
-                    <em
-                      (click)="goBackProfiles()"
-                      class="back"
-                      class="fas fa-angle-double-left fa-2x heed2, top-right"
-                      style="color: #12579c"
-                    ></em>
-                    <em
-                      class="ahead"
-                      (click)="goAheadProfiles()"
-                      class="fas fa-angle-double-right fa-2x heed, top-right"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                  <div class="col-sm-6 fort" style="float: left">
-                    <mat-form-field
-                      appearance="outline"
-                      *ngIf="this.editProfile == false"
+              <div class="col-sm-6">
+                <div *ngIf="this.editProfile == true">
+                  <em
+                    (click)="goBackProfiles()"
+                    class="back"
+                    class="fas fa-angle-double-left fa-2x heed2, top-right"
+                    style="color: #12579c"
+                  ></em>
+                  <em
+                    class="ahead"
+                    (click)="goAheadProfiles()"
+                    class="fas fa-angle-double-right fa-2x heed, top-right"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+                <div class="col-sm-6 fort" style="float: left">
+                  <mat-form-field
+                    appearance="outline"
+                    *ngIf="this.editProfile == false"
+                  >
+                    <mat-label>Mi perfil</mat-label>
+                    <select
+                      matNativeControl
+                      name="profile"
+                      #profile="ngModel"
+                      [(ngModel)]="getUser.profile"
                     >
-                      <mat-label>Mi perfil</mat-label>
-                      <select
-                        matNativeControl
-                        name="profile"
-                        #profile="ngModel"
-                        [(ngModel)]="getUser.profile"
+                      <option
+                        [disabled]="true"
+                        [value]="myProfile.id"
+                        [selected]="myProfile.name"
                       >
-                        <option
-                          [disabled]="true"
-                          [value]="myProfile.id"
-                          [selected]="myProfile.name"
-                        >
-                          {{ myProfile.name }}
-                        </option>
-                      </select>
-                    </mat-form-field>
-                    <mat-form-field
-                      appearance="fill"
-                      *ngIf="this.editProfile == true"
+                        {{ myProfile.name }}
+                      </option>
+                    </select>
+                  </mat-form-field>
+                  <mat-form-field
+                    appearance="fill"
+                    *ngIf="this.editProfile == true"
+                  >
+                    <mat-label>Mi perfil</mat-label>
+                    <select
+                      matNativeControl
+                      name="profile"
+                      #profile="ngModel"
+                      [(ngModel)]="getUser.profile"
                     >
-                      <mat-label>Mi perfil</mat-label>
-                      <select
-                        matNativeControl
-                        name="profile"
-                        #profile="ngModel"
-                        [(ngModel)]="getUser.profile"
+                      <option
+                        *ngFor="let profile of profiles"
+                        [value]="profile.id"
                       >
-                        <option
-                          *ngFor="let profile of profiles"
-                          [value]="profile.id"
-                        >
-                          {{ profile.name }}
-                        </option>
-                      </select>
-                    </mat-form-field>
-                  </div>
+                        {{ profile.name }}
+                      </option>
+                    </select>
+                  </mat-form-field>
                 </div>
               </div>
+            </div>
           </div>
           <div>
             <p class="dragd">Asignación de empresas</p>
@@ -328,7 +514,14 @@
                     cdkDrag
                   >
                     {{ n.enterpriseName }}
-                    <div (click)="deleteUserEnterprise(n.id,n.enterpriseName,n.userId)" class="forev"><mat-icon class="dragg">delete_forever</mat-icon></div>
+                    <div
+                      (click)="
+                        deleteUserEnterprise(n.id, n.enterpriseName, n.userId)
+                      "
+                      class="forev"
+                    >
+                      <mat-icon class="dragg">delete_forever</mat-icon>
+                    </div>
                   </div>
                 </div>
                 <pagination-controls
@@ -373,7 +566,7 @@
               color="black"
               type="button"
               class="btn btn-primary butt"
-              (click)="openDialog()"
+              (click)="this.addUser = true"
             >
               <mat-icon>note_add</mat-icon>
             </button>

@@ -19,6 +19,7 @@ import { EnterpriseService } from 'src/app/services/enterprise.service';
   providers: [UserService, ProfileService, EnterpriseService],
 })
 export class UsersComponent implements OnInit {
+  public postUser: User;
   public users: User;
   public listNumbers1 = [];
   public empresas = [];
@@ -34,6 +35,7 @@ export class UsersComponent implements OnInit {
   public myProfile: Profile;
   public editProfile = false;
 
+  public addUser: boolean = true;
 
   public pageEnterprise = 0;
 
@@ -58,18 +60,13 @@ export class UsersComponent implements OnInit {
     private enterpriseService: EnterpriseService
   ) {
     this.getUser = new User(0, '', '', 1, 0, []);
+    this.postUser = new User(0, '', '', 1, 0, []);
     this.myProfile = new Profile(0, '', 0);
   }
 
   ngOnInit(): void {
-    for (let index = 0; index < this.listNumbers1.length; index++) {
-      this.listNumbers1.push(index);
-    }
-
-    for (let index = 3; index < this.empresas.length; index++) {
-      this.empresas.push(index);
-    }
     this.getUsers();
+    this.cambiarPerfil();
     this.getEnterprises();
   }
 
@@ -166,6 +163,7 @@ export class UsersComponent implements OnInit {
   }
 
   findById(id) {
+    this.addUser = false;
     this.getEnterprises();
     this.userService.getUser(id).subscribe({
       next: (response: any) => {
@@ -278,16 +276,49 @@ export class UsersComponent implements OnInit {
     });
   }
 
-equals(source: User, target: User): boolean{
-  return source.id === target.id &&
-         source.name === target.name &&
-         source.status === target.status &&
-         source.email === target.email &&
-         source.profile === target.profile &&
-         source.empresas === target.empresas
-}
+  equals(source: User, target: User): boolean {
+    return (
+      source.id === target.id &&
+      source.name === target.name &&
+      source.status === target.status &&
+      source.email === target.email &&
+      source.profile === target.profile &&
+      source.empresas === target.empresas
+    );
+  }
 
-
-
-
+  postUsers(addForm) {
+    this.empresas.forEach((empresa) => {
+      this.postUser.empresas.push({
+        enterpriseId: empresa.id,
+        id: 0,
+        enterpriseName: empresa.name,
+      });
+    });
+    this.userService.postUser(this.postUser).subscribe({
+      next: () => {
+        addForm.reset();
+        this.getUsers();
+        Swal.fire({
+          text: 'Usuario agregado exitosamente',
+          icon: 'success',
+        });
+      },
+      error: (error: any) => {
+        if (error.error.errors) {
+          Swal.fire({
+            icon: 'error',
+            text: error.error.errors[0].defaultMessage,
+          });
+          this.postUser.empresas = [];
+        } else {
+          Swal.fire({
+            icon: 'error',
+            text: error.error.message,
+          });
+          this.postUser.empresas = [];
+        }
+      },
+    });
+  }
 }

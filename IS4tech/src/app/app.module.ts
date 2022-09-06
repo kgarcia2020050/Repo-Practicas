@@ -23,7 +23,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SearchPipe } from './pipes/search.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 import { OpenEnterpriseComponent } from './components/open-enterprise/open-enterprise.component';
 import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterprise-dialog.component';
 
@@ -34,7 +33,6 @@ import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterp
     ProfilesComponent,
     SidenavComponent,
     SearchPipe,
-    UserDialogComponent,
     OpenEnterpriseComponent,
     EnterpriseDialogComponent,
   ],
