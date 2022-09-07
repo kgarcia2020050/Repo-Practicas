@@ -3,6 +3,7 @@ import url from '../helper';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Profile } from '../models/profile';
+import { Byte } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +40,9 @@ export class ProfileService {
 
   putProfile(model: Profile, id: number): Observable<any> {
     return this.http.put(url + 'profile/editProfile/' + id, model);
+  }
+
+  getStatusProfile(): Observable<any> {
+    return this.http.get(url + 'profile/findByStatus/' + 1);
   }
 }

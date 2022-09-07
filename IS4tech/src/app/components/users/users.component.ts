@@ -39,11 +39,6 @@ export class UsersComponent implements OnInit {
 
   public pageEnterprise = 0;
 
-  public pageProfile = 0;
-  public ascProfile = true;
-  public isFirstProfile: boolean;
-  public isLastProfile: boolean;
-
   public editEnterprises: boolean = false;
 
   public firstEnterprise: boolean;
@@ -119,30 +114,12 @@ export class UsersComponent implements OnInit {
   }
 
   cambiarPerfil() {
-    this.profileService
-      .getProfiles(this.pageProfile,1000, 'name', this.ascProfile)
-      .subscribe({
-        next: (response: any) => {
-          this.profiles = response.content;
-          this.editProfile = true;
-          this.isFirstProfile = response.first;
-          this.isLastProfile = response.last;
-        },
-      });
-  }
-
-  goBackProfiles() {
-    if (!this.isFirstProfile) {
-      this.pageProfile--;
-      this.cambiarPerfil();
-    }
-  }
-
-  goAheadProfiles() {
-    if (!this.isLastProfile) {
-      this.pageProfile++;
-      this.cambiarPerfil();
-    }
+    this.profileService.getStatusProfile().subscribe({
+      next: (response: any) => {
+        this.profiles = response;
+        this.editProfile = true;
+      },
+    });
   }
 
   goBackEnterprise() {
@@ -315,8 +292,6 @@ export class UsersComponent implements OnInit {
   }
 
   equals(source: User, target: User): boolean {
-    console.log(source)
-    console.log(target)
     return (
       source.id === target.id &&
       source.name === target.name &&

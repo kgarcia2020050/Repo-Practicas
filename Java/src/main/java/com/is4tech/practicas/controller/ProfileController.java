@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -46,6 +47,11 @@ public class ProfileController {
             profiles = profilesService.findAll(PageRequest.of(page, size, Sort.by(order).descending()));
         }
         return profiles;
+    }
+
+    @GetMapping("/findByStatus/{status}")
+    public List<Profiles> findAllByStatus(@PathVariable("status")Byte status){
+        return this.profilesService.findAllByStatus(status);
     }
 
     @PutMapping("/editProfile/{id}")
