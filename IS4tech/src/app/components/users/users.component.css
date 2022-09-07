@@ -165,6 +165,11 @@
 justify-content: space-between; 
 
 }
+.itemSelected{
+    background-color: rgb(199, 202, 202);
+    transition: background-color .5s;  
+}
+
 
 .havv:hover{
     background-color: rgb(156, 171, 241);

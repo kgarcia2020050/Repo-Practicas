@@ -7,7 +7,7 @@
 <div>
   <div class="row">
     <!--Area de funcionalidad-->
-    <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 24rem">
+    <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 25rem">
       <div>
         <h1 class="title">Usuarios</h1>
         <br />
@@ -44,7 +44,7 @@
       </div>
 
       <div class="card" *ngFor="let user of users | search: search">
-        <div class="card-body hoved" (click)="findById(user.id)">
+        <div class="card-body hoved" (click)="findById(user.id)" [ngClass]="{'itemSelected': user?.id === itemSelected}">
           <em
             *ngIf="user.status == 1"
             class="fa-solid fa-circle text-success"
@@ -398,14 +398,10 @@
                   </div>
                 </div>
 
-                <button
-                  (click)="addEnterprise()"
-                  type="button"
-                  class="btn btn-primary botdrag"
-                >
-                  Agregar Empresa
-                </button>
+         
+                
               </div>
+             
 
               <!--OTRO DRAG-->
               <div class="example-container">
@@ -481,13 +477,7 @@
                   </div>
                 </div>
 
-                <button
-                  (click)="addEnterprise()"
-                  type="button"
-                  class="btn btn-primary botdrag"
-                >
-                  Agregar Empresa
-                </button>
+             
               </div>
 
               <!--OTRO DRAG-->
@@ -545,6 +535,13 @@
             >
               Guardar
             </button>
+            <button
+            (click)="addEnterprise()"
+            type="button"
+            class="btn btn-primary botdrag"
+          >
+            Agregar Empresa
+          </button>
             <button
               (click)="cambiarPerfil()"
               [disabled]="!name.valid || !email.valid"

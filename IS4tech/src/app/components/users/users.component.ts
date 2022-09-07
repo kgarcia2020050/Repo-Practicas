@@ -52,6 +52,8 @@ export class UsersComponent implements OnInit {
 
   public changeForm: boolean = false;
   public dataServiceChange: User;
+  public itemSelected: number;
+
 
   constructor(
     private userService: UserService,
@@ -169,6 +171,8 @@ export class UsersComponent implements OnInit {
       next: (response: any) => {
         this.editEnterprises = false;
         this.getUser = response;
+        this.itemSelected = id;
+
         this.profileService.getProfile(this.getUser.profile).subscribe({
           next: (res: any) => {
             this.myProfile = res;
