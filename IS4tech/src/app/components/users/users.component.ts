@@ -54,7 +54,6 @@ export class UsersComponent implements OnInit {
   public dataServiceChange: User;
   public itemSelected: number;
 
-
   constructor(
     private userService: UserService,
     private profileService: ProfileService,
@@ -70,10 +69,6 @@ export class UsersComponent implements OnInit {
     this.getUsers();
     this.cambiarPerfil();
     this.getEnterprises();
-  }
-
-  openDialog() {
-    this.router.navigate(['/openUser']);
   }
 
   getUsers() {
@@ -125,7 +120,7 @@ export class UsersComponent implements OnInit {
 
   cambiarPerfil() {
     this.profileService
-      .getProfiles(this.pageProfile, 6, 'name', this.ascProfile)
+      .getProfiles(this.pageProfile, 5, 'name', this.ascProfile)
       .subscribe({
         next: (response: any) => {
           this.profiles = response.content;
@@ -330,9 +325,9 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  validChangeForm(){
-    if(!this.addUser){
-      this.changeForm = this.equals(this.getUser, this.dataServiceChange)
+  validChangeForm() {
+    if (!this.addUser) {
+      this.changeForm = this.equals(this.getUser, this.dataServiceChange);
     }
   }
 }

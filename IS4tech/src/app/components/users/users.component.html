@@ -44,7 +44,11 @@
       </div>
 
       <div class="card" *ngFor="let user of users | search: search">
-        <div class="card-body hoved" (click)="findById(user.id)" [ngClass]="{'itemSelected': user?.id === itemSelected}">
+        <div
+          class="card-body hoved"
+          (click)="findById(user.id)"
+          [ngClass]="{ itemSelected: user?.id === itemSelected }"
+        >
           <em
             *ngIf="user.status == 1"
             class="fa-solid fa-circle text-success"
@@ -105,7 +109,6 @@
                     required="true"
                     class="form-control datepicker mb-4"
                     style="font-family: Arial, FontAwesome"
-                    
                   />
                 </div>
 
@@ -216,31 +219,6 @@
             >
               Guardar
             </button>
-            <button
-              (click)="cambiarPerfil()"
-              [disabled]="!name.valid || !email.valid"
-              type="button"
-              class="btn btn-primary butt3"
-            >
-              Cambiar perfil
-            </button>
-            <button
-              (click)="asignarEmpresas()"
-              [disabled]="!name.valid || !email.valid"
-              type="button"
-              class="btn btn-primary asignEnt"
-            >
-              Asignarme empresas
-            </button>
-            <button
-              mat-mini-fab
-              color="black"
-              type="button"
-              class="btn btn-primary butt"
-              (click)="openDialog()"
-            >
-              <mat-icon>note_add</mat-icon>
-            </button>
           </div>
         </div>
       </div>
@@ -347,7 +325,6 @@
                       name="profile"
                       #profile="ngModel"
                       [(ngModel)]="getUser.profile"
-                      
                     >
                       <option
                         *ngFor="let profile of profiles"
@@ -402,11 +379,7 @@
                     ></em>
                   </div>
                 </div>
-
-         
-                
               </div>
-             
 
               <!--OTRO DRAG-->
               <div class="example-container">
@@ -481,8 +454,6 @@
                     ></em>
                   </div>
                 </div>
-
-             
               </div>
 
               <!--OTRO DRAG-->
@@ -541,12 +512,12 @@
               Guardar
             </button>
             <button
-            (click)="addEnterprise()"
-            type="button"
-            class="btn btn-primary botdrag"
-          >
-            Agregar Empresa
-          </button>
+              (click)="addEnterprise()"
+              type="button"
+              class="btn btn-primary botdrag"
+            >
+              Agregar Empresa
+            </button>
             <button
               (click)="cambiarPerfil()"
               [disabled]="!name.valid || !email.valid"
