@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
+import { UserEnterprise } from 'src/app/models/user-enterprise';
 
 @Component({
   selector: 'app-users',
@@ -114,12 +115,6 @@ export class UsersComponent implements OnInit {
   }
 
   cambiarPerfil() {
-    this.profileService.getStatusProfile().subscribe({
-      next: (response: any) => {
-        this.profiles = response;
-        this.editProfile = true;
-      },
-    });
   }
 
   goBackEnterprise() {
@@ -307,4 +302,11 @@ export class UsersComponent implements OnInit {
       this.changeForm = this.equals(this.getUser, this.dataServiceChange);
     }
   }
+
+  equalsEnterprise(backUp: UserEnterprise, newEnterprise: UserEnterprise){
+    JSON.stringify(backUp) === JSON.stringify(newEnterprise);
+    console.log(backUp);
+    console.log(newEnterprise);
+  }
+  
 }
