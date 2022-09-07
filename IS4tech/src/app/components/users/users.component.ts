@@ -120,7 +120,7 @@ export class UsersComponent implements OnInit {
 
   cambiarPerfil() {
     this.profileService
-      .getProfiles(this.pageProfile, 5, 'name', this.ascProfile)
+      .getProfiles(this.pageProfile,1000, 'name', this.ascProfile)
       .subscribe({
         next: (response: any) => {
           this.profiles = response.content;
