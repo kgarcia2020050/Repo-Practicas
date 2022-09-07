@@ -1,115 +1,114 @@
 
 .example-button-container{
-    padding-top: 50%;
+  padding-top: 50%;
 }
 
 .positionn{
-    position: relative;
+  position: relative;
 }
- 
+
 .title{
-    padding: 3%;
-    font-size: 65px;
-    color: #2B638C;
-    font-family: 'Lato', sans-serif;
+  padding: 3%;
+  font-size: 65px;
+  color: #2B638C;
+  font-family: 'Lato', sans-serif;
 
 }
 
 .coll{
-    color: #2B638C;
-    font-family: 'Lato', sans-serif;
+  color: #2B638C;
+  font-family: 'Lato', sans-serif;
 
 
-} 
+}
 
 .colla{
-    color: #2B638C;
-    font-family: 'Lato', sans-serif;
-    font-size: 65px;
+  color: #2B638C;
+  font-family: 'Lato', sans-serif;
+  font-size: 65px;
 
 }
 
 .card-body{
-    padding-top: 5%;
+  padding-top: 5%;
 }
 
 .perf{
-    padding-top: 100%;
+  padding-top: 100%;
 }
 .img-profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-  
-  .dimen{
-    padding: 100%;
-  }
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
 
-  .tabod{
-    border-radius: 50%;
-  }
+.dimen{
+  padding: 100%;
+}
 
-  .hoved:hover{
-    background-color: rgb(199, 202, 202);
-    transition: background-color .5s;  
+.tabod{
+  border-radius: 50%;
+}
+
+.hoved:hover{
+  background-color: rgb(199, 202, 202);
+  transition: background-color .5s;
 }
 
 .itemSelected{
-    background-color: rgb(199, 202, 202);
-    transition: background-color .5s;  
+  background-color: rgb(199, 202, 202);
+  transition: background-color .5s;
 }
 
 
-    .btnn:hover{
-        background-color: rgb(199, 202, 202);
-        transition: background-color .5s;  }
+  .btnn:hover{
+      background-color: rgb(199, 202, 202);
+      transition: background-color .5s;  }
 
-        .hoved{
-            font-size: medium;
-        }
+      .hoved{
+          font-size: medium;
+      }
 
 
 .princ{
-    background-color: #F0F0F0;
+  background-color: #F0F0F0;
 }
 
 .sidenav{
-    background-color: #12579C;
+  background-color: #12579C;
 }
 
 .butt{
-    position: absolute;
-left: 85%;
+
 background-color: #12579C   ;
 
 }
 
 .butt2{
-    background-color: #12579C   ;
+  background-color: #12579C   ;
 }
 
 .sear:hover{
-    background-color: rgb(51, 98, 226);
-    transition: background-color .5s;  
+  background-color: rgb(51, 98, 226);
+  transition: background-color .5s;
 }
 
 .heed{
-    position: absolute;
+  position: absolute;
 left: 20%;
 color: #12579C;
 
 }
 .heed2{
-    position: absolute;
+  position: absolute;
 left: 16%;
 color: #12579C;
 }
 
 .fa-sort{
-    position: relative;
-    left: 95%;
-    color: #12579C;
+  position: relative;
+  left: 95%;
+  color: #12579C;
 }
 
 .slide{
@@ -119,12 +118,12 @@ left: 60%;
 }
 
 .mat-form-field {
-    width: 50%;
-  }
+  width: 50%;
+}
 
-  .flex-container {
-    display: flex;
-justify-content: space-between; 
+.flex-container {
+  display: flex;
+justify-content: space-between;
 
 }
 
