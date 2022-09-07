@@ -173,6 +173,10 @@ export class UsersComponent implements OnInit {
         this.getUser = response;
         this.itemSelected = id;
 
+        this.dataServiceChange = Object.assign({}, response);
+        this.getUser = Object.assign({}, response);
+        this.validChangeForm();
+
         this.profileService.getProfile(this.getUser.profile).subscribe({
           next: (res: any) => {
             this.myProfile = res;
@@ -280,17 +284,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  equals(source: User, target: User): boolean {
-    return (
-      source.id === target.id &&
-      source.name === target.name &&
-      source.status === target.status &&
-      source.email === target.email &&
-      source.profile === target.profile &&
-      source.empresas === target.empresas
-    );
-  }
-
   postUsers(addForm) {
     this.empresas.forEach((empresa) => {
       this.postUser.empresas.push({
@@ -324,5 +317,22 @@ export class UsersComponent implements OnInit {
         }
       },
     });
+  }
+
+  equals(source: User, target: User): boolean {
+    return (
+      source.id === target.id &&
+      source.name === target.name &&
+      source.status === target.status &&
+      source.email === target.email &&
+      source.profile === target.profile &&
+      source.empresas === target.empresas
+    );
+  }
+
+  validChangeForm(){
+    if(!this.addUser){
+      this.changeForm = this.equals(this.getUser, this.dataServiceChange)
+    }
   }
 }

@@ -105,6 +105,7 @@
                     required="true"
                     class="form-control datepicker mb-4"
                     style="font-family: Arial, FontAwesome"
+                    
                   />
                 </div>
 
@@ -256,6 +257,7 @@
             [(ngModel)]="getUser.status"
             class="slide"
             *ngIf="getUser.name && getUser.email"
+            (change)="validChangeForm()"
           >
             <div *ngIf="getUser.status == 1">Activo</div>
             <div *ngIf="getUser.status == 0">Inactivo</div>
@@ -278,6 +280,7 @@
                     placeholder="Nombre"
                     name="nombre"
                     required="true"
+                    (change)="validChangeForm()"
                   />
                 </mat-form-field>
                 <mat-form-field class="" appearance="outline">
@@ -293,6 +296,7 @@
                     placeholder="Email"
                     name="email"
                     required="true"
+                    (change)="validChangeForm()"
                   />
                 </mat-form-field>
               </div>
@@ -343,6 +347,7 @@
                       name="profile"
                       #profile="ngModel"
                       [(ngModel)]="getUser.profile"
+                      
                     >
                       <option
                         *ngFor="let profile of profiles"
@@ -529,7 +534,7 @@
           <div class="flex-container">
             <button
               (click)="putProfile(getUser.id)"
-              [disabled]="!name.valid || !email.valid"
+              [disabled]="!name.valid || !email.valid || changeForm"
               type="button"
               class="btn btn-primary butt2"
             >

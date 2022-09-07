@@ -50,7 +50,7 @@ export class ProfilesComponent implements OnInit {
         
         this.validChangeForm();
       },
-    });
+    }); 
   }
 
   newProfile(addForm) {
