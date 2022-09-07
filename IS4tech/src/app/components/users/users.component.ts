@@ -315,6 +315,8 @@ export class UsersComponent implements OnInit {
   }
 
   equals(source: User, target: User): boolean {
+    console.log(source)
+    console.log(target)
     return (
       source.id === target.id &&
       source.name === target.name &&
