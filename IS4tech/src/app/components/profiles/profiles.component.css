@@ -115,7 +115,7 @@ color: #12579C;
 .slide{
 color: #12579C;
 position: absolute;
-left: 75%;
+left: 60%;
 }
 
 .mat-form-field {
@@ -127,3 +127,4 @@ left: 75%;
 justify-content: space-between; 
 
 }
+

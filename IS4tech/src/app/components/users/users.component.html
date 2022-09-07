@@ -1,11 +1,8 @@
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"
-></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <div>
-  <div class="row">
+  <div class="row layout">
     <!--Area de funcionalidad-->
     <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 25rem">
       <div>
@@ -14,14 +11,8 @@
 
         <!--Buscador-->
         <div class="input-group rounded" style="max-width: 20rem">
-          <input
-            type="Buscar"
-            class="form-control rounded"
-            placeholder="Buscar"
-            aria-label="Buscar"
-            aria-describedby="search-addon"
-            [(ngModel)]="search"
-          />
+          <input type="Buscar" class="form-control rounded" placeholder="Buscar" aria-label="Buscar"
+            aria-describedby="search-addon" [(ngModel)]="search" />
           <span class="input-group-text border-0" id="search-addon">
             <mat-icon>search</mat-icon>
           </span>
@@ -29,50 +20,26 @@
         <br />
       </div>
       <div>
-        <em
-          *ngIf="asc == false"
-          matTooltip="Ordenar de manera ascendente."
-          (click)="filter()"
-          class="fa-solid fa-sort filt"
-        ></em>
-        <em
-          *ngIf="asc == true"
-          matTooltip="Ordenar de manera descendente."
-          (click)="filter()"
-          class="fa-solid fa-sort filt"
-        ></em>
+        <em *ngIf="asc == false" matTooltip="Ordenar de manera ascendente." (click)="filter()"
+          class="fa-solid fa-sort filt"></em>
+        <em *ngIf="asc == true" matTooltip="Ordenar de manera descendente." (click)="filter()"
+          class="fa-solid fa-sort filt"></em>
       </div>
+      <div class="containerProfiles">
 
       <div class="card" *ngFor="let user of users | search: search">
-        <div
-          class="card-body hoved"
-          (click)="findById(user.id)"
-          [ngClass]="{ itemSelected: user?.id === itemSelected }"
-        >
-          <em
-            *ngIf="user.status == 1"
-            class="fa-solid fa-circle text-success"
-          ></em>
-          <em
-            *ngIf="user.status == 0"
-            class="fa-solid fa-circle text-secondary"
-          ></em>
+        <div class="card-body hoved" (click)="findById(user.id)"
+          [ngClass]="{ itemSelected: user?.id === itemSelected }">
+          <em *ngIf="user.status == 1" class="fa-solid fa-circle text-success"></em>
+          <em *ngIf="user.status == 0" class="fa-solid fa-circle text-secondary"></em>
           {{ user.name }}
         </div>
       </div>
+    </div>
+
       <div class="flex-container">
-        <em
-          class="back bacc"
-          (click)="goBack()"
-          class="fas fa-angle-double-left fa-2x"
-          style="color: #12579c"
-        ></em>
-        <em
-          class="ahead bacc"
-          (click)="goAhead()"
-          class="fas fa-angle-double-right fa-2x"
-          style="color: #12579c"
-        ></em>
+        <em class="back bacc" (click)="goBack()" class="fas fa-angle-double-left fa-2x" style="color: #12579c"></em>
+        <em class="ahead bacc" (click)="goAhead()" class="fas fa-angle-double-right fa-2x" style="color: #12579c"></em>
       </div>
     </div>
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == true">
@@ -86,45 +53,21 @@
             <div class="container card-0 justify-content-center">
               <div class="row">
                 <div class="col-sm-6">
-                  <input
-                    name="name"
-                    #name="ngModel"
-                    [(ngModel)]="postUser.name"
-                    placeholder="Nombre de usuario"
-                    type="text"
-                    id="date-picker-example"
-                    required="true"
-                    class="form-control datepicker"
-                    style="font-family: Arial, FontAwesome"
-                  />
+                  <input name="name" #name="ngModel" [(ngModel)]="postUser.name" placeholder="Nombre de usuario"
+                    type="text" id="date-picker-example" required="true" class="form-control datepicker"
+                    style="font-family: Arial, FontAwesome" />
                 </div>
 
                 <div class="col-sm-6">
-                  <input
-                    name="email"
-                    #email="ngModel"
-                    [(ngModel)]="postUser.email"
-                    placeholder="Correo"
-                    type="text"
-                    required="true"
-                    class="form-control datepicker mb-4"
-                    style="font-family: Arial, FontAwesome"
-                  />
+                  <input name="email" #email="ngModel" [(ngModel)]="postUser.email" placeholder="Correo" type="text"
+                    required="true" class="form-control datepicker mb-4" style="font-family: Arial, FontAwesome" />
                 </div>
 
                 <div class="col-sm-6 fort">
                   <mat-form-field appearance="fill">
                     <mat-label>Selecciona tu perfil</mat-label>
-                    <mat-select
-                      matNativeControl
-                      name="status"
-                      #status="ngModel"
-                      [(ngModel)]="postUser.profile"
-                    >
-                      <mat-option
-                        *ngFor="let info of profiles"
-                        [value]="info.id"
-                      >
+                    <mat-select matNativeControl name="status" #status="ngModel" [(ngModel)]="postUser.profile">
+                      <mat-option *ngFor="let info of profiles" [value]="info.id">
                         {{ info.name }}
                       </mat-option>
                     </mat-select>
@@ -139,73 +82,44 @@
 
           <div cdkDropListGroup>
             <div class="example-container">
-              <div
-                cdkDropList
-                [cdkDropListData]="listNumbers1"
-                class="example-list"
-                (cdkDropListDropped)="drop($event)"
-              >
+              <div cdkDropList [cdkDropListData]="listNumbers1" class="example-list"
+                (cdkDropListDropped)="drop($event)">
                 <div class="example-box" *ngFor="let n of listNumbers1" cdkDrag>
                   {{ n.name }}
                 </div>
               </div>
               <div class="flex-container">
                 <div>
-                  <em
-                    class="back"
-                    (click)="goBackEnterprise()"
-                    class="fas fa-angle-double-left fa-2x drag1"
-                    style="color: #12579c"
-                  ></em>
+                  <em class="back" (click)="goBackEnterprise()" class="fas fa-angle-double-left fa-2x drag1"
+                    style="color: #12579c"></em>
                 </div>
                 <div>
-                  <em
-                    class="ahead"
-                    (click)="goAheadEnterprise()"
-                    class="fas fa-angle-double-right fa-2x drag2"
-                    style="color: #12579c"
-                  ></em>
+                  <em class="ahead" (click)="goAheadEnterprise()" class="fas fa-angle-double-right fa-2x drag2"
+                    style="color: #12579c"></em>
                 </div>
               </div>
             </div>
 
             <div class="example-container">
-              <div
-                cdkDropList
-                [cdkDropListData]="empresas"
-                class="example-list"
-                (cdkDropListDropped)="drop($event)"
-              >
+              <div cdkDropList [cdkDropListData]="empresas" class="example-list" (cdkDropListDropped)="drop($event)">
                 <div class="example-box" *ngFor="let n of empresas" cdkDrag>
                   {{ n.name }}
                 </div>
               </div>
               <div class="flex-container">
                 <div>
-                  <em
-                    class="back"
-                    class="fas fa-angle-double-left fa-2x drag1"
-                    style="color: #12579c"
-                  ></em>
+                  <em class="back" class="fas fa-angle-double-left fa-2x drag1" style="color: #12579c"></em>
                 </div>
                 <div>
-                  <em
-                    class="ahead"
-                    class="fas fa-angle-double-right fa-2x drag2"
-                    style="color: #12579c"
-                  ></em>
+                  <em class="ahead" class="fas fa-angle-double-right fa-2x drag2" style="color: #12579c"></em>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="flex-container">
-            <button
-              (click)="postUsers(addForm)"
-              [disabled]="!name.valid || !email.valid"
-              type="button"
-              class="btn btn-primary butt2"
-            >
+            <button (click)="postUsers(addForm)" [disabled]="!name.valid || !email.valid" type="button"
+              class="btn btn-primary butt2">
               Guardar
             </button>
           </div>
@@ -218,14 +132,8 @@
           <!--Titulos y nombres-->
 
           <p class="coll">Editar</p>
-          <mat-slide-toggle
-            name="status"
-            #status="ngModel"
-            [(ngModel)]="getUser.status"
-            class="slide"
-            *ngIf="getUser.name && getUser.email"
-            (change)="validChangeForm()"
-          >
+          <mat-slide-toggle name="status" #status="ngModel" [(ngModel)]="getUser.status" class="slide"
+            *ngIf="getUser.name && getUser.email" (change)="validChangeForm()">
             <div *ngIf="getUser.status == 1">Activo</div>
             <div *ngIf="getUser.status == 0">Inactivo</div>
           </mat-slide-toggle>
@@ -237,78 +145,36 @@
                 <mat-form-field class="other" appearance="outline">
                   <mat-label>Nombre</mat-label>
                   <mat-label *ngIf="!name.valid && name.touched">
-                    requerido</mat-label
-                  >
-                  <input
-                    [disabled]="!getUser.name"
-                    #name="ngModel"
-                    [(ngModel)]="getUser.name"
-                    matInput
-                    placeholder="Nombre"
-                    name="nombre"
-                    required="true"
-                    (change)="validChangeForm()"
-                  />
+                    requerido</mat-label>
+                  <input [disabled]="!getUser.name" #name="ngModel" [(ngModel)]="getUser.name" matInput
+                    placeholder="Nombre" name="nombre" required="true" (change)="validChangeForm()" />
                 </mat-form-field>
                 <mat-form-field class="" appearance="outline">
                   <mat-label>Correo</mat-label>
                   <mat-label *ngIf="!name.valid && name.touched">
-                    requerido</mat-label
-                  >
-                  <input
-                    [disabled]="!getUser.email"
-                    #email="ngModel"
-                    [(ngModel)]="getUser.email"
-                    matInput
-                    placeholder="Email"
-                    name="email"
-                    required="true"
-                    (change)="validChangeForm()"
-                  />
+                    requerido</mat-label>
+                  <input [disabled]="!getUser.email" #email="ngModel" [(ngModel)]="getUser.email" matInput
+                    placeholder="Email" name="email" required="true" (change)="validChangeForm()" />
                 </mat-form-field>
               </div>
 
               <div class="col-sm-6">
                 <div class="col-sm-6 fort" style="float: left">
-                  <mat-form-field
-                    appearance="outline"
-                    *ngIf="this.editProfile == false"
-                  >
+                  <mat-form-field appearance="outline" *ngIf="this.editProfile == false">
                     <mat-label>Mi perfil</mat-label>
-                    <select
-                      (selectionChange)="validChangeForm()"
-                      matNativeControl
-                      name="profile"
-                      #profile="ngModel"
-                      [(ngModel)]="getUser.profile"
-                    >
-                      <option
-                        [disabled]="true"
-                        [value]="myProfile.id"
-                        [selected]="myProfile.name"
-                      >
+                    <select (selectionChange)="validChangeForm()" matNativeControl name="profile" #profile="ngModel"
+                      [(ngModel)]="getUser.profile">
+                      <option [disabled]="true" [value]="myProfile.id" [selected]="myProfile.name">
                         {{ myProfile.name }}
                       </option>
                     </select>
                   </mat-form-field>
-                  <mat-form-field
-                    appearance="fill"
-                    *ngIf="this.editProfile == true"
-                  >
+                  <mat-form-field appearance="fill" *ngIf="this.editProfile == true">
                     <mat-label>Mi perfil</mat-label>
-                    <mat-select
-                      size="5"
-                      matNativeControl
-                      name="profile"
-                      #profile="ngModel"
-                      [(ngModel)]="getUser.profile"
-                    >
-                      <mat-option
-                        *ngFor="let profile of profiles"
-                        [value]="profile.id"
-                      >
-                        {{ profile.name }}</mat-option
-                      >
+                    <mat-select size="5" matNativeControl name="profile" #profile="ngModel"
+                      [(ngModel)]="getUser.profile">
+                      <mat-option *ngFor="let profile of profiles" [value]="profile.id">
+                        {{ profile.name }}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
@@ -323,72 +189,41 @@
             <div cdkDropListGroup>
               <!--OTRO DRAG-->
               <div class="example-container">
-                <div
-                  cdkDropList
-                  [cdkDropListData]="listNumbers1"
-                  [cdkDropListConnectedTo]="[ln2]"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)"
-                >
-                  <div
-                    class="example-box"
-                    *ngFor="let n of listNumbers1"
-                    cdkDrag
-                  >
+                <div cdkDropList [cdkDropListData]="listNumbers1" [cdkDropListConnectedTo]="[ln2]" class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="example-box" *ngFor="let n of listNumbers1" cdkDrag>
                     {{ n.name }}
                   </div>
                 </div>
                 <div class="flex-container">
                   <div>
-                    <em
-                      class="back"
-                      (click)="goBackEnterprise()"
-                      class="fas fa-angle-double-left fa-2x drag1"
-                      style="color: #12579c"
-                    ></em>
+                    <em class="back" (click)="goBackEnterprise()" class="fas fa-angle-double-left fa-2x drag1"
+                      style="color: #12579c"></em>
                   </div>
                   <div>
-                    <em
-                      class="ahead"
-                      (click)="goAheadEnterprise()"
-                      class="fas fa-angle-double-right fa-2x drag2"
-                      style="color: #12579c"
-                    ></em>
+                    <em class="ahead" (click)="goAheadEnterprise()" class="fas fa-angle-double-right fa-2x drag2"
+                      style="color: #12579c"></em>
                   </div>
                 </div>
               </div>
 
               <!--OTRO DRAG-->
               <div class="example-container">
-                <div
-                  cdkDropList
-                  [cdkDropListData]="empresas"
-                  [cdkDropListConnectedTo]="[ln1]"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)"
-                >
-                  <div
-                    class="example-box"
-                    *ngFor="
+                <div cdkDropList [cdkDropListData]="empresas" [cdkDropListConnectedTo]="[ln1]" class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div class="example-box" *ngFor="
                       let n of empresas;
                       paginate: {
                         id: 'empresas',
                         itemsPerPage: 3,
                         currentPage: p
                       }
-                    "
-                    cdkDrag
-                  >
+                    " cdkDrag>
                     {{ n.name }}
                   </div>
                 </div>
-                <pagination-controls
-                  id="empresas"
-                  (pageChange)="p = $event"
-                  responsive="true"
-                  previousLabel="Previous"
-                  nextLabel="Next"
-                >
+                <pagination-controls id="empresas" (pageChange)="p = $event" responsive="true" previousLabel="Previous"
+                  nextLabel="Next">
                 </pagination-controls>
               </div>
             </div>
@@ -397,55 +232,29 @@
             <div cdkDropListGroup>
               <!--OTRO DRAG-->
               <div class="example-container">
-                <div
-                  cdkDropList
-                  [cdkDropListData]="listNumbers1"
-                  [cdkDropListConnectedTo]="[ln2]"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)"
-                >
-                  <div
-                    cdkDragDisabled
-                    class="example-box"
-                    *ngFor="let n of listNumbers1"
-                    cdkDrag
-                  >
+                <div cdkDropList [cdkDropListData]="listNumbers1" [cdkDropListConnectedTo]="[ln2]" class="example-list"
+                  (cdkDropListDropped)="drop($event)">
+                  <div cdkDragDisabled class="example-box" *ngFor="let n of listNumbers1" cdkDrag>
                     {{ n.name }}
                   </div>
                 </div>
                 <div class="flex-container">
                   <div>
-                    <em
-                      class="back"
-                      (click)="goBackEnterprise()"
-                      class="fas fa-angle-double-left fa-2x drag1"
-                      style="color: #12579c"
-                    ></em>
+                    <em class="back" (click)="goBackEnterprise()" class="fas fa-angle-double-left fa-2x drag1"
+                      style="color: #12579c"></em>
                   </div>
                   <div>
-                    <em
-                      class="ahead"
-                      (click)="goAheadEnterprise()"
-                      class="fas fa-angle-double-right fa-2x drag2"
-                      style="color: #12579c"
-                    ></em>
+                    <em class="ahead" (click)="goAheadEnterprise()" class="fas fa-angle-double-right fa-2x drag2"
+                      style="color: #12579c"></em>
                   </div>
                 </div>
               </div>
 
               <!--OTRO DRAG-->
               <div class="example-container">
-                <div
-                  cdkDropList
-                  [cdkDropListData]="getUser.empresas"
-                  [cdkDropListConnectedTo]="[ln1]"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)"
-                >
-                  <div
-                    cdkDragDisabled
-                    class="example-box"
-                    *ngFor="
+                <div cdkDropList [cdkDropListData]="getUser.empresas" [cdkDropListConnectedTo]="[ln1]"
+                  class="example-list" (cdkDropListDropped)="drop($event)">
+                  <div cdkDragDisabled class="example-box" *ngFor="
                       let n of getUser.empresas
                         | paginate
                           : {
@@ -453,71 +262,39 @@
                               itemsPerPage: 4,
                               currentPage: p
                             }
-                    "
-                    cdkDrag
-                  >
+                    " cdkDrag>
                     {{ n.enterpriseName }}
-                    <div
-                      (click)="
+                    <div (click)="
                         deleteUserEnterprise(n.id, n.enterpriseName, n.userId)
-                      "
-                      class="forev"
-                    >
+                      " class="forev">
                       <mat-icon class="dragg">delete_forever</mat-icon>
                     </div>
                   </div>
                 </div>
-                <pagination-controls
-                  id="empresas"
-                  (pageChange)="p = $event"
-                  responsive="true"
-                  previousLabel="Previous"
-                  nextLabel="Next"
-                >
+                <pagination-controls id="empresas" (pageChange)="p = $event" responsive="true" previousLabel="Previous"
+                  nextLabel="Next">
                 </pagination-controls>
               </div>
             </div>
           </div>
 
           <div class="flex-container">
-            <button
-              (click)="putProfile(getUser.id)"
-              [disabled]="!name.valid || !email.valid || changeForm"
-              type="button"
-              class="btn btn-primary butt2"
-            >
+            <button (click)="putProfile(getUser.id)" [disabled]="!name.valid || !email.valid || changeForm"
+              type="button" class="btn btn-primary butt2">
               Guardar
             </button>
-            <button
-              (click)="addEnterprise()"
-              type="button"
-              class="btn btn-primary botdrag"
-            >
+            <button (click)="addEnterprise()" type="button" class="btn btn-primary botdrag">
               Agregar Empresa
             </button>
-            <button
-              (click)="cambiarPerfil()"
-              [disabled]="!name.valid || !email.valid"
-              type="button"
-              class="btn btn-primary butt3"
-            >
+            <button (click)="cambiarPerfil()" [disabled]="!name.valid || !email.valid" type="button"
+              class="btn btn-primary butt3">
               Cambiar perfil
             </button>
-            <button
-              (click)="asignarEmpresas()"
-              [disabled]="!name.valid || !email.valid"
-              type="button"
-              class="btn btn-primary asignEnt"
-            >
+            <button (click)="asignarEmpresas()" [disabled]="!name.valid || !email.valid" type="button"
+              class="btn btn-primary asignEnt">
               Asignarme empresas
             </button>
-            <button
-              mat-mini-fab
-              color="black"
-              type="button"
-              class="btn btn-primary butt"
-              (click)="this.addUser = true"
-            >
+            <button mat-mini-fab color="black" type="button" class="btn btn-primary butt" (click)="this.addUser = true">
               <mat-icon>note_add</mat-icon>
             </button>
           </div>

@@ -68,4 +68,9 @@
     padding: 1rem .5rem;
     z-index: 9;
   }
+
+  .sidenav .nav{
+    height: calc(100vh - (16px + 50px + 16px));
+    display: block !important;
+  }
   

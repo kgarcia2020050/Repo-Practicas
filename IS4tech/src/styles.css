@@ -19,4 +19,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     url('~material-design-icons/iconfont/MaterialIcons-Regular.ttf') format('truetype');
   }
 
+  .layout{
+    overflow-y: auto;
+    height: 100vh;
+  }
+  .containerProfiles{
+    height: calc(100vh - (74px + 40px + 20px + 28px + 6rem));
+}
+
+
   
