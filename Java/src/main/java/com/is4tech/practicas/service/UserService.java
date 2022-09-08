@@ -71,8 +71,9 @@ public class UserService {
 
     public void verification(Integer id, UserDTO userDTO) {
         UserDTO user = findById(id);
+        List<UsersEnterprisesDTO> enterprisesDTOS = this.userEnterpriseRepository.findAllDtoByUserId(id);
         if (user.getName().equals(userDTO.getName()) && userDTO.isStatus() == user.isStatus() &&
-                user.getEmail().equals(userDTO.getEmail()) && user.getProfile().equals(userDTO.getProfile())) {
+                user.getEmail().equals(userDTO.getEmail()) && user.getProfile().equals(userDTO.getProfile())&&user.getEmpresas().toString().equals(enterprisesDTOS.toString())) {
             throw new InformationNotChangedException("No has cambiado la información del usuario.");
         } else if (user.getName().equals(userDTO.getName())) {
             editUser(id, userDTO);

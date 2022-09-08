@@ -269,6 +269,7 @@ export class UsersComponent implements OnInit {
       next: () => {
         addForm.reset();
         this.getUsers();
+        this.postUser.empresas = [];
         Swal.fire({
           text: 'Usuario agregado exitosamente',
           icon: 'success',

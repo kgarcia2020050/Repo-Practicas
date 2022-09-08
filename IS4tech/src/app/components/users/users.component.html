@@ -210,6 +210,13 @@
             >
               Guardar
             </button>
+            <button
+            (click)="addEnterprise()"
+            type="button"
+            class="btn btn-primary botdrag"
+          >
+            Agregar Empresa
+          </button>
           </div>
         </div>
       </div>
@@ -330,7 +337,7 @@
                   [cdkDropListConnectedTo]="[ln2]"
                   class="example-list"
                   (cdkDropListDropped)="drop($event)"
-                  
+
                 >
                   <div
                     class="example-box"
