@@ -71,6 +71,11 @@ public class UserService {
 
     public void verification(Integer id, UserDTO userDTO) {
         UserDTO user = findById(id);
+        for(int i=0;i<user.getEmpresas().size();i++){
+            if(user.getEmpresas().get(i).toString().equals(userDTO.getEmpresas().get(i).toString())){
+                throw new InformationNotChangedException("No has cambiado la información del usuario.");
+            }
+        }
         List<UsersEnterprisesDTO> enterprisesDTOS = this.userEnterpriseRepository.findAllDtoByUserId(id);
         if (user.getName().equals(userDTO.getName()) && userDTO.isStatus() == user.isStatus() &&
                 user.getEmail().equals(userDTO.getEmail()) && user.getProfile().equals(userDTO.getProfile())&&user.getEmpresas().toString().equals(enterprisesDTOS.toString())) {
@@ -85,6 +90,11 @@ public class UserService {
     }
 
     public void saveUser(UserDTO userdto) {
+        for(int i=0;i<userdto.getEmpresas().size();i++){
+            if(userdto.getEmpresas().get(i).getEnterpriseName().){
+                throw new ExistingRegisterException("Te has asignado la misma empresa mas de una vez.");
+            }
+        }
         if (findByName(userdto.getName()) != null) {
             throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
         } else if (userdto.getProfile() == 0) {

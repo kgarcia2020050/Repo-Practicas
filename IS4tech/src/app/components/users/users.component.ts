@@ -138,6 +138,7 @@ export class UsersComponent implements OnInit {
   }
 
   findById(id) {
+    this.empresas=[]
     this.addUser = false;
     this.getEnterprises();
     this.userService.getUser(id).subscribe({
