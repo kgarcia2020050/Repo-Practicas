@@ -304,9 +304,14 @@ export class UsersComponent implements OnInit {
   }
 
   equalsEnterprise(backUp: UserEnterprise, newEnterprise: UserEnterprise){
-    JSON.stringify(backUp) === JSON.stringify(newEnterprise);
     console.log(backUp);
-    console.log(newEnterprise);
+    console.log(newEnterprise)
+    return(JSON.stringify(backUp) === JSON.stringify(newEnterprise))
   }
-  
+
+  validChangeEnterprise(){
+    if(!this.addEnterprise){
+      
+    }
+  }
 }
