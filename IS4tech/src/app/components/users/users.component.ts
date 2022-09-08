@@ -327,15 +327,10 @@ export class UsersComponent implements OnInit {
   }
 
   validChangeEnterprise(){
-<<<<<<< Updated upstream
-    if(!this.addEnterprise){
-
-=======
     if(!this.addUser){
-      console.log(this.getUser.empresas)
+
       console.log(this.enterpriseNew)
       this.changeEnterprise = this.equalsEnterprise(this.getUser.empresas, this.enterpriseNew);
->>>>>>> Stashed changes
     }
   }
 }
