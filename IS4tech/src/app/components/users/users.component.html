@@ -374,7 +374,8 @@
                   [cdkDropListData]="empresas"
                   [cdkDropListConnectedTo]="[ln1]"
                   class="example-list"
-                  (cdkDropListDropped)="drop($event)"
+                  (cdkDropListDropped)="drop($event); validChangeEnterprise()"
+
                 >
                   <div
                     class="example-box"
@@ -449,7 +450,7 @@
                   [cdkDropListData]="getUser.empresas"
                   [cdkDropListConnectedTo]="[ln1]"
                   class="example-list"
-                  (cdkDropListDropped)="drop($event)"
+                  (cdkDropListDropped)="drop($event); validChangeEnterprise()"
                 >
                   <div
                     cdkDragDisabled
@@ -491,7 +492,7 @@
           <div class="flex-container">
             <button
               (click)="putProfile(getUser.id)"
-              [disabled]="!name.valid || !email.valid || changeForm"
+              [disabled]="!name.valid || !email.valid || (changeForm && changeEnterprise)"
               type="button"
               class="btn btn-primary butt2"
             >
