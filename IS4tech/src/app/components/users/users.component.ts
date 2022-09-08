@@ -184,6 +184,7 @@ export class UsersComponent implements OnInit {
           text: 'Usuario modificado exitosamente.',
         }).then(() => {
           this.getUsers();
+          this.addUser=true;
         });
       },
       error: (error: any) => {
