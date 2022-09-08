@@ -32,7 +32,7 @@ public class EntrerprisesService {
     }
 
     public void save(EnterpriseDTO enterprisesModeDto) {
-        if (findByName(enterprisesModeDto.getName()) != null) {
+        if (findByName(enterprisesModeDto.getName()) != null || findByName(enterprisesModeDto.getName().trim()) != null || findByName(enterprisesModeDto.getName().toUpperCase()) != null || findByName(enterprisesModeDto.getName().toLowerCase()) != null) {
             throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
         } else {
             Enterprises model = mapperEnterprises.mapeo(enterprisesModeDto);

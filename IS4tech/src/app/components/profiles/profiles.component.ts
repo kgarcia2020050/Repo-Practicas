@@ -47,10 +47,10 @@ export class ProfilesComponent implements OnInit {
         this.itemSelected = id;
         this.dataServiceProfile = Object.assign({}, response);
         this.getProfile = Object.assign({}, response);
-        
+
         this.validChangeForm();
       },
-    }); 
+    });
   }
 
   newProfile(addForm) {
@@ -143,17 +143,13 @@ export class ProfilesComponent implements OnInit {
   }
 
   equals(source: Profile, target: Profile): boolean{
-    return source.id === target.id && 
-           source.name === target.name &&
-           source.status === target.status   
+    return source.name === target.name &&
+           source.status === target.status
   }
 
   validChangeForm(){
     if(!this.addProfile ){
       this.changeForm = this.equals(this.getProfile, this.dataServiceProfile)
-      console.log (this.changeForm)
-      console.log (this.dataServiceProfile)
-      console.log (this.getProfile);
     }
   }
 

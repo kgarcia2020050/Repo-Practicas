@@ -43,7 +43,7 @@ public class ProfilesService {
 
 
     public void saveProfile(ProfilesDTO profilesDTO) {
-        if (findByName(profilesDTO.getName()) != null) {
+        if (findByName(profilesDTO.getName()) != null || findByName(profilesDTO.getName().trim()) != null || findByName(profilesDTO.getName().toLowerCase()) != null || findByName(profilesDTO.getName().toUpperCase()) != null) {
             throw new ExistingRegisterException("Ya existe un perfil con el mismo nombre.");
         } else {
             Profiles model = mapperProfile.mapeo(profilesDTO);
@@ -52,7 +52,7 @@ public class ProfilesService {
     }
 
 
-    public List<Profiles> findAllByStatus(Byte status){
+    public List<Profiles> findAllByStatus(Byte status) {
         return this.profileRepository.findAllByStatus(status);
     }
 
@@ -64,7 +64,7 @@ public class ProfilesService {
             throw new InformationNotChangedException("No has cambiado la información del perfil.");
         } else if (profilesDTO.getName().equals(profile.getName())) {
             editProfile(id, profilesDTO);
-        } else if (findByName(profilesDTO.getName()) != null) {
+        } else if (findByName(profilesDTO.getName()) != null || findByName(profilesDTO.getName().trim()) != null || findByName(profilesDTO.getName().toLowerCase()) != null || findByName(profilesDTO.getName().toUpperCase()) != null) {
             throw new ExistingRegisterException("Ya existe un perfil con el mismo nombre.");
         } else {
             editProfile(id, profilesDTO);
