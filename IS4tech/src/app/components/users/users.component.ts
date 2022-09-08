@@ -115,6 +115,12 @@ export class UsersComponent implements OnInit {
   }
 
   cambiarPerfil() {
+    this.profileService.getStatusProfile().subscribe({
+      next: (response: any) => {
+        this.profiles = response;
+        this.editProfile = true;
+      },
+    });
   }
 
   goBackEnterprise() {
@@ -311,7 +317,7 @@ export class UsersComponent implements OnInit {
 
   validChangeEnterprise(){
     if(!this.addEnterprise){
-      
+
     }
   }
 }
