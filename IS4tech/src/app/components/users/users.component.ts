@@ -138,7 +138,7 @@ export class UsersComponent implements OnInit {
   }
 
   findById(id) {
-    this.empresas=[]
+    this.empresas = [];
     this.addUser = false;
     this.getEnterprises();
     this.userService.getUser(id).subscribe({
@@ -182,24 +182,30 @@ export class UsersComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           text: 'Usuario modificado exitosamente.',
-        }).then(() => {
-          this.getUsers();
-          this.addUser=true;
         });
+        this.getUsers();
+        this.empresas = [];
+        this.getEnterprises();
+        this.addUser = true;
       },
       error: (error: any) => {
+        this.empresas = [];
         if (error.error.errors) {
           Swal.fire({
             icon: 'error',
             text: error.error.errors[0].defaultMessage,
           });
-          this.empresas = [];
         } else {
           Swal.fire({
             icon: 'error',
             text: error.error.message,
           });
-          this.empresas = [];
+          if (
+            error.error.message ==
+            'Te has asignado la misma empresa mas de una vez.'
+          ) {
+            this.getEnterprises();
+          }
         }
       },
     });
@@ -278,18 +284,25 @@ export class UsersComponent implements OnInit {
         });
       },
       error: (error: any) => {
+        this.postUser.empresas = [];
+        this.getUsers();
         if (error.error.errors) {
           Swal.fire({
             icon: 'error',
             text: error.error.errors[0].defaultMessage,
           });
-          this.postUser.empresas = [];
         } else {
           Swal.fire({
             icon: 'error',
             text: error.error.message,
           });
-          this.postUser.empresas = [];
+          if (
+            error.error.message ==
+            'Te has asignado la misma empresa mas de una vez, edita tu perfil para asignarte las empresas que deseas.'
+          ) {
+            this.getUsers();
+            addForm.reset();
+          }
         }
       },
     });
@@ -312,15 +325,14 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  equalsEnterprise(backUp: UserEnterprise, newEnterprise: UserEnterprise){
+  equalsEnterprise(backUp: UserEnterprise, newEnterprise: UserEnterprise) {
     console.log(backUp);
-    console.log(newEnterprise)
-    return(JSON.stringify(backUp) === JSON.stringify(newEnterprise))
+    console.log(newEnterprise);
+    return JSON.stringify(backUp) === JSON.stringify(newEnterprise);
   }
 
-  validChangeEnterprise(){
-    if(!this.addEnterprise){
-
+  validChangeEnterprise() {
+    if (!this.addEnterprise) {
     }
   }
 }

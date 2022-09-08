@@ -103,6 +103,11 @@ public class UserService {
                     usersEnterprises.setUserName(bo.getName());
                     usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
                     enterpirses.add(usersEnterprises);
+                    for (int j = i + 1; j < userdto.getEmpresas().size(); j++) {
+                        if (userdto.getEmpresas().get(i).getEnterpriseName().equals(userdto.getEmpresas().get(j).getEnterpriseName())) {
+                            throw new ExistingRegisterException("Te has asignado la misma empresa mas de una vez, edita tu perfil para asignarte las empresas que deseas.");
+                        }
+                    }
                 }
                 this.userEnterpriseRepository.saveAll(enterpirses);
             }
@@ -139,6 +144,13 @@ public class UserService {
                 usersEnterprises.setEnterpriseId(userDTO.getEmpresas().get(i).getEnterpriseId());
                 usersEnterprises.setEnterpriseName(userDTO.getEmpresas().get(i).getEnterpriseName());
                 enterpirses.add(usersEnterprises);
+
+                for (int j = i + 1; j < userDTO.getEmpresas().size(); j++) {
+                    if (userDTO.getEmpresas().get(i).getEnterpriseName().equals(userDTO.getEmpresas().get(j).getEnterpriseName())) {
+                        throw new ExistingRegisterException("Te has asignado la misma empresa mas de una vez.");
+                    }
+                }
+
             }
             this.userEnterpriseRepository.saveAll(enterpirses);
         }

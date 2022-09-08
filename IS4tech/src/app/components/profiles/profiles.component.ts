@@ -150,7 +150,7 @@ export class ProfilesComponent implements OnInit {
   validChangeForm(){
     if(!this.addProfile ){
       this.changeForm = this.equals(this.getProfile, this.dataServiceProfile)
-    }
+      }
   }
 
 }
