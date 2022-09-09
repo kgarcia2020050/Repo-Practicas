@@ -6,9 +6,9 @@ import com.is4tech.practicas.mapper.MapperEnterprises;
 import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.repository.EnterpriseRepository;
 import com.is4tech.practicas.repository.UserEnterpriseRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
@@ -40,8 +40,8 @@ public class EntrerprisesService {
         }
     }
 
-    public List<Enterprises> findAll() {
-        return enterpriseRepository.findAll();
+    public Page<Enterprises> findAll(Pageable pageable) {
+        return enterpriseRepository.findAll(pageable);
     }
 
     public void deleteById(Integer id) {

@@ -38,9 +38,13 @@ export class UsersComponent implements OnInit {
 
   public addUser: boolean = true;
 
+  public pageEnterprise = 0;
 
   public editEnterprises: boolean = false;
 
+  public firstEnterprise: boolean;
+
+  public lastEnterprise: boolean;
 
   public changeForm: boolean = false;
   public dataServiceChange: User;
@@ -99,11 +103,15 @@ export class UsersComponent implements OnInit {
   }
 
   getEnterprises() {
-    this.enterpriseService.getEnterprises().subscribe({
-      next: (response: any) => {
-        this.listNumbers1 = response;
-      },
-    });
+    this.enterpriseService
+      .getEnterprises(this.pageEnterprise, 4, 'name', true)
+      .subscribe({
+        next: (response: any) => {
+          this.listNumbers1 = response.content;
+          this.firstEnterprise = response.first;
+          this.lastEnterprise = response.last;
+        },
+      });
   }
 
   cambiarPerfil() {
@@ -113,6 +121,20 @@ export class UsersComponent implements OnInit {
         this.editProfile = true;
       },
     });
+  }
+
+  goBackEnterprise() {
+    if (!this.firstEnterprise) {
+      this.pageEnterprise--;
+      this.getEnterprises();
+    }
+  }
+
+  goAheadEnterprise() {
+    if (!this.lastEnterprise) {
+      this.pageEnterprise++;
+      this.getEnterprises();
+    }
   }
 
   findById(id) {
@@ -167,6 +189,7 @@ export class UsersComponent implements OnInit {
         this.addUser = true;
       },
       error: (error: any) => {
+        this.getUser.empresas=[]
         this.empresas = [];
         if (error.error.errors) {
           Swal.fire({

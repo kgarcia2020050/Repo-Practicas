@@ -79,156 +79,150 @@
     </div>
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == true">
       <div class="resp2">
-        <div class="card border-primary">
-          <div class="card-body">
-            <p class="fs-1 coll">Agregar</p>
+      <div class="card border-primary">
+        <div class="card-body">
+          <p class="fs-1 coll">Agregar</p>
 
-            <br />
+          <br />
 
-            <form #addForm="ngForm">
-              <div class="container card-0 justify-content-center">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <input
-                      name="name"
-                      #name="ngModel"
-                      [(ngModel)]="postUser.name"
-                      placeholder="Nombre de usuario"
-                      type="text"
-                      id="date-picker-example"
-                      required="true"
-                      class="form-control datepicker"
-                      style="font-family: Arial, FontAwesome"
-                    />
-                  </div>
+          <form #addForm="ngForm">
+            <div class="container card-0 justify-content-center">
+              <div class="row">
+                <div class="col-sm-6">
+                  <input
+                    name="name"
+                    #name="ngModel"
+                    [(ngModel)]="postUser.name"
+                    placeholder="Nombre de usuario"
+                    type="text"
+                    id="date-picker-example"
+                    required="true"
+                    class="form-control datepicker"
+                    style="font-family: Arial, FontAwesome"
+                  />
+                </div>
 
-                  <div class="col-sm-6">
-                    <input
-                      name="email"
-                      #email="ngModel"
-                      [(ngModel)]="postUser.email"
-                      placeholder="Correo"
-                      type="text"
-                      required="true"
-                      class="form-control datepicker mb-4"
-                      style="font-family: Arial, FontAwesome"
-                    />
-                  </div>
+                <div class="col-sm-6">
+                  <input
+                    name="email"
+                    #email="ngModel"
+                    [(ngModel)]="postUser.email"
+                    placeholder="Correo"
+                    type="text"
+                    required="true"
+                    class="form-control datepicker mb-4"
+                    style="font-family: Arial, FontAwesome"
+                  />
+                </div>
 
-                  <div class="col-sm-6 fort">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Selecciona tu perfil</mat-label>
-                      <mat-select
-                        matNativeControl
-                        name="status"
-                        #status="ngModel"
-                        [(ngModel)]="postUser.profile"
+                <div class="col-sm-6 fort">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Selecciona tu perfil</mat-label>
+                    <mat-select
+                      matNativeControl
+                      name="status"
+                      #status="ngModel"
+                      [(ngModel)]="postUser.profile"
+                    >
+                      <mat-option
+                        *ngFor="let info of profiles"
+                        [value]="info.id"
                       >
-                        <mat-option
-                          *ngFor="let info of profiles"
-                          [value]="info.id"
-                        >
-                          {{ info.name }}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
+                        {{ info.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-              </div>
-            </form>
-            <div>
-              <p class="fs-4 dragd">Asignación de empresas</p>
-            </div>
-
-            <div cdkDropListGroup>
-              <div class="example-container">
-                <div
-                  cdkDropList
-                  [cdkDropListData]="listNumbers1"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)"
-                >
-                  <div
-                    class="example-box"
-                    *ngFor="let n of listNumbers1"
-                    cdkDrag
-                  >
-                    {{ n.name }}
-                  </div>
-                </div>
-                <div class="flex-container">
-                  <div>
-                    <em
-                      class="back"
-                      class="fas fa-angle-double-left fa-2x drag1"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                  <div>
-                    <em
-                      class="ahead"
-                      class="fas fa-angle-double-right fa-2x drag2"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                </div>
-              </div>
-
-              <div class="example-container">
-                <div
-                  cdkDropList
-                  [cdkDropListData]="empresas"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)"
-                >
-                  <div
-                    class="example-box"
-                    *ngFor="
-                      let n of empresas
-                        | paginate
-                          : {
-                              id: 'misEmpresas',
-                              itemsPerPage: 3,
-                              currentPage: p
-                            }
-                    "
-                    cdkDrag
-                  >
-                    {{ n.name }}
-                  </div>
-                </div>
-                <pagination-controls
-                  id="misEmpresas"
-                  (pageChange)="p = $event"
-                  responsive="true"
-                  previousLabel="Previous"
-                  nextLabel="Next"
-                >
-                </pagination-controls>
               </div>
             </div>
+          </form>
+          <div>
+            <p class="fs-4 dragd">Asignación de empresas</p>
+          </div>
 
-            <div class="flex-container">
-              <button
-                (click)="postUsers(addForm)"
-                [disabled]="!name.valid || !email.valid"
-                type="button"
-                class="btn btn-primary butt2"
+          <div cdkDropListGroup>
+            <div class="example-container">
+              <div
+                cdkDropList
+                [cdkDropListData]="listNumbers1"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)"
               >
-                Guardar
-              </button>
-              <button
-                (click)="addEnterprise()"
-                type="button"
-                class="btn btn-primary botdrag"
-              >
-                Agregar Empresa
-              </button>
+                <div class="example-box" *ngFor="let n of listNumbers1" cdkDrag>
+                  {{ n.name }}
+                </div>
+              </div>
+              <div class="flex-container">
+                <div>
+                  <em
+                    class="back"
+                    (click)="goBackEnterprise()"
+                    class="fas fa-angle-double-left fa-2x drag1"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+                <div>
+                  <em
+                    class="ahead"
+                    (click)="goAheadEnterprise()"
+                    class="fas fa-angle-double-right fa-2x drag2"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+              </div>
             </div>
+
+            <div class="example-container">
+              <div
+                cdkDropList
+                [cdkDropListData]="empresas"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)"
+              >
+                <div class="example-box" *ngFor="let n of empresas" cdkDrag>
+                  {{ n.name }}
+                </div>
+              </div>
+              <div class="flex-container">
+                <div>
+                  <em
+                    class="back"
+                    class="fas fa-angle-double-left fa-2x drag1"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+                <div>
+                  <em
+                    class="ahead"
+                    class="fas fa-angle-double-right fa-2x drag2"
+                    style="color: #12579c"
+                  ></em>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-container">
+            <button
+              (click)="postUsers(addForm)"
+              [disabled]="!name.valid || !email.valid"
+              type="button"
+              class="btn btn-primary butt2"
+            >
+              Guardar
+            </button>
+            <button
+            (click)="addEnterprise()"
+            type="button"
+            class="btn btn-primary botdrag"
+          >
+            Agregar Empresa
+          </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == false">
       <div class="card border-primary">
         <div class="card-body">
@@ -345,6 +339,7 @@
                   [cdkDropListConnectedTo]="[ln2]"
                   class="example-list"
                   (cdkDropListDropped)="drop($event)"
+
                 >
                   <div
                     class="example-box"
@@ -358,6 +353,7 @@
                   <div>
                     <em
                       class="back"
+                      (click)="goBackEnterprise()"
                       class="fas fa-angle-double-left fa-2x drag1"
                       style="color: #12579c"
                     ></em>
@@ -365,6 +361,7 @@
                   <div>
                     <em
                       class="ahead"
+                      (click)="goAheadEnterprise()"
                       class="fas fa-angle-double-right fa-2x drag2"
                       style="color: #12579c"
                     ></em>
@@ -384,13 +381,12 @@
                   <div
                     class="example-box"
                     *ngFor="
-                      let n of empresas
-                        | paginate
-                          : {
-                              id: 'empresas',
-                              itemsPerPage: 3,
-                              currentPage: p
-                            }
+                      let n of empresas;
+                      paginate: {
+                        id: 'empresas',
+                        itemsPerPage: 3,
+                        currentPage: p
+                      }
                     "
                     cdkDrag
                   >
@@ -432,6 +428,7 @@
                   <div>
                     <em
                       class="back"
+                      (click)="goBackEnterprise()"
                       class="fas fa-angle-double-left fa-2x drag1"
                       style="color: #12579c"
                     ></em>
@@ -439,6 +436,7 @@
                   <div>
                     <em
                       class="ahead"
+                      (click)="goAheadEnterprise()"
                       class="fas fa-angle-double-right fa-2x drag2"
                       style="color: #12579c"
                     ></em>
