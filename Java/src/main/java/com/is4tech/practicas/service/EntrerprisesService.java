@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class EntrerprisesService {
@@ -40,8 +42,8 @@ public class EntrerprisesService {
         }
     }
 
-    public Page<Enterprises> findAll(Pageable pageable) {
-        return enterpriseRepository.findAll(pageable);
+    public List<Enterprises> findAll() {
+        return enterpriseRepository.findAll();
     }
 
     public void deleteById(Integer id) {

@@ -380,26 +380,13 @@
                   <div
                     class="example-box"
                     *ngFor="
-                      let n of empresas;
-                      paginate: {
-                        id: 'empresas',
-                        itemsPerPage: 3,
-                        currentPage: p
-                      }
+                      let n of empresas
                     "
                     cdkDrag
                   >
                     {{ n.name }}
                   </div>
                 </div>
-                <pagination-controls
-                  id="empresas"
-                  (pageChange)="p = $event"
-                  responsive="true"
-                  previousLabel="Previous"
-                  nextLabel="Next"
-                >
-                </pagination-controls>
               </div>
             </div>
           </div>
@@ -457,12 +444,7 @@
                     class="example-box"
                     *ngFor="
                       let n of getUser.empresas
-                        | paginate
-                          : {
-                              id: 'empresas',
-                              itemsPerPage: 4,
-                              currentPage: p
-                            }
+
                     "
                     cdkDrag
                   >
@@ -477,14 +459,6 @@
                     </div>
                   </div>
                 </div>
-                <pagination-controls
-                  id="empresas"
-                  (pageChange)="p = $event"
-                  responsive="true"
-                  previousLabel="Previous"
-                  nextLabel="Next"
-                >
-                </pagination-controls>
               </div>
             </div>
           </div>

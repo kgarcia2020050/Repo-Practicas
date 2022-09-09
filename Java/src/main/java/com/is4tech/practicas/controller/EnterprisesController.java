@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @RestController
@@ -30,17 +31,11 @@ public class EnterprisesController {
     }
 
     @GetMapping("/all")
-    public Page<Enterprises> findAll(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "4") int size,
-            @RequestParam(defaultValue = "name") String order,
-            @RequestParam(defaultValue = "true") boolean asc
+    public List<Enterprises> findAll(
+
     ) {
-        Page<Enterprises> enterprises = enterpriseServices.findAll(PageRequest.of(page, size, Sort.by(order)));
-        if (!asc) {
-            enterprises = enterpriseServices.findAll(PageRequest.of(page, size, Sort.by(order).descending()));
-        }
-        return enterprises;
+        return this.enterpriseServices.findAll();
+
     }
 
     @DeleteMapping("/delete/{id}")

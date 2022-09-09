@@ -87,6 +87,7 @@ export class UsersComponent implements OnInit {
   }
 
   asignarEmpresas() {
+    this.empresas=[]
     this.editEnterprises = true;
   }
 
@@ -112,9 +113,7 @@ export class UsersComponent implements OnInit {
       .getEnterprises(this.pageEnterprise, 4, 'name', true)
       .subscribe({
         next: (response: any) => {
-          this.listNumbers1 = response.content;
-          this.firstEnterprise = response.first;
-          this.lastEnterprise = response.last;
+          this.listNumbers1 = response;
         },
       });
   }
@@ -163,7 +162,7 @@ export class UsersComponent implements OnInit {
               next: (response: any) => {
                 this.getUser.empresas = Object.assign([], response.empresas);
                 this.enterpriseNew = Object.assign([], response.empresas);
-                
+
                 this.validChangeEnterprise();
               },
             });
@@ -338,11 +337,9 @@ export class UsersComponent implements OnInit {
   }
 
   validChangeEnterprise(){
-    console.log(this.editEnterprises);
-    console.log(!this.addUser)
     if(!this.addUser && this.editEnterprises){
 
-     
+
       if(this.enterpriseNew.length >0 ){
         let empresas = [];
         this.enterpriseNew.map((value: UserEnterprise) => {
@@ -352,12 +349,10 @@ export class UsersComponent implements OnInit {
             })
         })
         this.changeEnterprise = this.equalsEnterprise(this.empresas, empresas);
-        console.log(this.empresas);
-        console.log(empresas)
       }
-      
-    
-    
+
+
+
     }else if(!this.addUser && !this.editEnterprises ){
       this.changeEnterprise = true;
     }
