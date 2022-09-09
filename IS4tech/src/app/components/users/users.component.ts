@@ -162,12 +162,7 @@ export class UsersComponent implements OnInit {
             this.userService.getInfoUser(id).subscribe({
               next: (response: any) => {
                 this.getUser.empresas = response.empresas;
-                this.enterpriseNew = Object.assign({}, response.empresas.map((value) => {
-                  return {
-                      id: value.id,
-                      name: value.enterpriseName
-                  }
-              }));
+                this.enterpriseNew = Object.assign([], response.empresas);
                 this.validChangeEnterprise();
               },
             });
@@ -322,14 +317,12 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  equalsEnterprise(backUp: UserEnterprise[], newEnterprise:UserEnterprise[]){
-    return(JSON.stringify(backUp) === JSON.stringify(newEnterprise))
+  equalsEnterprise(backUp: UserEnterprise[], newEnterprise: UserEnterprise[]){
+    return JSON.stringify(backUp) === JSON.stringify(newEnterprise);
   }
 
   validChangeEnterprise(){
     if(!this.addUser){
-
-      console.log(this.enterpriseNew)
       this.changeEnterprise = this.equalsEnterprise(this.getUser.empresas, this.enterpriseNew);
     }
   }
