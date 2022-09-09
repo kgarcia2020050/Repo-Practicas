@@ -12,6 +12,7 @@ import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
 import { UserEnterprise } from 'src/app/models/user-enterprise';
+import { Enterprise } from 'src/app/models/enterprise';
 
 @Component({
   selector: 'app-users',
@@ -22,8 +23,8 @@ import { UserEnterprise } from 'src/app/models/user-enterprise';
 export class UsersComponent implements OnInit {
   public postUser: User;
   public users: User;
-  public listNumbers1 = [];
-  public empresas = [];
+  public listNumbers1: Enterprise[] =[];
+  public empresas: Enterprise[] =[];
   public getUser: User;
   public profiles: Profile;
   public asc: boolean = true;
@@ -49,6 +50,10 @@ export class UsersComponent implements OnInit {
   public changeForm: boolean = false;
   public dataServiceChange: User;
   public itemSelected: number;
+
+  public enterpriseNew: UserEnterprise[] =[];
+  public changeEnterprise: boolean = false;
+
 
   constructor(
     private userService: UserService,
@@ -138,7 +143,6 @@ export class UsersComponent implements OnInit {
   }
 
   findById(id) {
-    this.empresas = [];
     this.addUser = false;
     this.getEnterprises();
     this.userService.getUser(id).subscribe({
@@ -157,7 +161,10 @@ export class UsersComponent implements OnInit {
             this.editProfile = false;
             this.userService.getInfoUser(id).subscribe({
               next: (response: any) => {
-                this.getUser.empresas = response.empresas;
+                this.getUser.empresas = Object.assign([], response.empresas);
+                this.enterpriseNew = Object.assign([], response.empresas);
+                
+                this.validChangeEnterprise();
               },
             });
           },
@@ -326,14 +333,33 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  equalsEnterprise(backUp: UserEnterprise, newEnterprise: UserEnterprise) {
-    console.log(backUp);
-    console.log(newEnterprise);
+  equalsEnterprise(backUp: Enterprise[], newEnterprise: Enterprise[]){
     return JSON.stringify(backUp) === JSON.stringify(newEnterprise);
   }
 
-  validChangeEnterprise() {
-    if (!this.addEnterprise) {
+  validChangeEnterprise(){
+    console.log(this.editEnterprises);
+    console.log(!this.addUser)
+    if(!this.addUser && this.editEnterprises){
+
+     
+      if(this.enterpriseNew.length >0 ){
+        let empresas = [];
+        this.enterpriseNew.map((value: UserEnterprise) => {
+            empresas.push({
+                id: value.enterpriseId,
+                name: value.enterpriseName
+            })
+        })
+        this.changeEnterprise = this.equalsEnterprise(this.empresas, empresas);
+        console.log(this.empresas);
+        console.log(empresas)
+      }
+      
+    
+    
+    }else if(!this.addUser && !this.editEnterprises ){
+      this.changeEnterprise = true;
     }
   }
 }

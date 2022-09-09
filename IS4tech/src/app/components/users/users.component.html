@@ -78,7 +78,6 @@
       </div>
     </div>
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == true">
-      <div class="resp2">
       <div class="card border-primary">
         <div class="card-body">
           <p class="fs-1 coll">Agregar</p>
@@ -222,7 +221,6 @@
         </div>
       </div>
     </div>
-  </div>
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == false">
       <div class="card border-primary">
         <div class="card-body">
@@ -376,7 +374,8 @@
                   [cdkDropListData]="empresas"
                   [cdkDropListConnectedTo]="[ln1]"
                   class="example-list"
-                  (cdkDropListDropped)="drop($event)"
+                  (cdkDropListDropped)="drop($event); validChangeEnterprise()"
+
                 >
                   <div
                     class="example-box"
@@ -451,7 +450,7 @@
                   [cdkDropListData]="getUser.empresas"
                   [cdkDropListConnectedTo]="[ln1]"
                   class="example-list"
-                  (cdkDropListDropped)="drop($event)"
+                  (cdkDropListDropped)="drop($event); validChangeEnterprise()"
                 >
                   <div
                     cdkDragDisabled
@@ -493,7 +492,7 @@
           <div class="flex-container">
             <button
               (click)="putProfile(getUser.id)"
-              [disabled]="!name.valid || !email.valid || changeForm"
+              [disabled]="!name.valid || !email.valid || (changeForm && changeEnterprise)"
               type="button"
               class="btn btn-primary butt2"
             >
