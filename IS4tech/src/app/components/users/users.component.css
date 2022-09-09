@@ -163,6 +163,7 @@
 .flex-container {
     display: flex;
 justify-content: space-between; 
+  flex-wrap: wrap;
 
 }
 .itemSelected{
@@ -189,6 +190,8 @@ justify-content: space-between;
         margin: 0 25px 25px 0;
         display: inline-block;
         vertical-align: top;
+        height: 150px;
+        overflow: auto;
         
       }
       
@@ -203,16 +206,16 @@ justify-content: space-between;
       }
 
       .example-list:hover{
-        background-color: rgb(132, 162, 245);
+        background-color: rgb(113, 147, 240);
         transition: background-color .5s;  }
       
         .example-box:hover{
-          background-color: rgb(132, 162, 245);
+          background-color: rgb(111, 145, 238);
           transition: background-color .5s;  }
       
           .example-box {
-            padding: 5px 5px;
-            border-bottom: solid 1px rgb(13, 111, 202);
+            padding: 8px 8px;
+            border-bottom: solid 1px rgb(4, 81, 153);
             color: rgba(0, 0, 0, 0.87);
             font-family: 'Lato', sans-serif;
           
@@ -263,6 +266,10 @@ justify-content: space-between;
 
       .forev{
         padding: 1px;
+      }
+
+      .over{
+        height: 500px;
       }
 
    

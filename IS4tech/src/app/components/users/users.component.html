@@ -115,7 +115,7 @@
                 </div>
 
                 <div class="col-sm-6 fort">
-                  <mat-form-field appearance="fill">
+                  <mat-form-field appearance="outline">
                     <mat-label>Selecciona tu perfil</mat-label>
                     <mat-select
                       matNativeControl
@@ -137,38 +137,21 @@
           </form>
           <div>
             <p class="fs-4 dragd">Asignación de empresas</p>
-          </div>
+          </div><br>
 
           <div cdkDropListGroup>
-            <div class="example-container">
+            <div class="example-container ">
               <div
                 cdkDropList
                 [cdkDropListData]="listNumbers1"
-                class="example-list"
+                class="example-list over"
                 (cdkDropListDropped)="drop($event)"
               >
                 <div class="example-box" *ngFor="let n of listNumbers1" cdkDrag>
                   {{ n.name }}
                 </div>
               </div>
-              <div class="flex-container">
-                <div>
-                  <em
-                    class="back"
-                    (click)="goBackEnterprise()"
-                    class="fas fa-angle-double-left fa-2x drag1"
-                    style="color: #12579c"
-                  ></em>
-                </div>
-                <div>
-                  <em
-                    class="ahead"
-                    (click)="goAheadEnterprise()"
-                    class="fas fa-angle-double-right fa-2x drag2"
-                    style="color: #12579c"
-                  ></em>
-                </div>
-              </div>
+              
             </div>
 
             <div class="example-container">
@@ -182,22 +165,7 @@
                   {{ n.name }}
                 </div>
               </div>
-              <div class="flex-container">
-                <div>
-                  <em
-                    class="back"
-                    class="fas fa-angle-double-left fa-2x drag1"
-                    style="color: #12579c"
-                  ></em>
-                </div>
-                <div>
-                  <em
-                    class="ahead"
-                    class="fas fa-angle-double-right fa-2x drag2"
-                    style="color: #12579c"
-                  ></em>
-                </div>
-              </div>
+            
             </div>
           </div>
 
@@ -347,24 +315,7 @@
                     {{ n.name }}
                   </div>
                 </div>
-                <div class="flex-container">
-                  <div>
-                    <em
-                      class="back"
-                      (click)="goBackEnterprise()"
-                      class="fas fa-angle-double-left fa-2x drag1"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                  <div>
-                    <em
-                      class="ahead"
-                      (click)="goAheadEnterprise()"
-                      class="fas fa-angle-double-right fa-2x drag2"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                </div>
+              
               </div>
 
               <!--OTRO DRAG-->
@@ -410,24 +361,7 @@
                     {{ n.name }}
                   </div>
                 </div>
-                <div class="flex-container">
-                  <div>
-                    <em
-                      class="back"
-                      (click)="goBackEnterprise()"
-                      class="fas fa-angle-double-left fa-2x drag1"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                  <div>
-                    <em
-                      class="ahead"
-                      (click)="goAheadEnterprise()"
-                      class="fas fa-angle-double-right fa-2x drag2"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                </div>
+               
               </div>
 
               <!--OTRO DRAG-->
