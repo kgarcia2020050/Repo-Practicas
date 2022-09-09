@@ -5,7 +5,6 @@ import com.is4tech.practicas.dto.UserDTO;
 import com.is4tech.practicas.dto.UsersEnterprisesDTO;
 import com.is4tech.practicas.exception.EmptyProfileException;
 import com.is4tech.practicas.exception.ExistingRegisterException;
-import com.is4tech.practicas.exception.InformationNotChangedException;
 import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperUser;
 import com.is4tech.practicas.bo.Users;
@@ -44,12 +43,16 @@ public class UserService {
         return usersRepository.findAll(pageable);
     }
 
+    public Page<UsersEnterprisesDTO> findAllByUserId(Integer id,Pageable pageable){
+        return userEnterpriseRepository.findAllDtoByUserId(id,pageable);
+    }
+
+
     public UserDTO findById(Integer id) {
         Optional<Users> users = this.usersRepository.findById(id);
         UserDTO userDTO = new UserDTO();
 
         if (users.isPresent()) {
-            List<UsersEnterprisesDTO> enterprisesDTOS = this.userEnterpriseRepository.findAllDtoByUserId(users.get().getId());
             userDTO.setName(users.get().getName());
             userDTO.setProfile(users.get().getProfile());
             userDTO.setEmail(users.get().getEmail());
@@ -58,7 +61,6 @@ public class UserService {
             } else {
                 userDTO.setStatus(false);
             }
-            userDTO.setEmpresas(enterprisesDTOS);
             return userDTO;
         } else {
             throw new NotFoundException();
@@ -71,12 +73,6 @@ public class UserService {
 
     public void verification(Integer id, UserDTO userDTO) {
         UserDTO user = findById(id);
-
-/*        if (user.getName().equals(userDTO.getName()) && userDTO.isStatus() == user.isStatus() &&
-                user.getEmpresas().toString().equals(userDTO.getEmpresas().toString())&&
-                user.getEmail().equals(userDTO.getEmail()) && user.getProfile().equals(userDTO.getProfile()) && user.getEmpresas().toString().equals(enterprisesDTOS.toString())) {
-            throw new InformationNotChangedException("No has cambiado la información del usuario.");
-        } else */
         if (user.getName().equals(userDTO.getName())) {
             editUser(id, userDTO);
         } else if (findByName(userDTO.getName()) != null || findByName(userDTO.getName().trim()) != null || findByName(userDTO.getName().toLowerCase()) != null || findByName(userDTO.getName().toUpperCase()) != null) {

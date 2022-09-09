@@ -3,7 +3,6 @@ import url from '../helper';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Profile } from '../models/profile';
-import { Byte } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root',

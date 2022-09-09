@@ -46,6 +46,10 @@ export class UsersComponent implements OnInit {
 
   public lastEnterprise: boolean;
 
+  public firstUserEnterprises: boolean;
+  public lastUserEnterprises: boolean;
+  public pageUserEnterprise = 0;
+
   public changeForm: boolean = false;
   public dataServiceChange: User;
   public itemSelected: number;
@@ -137,6 +141,20 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  goAheadUserEnterprise(id) {
+    if (!this.lastUserEnterprises) {
+      this.pageUserEnterprise++;
+      this.getUserEnterprises(id)
+    }
+  }
+
+  goBackUserEnterprise(id) {
+    if (!this.firstUserEnterprises) {
+      this.pageUserEnterprise--;
+      this.getUserEnterprises(id);
+    }
+  }
+
   findById(id) {
     this.empresas = [];
     this.addUser = false;
@@ -150,18 +168,25 @@ export class UsersComponent implements OnInit {
         this.dataServiceChange = Object.assign({}, response);
         this.getUser = Object.assign({}, response);
         this.validChangeForm();
+        this.getUserEnterprises(id);
+      },
+    });
+  }
 
-        this.profileService.getProfile(this.getUser.profile).subscribe({
-          next: (res: any) => {
-            this.myProfile = res;
-            this.editProfile = false;
-            this.userService.getInfoUser(id).subscribe({
-              next: (response: any) => {
-                this.getUser.empresas = response.empresas;
-              },
-            });
-          },
-        });
+  getUserEnterprises(id) {
+    this.profileService.getProfile(this.getUser.profile).subscribe({
+      next: (res: any) => {
+        this.myProfile = res;
+        this.editProfile = false;
+        this.userService
+          .getInfoUser(id, this.pageUserEnterprise, 4, 'enterpriseName', true)
+          .subscribe({
+            next: (response: any) => {
+              this.firstUserEnterprises = response.first;
+              this.lastUserEnterprises = response.last;
+              this.getUser.empresas = response.content;
+            },
+          });
       },
     });
   }
