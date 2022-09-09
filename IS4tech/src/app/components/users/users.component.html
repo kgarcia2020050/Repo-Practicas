@@ -160,7 +160,6 @@
                   <div>
                     <em
                       class="back"
-                      (click)="goBackEnterprise()"
                       class="fas fa-angle-double-left fa-2x drag1"
                       style="color: #12579c"
                     ></em>
@@ -168,7 +167,6 @@
                   <div>
                     <em
                       class="ahead"
-                      (click)="goAheadEnterprise()"
                       class="fas fa-angle-double-right fa-2x drag2"
                       style="color: #12579c"
                     ></em>
@@ -190,7 +188,7 @@
                         | paginate
                           : {
                               id: 'misEmpresas',
-                              itemsPerPage: 4,
+                              itemsPerPage: 3,
                               currentPage: p
                             }
                     "
@@ -360,7 +358,6 @@
                   <div>
                     <em
                       class="back"
-                      (click)="goBackEnterprise()"
                       class="fas fa-angle-double-left fa-2x drag1"
                       style="color: #12579c"
                     ></em>
@@ -368,7 +365,6 @@
                   <div>
                     <em
                       class="ahead"
-                      (click)="goAheadEnterprise()"
                       class="fas fa-angle-double-right fa-2x drag2"
                       style="color: #12579c"
                     ></em>
@@ -392,7 +388,7 @@
                         | paginate
                           : {
                               id: 'empresas',
-                              itemsPerPage: 4,
+                              itemsPerPage: 3,
                               currentPage: p
                             }
                     "
@@ -436,7 +432,6 @@
                   <div>
                     <em
                       class="back"
-                      (click)="goBackEnterprise()"
                       class="fas fa-angle-double-left fa-2x drag1"
                       style="color: #12579c"
                     ></em>
@@ -444,7 +439,6 @@
                   <div>
                     <em
                       class="ahead"
-                      (click)="goAheadEnterprise()"
                       class="fas fa-angle-double-right fa-2x drag2"
                       style="color: #12579c"
                     ></em>
@@ -464,7 +458,15 @@
                   <div
                     cdkDragDisabled
                     class="example-box"
-                    *ngFor="let n of getUser.empresas"
+                    *ngFor="
+                      let n of getUser.empresas
+                        | paginate
+                          : {
+                              id: 'empresas',
+                              itemsPerPage: 4,
+                              currentPage: p
+                            }
+                    "
                     cdkDrag
                   >
                     {{ n.enterpriseName }}
@@ -478,24 +480,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex-container">
-                  <div>
-                    <em
-                      (click)="goBackUserEnterprise(getUser.id)"
-                      class="back"
-                      class="fas fa-angle-double-left fa-2x drag1"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                  <div>
-                    <em
-                      (click)="goAheadUserEnterprise(getUser.id)"
-                      class="ahead"
-                      class="fas fa-angle-double-right fa-2x drag2"
-                      style="color: #12579c"
-                    ></em>
-                  </div>
-                </div>
+                <pagination-controls
+                  id="empresas"
+                  (pageChange)="p = $event"
+                  responsive="true"
+                  previousLabel="Previous"
+                  nextLabel="Next"
+                >
+                </pagination-controls>
               </div>
             </div>
           </div>

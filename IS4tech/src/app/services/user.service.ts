@@ -33,26 +33,8 @@ export class UserService {
     return this.http.post(url + 'user/saveUser', model);
   }
 
-  getInfoUser(
-    id: number,
-    page: number,
-    size: number,
-    order: string,
-    asc: boolean
-  ): Observable<any> {
-    return this.http.get(
-      url +
-        'user/pag/' +
-        id +
-        '?page=' +
-        page +
-        '&size=' +
-        size +
-        '&order=' +
-        order +
-        '&asc=' +
-        asc
-    );
+  getInfoUser(id: number): Observable<any> {
+    return this.http.get(url + 'user/users/' + id);
   }
 
   putUser(model: User, id: number): Observable<any> {

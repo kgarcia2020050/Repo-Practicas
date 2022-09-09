@@ -21,6 +21,8 @@ public class ProfilesService {
 
     private final MapperProfile mapperProfile;
 
+    private static final String MESSAGE = "No se encuentra al perfil con el id ";
+
 
     public ProfilesService(ProfileRepository profileRepository, MapperProfile mapperProfile) {
         this.profileRepository = profileRepository;
@@ -38,7 +40,7 @@ public class ProfilesService {
     }
 
     public Profiles findById(Integer id) {
-        return profileRepository.findById(id).orElseThrow(NotFoundException::new);
+        return profileRepository.findById(id).orElseThrow(()->new NotFoundException(MESSAGE+id));
     }
 
 
@@ -72,7 +74,7 @@ public class ProfilesService {
     }
 
     public void editProfile(Integer id, ProfilesDTO profilesDTO) {
-        Profiles model = profileRepository.findById(id).orElseThrow(NotFoundException::new);
+        Profiles model = profileRepository.findById(id).orElseThrow(()->new NotFoundException(MESSAGE+id));
         model.setName(profilesDTO.getName());
         if (profilesDTO.isStatus()) {
             model.setStatus((byte) 1);

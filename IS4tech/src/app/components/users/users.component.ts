@@ -38,17 +38,9 @@ export class UsersComponent implements OnInit {
 
   public addUser: boolean = true;
 
-  public pageEnterprise = 0;
 
   public editEnterprises: boolean = false;
 
-  public firstEnterprise: boolean;
-
-  public lastEnterprise: boolean;
-
-  public firstUserEnterprises: boolean;
-  public lastUserEnterprises: boolean;
-  public pageUserEnterprise = 0;
 
   public changeForm: boolean = false;
   public dataServiceChange: User;
@@ -107,15 +99,11 @@ export class UsersComponent implements OnInit {
   }
 
   getEnterprises() {
-    this.enterpriseService
-      .getEnterprises(this.pageEnterprise, 4, 'name', true)
-      .subscribe({
-        next: (response: any) => {
-          this.listNumbers1 = response.content;
-          this.firstEnterprise = response.first;
-          this.lastEnterprise = response.last;
-        },
-      });
+    this.enterpriseService.getEnterprises().subscribe({
+      next: (response: any) => {
+        this.listNumbers1 = response;
+      },
+    });
   }
 
   cambiarPerfil() {
@@ -125,34 +113,6 @@ export class UsersComponent implements OnInit {
         this.editProfile = true;
       },
     });
-  }
-
-  goBackEnterprise() {
-    if (!this.firstEnterprise) {
-      this.pageEnterprise--;
-      this.getEnterprises();
-    }
-  }
-
-  goAheadEnterprise() {
-    if (!this.lastEnterprise) {
-      this.pageEnterprise++;
-      this.getEnterprises();
-    }
-  }
-
-  goAheadUserEnterprise(id) {
-    if (!this.lastUserEnterprises) {
-      this.pageUserEnterprise++;
-      this.getUserEnterprises(id)
-    }
-  }
-
-  goBackUserEnterprise(id) {
-    if (!this.firstUserEnterprises) {
-      this.pageUserEnterprise--;
-      this.getUserEnterprises(id);
-    }
   }
 
   findById(id) {
@@ -168,25 +128,18 @@ export class UsersComponent implements OnInit {
         this.dataServiceChange = Object.assign({}, response);
         this.getUser = Object.assign({}, response);
         this.validChangeForm();
-        this.getUserEnterprises(id);
-      },
-    });
-  }
 
-  getUserEnterprises(id) {
-    this.profileService.getProfile(this.getUser.profile).subscribe({
-      next: (res: any) => {
-        this.myProfile = res;
-        this.editProfile = false;
-        this.userService
-          .getInfoUser(id, this.pageUserEnterprise, 4, 'enterpriseName', true)
-          .subscribe({
-            next: (response: any) => {
-              this.firstUserEnterprises = response.first;
-              this.lastUserEnterprises = response.last;
-              this.getUser.empresas = response.content;
-            },
-          });
+        this.profileService.getProfile(this.getUser.profile).subscribe({
+          next: (res: any) => {
+            this.myProfile = res;
+            this.editProfile = false;
+            this.userService.getInfoUser(id).subscribe({
+              next: (response: any) => {
+                this.getUser.empresas = response.empresas;
+              },
+            });
+          },
+        });
       },
     });
   }

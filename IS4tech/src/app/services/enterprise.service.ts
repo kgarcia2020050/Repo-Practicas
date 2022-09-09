@@ -11,22 +11,9 @@ export class EnterpriseService {
   constructor(public http: HttpClient) {}
 
   getEnterprises(
-    page: number,
-    size: number,
-    order: string,
-    asc: boolean
+
   ): Observable<any> {
-    return this.http.get(
-      url +
-        'enterprise/all?page=' +
-        page +
-        '&size=' +
-        size +
-        '&order=' +
-        order +
-        '&asc=' +
-        asc
-    );
+    return this.http.get(url + 'enterprise/all');
   }
 
   postEnterprise(model: Enterprise): Observable<any> {

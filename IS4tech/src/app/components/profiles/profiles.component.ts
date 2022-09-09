@@ -79,8 +79,8 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
-  cancelar(){
-    this.addProfile=false;
+  cancelar() {
+    this.addProfile = false;
   }
 
   putProfile(id) {
@@ -142,16 +142,13 @@ export class ProfilesComponent implements OnInit {
     this.getProfiles();
   }
 
-  equals(source: Profile, target: Profile): boolean{
-    return source.name === target.name &&
-           source.status === target.status
+  equals(source: Profile, target: Profile): boolean {
+    return source.name === target.name && source.status === target.status;
   }
 
-  validChangeForm(){
-    if(!this.addProfile ){
-      this.changeForm = this.equals(this.getProfile, this.dataServiceProfile)
-      }
+  validChangeForm() {
+    if (!this.addProfile) {
+      this.changeForm = this.equals(this.getProfile, this.dataServiceProfile);
+    }
   }
-
 }
-

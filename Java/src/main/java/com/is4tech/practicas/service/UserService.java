@@ -27,6 +27,9 @@ public class UserService {
     private final ProfilesService profilesService;
     private final UserEnterpriseRepository userEnterpriseRepository;
 
+    private static final String MESSAGE = "No se encuentra al usuario con el id ";
+
+
     public UserService(MapperUser mapper, UsersRepository usersRepository, ProfilesService profilesService,
                        UserEnterpriseRepository userEnterpriseRepository) {
         this.mapper = mapper;
@@ -43,16 +46,13 @@ public class UserService {
         return usersRepository.findAll(pageable);
     }
 
-    public Page<UsersEnterprisesDTO> findAllByUserId(Integer id,Pageable pageable){
-        return userEnterpriseRepository.findAllDtoByUserId(id,pageable);
-    }
-
 
     public UserDTO findById(Integer id) {
         Optional<Users> users = this.usersRepository.findById(id);
         UserDTO userDTO = new UserDTO();
 
         if (users.isPresent()) {
+            List<UsersEnterprisesDTO> enterprisesDTOS = this.userEnterpriseRepository.findAllDtoByUserId(users.get().getId());
             userDTO.setName(users.get().getName());
             userDTO.setProfile(users.get().getProfile());
             userDTO.setEmail(users.get().getEmail());
@@ -61,14 +61,15 @@ public class UserService {
             } else {
                 userDTO.setStatus(false);
             }
+            userDTO.setEmpresas(enterprisesDTOS);
             return userDTO;
         } else {
-            throw new NotFoundException();
+            throw new NotFoundException(MESSAGE + id);
         }
     }
 
     public Users userId(Integer id) {
-        return this.usersRepository.findById(id).orElseThrow(NotFoundException::new);
+        return this.usersRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
     }
 
     public void verification(Integer id, UserDTO userDTO) {
@@ -115,7 +116,7 @@ public class UserService {
     }
 
     public void editUser(Integer id, UserDTO userDTO) {
-        Users model = usersRepository.findById(id).orElseThrow(NotFoundException::new);
+        Users model = usersRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
         model.setName(userDTO.getName());
         model.setEmail(userDTO.getEmail());
         if (userDTO.isStatus()) {
