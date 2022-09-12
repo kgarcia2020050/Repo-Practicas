@@ -23,8 +23,8 @@ import { Enterprise } from 'src/app/models/enterprise';
 export class UsersComponent implements OnInit {
   public postUser: User;
   public users: User;
-  public listNumbers1: Enterprise[] =[];
-  public empresas: Enterprise[] =[];
+  public listNumbers1: Enterprise[] = [];
+  public empresas: Enterprise[] = [];
   public getUser: User;
   public profiles: Profile;
   public asc: boolean = true;
@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
   public p2: number = 1;
   public page: number = 0;
   public search: any;
+  public prueba;
   public search2: any;
   public myProfile: Profile;
   public editProfile = false;
@@ -52,9 +53,8 @@ export class UsersComponent implements OnInit {
   public dataServiceChange: User;
   public itemSelected: number;
 
-  public enterpriseNew: UserEnterprise[] =[];
+  public enterpriseNew: UserEnterprise[] = [];
   public changeEnterprise: boolean = false;
-
 
   constructor(
     private userService: UserService,
@@ -88,7 +88,7 @@ export class UsersComponent implements OnInit {
   }
 
   asignarEmpresas() {
-    this.empresas=[]
+    this.empresas = [];
     this.editEnterprises = true;
   }
 
@@ -161,6 +161,7 @@ export class UsersComponent implements OnInit {
             this.editProfile = false;
             this.userService.getInfoUser(id).subscribe({
               next: (response: any) => {
+                this.prueba = response.empresas;
                 this.getUser.empresas = Object.assign([], response.empresas);
                 this.enterpriseNew = Object.assign([], response.empresas);
 
@@ -169,6 +170,14 @@ export class UsersComponent implements OnInit {
             });
           },
         });
+      },
+    });
+  }
+
+  pruebaFuncion(id) {
+    this.userService.getInfoUser(id).subscribe({
+      next: (response: any) => {
+        this.prueba = response.empresas;
       },
     });
   }
@@ -196,8 +205,6 @@ export class UsersComponent implements OnInit {
         this.addUser = true;
       },
       error: (error: any) => {
-        this.getUser.empresas=[]
-        this.empresas = [];
         if (error.error.errors) {
           Swal.fire({
             icon: 'error',
@@ -212,7 +219,8 @@ export class UsersComponent implements OnInit {
             error.error.message ==
             'Te has asignado la misma empresa mas de una vez.'
           ) {
-            this.getEnterprises();
+            this.pruebaFuncion(id)
+            this.getUser.empresas = this.prueba;
           }
         }
       },
@@ -333,28 +341,23 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  equalsEnterprise(backUp: Enterprise[], newEnterprise: Enterprise[]){
+  equalsEnterprise(backUp: Enterprise[], newEnterprise: Enterprise[]) {
     return JSON.stringify(backUp) === JSON.stringify(newEnterprise);
   }
 
-  validChangeEnterprise(){
-    if(!this.addUser && this.editEnterprises){
-
-
-      if(this.enterpriseNew.length >0 ){
+  validChangeEnterprise() {
+    if (!this.addUser && this.editEnterprises) {
+      if (this.enterpriseNew.length > 0) {
         let empresas = [];
         this.enterpriseNew.map((value: UserEnterprise) => {
-            empresas.push({
-                id: value.enterpriseId,
-                name: value.enterpriseName
-            })
-        })
+          empresas.push({
+            id: value.enterpriseId,
+            name: value.enterpriseName,
+          });
+        });
         this.changeEnterprise = this.equalsEnterprise(this.empresas, empresas);
       }
-
-
-
-    }else if(!this.addUser && !this.editEnterprises ){
+    } else if (!this.addUser && !this.editEnterprises) {
       this.changeEnterprise = true;
     }
   }

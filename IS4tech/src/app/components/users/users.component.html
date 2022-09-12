@@ -137,38 +137,43 @@
           </form>
           <div>
             <p class="fs-4 dragd">Asignación de empresas</p>
-          </div><br>
-          <div >
-          <div class="input-group rounded" style="max-width: 21rem">
-            <input
-              type="Buscar"
-              class="form-control rounded"
-              placeholder="Buscar Empresa"
-              aria-label="Buscar"
-              aria-describedby="search-addon"
-              [(ngModel)]="search2"
-              style="align-items: center;"
-            />
-            <span class="input-group-text border-0 sear" id="search-addon">
-              <mat-icon>search</mat-icon>
-            </span>
           </div>
-        </div><br>
+          <br />
+          <div>
+            <div class="input-group rounded" style="max-width: 21rem">
+              <input
+                type="Buscar"
+                class="form-control rounded"
+                placeholder="Buscar Empresa"
+                aria-label="Buscar"
+                aria-describedby="search-addon"
+                [(ngModel)]="search2"
+                style="align-items: center"
+              />
+              <span class="input-group-text border-0 sear" id="search-addon">
+                <mat-icon>search</mat-icon>
+              </span>
+            </div>
+          </div>
+          <br />
 
           <div cdkDropListGroup>
-            <div class="example-container ">
+            <div class="example-container">
               <div
                 cdkDropList
                 [cdkDropListData]="listNumbers1"
                 class="example-list over"
                 (cdkDropListDropped)="drop($event)"
               >
-                <div class="example-box" *ngFor="let n of listNumbers1 | search: search2 " cdkDrag>
+                <div
+                  class="example-box"
+                  *ngFor="let n of listNumbers1 | search: search2"
+                  cdkDrag
+                >
                   {{ n.name }}
                 </div>
               </div>
-              
-            </div>  
+            </div>
 
             <div class="example-container">
               <div
@@ -181,7 +186,6 @@
                   {{ n.name }}
                 </div>
               </div>
-            
             </div>
           </div>
 
@@ -195,12 +199,12 @@
               Guardar
             </button>
             <button
-            (click)="addEnterprise()"
-            type="button"
-            class="btn btn-primary botdrag"
-          >
-            Agregar Empresa
-          </button>
+              (click)="addEnterprise()"
+              type="button"
+              class="btn btn-primary botdrag"
+            >
+              Agregar Empresa
+            </button>
           </div>
         </div>
       </div>
@@ -311,36 +315,27 @@
             <p class="dragd">Asignación de empresas</p>
           </div>
           <br />
-          <div class="input-group rounded" style="max-width: 21rem">
-            <input
-              type="Buscar"
-              class="form-control rounded"
-              placeholder="Buscar Empresa"
-              aria-label="Buscar"
-              aria-describedby="search-addon"
-              [(ngModel)]="search2"
-              style="align-items: center;"
-            />
-            <span class="input-group-text border-0 sear" id="search-addon">
-              <mat-icon>search</mat-icon>
-            </span>
-          </div><br>
+
+          <br />
           <div class="row" *ngIf="this.editEnterprises == true">
             <div cdkDropListGroup>
               <!--OTRO DRAG-->
-              <div class="example-container ">
+              <div class="example-container">
                 <div
                   cdkDropList
                   [cdkDropListData]="listNumbers1"
                   class="example-list over"
                   (cdkDropListDropped)="drop($event)"
                 >
-                  <div class="example-box" *ngFor="let n of listNumbers1 | search: search2 " cdkDrag>
+                  <div
+                    class="example-box"
+                    *ngFor="let n of listNumbers1 | search: search2"
+                    cdkDrag
+                  >
                     {{ n.name }}
                   </div>
                 </div>
-                
-              </div> 
+              </div>
 
               <!--OTRO DRAG-->
               <div class="example-container">
@@ -350,15 +345,8 @@
                   [cdkDropListConnectedTo]="[ln1]"
                   class="example-list"
                   (cdkDropListDropped)="drop($event); validChangeEnterprise()"
-
                 >
-                  <div
-                    class="example-box"
-                    *ngFor="
-                      let n of empresas
-                    "
-                    cdkDrag
-                  >
+                  <div class="example-box" *ngFor="let n of empresas" cdkDrag>
                     {{ n.name }}
                   </div>
                 </div>
@@ -385,7 +373,6 @@
                     {{ n.name }}
                   </div>
                 </div>
-               
               </div>
 
               <!--OTRO DRAG-->
@@ -400,10 +387,7 @@
                   <div
                     cdkDragDisabled
                     class="example-box"
-                    *ngFor="
-                      let n of getUser.empresas
-
-                    "
+                    *ngFor="let n of getUser.empresas"
                     cdkDrag
                   >
                     {{ n.enterpriseName }}
@@ -424,7 +408,9 @@
           <div class="flex-container">
             <button
               (click)="putProfile(getUser.id)"
-              [disabled]="!name.valid || !email.valid || (changeForm && changeEnterprise)"
+              [disabled]="
+                !name.valid || !email.valid || (changeForm && changeEnterprise)
+              "
               type="button"
               class="btn btn-primary butt2"
             >
