@@ -40,4 +40,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       height: calc(100vh - (10rem ));
   }
 }
+.sear:hover{
+  background-color: rgb(172, 188, 235);
+  transition: background-color .5s;
+}
+
 

@@ -184,16 +184,23 @@ justify-content: space-between;
         -webkit-font-smoothing: antialiased;
       }
 
-      .example-container {
-        padding-left: 5%;
-        width: 350px;
-        margin: 0 25px 25px 0;
-        display: inline-block;
-        vertical-align: top;
-        height: 150px;
-        overflow: auto;
-        
+      @media  (min-width: 415px ) {
+        .example-container {
+            padding-left: 5%;
+            width: 350px;
+            margin: 0 25px 25px 0;
+            display: inline-block;
+            vertical-align: top;
+            height: 150px;
+            overflow: auto;
+            
+          }
       }
+      .rounded{
+        padding-left: 5%;
+      }
+
+   
       
       .example-list {
         border: solid 1px #ccc;

@@ -88,10 +88,6 @@ background-color: #12579C   ;
   background-color: #12579C   ;
 }
 
-.sear:hover{
-  background-color: rgb(51, 98, 226);
-  transition: background-color .5s;
-}
 
 .heed{
   position: absolute;

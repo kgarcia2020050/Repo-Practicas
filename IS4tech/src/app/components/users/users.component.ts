@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
   public p2: number = 1;
   public page: number = 0;
   public search: any;
+  public search2: any;
   public myProfile: Profile;
   public editProfile = false;
 
