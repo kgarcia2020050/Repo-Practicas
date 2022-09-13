@@ -25,10 +25,15 @@
           class="fa-solid fa-sort filt"></em>
       </div>
       <div class="containerEnterprises">
-        <div class="card" *ngFor="let enterprise of enterprises">
-          <div  class="card-body hoved">
-            {{ enterprise.name }}
+        <div class="card" *ngFor="let enterp of enterprises">
+          
+
+          <div class="card-body hoved" 
+           >
+            
+            {{ enterp.name }}
           </div>
+
         </div>
       </div>
       <div class="flex-container">
@@ -37,17 +42,44 @@
       </div>
     </div>
   </div>
+
   <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
+    <form #addForm="ngForm" class="padd">
+
     <div class="resp hei">
       <div class="card cardHei" >
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
+          <h5 class="card-title fs-1" style="padding: 5%;">Agregar Empresa</h5>
+          <p class="card-text">Agregue una empresa</p>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <mat-label > requerido</mat-label>
+            <input #name="ngModel" [(ngModel)]="postEnterprise.name" matInput placeholder="Nombre" name="nombre"
+              required="true" />
+          </mat-form-field>
+       
+          
+        </div><div>
+        <button
+          [disabled]="!addForm.form.valid"
+          type="button"
+          class="btn btn-primary butt"
+          type="button"
+          (click)="newEnterprise(addForm)"
+        >
+          Guardar
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary butt2"
+        >
+          Cancelar
+        </button>
       </div>
+      </div>
+      
   </div>   
-  </div>
-</div>
+ 
+  </form>
+   </div>
+

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Enterprise } from 'src/app/models/enterprise';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-enterprise',
@@ -16,12 +18,14 @@ export class EnterpriseComponent implements OnInit {
   public page: number = 0;
   public enterprises: Enterprise;
   public search: any;
+  public postEnterprise: Enterprise;
+
 
 
 
 
   constructor(private enterpriseService: EnterpriseService, private router: Router) {
-    this.getEnterprise = new Enterprise(0, '');
+    this.getEnterprise = new Enterprise(0, '',1);
 
   }
 
@@ -39,5 +43,32 @@ export class EnterpriseComponent implements OnInit {
       },
     });
   }
+
+  newEnterprise(addForm) {
+    this.enterpriseService.postEnterprise(this.postEnterprise).subscribe({
+      next: () => {
+        addForm.reset();
+        Swal.fire({
+          text: 'Empresa agregada exitosamente',
+          icon: 'success',
+        })
+      },
+      error: (error: any) => {
+        if (error.error.errors) {
+          Swal.fire({
+            icon: 'error',
+            text: error.error.errors[0].defaultMessage,
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            text: error.error.message,
+          });
+        }
+      },
+    });
+  }
+
+
 
 }
