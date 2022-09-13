@@ -1,0 +1,35 @@
+
+<div class="row layout">
+
+  <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 30rem">
+    <div>
+      <h1 class="title">Empresas</h1>
+      <br />
+
+      <!--Buscador-->
+
+      <div class="input-group" style="max-width: 25rem">
+        <input type="Buscar" class="form-control rounded" placeholder="Buscar" aria-label="Buscar"
+          aria-describedby="search-addon"  />
+        <span class="input-group-text border-0 sear" id="search-addon">
+          <mat-icon>search</mat-icon>
+        </span>
+      </div>
+      <br />
+    </div>
+    <div>
+      
+      <div class="containerEnterprises">
+        <div class="card" *ngFor="let enterprise of enterprises">
+          <div style="text-align: center" class="card-body hoved">
+            {{ enterprise.name }}
+          </div>
+        </div>
+      </div>
+      <div class="flex-container">
+        <em  class="fas fa-angle-double-left fa-2x " style="color: #12579c"></em>
+        <em  class="fas fa-angle-double-right fa-2x " style="color: #12579c"></em>
+      </div>
+    </div>
+  </div>
+</div>

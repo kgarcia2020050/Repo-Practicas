@@ -46,3 +46,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 
+.title{
+  padding: 3%;
+  font-size: 65px;
+  color: #2B638C;
+  font-family: 'Lato', sans-serif;
+
+}
+

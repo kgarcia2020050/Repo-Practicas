@@ -52,7 +52,7 @@
         <!--Titulos y nombres-->
 
         <p class="fs-1 coll">Agregar</p>
-        <mat-slide-toggle class="" [checked]="true" [disabled]="true">
+        <mat-slide-toggle class="slide" [checked]="true" [disabled]="true">
           <div>Activo</div>
         </mat-slide-toggle>
         <br />
@@ -68,7 +68,7 @@
 
         <div class="card-body border-primary">
           <blockquote class="blockquote mb-0">
-            <table class="table table-bordered tabod" aria-describedby="mydesc">
+            <table class="table" aria-describedby="mydesc">
               <th></th>
               <tbody>
                 <!--Opciones-->
@@ -124,7 +124,7 @@
         <div class="card-header coll">Operaciones</div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
-            <table class="table table-bordered" aria-describedby="mydesc">
+            <table class="table" aria-describedby="mydesc">
               <th></th>
               <tbody>
                 <!--Opciones-->
@@ -324,7 +324,9 @@
             </table>
           </blockquote>
         </div>
+
         <div class="flex-container">
+            
           <button (click)="putProfile(getProfile.id)" [disabled]="!addForm.form.valid || !getProfile.name || changeForm"
             type="button" class="btn btn-primary butt2">
             Guardar
@@ -334,6 +336,7 @@
             <mat-icon>note_add</mat-icon>
           </button>
         </div>
+       
       </form>
     </div>
   </div>

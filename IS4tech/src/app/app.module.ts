@@ -25,6 +25,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OpenEnterpriseComponent } from './components/open-enterprise/open-enterprise.component';
 import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterprise-dialog.component';
+import { EnterpriseComponent } from './components/enterprise/enterprise.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterp
     SearchPipe,
     OpenEnterpriseComponent,
     EnterpriseDialogComponent,
+    EnterpriseComponent,
   ],
   imports: [
     BrowserModule,
