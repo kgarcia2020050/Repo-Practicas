@@ -29,7 +29,7 @@ public class UserService {
     private final ProfilesService profilesService;
     private final UserEnterpriseRepository userEnterpriseRepository;
 
-    Pattern pat = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+    Pattern pat = Pattern.compile("^[_A-Za-z0-9\\+](\\.[A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     private static final String MESSAGE = "No se encuentra al usuario con el id ";
 
 
