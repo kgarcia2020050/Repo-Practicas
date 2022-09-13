@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class EnterpriseService {
   constructor(public http: HttpClient) {}
 
-  getEnterprises(
+  getEnterprisesPagination(
     page: number,
     size: number,
     order: string,
@@ -18,7 +18,7 @@ export class EnterpriseService {
   ): Observable<any> {
     return this.http.get(
       url +
-        'enterprise/all?page=' +
+        'enterprise/allPagination?page=' +
         page +
         '&size=' +
         size +
@@ -27,6 +27,10 @@ export class EnterpriseService {
         '&asc=' +
         asc
     );
+  }
+
+  getEnterprises(): Observable<any> {
+    return this.http.get(url + 'enterprise/all');
   }
 
   postEnterprise(model: Enterprise): Observable<any> {

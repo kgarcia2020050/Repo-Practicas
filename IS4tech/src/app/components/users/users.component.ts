@@ -113,7 +113,7 @@ export class UsersComponent implements OnInit {
 
   getEnterprises() {
     this.enterpriseService
-      .getEnterprises(this.pageEnterprise, 4, 'name', true)
+      .getEnterprises()
       .subscribe({
         next: (response: any) => {
           this.listNumbers1 = response;

@@ -20,7 +20,7 @@ export class EnterpriseComponent implements OnInit {
 
 
 
-  constructor(private enterpriseService: EnterpriseService, private router: Router) { 
+  constructor(private enterpriseService: EnterpriseService, private router: Router) {
     this.getEnterprise = new Enterprise(0, '');
 
   }
@@ -30,7 +30,7 @@ export class EnterpriseComponent implements OnInit {
   }
 
   getEnterprises() {
-    this.enterpriseService.getEnterprises(this.page, 6, 'name', this.asc).subscribe({
+    this.enterpriseService.getEnterprisesPagination(this.page, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
         this.enterprises = response.content;
         this.isFirst = response.first;
