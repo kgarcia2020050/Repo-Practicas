@@ -50,6 +50,11 @@ public class EntrerprisesService {
         return enterpriseRepository.findAll();
     }
 
+
+    public Page<Enterprises> findAllPagination(Pageable pageable) {
+        return enterpriseRepository.findAll(pageable);
+    }
+
     public void verification(Integer id, EnterpriseDTO enterpriseDTO) {
         Enterprises entereprise = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
         Byte status = (enterpriseDTO.isStatus() ? (byte) 1 : (byte) 0);

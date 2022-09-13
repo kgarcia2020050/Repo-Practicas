@@ -28,6 +28,7 @@ export class UsersComponent implements OnInit {
   public getUser: User;
   public profiles: Profile;
   public asc: boolean = true;
+  public totalPages: number;
   public isFirst: boolean;
   public isLast: boolean;
   public p: number = 1;
@@ -78,6 +79,7 @@ export class UsersComponent implements OnInit {
       next: (response: any) => {
         this.users = response.content;
         this.isFirst = response.first;
+        this.totalPages = response.totalPages;
         this.isLast = response.last;
       },
     });
@@ -219,7 +221,7 @@ export class UsersComponent implements OnInit {
             error.error.message ==
             'Te has asignado la misma empresa mas de una vez.'
           ) {
-            this.pruebaFuncion(id)
+            this.pruebaFuncion(id);
             this.getUser.empresas = this.prueba;
           }
         }
@@ -294,6 +296,7 @@ export class UsersComponent implements OnInit {
         addForm.reset();
         this.getUsers();
         this.postUser.empresas = [];
+        this.empresas = [];
         Swal.fire({
           text: 'Usuario agregado exitosamente',
           icon: 'success',
@@ -361,6 +364,4 @@ export class UsersComponent implements OnInit {
       this.changeEnterprise = true;
     }
   }
-
-
 }

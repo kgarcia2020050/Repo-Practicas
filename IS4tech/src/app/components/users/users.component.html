@@ -22,9 +22,9 @@
             aria-describedby="search-addon"
             [(ngModel)]="search"
           />
-          <span class="input-group-text border-0 sear" id="search-addon"> 
+          <span class="input-group-text border-0 sear" id="search-addon">
             <mat-icon>search</mat-icon>
-          
+
           </span>
         </div>
         <br />
@@ -67,12 +67,14 @@
         <em
           class="back bacc"
           (click)="goBack()"
+          *ngIf="this.page > 0"
           class="fas fa-angle-double-left fa-2x"
           style="color: #12579c"
         ></em>
         <em
           class="ahead bacc"
           (click)="goAhead()"
+          *ngIf="this.totalPages > 0 && !isLast"
           class="fas fa-angle-double-right fa-2x"
           style="color: #12579c"
         ></em>

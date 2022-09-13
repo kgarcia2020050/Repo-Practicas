@@ -38,6 +38,18 @@ public class EnterprisesController {
 
     }
 
+    @GetMapping("/allPagination")
+    public Page<Enterprises> findAllPagination(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "6") int size,
+                                               @RequestParam(defaultValue = "name") String order,
+                                               @RequestParam(defaultValue = "true") boolean asc) {
+        Page<Enterprises> enterprises = enterpriseServices.findAllPagination(PageRequest.of(page, size, Sort.by(order)));
+        if (!asc) {
+            enterprises = enterpriseServices.findAllPagination(PageRequest.of(page, size, Sort.by(order).descending()));
+        }
+        return enterprises;
+    }
+
     @PutMapping("/edit/{id}")
     public void editEnterprise(@PathVariable("id") Integer id, @RequestBody @Valid EnterpriseDTO enterpriseDTO) {
         enterpriseServices.verification(id, enterpriseDTO);
