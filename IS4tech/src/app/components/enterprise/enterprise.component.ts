@@ -32,6 +32,7 @@ export class EnterpriseComponent implements OnInit {
   getEnterprises() {
     this.enterpriseService.getEnterprisesPagination(this.page, 6, 'name', this.asc).subscribe({
       next: (response: any) => {
+        console.log(response)
         this.enterprises = response.content;
         this.isFirst = response.first;
         this.isLast = response.last;

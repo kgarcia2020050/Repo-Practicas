@@ -1,13 +1,10 @@
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-  crossorigin="anonymous"
-></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <div class="row layout">
   <!--Area de funcionalidad-->
 
-  <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 30rem">
+  <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 27rem">
     <div>
       <h1 class="title">Perfiles</h1>
       <br />
@@ -15,14 +12,8 @@
       <!--Buscador-->
 
       <div class="input-group" style="max-width: 25rem">
-        <input
-          type="search"
-          class="form-control rounded"
-          placeholder="Buscar"
-          aria-label="Buscar"
-          aria-describedby="search-addon"
-          [(ngModel)]="search"
-        />
+        <input type="search" class="form-control rounded" placeholder="Buscar" aria-label="Buscar"
+          aria-describedby="search-addon" [(ngModel)]="search" />
         <span class="input-group-text border-0 sear" id="search-addon">
           <mat-icon>search</mat-icon>
         </span>
@@ -31,511 +22,323 @@
     </div>
     <div>
       <div>
-        <em
-          *ngIf="asc == false"
-          matTooltip="Ordenar de manera ascendente."
-          (click)="filter()"
-          class="fa-solid fa-sort filt"
-        ></em>
-        <em
-          *ngIf="asc == true"
-          matTooltip="Ordenar de manera descendente."
-          (click)="filter()"
-          class="fa-solid fa-sort filt"
-        ></em>
+        <em *ngIf="asc == false" matTooltip="Ordenar de manera ascendente." (click)="filter()"
+          class="fa-solid fa-sort filt"></em>
+        <em *ngIf="asc == true" matTooltip="Ordenar de manera descendente." (click)="filter()"
+          class="fa-solid fa-sort filt"></em>
       </div>
       <div class="containerProfiles">
         <div class="card" *ngFor="let profile of profiles | search: search">
-          <div
-            class="card-body hoved"
-            (click)="findById(profile.id)"
-            [ngClass]="{ itemSelected: profile?.id === itemSelected }"
-          >
-            <em
-              *ngIf="profile.status == 1"
-              class="fa-solid fa-circle text-success"
-            ></em>
-            <em
-              *ngIf="profile.status == 0"
-              class="fa-solid fa-circle text-secondary"
-            ></em>
+
+          <div class="card-body hoved" (click)="findById(profile.id)"
+            [ngClass]="{'itemSelected': profile?.id === itemSelected}">
+            <em *ngIf="profile.status == 1" class="fa-solid fa-circle text-success"></em>
+            <em *ngIf="profile.status == 0" class="fa-solid fa-circle text-secondary"></em>
             {{ profile.name }}
           </div>
         </div>
       </div>
       <div class="flex-container">
-        <em
-          (click)="goBack()"
-          *ngIf="this.page > 0"
-          class="fas fa-angle-double-left fa-2x"
-          style="color: #12579c"
-        ></em>
-        <em
-          (click)="goAhead()"
-          *ngIf="this.totalPages > 0 && !isLast"
-          class="fas fa-angle-double-right fa-2x"
-          style="color: #12579c"
-        ></em>
+        <em (click)="goBack()" class="fas fa-angle-double-left fa-2x " style="color: #12579c"></em>
+        <em (click)="goAhead()" class="fas fa-angle-double-right fa-2x " style="color: #12579c"></em>
       </div>
     </div>
   </div>
 
-  <div
-    class="col-sm p-3 min-vh-100 dim2"
-    style="max-width: 47rem"
-    *ngIf="addProfile == true"
-  >
+  <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem" *ngIf="addProfile == true">
     <div class="resp">
-      <div class="card border-primary">
-        <form class="card-body" #addForm="ngForm">
-          <!--Titulos y nombres-->
+    <div class="card border-primary ">
+      <form class="card-body" #addForm="ngForm">
+        <!--Titulos y nombres-->
 
-          <p class="fs-1 coll">Agregar</p>
-          <mat-slide-toggle class="slide" [checked]="true" [disabled]="true">
-            <div>Activo</div>
+        <p class="fs-1 coll">Agregar</p>
+        <mat-slide-toggle class="slide" [checked]="true" [disabled]="true">
+          <div>Activo</div>
+        </mat-slide-toggle>
+        <br />
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <mat-label *ngIf="!name.valid && name.touched"> requerido</mat-label>
+          <input #name="ngModel" [(ngModel)]="postProfile.name" matInput placeholder="Nombre" name="nombre"
+            required="true" />
+        </mat-form-field>
+        <br />
+        <p class="fs-2 coll">Accesos</p>
+        <div class="card-header coll">Configuración</div>
+
+        <div class="card-body border-primary">
+          <blockquote class="blockquote mb-0">
+            <table class="table" aria-describedby="mydesc">
+              <th></th>
+              <tbody>
+                <!--Opciones-->
+
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 1</label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 2</label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 3</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 4</label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 5</label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 6</label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </blockquote>
+        </div>
+        <div class="card-header coll">Operaciones</div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <table class="table" aria-describedby="mydesc">
+              <th></th>
+              <tbody>
+                <!--Opciones-->
+
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 1</label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 2</label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 3</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 4</label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 5</label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 6</label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </blockquote>
+        </div>
+        <div class="flex-container">
+          <button [disabled]="!addForm.form.valid" type="button" (click)="newProfile(addForm)"
+            class="btn btn-primary butt2">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+
+  <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem" *ngIf="addProfile == false">
+    <div class="resp">
+    <div class="card border-primary " >
+      <form class="card-body" #addForm="ngForm">
+        <!--Titulos y nombres-->
+
+        <div>
+          <p class="fs-1 colla">Editar</p>
+          <mat-slide-toggle name="status" #status="ngModel" [(ngModel)]="getProfile.status" class="slide"
+            *ngIf="getProfile.name" (change)="validChangeForm()">
+            <div *ngIf="getProfile.status == 1">Activo</div>
+            <div *ngIf="getProfile.status == 0">Inactivo</div>
           </mat-slide-toggle>
-          <br />
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <mat-label *ngIf="!name.valid && name.touched">
-              requerido</mat-label
-            >
-            <input
-              #name="ngModel"
-              [(ngModel)]="postProfile.name"
-              matInput
-              placeholder="Nombre"
-              name="nombre"
-              required="true"
-            />
-          </mat-form-field>
-          <br />
-          <p class="fs-2 coll">Accesos</p>
-          <div class="card-header coll">Configuración</div>
+        </div>
+        <br />
+        <mat-form-field class="matb" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <mat-label> requerido</mat-label>
+          <input [disabled]="!getProfile.name" matInput placeholder="Nombre" name="name" #name="ngModel"
+            [(ngModel)]="getProfile.name" required="true" (change)="validChangeForm()" />
+        </mat-form-field>
+        <br />
+        <p class="fs-2 coll">Accesos</p>
+        <div class="card-header coll">Configuración</div>
 
-          <div class="card-body border-primary">
-            <blockquote class="blockquote mb-0">
-              <table class="table" aria-describedby="mydesc">
-                <th></th>
-                <tbody>
-                  <!--Opciones-->
+        <div class="card-body border-primary">
+          <blockquote class="blockquote mb-0">
+            <table class="table" aria-describedby="mydesc">
+              <th></th>
+              <tbody>
+                <!--Opciones-->
 
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 1</label>
-                      </div>
-                    </td>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 1</label>
+                    </div>
+                  </td>
 
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 2</label>
-                      </div>
-                    </td>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 2</label>
+                    </div>
+                  </td>
 
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 3</label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 4</label>
-                      </div>
-                    </td>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 3</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 4</label>
+                    </div>
+                  </td>
 
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 5</label>
-                      </div>
-                    </td>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 5</label>
+                    </div>
+                  </td>
 
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 6</label>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </blockquote>
-          </div>
-          <div class="card-header coll">Operaciones</div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <table class="table" aria-describedby="mydesc">
-                <th></th>
-                <tbody>
-                  <!--Opciones-->
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 6</label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </blockquote>
+        </div>
+        <div class="card-header coll">Operaciones</div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <table class="table" aria-describedby="mydesc">
+              <th></th>
+              <tbody>
+                <!--Opciones-->
 
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 1</label>
-                      </div>
-                    </td>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 1</label>
+                    </div>
+                  </td>
 
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 2</label>
-                      </div>
-                    </td>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 2</label>
+                    </div>
+                  </td>
 
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 3</label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 4</label>
-                      </div>
-                    </td>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 3</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 4</label>
+                    </div>
+                  </td>
 
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 5</label>
-                      </div>
-                    </td>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 5</label>
+                    </div>
+                  </td>
 
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 6</label>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </blockquote>
-          </div>
-          <div class="flex-container">
-            <button
-              [disabled]="!addForm.form.valid"
-              type="button"
-              (click)="newProfile(addForm)"
-              class="btn btn-primary butt2"
-            >
-              Guardar
-            </button>
-          </div>
-        </form>
-      </div>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input type="checkbox" class="form-check-input" value="" id="check1" />
+                      <label for="check1" class="form-check-label"> 6</label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </blockquote>
+        </div>
+
+        <div class="flex-container">
+            
+          <button (click)="putProfile(getProfile.id)" [disabled]="!addForm.form.valid || !getProfile.name || changeForm"
+            type="button" class="btn btn-primary butt2">
+            Guardar
+          </button>
+
+          <button mat-mini-fab (click)="openDialog()" color="black" type="button" class="btn btn-primary butt">
+            <mat-icon>note_add</mat-icon>
+          </button>
+        </div>
+       
+      </form>
     </div>
   </div>
-
-  <div
-    class="col-sm p-3 min-vh-100 dim2"
-    style="max-width: 47rem"
-    *ngIf="addProfile == false"
-  >
-    <div class="resp">
-      <div class="card border-primary">
-        <form class="card-body" #addForm="ngForm">
-          <!--Titulos y nombres-->
-
-          <div>
-            <p class="fs-1 colla">Editar</p>
-            <mat-slide-toggle
-              name="status"
-              #status="ngModel"
-              [(ngModel)]="getProfile.status"
-              class="slide"
-              *ngIf="getProfile.name"
-              (change)="validChangeForm()"
-            >
-              <div *ngIf="getProfile.status == 1">Activo</div>
-              <div *ngIf="getProfile.status == 0">Inactivo</div>
-            </mat-slide-toggle>
-          </div>
-          <br />
-          <mat-form-field class="matb" appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <mat-label> requerido</mat-label>
-            <input
-              [disabled]="!getProfile.name"
-              matInput
-              placeholder="Nombre"
-              name="name"
-              #name="ngModel"
-              [(ngModel)]="getProfile.name"
-              required="true"
-              (change)="validChangeForm()"
-            />
-          </mat-form-field>
-          <br />
-          <p class="fs-2 coll">Accesos</p>
-          <div class="card-header coll">Configuración</div>
-
-          <div class="card-body border-primary">
-            <blockquote class="blockquote mb-0">
-              <table class="table" aria-describedby="mydesc">
-                <th></th>
-                <tbody>
-                  <!--Opciones-->
-
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 1</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 2</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 3</label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 4</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 5</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 6</label>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </blockquote>
-          </div>
-          <div class="card-header coll">Operaciones</div>
-          <div class="card-body">
-            <blockquote class="blockquote mb-0">
-              <table class="table" aria-describedby="mydesc">
-                <th></th>
-                <tbody>
-                  <!--Opciones-->
-
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 1</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 2</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 3</label>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 4</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 5</label>
-                      </div>
-                    </td>
-
-                    <td>
-                      <div class="form-check form-switch">
-                        <input
-                          type="checkbox"
-                          class="form-check-input"
-                          value=""
-                          id="check1"
-                        />
-                        <label for="check1" class="form-check-label"> 6</label>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </blockquote>
-          </div>
-
-          <div class="flex-container">
-            <button
-              (click)="putProfile(getProfile.id)"
-              [disabled]="!addForm.form.valid || !getProfile.name || changeForm"
-              type="button"
-              class="btn btn-primary butt2"
-            >
-              Guardar
-            </button>
-
-            <button
-              mat-mini-fab
-              (click)="openDialog()"
-              color="black"
-              type="button"
-              class="btn btn-primary butt"
-            >
-              <mat-icon>note_add</mat-icon>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
   </div>
 </div>

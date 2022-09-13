@@ -22,8 +22,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .layout{
     overflow-y: auto;
     height: 100vh;
-  }
+}
   .containerProfiles{
+    height: calc(100vh - (74px + 40px + 20px + 28px + 6rem));
+}
+  .containerEnterprises{
     height: calc(100vh - (74px + 40px + 20px + 28px + 6rem));
 }
 
