@@ -74,5 +74,10 @@
                                  referencedColumnNames="ID"/>
     </changeSet>
 
+    <changeSet id="sixthChangeSet" author="Kenneth Garcia">
+        <addColumn tableName="ENTERPRISES">
+            <column name="STATUS" type="tinyint(1)" remarks="STATUS_COLUMN"/>
+        </addColumn>
+    </changeSet>
 
 </databaseChangeLog>

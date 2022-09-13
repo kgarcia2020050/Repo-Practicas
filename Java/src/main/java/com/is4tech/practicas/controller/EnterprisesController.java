@@ -38,9 +38,10 @@ public class EnterprisesController {
 
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable("id") Integer id) {
-        enterpriseServices.deleteById(id);
+    @PutMapping("/edit/{id}")
+    public void editEnterprise(@PathVariable("id") Integer id, @RequestBody @Valid EnterpriseDTO enterpriseDTO) {
+        enterpriseServices.verification(id, enterpriseDTO);
     }
+
 
 }

@@ -2,6 +2,8 @@ package com.is4tech.practicas.service;
 
 import com.is4tech.practicas.dto.EnterpriseDTO;
 import com.is4tech.practicas.exception.ExistingRegisterException;
+import com.is4tech.practicas.exception.InformationNotChangedException;
+import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperEnterprises;
 import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.repository.EnterpriseRepository;
@@ -22,6 +24,8 @@ public class EntrerprisesService {
     private final MapperEnterprises mapperEnterprises;
 
     private final UserEnterpriseRepository userEnterpriseRepository;
+
+    private static final String MESSAGE = "No se encuentra al perfil con el id ";
 
     public EntrerprisesService(EnterpriseRepository enterpriseRepository, MapperEnterprises mapperEnterprises, UserEnterpriseRepository userEnterpriseRepository) {
         this.enterpriseRepository = enterpriseRepository;
@@ -46,8 +50,30 @@ public class EntrerprisesService {
         return enterpriseRepository.findAll();
     }
 
-    public void deleteById(Integer id) {
-        userEnterpriseRepository.deleteById(id);
+    public void verification(Integer id, EnterpriseDTO enterpriseDTO) {
+        Enterprises entereprise = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
+        Byte status = (enterpriseDTO.isStatus() ? (byte) 1 : (byte) 0);
+        if (enterpriseDTO.getName().equals(entereprise.getName()) && entereprise.getStatus().equals(status)) {
+            throw new InformationNotChangedException("No has cambiado la información de la empresa.");
+        } else if (entereprise.getName().equals(enterpriseDTO.getName())) {
+            editEnterprise(id, enterpriseDTO);
+        } else if (findByName(enterpriseDTO.getName()) != null && findByName(enterpriseDTO.getName().trim()) != null && findByName(enterpriseDTO.getName().toUpperCase()) != null && findByName(enterpriseDTO.getName().toLowerCase()) != null) {
+            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
+        } else {
+            editEnterprise(id, enterpriseDTO);
+        }
     }
+
+    public void editEnterprise(Integer id, EnterpriseDTO enterpriseDTO) {
+        Enterprises model = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
+        model.setName(enterpriseDTO.getName());
+        if (enterpriseDTO.isStatus()) {
+            model.setStatus((byte) 1);
+        } else {
+            model.setStatus((byte) 0);
+        }
+        enterpriseRepository.save(model);
+    }
+
 
 }

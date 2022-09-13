@@ -13,6 +13,9 @@ public class Enterprises {
     @Basic
     @Column(name = "NAME", nullable = true, length = 40)
     private String name;
+    @Basic
+    @Column(name = "STATUS", nullable = true)
+    private Byte status;
 
     public int getId() {
         return id;
@@ -30,7 +33,6 @@ public class Enterprises {
         this.name = name;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,5 +44,13 @@ public class Enterprises {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName());
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 }
