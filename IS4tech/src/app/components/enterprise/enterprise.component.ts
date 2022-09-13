@@ -4,11 +4,10 @@ import { Enterprise } from 'src/app/models/enterprise';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-enterprise',
   templateUrl: './enterprise.component.html',
-  styleUrls: ['./enterprise.component.css']
+  styleUrls: ['./enterprise.component.css'],
 })
 export class EnterpriseComponent implements OnInit {
   public getEnterprise: Enterprise;
@@ -16,17 +15,16 @@ export class EnterpriseComponent implements OnInit {
   public isFirst: boolean;
   public isLast: boolean;
   public page: number = 0;
+  public totalPages: number;
   public enterprises: Enterprise;
   public search: any;
   public postEnterprise: Enterprise;
 
-
-
-
-
-  constructor(private enterpriseService: EnterpriseService, private router: Router) {
-    this.getEnterprise = new Enterprise(0, '',1);
-
+  constructor(
+    private enterpriseService: EnterpriseService,
+    private router: Router
+  ) {
+    this.postEnterprise = new Enterprise(0, '', 1);
   }
 
   ngOnInit(): void {
@@ -34,14 +32,31 @@ export class EnterpriseComponent implements OnInit {
   }
 
   getEnterprises() {
-    this.enterpriseService.getEnterprisesPagination(this.page, 6, 'name', this.asc).subscribe({
-      next: (response: any) => {
-        console.log(response)
-        this.enterprises = response.content;
-        this.isFirst = response.first;
-        this.isLast = response.last;
-      },
-    });
+    this.enterpriseService
+      .getEnterprisesPagination(this.page, 6, 'name', this.asc)
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.enterprises = response.content;
+          this.isFirst = response.first;
+          this.isLast = response.last;
+          this.totalPages = response.totalPages;
+        },
+      });
+  }
+
+  goBack() {
+    if (!this.isFirst) {
+      this.page--;
+      this.getEnterprises();
+    }
+  }
+
+  goAhead() {
+    if (!this.isLast) {
+      this.page++;
+      this.getEnterprises();
+    }
   }
 
   newEnterprise(addForm) {
@@ -51,7 +66,7 @@ export class EnterpriseComponent implements OnInit {
         Swal.fire({
           text: 'Empresa agregada exitosamente',
           icon: 'success',
-        })
+        });
       },
       error: (error: any) => {
         if (error.error.errors) {
@@ -68,7 +83,4 @@ export class EnterpriseComponent implements OnInit {
       },
     });
   }
-
-
-
 }

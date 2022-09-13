@@ -1,6 +1,4 @@
-
 <div class="row layout">
-
   <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 27rem">
     <div>
       <h1 class="title">Empresas</h1>
@@ -9,8 +7,13 @@
       <!--Buscador-->
 
       <div class="input-group" style="max-width: 25rem">
-        <input type="search" class="form-control rounded" placeholder="Buscar" aria-label="Buscar"
-          aria-describedby="search-addon"  />
+        <input
+          type="search"
+          class="form-control rounded"
+          placeholder="Buscar"
+          aria-label="Buscar"
+          aria-describedby="search-addon"
+        />
         <span class="input-group-text border-0 sear" id="search-addon">
           <mat-icon>search</mat-icon>
         </span>
@@ -19,67 +22,87 @@
     </div>
     <div>
       <div>
-        <em *ngIf="asc == false" matTooltip="Ordenar de manera ascendente." (click)="filter()"
-          class="fa-solid fa-sort filt"></em>
-        <em *ngIf="asc == true" matTooltip="Ordenar de manera descendente." (click)="filter()"
-          class="fa-solid fa-sort filt"></em>
+        <em
+          *ngIf="asc == false"
+          matTooltip="Ordenar de manera ascendente."
+          (click)="filter()"
+          class="fa-solid fa-sort filt"
+        ></em>
+        <em
+          *ngIf="asc == true"
+          matTooltip="Ordenar de manera descendente."
+          (click)="filter()"
+          class="fa-solid fa-sort filt"
+        ></em>
       </div>
       <div class="containerEnterprises">
         <div class="card" *ngFor="let enterp of enterprises">
-          
-
-          <div class="card-body hoved" 
-           >
-            
+          <div class="card-body hoved">
+            <em
+              *ngIf="enterp.status == 1"
+              class="fa-solid fa-circle text-success"
+            ></em>
+            <em
+              *ngIf="enterp.status == 0"
+              class="fa-solid fa-circle text-secondary"
+            ></em>
             {{ enterp.name }}
           </div>
-
         </div>
       </div>
       <div class="flex-container">
-        <em  class="fas fa-angle-double-left fa-2x " style="color: #12579c"></em>
-        <em  class="fas fa-angle-double-right fa-2x " style="color: #12579c"></em>
+        <em
+          (click)="goBack()"
+          *ngIf="this.page > 0"
+          class="fas fa-angle-double-left fa-2x"
+          style="color: #12579c"
+        ></em>
+        <em
+          (click)="goAhead()"
+          *ngIf="this.totalPages > 0 && !isLast"
+          class="fas fa-angle-double-right fa-2x"
+          style="color: #12579c"
+        ></em>
       </div>
     </div>
   </div>
 
   <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
     <form #addForm="ngForm" class="padd">
-
-    <div class="resp hei">
-      <div class="card cardHei" >
-        <div class="card-body">
-          <h5 class="card-title fs-1" style="padding: 5%;">Agregar Empresa</h5>
-          <p class="card-text">Agregue una empresa</p>
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <mat-label > requerido</mat-label>
-            <input #name="ngModel" [(ngModel)]="postEnterprise.name" matInput placeholder="Nombre" name="nombre"
-              required="true" />
-          </mat-form-field>
-       
-          
-        </div><div>
-        <button
-          [disabled]="!addForm.form.valid"
-          type="button"
-          class="btn btn-primary butt"
-          type="button"
-          (click)="newEnterprise(addForm)"
-        >
-          Guardar
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary butt2"
-        >
-          Cancelar
-        </button>
+      <div class="resp hei">
+        <div class="card cardHei">
+          <div class="card-body">
+            <h5 class="card-title fs-1" style="padding: 5%">Agregar Empresa</h5>
+            <p class="card-text">Agregue una empresa</p>
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <mat-label> requerido</mat-label>
+              <input
+                #name="ngModel"
+                [(ngModel)]="postEnterprise.name"
+                matInput
+                placeholder="Nombre"
+                name="nombre"
+                required="true"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <button
+              [disabled]="!addForm.form.valid"
+              type="button"
+              class="btn btn-primary butt"
+              type="button"
+              (click)="newEnterprise(addForm)"
+            >
+              Guardar
+            </button>
+            <button type="button" class="btn btn-primary butt2">
+              Cancelar
+            </button>
+          </div>
+        </div>
       </div>
-      </div>
-      
-  </div>   
- 
-  </form>
-   </div>
-
+    </form>
+  </div>
+</div>

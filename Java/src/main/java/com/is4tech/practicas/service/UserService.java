@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Service
@@ -27,6 +29,7 @@ public class UserService {
     private final ProfilesService profilesService;
     private final UserEnterpriseRepository userEnterpriseRepository;
 
+    Pattern pat = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
     private static final String MESSAGE = "No se encuentra al usuario con el id ";
 
 
@@ -73,21 +76,27 @@ public class UserService {
     }
 
     public void verification(Integer id, UserDTO userDTO) {
+        Matcher mat = pat.matcher(userDTO.getEmail());
         UserDTO user = findById(id);
         if (user.getName().equals(userDTO.getName())) {
             editUser(id, userDTO);
         } else if (findByName(userDTO.getName()) != null || findByName(userDTO.getName().trim()) != null || findByName(userDTO.getName().toLowerCase()) != null || findByName(userDTO.getName().toUpperCase()) != null) {
             throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
+        } else if (!mat.find()) {
+            throw new ExistingRegisterException("El email ingresado no es valido.");
         } else {
             editUser(id, userDTO);
         }
     }
 
     public void saveUser(UserDTO userdto) {
+        Matcher mat = pat.matcher(userdto.getEmail());
         if (findByName(userdto.getName()) != null || findByName(userdto.getName().trim()) != null || findByName(userdto.getName().toLowerCase()) != null || findByName(userdto.getName().toUpperCase()) != null) {
             throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
         } else if (userdto.getProfile() == 0) {
             throw new EmptyProfileException("Debes asignarte un perfil.");
+        } else if (!mat.find()) {
+            throw new ExistingRegisterException("El email ingresado no es valido.");
         } else {
             Users bo = mapper.mapeo(userdto);
             bo = this.usersRepository.save(bo);
