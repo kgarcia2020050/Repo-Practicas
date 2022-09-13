@@ -7,13 +7,13 @@
 <div>
   <div class="row layout">
     <!--Area de funcionalidad-->
-    <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 25rem">
+    <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 27rem">
       <div>
         <h1 class="title">Usuarios</h1>
         <br />
 
         <!--Buscador-->
-        <div class="input-group rounded" style="max-width: 20rem">
+        <div class="input-group rounded" style="max-width: 25rem">
           <input
             type="search"
             class="form-control rounded"
@@ -24,7 +24,6 @@
           />
           <span class="input-group-text border-0 sear" id="search-addon">
             <mat-icon>search</mat-icon>
-
           </span>
         </div>
         <br />
@@ -271,11 +270,12 @@
               <div class="col-sm-6">
                 <div class="col-sm-6 fort" style="float: left">
                   <mat-form-field
-                    appearance="outline"
+                    appearance="fill"
                     *ngIf="this.editProfile == false"
                   >
                     <mat-label>Mi perfil</mat-label>
                     <select
+                      (dblclick)="cambiarPerfil()"
                       matNativeControl
                       name="profile"
                       #profile="ngModel"
@@ -425,14 +425,6 @@
               class="btn btn-primary botdrag"
             >
               Agregar Empresa
-            </button>
-            <button
-              (click)="cambiarPerfil()"
-              [disabled]="!name.valid || !email.valid"
-              type="button"
-              class="btn btn-primary butt3"
-            >
-              Cambiar perfil
             </button>
             <button
               (click)="asignarEmpresas()"
