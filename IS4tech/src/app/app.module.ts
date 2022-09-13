@@ -26,6 +26,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { OpenEnterpriseComponent } from './components/open-enterprise/open-enterprise.component';
 import { EnterpriseDialogComponent } from './components/enterprise-dialog/enterprise-dialog.component';
 import { EnterpriseComponent } from './components/enterprise/enterprise.component';
+import {MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import { EnterpriseComponent } from './components/enterprise/enterprise.componen
     MatFormFieldModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

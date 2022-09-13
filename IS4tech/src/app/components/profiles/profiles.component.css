@@ -114,6 +114,13 @@ position: absolute;
 left: 60%;
 }
 
+@media  (min-width: 415px ) {
+  .cardHei{
+    height: calc(100vh - (2px + 3px + 3px  + 2.5rem));
+  }
+}
+
+
 .mat-form-field {
   width: 50%;
 }

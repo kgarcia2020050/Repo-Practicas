@@ -18,7 +18,12 @@
       <br />
     </div>
     <div>
-      
+      <div>
+        <em *ngIf="asc == false" matTooltip="Ordenar de manera ascendente." (click)="filter()"
+          class="fa-solid fa-sort filt"></em>
+        <em *ngIf="asc == true" matTooltip="Ordenar de manera descendente." (click)="filter()"
+          class="fa-solid fa-sort filt"></em>
+      </div>
       <div class="containerEnterprises">
         <div class="card" *ngFor="let enterprise of enterprises">
           <div  class="card-body hoved">
@@ -31,5 +36,18 @@
         <em  class="fas fa-angle-double-right fa-2x " style="color: #12579c"></em>
       </div>
     </div>
+  </div>
+  <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
+    <div class="resp hei">
+      <div class="card cardHei" >
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+  </div>   
   </div>
 </div>
