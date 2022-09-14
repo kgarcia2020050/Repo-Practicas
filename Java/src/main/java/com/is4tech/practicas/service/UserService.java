@@ -77,7 +77,7 @@ public class UserService {
         if (!userDTO.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
             throw new ExistingRegisterException("El email ingresado no es valido.");
         }else if(!userDTO.getName().matches("^[A-Za-z]$")){
-            throw new EmptyProfileException("El nombre no puede llevar caracteres especiales");
+            throw new EmptyProfileException("El nombre no puede contener caracteres especiales");
         }else if (user.getName().equals(userDTO.getName())) {
             editUser(id, userDTO);
         } else if (findByName(userDTO.getName()) != null || findByName(userDTO.getName().trim()) != null || findByName(userDTO.getName().toLowerCase()) != null || findByName(userDTO.getName().toUpperCase()) != null) {
@@ -91,7 +91,7 @@ public class UserService {
         if (findByName(userdto.getName()) != null || findByName(userdto.getName().trim()) != null || findByName(userdto.getName().toLowerCase()) != null || findByName(userdto.getName().toUpperCase()) != null) {
             throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
         }else if(!userdto.getName().matches("^[A-Za-z]$")){
-            throw new EmptyProfileException("El nombre no puede llevar caracteres especiales");
+            throw new EmptyProfileException("El nombre no puede contener caracteres especiales");
         }else if (userdto.getProfile() == 0) {
             throw new EmptyProfileException("Debes asignarte un perfil.");
         } else if (!userdto.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {

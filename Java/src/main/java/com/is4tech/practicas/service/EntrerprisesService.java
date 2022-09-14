@@ -1,6 +1,7 @@
 package com.is4tech.practicas.service;
 
 import com.is4tech.practicas.dto.EnterpriseDTO;
+import com.is4tech.practicas.exception.EmptyProfileException;
 import com.is4tech.practicas.exception.ExistingRegisterException;
 import com.is4tech.practicas.exception.InformationNotChangedException;
 import com.is4tech.practicas.exception.NotFoundException;
@@ -44,7 +45,9 @@ public class EntrerprisesService {
     public void save(EnterpriseDTO enterprisesModeDto) {
         if (findByName(enterprisesModeDto.getName()) != null || findByName(enterprisesModeDto.getName().trim()) != null || findByName(enterprisesModeDto.getName().toUpperCase()) != null || findByName(enterprisesModeDto.getName().toLowerCase()) != null) {
             throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-        } else {
+        }else if (!enterprisesModeDto.getName().matches("^[A-Za-z]$")){
+            throw new ExistingRegisterException("El nombre de la empresa no puede contener caracteres especiales")
+;        }else {
             Enterprises model = mapperEnterprises.mapeo(enterprisesModeDto);
             enterpriseRepository.save(model);
         }
@@ -68,7 +71,9 @@ public class EntrerprisesService {
             editEnterprise(id, enterpriseDTO);
         } else if (findByName(enterpriseDTO.getName()) != null && findByName(enterpriseDTO.getName().trim()) != null && findByName(enterpriseDTO.getName().toUpperCase()) != null && findByName(enterpriseDTO.getName().toLowerCase()) != null) {
             throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-        } else {
+        }else if(!enterpriseDTO.getName().matches("^[A-Za-z]$")){
+            throw new ExistingRegisterException("El nombre de la empresa no puede contener caracteres especiales");
+        }else {
             editEnterprise(id, enterpriseDTO);
         }
     }
