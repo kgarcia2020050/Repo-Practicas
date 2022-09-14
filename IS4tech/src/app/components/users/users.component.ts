@@ -39,6 +39,7 @@ export class UsersComponent implements OnInit {
   public search2: any;
   public myProfile: Profile;
   public editProfile = false;
+  public userId : any
 
   public addUser: boolean = true;
 

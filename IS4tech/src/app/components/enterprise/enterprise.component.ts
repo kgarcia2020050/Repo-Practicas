@@ -126,6 +126,8 @@ export class EnterpriseComponent implements OnInit {
     this.enterpriseService.postEnterprise(this.postEnterprise).subscribe({
       next: () => {
         addForm.reset();
+        this.getEnterprises();
+
         Swal.fire({
           text: 'Empresa agregada exitosamente',
           icon: 'success',
