@@ -39,7 +39,10 @@
       </div>
       <div class="containerEnterprises">
         <div class="card" *ngFor="let enterp of enterprises | search: search">
-          <div class="card-body hoved">
+          <div class="card-body hoved"
+          (click)="findById(enterp.id)"
+          [ngClass]="{itemSelected: enterp?.id === itemSelected}"
+          >
             <em
               *ngIf="enterp.status == 1"
               class="fa-solid fa-circle text-success"
@@ -69,7 +72,8 @@
     </div>
   </div>
 
-  <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
+  <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem"     *ngIf="addEnterprise == true"
+  > 
     
     <form #addForm="ngForm" class="padd">
       <div class="resp hei">
@@ -97,6 +101,68 @@
               class="btn btn-primary butt"
               type="button"
               (click)="newEnterprise(addForm)"
+              style="background-color:#12579c ;"
+            >
+              Guardar
+            </button>
+            <button type="button" style="background-color:#12579c ;" class="btn btn-primary butt2">
+              Cancelar
+            </button>
+          </div>
+          </div>
+         
+        </div>
+      </div> 
+    </div> 
+    </form>
+ 
+  </div>
+
+  <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem"
+  *ngIf="addEnterprise == false"
+  >
+    
+    <form #addForm="ngForm" class="padd">
+      <div class="resp hei">
+        <div class="card cardHei border-primary ">
+
+          <div class="card-body ">
+            <div style="padding: 20%">
+            <h5 class="card-title fs-1  colla" >Editar Empresa</h5>
+
+            <mat-slide-toggle
+            name="status"
+            #status="ngModel"
+            [(ngModel)]="getEnterprise.status"
+            class="slide"
+            *ngIf="getEnterprise.name"
+            (change)="validChangeForm()"
+          >
+            <div *ngIf="getEnterprise.status == 1">Activo</div>
+            <div *ngIf="getEnterprise.status == 0">Inactivo</div>
+          </mat-slide-toggle><br><br>
+
+          <mat-form-field class="matb" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <mat-label> requerido</mat-label>
+            <input
+              [disabled]="!getEnterprise.name"
+              matInput
+              placeholder="Nombre"
+              name="name"
+              #name="ngModel"
+              [(ngModel)]="getEnterprise.name"
+              required="true"
+              (change)="validChangeForm()"
+            />
+          </mat-form-field>
+            <div class="flex-container buttons">
+            <button
+            [disabled]="!addForm.form.valid || !getEnterprise.name || changeForm"
+            type="button"
+              class="btn btn-primary butt"
+              type="button"
+              (click)="putEnterprise(getEnterprise.id)"
               style="background-color:#12579c ;"
             >
               Guardar
