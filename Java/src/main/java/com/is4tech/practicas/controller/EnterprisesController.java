@@ -56,4 +56,9 @@ public class EnterprisesController {
     }
 
 
+    @GetMapping("/enterprise/{id}")
+    public Enterprises findById(@PathVariable("id") Integer id) {
+        return enterpriseServices.findById(id);
+    }
+
 }

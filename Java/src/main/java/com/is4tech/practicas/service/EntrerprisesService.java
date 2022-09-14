@@ -37,6 +37,10 @@ public class EntrerprisesService {
         return enterpriseRepository.findByName(name);
     }
 
+    public Enterprises findById(Integer id) {
+        return enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra la empresa con el ID " + id));
+    }
+
     public void save(EnterpriseDTO enterprisesModeDto) {
         if (findByName(enterprisesModeDto.getName()) != null || findByName(enterprisesModeDto.getName().trim()) != null || findByName(enterprisesModeDto.getName().toUpperCase()) != null || findByName(enterprisesModeDto.getName().toLowerCase()) != null) {
             throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
