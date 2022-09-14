@@ -1,5 +1,5 @@
 <div class="row layout">
-  <div class="col-sm p-3 min-vh-100 dimen" style="max-width: 27rem">
+  <div class="col-sm p-3 dimen" style="max-width: 27rem">
     <div>
       <h1 class="title">Empresas</h1>
       <br />
@@ -13,6 +13,8 @@
           placeholder="Buscar"
           aria-label="Buscar"
           aria-describedby="search-addon"
+          [(ngModel)]="search"
+
         />
         <span class="input-group-text border-0 sear" id="search-addon">
           <mat-icon>search</mat-icon>
@@ -36,7 +38,7 @@
         ></em>
       </div>
       <div class="containerEnterprises">
-        <div class="card" *ngFor="let enterp of enterprises">
+        <div class="card" *ngFor="let enterp of enterprises | search: search">
           <div class="card-body hoved">
             <em
               *ngIf="enterp.status == 1"
@@ -68,13 +70,15 @@
   </div>
 
   <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem">
+    
     <form #addForm="ngForm" class="padd">
       <div class="resp hei">
-        <div class="card cardHei">
-          <div class="card-body">
-            <h5 class="card-title fs-1" style="padding: 5%">Agregar Empresa</h5>
-            <p class="card-text">Agregue una empresa</p>
-            <mat-form-field class="full-width" appearance="outline">
+        <div class="card cardHei border-primary ">
+
+          <div class="card-body ">
+            <div style="padding: 20%">
+            <h5 class="card-title fs-1  colla" >Agregar Empresa</h5><br>
+            <mat-form-field class="" appearance="outline">
               <mat-label>Nombre</mat-label>
               <mat-label> requerido</mat-label>
               <input
@@ -85,24 +89,28 @@
                 name="nombre"
                 required="true"
               />
-            </mat-form-field>
-          </div>
-          <div>
+            </mat-form-field> 
+            <div class="flex-container buttons">
             <button
               [disabled]="!addForm.form.valid"
               type="button"
               class="btn btn-primary butt"
               type="button"
               (click)="newEnterprise(addForm)"
+              style="background-color:#12579c ;"
             >
               Guardar
             </button>
-            <button type="button" class="btn btn-primary butt2">
+            <button type="button" style="background-color:#12579c ;" class="btn btn-primary butt2">
               Cancelar
             </button>
           </div>
+          </div>
+         
         </div>
-      </div>
+      </div> 
+    </div> 
     </form>
+ 
   </div>
 </div>

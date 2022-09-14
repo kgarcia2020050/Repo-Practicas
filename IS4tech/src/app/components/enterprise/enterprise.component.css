@@ -18,7 +18,26 @@
     color: #12579C;
   }
 
+  .colla{
+    color: #2B638C;
+    font-family: 'Lato', sans-serif;
+   
   
+  }
+  .calcCard{
+    height: 50px;
+  }
+  .buttons{
+    padding-top: 5%;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .calcBut{
+    height: calc(100vh - (4px + 40px ));
+
+  }
   
   @media  (min-width: 415px ) {
     .cardHei{
