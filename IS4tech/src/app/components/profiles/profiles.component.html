@@ -92,7 +92,7 @@
 
           <div class="flex-container">
           <p class="fs-1 coll">Agregar</p>
-          <mat-slide-toggle class="slide" [checked]="true" [disabled]="true">
+          <mat-slide-toggle class="slide" [checked]="true" [disabled]="true" color="primary">
             <div>Activo</div>
           </mat-slide-toggle></div>
           <br />
@@ -319,6 +319,7 @@
               class=""
               *ngIf="getProfile.name"
               (change)="validChangeForm()"
+              color="primary"
             >
               <div *ngIf="getProfile.status == 1">Activo</div>
               <div *ngIf="getProfile.status == 0">Inactivo</div>

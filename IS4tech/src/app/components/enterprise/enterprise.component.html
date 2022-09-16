@@ -136,6 +136,7 @@
             class="slide "
             *ngIf="getEnterprise.name"
             (change)="validChangeForm()"
+            color="primary"
           >
             <div *ngIf="getEnterprise.status == 1">Activo</div>
             <div *ngIf="getEnterprise.status == 0">Inactivo</div>

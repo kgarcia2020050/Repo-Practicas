@@ -231,6 +231,7 @@
             class=""
             *ngIf="getUser.name && getUser.email"
             (change)="validChangeForm()"
+            color="primary"
           >
             <div *ngIf="getUser.status == 1">Activo</div>
             <div *ngIf="getUser.status == 0">Inactivo</div>
