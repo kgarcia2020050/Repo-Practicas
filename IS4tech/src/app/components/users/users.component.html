@@ -79,10 +79,10 @@
         ></em>
       </div>
     </div>
-    <div class="col-sm p-3 min-vh-100 dim2 " style="max-width:47rem" *ngIf="addUser == true">
-      <div class="card border-primary cardHei">
+    <div class="col-sm p-3 min-vh-100 dim2 " *ngIf="addUser == true">
+      <div class="card border-primary cardHei resp">
         <div class="card-body">
-          <p class="fs-1 coll">Agregar</p>
+          <p class=" coll">Agregar</p>
 
           <br />
 
@@ -148,10 +148,10 @@
                 </div>
               </div>
             </div>
-          </form>
+          </form><br>
           <div>
-            <p class="fs-4 dragd">Asignación de empresas</p>
-          </div>
+            <p class=" dragd">Asignación de empresas</p>
+          </div><br>
           <br />
           <div>
             <div class="input-group roud" >
@@ -218,23 +218,24 @@
         </div>
       </div>
     </div>
-    <div class="col-sm p-3 min-vh-100 dim2 " style="max-width:47rem"*ngIf="addUser == false">
-      <div class="card border-primary cardHei">
+    <div class="col-sm p-3 min-vh-100 dim2 " *ngIf="addUser == false">
+      <div class="card border-primary cardHei resp">
         <div class="card-body">
           <!--Titulos y nombres-->
-
+          <div class="flex-container">
           <p class="coll">Editar</p>
           <mat-slide-toggle
             name="status"
             #status="ngModel"
             [(ngModel)]="getUser.status"
-            class="slide"
+            class=""
             *ngIf="getUser.name && getUser.email"
             (change)="validChangeForm()"
           >
             <div *ngIf="getUser.status == 1">Activo</div>
             <div *ngIf="getUser.status == 0">Inactivo</div>
           </mat-slide-toggle>
+        </div>
           <br /><br />
 
         
@@ -325,12 +326,12 @@
                 </div>
               </div>
             </div>
-          </form>
+          </form><br>
 
           <div>
             <p class="dragd">Asignación de empresas</p>
           </div>
-          <br />
+          <br /><br>
 
           <br />
           <div class="row" *ngIf="this.editEnterprises == true">

@@ -37,6 +37,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
+.responsive{
+  width: calc(100vw - 600px);
+}
+
 
 
 @media  (min-width: 415px ) {

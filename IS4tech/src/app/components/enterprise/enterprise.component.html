@@ -72,16 +72,16 @@
     </div>
   </div>
 
-  <div class="col-sm p-3 min-vh-100 dim2" style="max-width: 47rem"     *ngIf="addEnterprise == true"
+  <div class="col-sm p-3  "   style="max-width: 60rem"  *ngIf="addEnterprise == true"
   > 
     
-    <form #addForm="ngForm" class="padd">
       <div class="resp hei">
         <div class="card cardHei border-primary ">
+          <form #addForm="ngForm" class="padd">
 
           <div class="card-body ">
             <div style="padding: 20%">
-            <h5 class="card-title fs-1  colla" >Agregar Empresa</h5><br>
+            <h5 class="card-title fs-1  colla" >Agregar Empresa</h5><br><br>
             <mat-form-field class="" appearance="outline">
               <mat-label>Nombre</mat-label>
               <mat-label> requerido</mat-label>
@@ -93,12 +93,12 @@
                 name="nombre"
                 required="true"
               />
-            </mat-form-field> 
+            </mat-form-field> <br><br>
             <div class="flex-container buttons">
             <button
               [disabled]="!addForm.form.valid"
               type="button"
-              class="btn btn-primary butt"
+              class="btn btn-primary butt2"
               type="button"
               (click)="newEnterprise(addForm)"
               style="background-color:#12579c ;"
@@ -109,10 +109,10 @@
           </div>
           </div>
          
-        </div>
+        </div></form>
       </div> 
     </div> 
-    </form>
+    
  
   </div>
 
@@ -121,24 +121,25 @@
   >
     
     <form #addForm="ngForm" class="padd">
-      <div class="resp hei">
-        <div class="card cardHei border-primary ">
+      <div class="resp ">
+        <div class="card  border-primary ">
 
           <div class="card-body ">
             <div style="padding: 20%">
+              <div class="flex-container">
             <h5 class="card-title fs-1  colla" >Editar Empresa</h5>
 
             <mat-slide-toggle
             name="status"
             #status="ngModel"
             [(ngModel)]="getEnterprise.status"
-            class="slide"
+            class="slide "
             *ngIf="getEnterprise.name"
             (change)="validChangeForm()"
           >
             <div *ngIf="getEnterprise.status == 1">Activo</div>
             <div *ngIf="getEnterprise.status == 0">Inactivo</div>
-          </mat-slide-toggle><br><br>
+          </mat-slide-toggle></div><br><br>
 
           <mat-form-field class="matb" appearance="outline">
             <mat-label>Nombre</mat-label>
@@ -153,7 +154,7 @@
               required="true"
               (change)="validChangeForm()"
             />
-          </mat-form-field>
+          </mat-form-field><br><br>
             <div class="flex-container buttons">
             <button
             [disabled]="!addForm.form.valid || !getEnterprise.name || changeForm"

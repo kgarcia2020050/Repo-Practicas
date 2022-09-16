@@ -55,6 +55,13 @@
   transition: background-color .5s;
 }
 
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #12579c; /*replace with your color*/
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+background-color: rgb(118, 129, 233);  /*replace with your color*/
+}
+
 .itemSelected{
   background-color: rgb(199, 202, 202);
   transition: background-color .5s;

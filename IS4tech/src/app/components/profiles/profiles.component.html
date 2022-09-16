@@ -90,10 +90,11 @@
         <form class="card-body" #addForm="ngForm">
           <!--Titulos y nombres-->
 
+          <div class="flex-container">
           <p class="fs-1 coll">Agregar</p>
           <mat-slide-toggle class="slide" [checked]="true" [disabled]="true">
             <div>Activo</div>
-          </mat-slide-toggle>
+          </mat-slide-toggle></div>
           <br />
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Nombre</mat-label>
@@ -309,13 +310,13 @@
         <form class="card-body" #addForm="ngForm">
           <!--Titulos y nombres-->
 
-          <div>
+          <div class="flex-container">
             <p class="fs-1 colla">Editar</p>
             <mat-slide-toggle
               name="status"
               #status="ngModel"
               [(ngModel)]="getProfile.status"
-              class="slide"
+              class=""
               *ngIf="getProfile.name"
               (change)="validChangeForm()"
             >
