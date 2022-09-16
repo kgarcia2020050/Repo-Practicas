@@ -90,30 +90,42 @@
             <div class="container card-0 justify-content-center">
               <div class="row">
                 <div class="col-sm-6">
-                  <input
-                    name="name"
-                    #name="ngModel"
-                    [(ngModel)]="postUser.name"
-                    placeholder="Nombre de usuario"
-                    type="text"
-                    id="date-picker-example"
-                    required="true"
-                    class="form-control datepicker"
-                    style="font-family: Arial, FontAwesome"
-                  />
+                
+                  <mat-form-field class="other" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched">
+                      requerido</mat-label
+                    >
+                    <input
+                      #name="ngModel"
+                      [(ngModel)]="postUser.name"
+                      matInput
+                      placeholder="Nombre"
+                      name="nombre"
+                      required="true"
+                      (change)="validChangeForm()"
+                    />
+                  </mat-form-field>
                 </div>
 
                 <div class="col-sm-6">
-                  <input
-                    name="email"
-                    #email="ngModel"
-                    [(ngModel)]="postUser.email"
-                    placeholder="Correo"
-                    type="text"
-                    required="true"
-                    class="form-control datepicker mb-4"
-                    style="font-family: Arial, FontAwesome"
-                  />
+               
+
+                  <mat-form-field class="" appearance="outline">
+                    <mat-label>Correo</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched">
+                      requerido</mat-label
+                    >
+                    <input
+                      #email="ngModel"
+                      [(ngModel)]="postUser.email"
+                      matInput
+                      placeholder="Email"
+                      name="email"
+                      required="true"
+                      (change)="validChangeForm()"
+                    />
+                  </mat-form-field>
                 </div>
 
                 <div class="col-sm-6 fort">
@@ -142,10 +154,10 @@
           </div>
           <br />
           <div>
-            <div class="input-group rounded" style="max-width: 21rem">
+            <div class="input-group roud" >
               <input
                 type="search"
-                class="form-control rounded"
+                class="form-control   "
                 placeholder="Buscar Empresa"
                 aria-label="Buscar"
                 aria-describedby="search-addon"
@@ -177,11 +189,12 @@
               </div>
             </div>
 
-            <div class="example-container">
+            <div class="example-container" >
               <div
+              style="height: 150px;" 
                 cdkDropList
                 [cdkDropListData]="empresas"
-                class="example-list"
+                class="example-list scro"
                 (cdkDropListDropped)="drop($event)"
               >
                 <div class="example-box" *ngFor="let n of empresas" cdkDrag>
@@ -200,13 +213,7 @@
             >
               Guardar
             </button>
-            <button
-              (click)="addEnterprise()"
-              type="button"
-              class="btn btn-primary botdrag"
-            >
-              Agregar Empresa
-            </button>
+           
           </div>
         </div>
       </div>
@@ -230,47 +237,52 @@
           </mat-slide-toggle>
           <br /><br />
 
-          <div class="container card-0">
-            <div class="row">
-              <div class="col-sm-6">
-                <mat-form-field class="other" appearance="outline">
-                  <mat-label>Nombre</mat-label>
-                  <mat-label *ngIf="!name.valid && name.touched">
-                    requerido</mat-label
-                  >
-                  <input
-                    [disabled]="!getUser.name"
-                    #name="ngModel"
-                    [(ngModel)]="getUser.name"
-                    matInput
-                    placeholder="Nombre"
-                    name="nombre"
-                    required="true"
-                    (change)="validChangeForm()"
-                  />
-                </mat-form-field>
-                <mat-form-field class="" appearance="outline">
-                  <mat-label>Correo</mat-label>
-                  <mat-label *ngIf="!name.valid && name.touched">
-                    requerido</mat-label
-                  >
-                  <input
-                    [disabled]="!getUser.email"
-                    #email="ngModel"
-                    [(ngModel)]="getUser.email"
-                    matInput
-                    placeholder="Email"
-                    name="email"
-                    required="true"
-                    (change)="validChangeForm()"
-                  />
-                </mat-form-field>
-              </div>
+        
 
-              <div class="col-sm-6">
-                <div class="col-sm-6 fort" style="float: left">
+          <form #addForm="ngForm">
+            <div class="container card-0 justify-content-center">
+              <div class="row">
+                <div class="col-sm-6">
+                  <mat-form-field class="other" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched">
+                      requerido</mat-label
+                    >
+                    <input
+                      [disabled]="!getUser.name"
+                      #name="ngModel"
+                      [(ngModel)]="getUser.name"
+                      matInput
+                      placeholder="Nombre"
+                      name="nombre"
+                      required="true"
+                      (change)="validChangeForm()"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6">
+                  <mat-form-field class="" appearance="outline">
+                    <mat-label>Correo</mat-label>
+                    <mat-label *ngIf="!name.valid && name.touched">
+                      requerido</mat-label
+                    >
+                    <input
+                      [disabled]="!getUser.email"
+                      #email="ngModel"
+                      [(ngModel)]="getUser.email"
+                      matInput
+                      placeholder="Email"
+                      name="email"
+                      required="true"
+                      (change)="validChangeForm()"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 fort">
                   <mat-form-field
-                    appearance="fill"
+                    appearance="outline"
                     *ngIf="this.editProfile == false"
                   >
                     <mat-label>Mi perfil</mat-label>
@@ -283,15 +295,15 @@
                     >
                       <option
                         [disabled]="true"
-                        [value]="myProfile.id"
-                        [selected]="myProfile.name"
+                        [value]="this.getUser.profilesByProfile.id"
+                        [selected]="this.getUser.profilesByProfile.name"
                       >
-                        {{ myProfile.name }}
+                        {{ this.getUser.profilesByProfile.id }}
                       </option>
                     </select>
                   </mat-form-field>
                   <mat-form-field
-                    appearance="fill"
+                    appearance="outline"
                     *ngIf="this.editProfile == true"
                   >
                     <mat-label>Mi perfil</mat-label>
@@ -313,7 +325,8 @@
                 </div>
               </div>
             </div>
-          </div>
+          </form>
+
           <div>
             <p class="dragd">Asignación de empresas</p>
           </div>
@@ -343,10 +356,11 @@
               <!--OTRO DRAG-->
               <div class="example-container">
                 <div
+                style="height: 150px;"
                   cdkDropList
                   [cdkDropListData]="empresas"
                   [cdkDropListConnectedTo]="[ln1]"
-                  class="example-list"
+                  class="example-list scro"
                   (cdkDropListDropped)="drop($event); validChangeEnterprise()"
                 >
                   <div class="example-box" *ngFor="let n of empresas" cdkDrag>
@@ -419,13 +433,7 @@
             >
               Guardar
             </button>
-            <button
-              (click)="addEnterprise()"
-              type="button"
-              class="btn btn-primary botdrag"
-            >
-              Agregar Empresa
-            </button>
+           
             <button
               (click)="asignarEmpresas()"
               [disabled]="!name.valid || !email.valid"

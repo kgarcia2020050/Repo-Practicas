@@ -37,9 +37,8 @@ export class UsersComponent implements OnInit {
   public search: any;
   public prueba;
   public search2: any;
-  public myProfile: Profile;
   public editProfile = false;
-  public userId : any
+  public userId: any;
 
   public addUser: boolean = true;
 
@@ -64,9 +63,16 @@ export class UsersComponent implements OnInit {
     private router: Router,
     private enterpriseService: EnterpriseService
   ) {
-    this.getUser = new User(0, '', '', 1, 0, []);
-    this.postUser = new User(0, '', '', 1, 0, []);
-    this.myProfile = new Profile(0, '', 0);
+    this.getUser = new User(0, '', '', 1, 0, [], {
+      id: 0,
+      status: 0,
+      name: '',
+    });
+    this.postUser = new User(0, '', '', 1, 0, [], {
+      id: 0,
+      status: 0,
+      name: '',
+    });
   }
 
   ngOnInit(): void {
@@ -113,13 +119,11 @@ export class UsersComponent implements OnInit {
   }
 
   getEnterprises() {
-    this.enterpriseService
-      .getEnterprises()
-      .subscribe({
-        next: (response: any) => {
-          this.listNumbers1 = response;
-        },
-      });
+    this.enterpriseService.getEnterprises().subscribe({
+      next: (response: any) => {
+        this.listNumbers1 = response;
+      },
+    });
   }
 
   cambiarPerfil() {
@@ -157,20 +161,13 @@ export class UsersComponent implements OnInit {
         this.dataServiceChange = Object.assign({}, response);
         this.getUser = Object.assign({}, response);
         this.validChangeForm();
+        this.userService.getInfoUser(id).subscribe({
+          next: (response: any) => {
+            this.prueba = response.empresas;
+            this.getUser.empresas = Object.assign([], response.empresas);
+            this.enterpriseNew = Object.assign([], response.empresas);
 
-        this.profileService.getProfile(this.getUser.profile).subscribe({
-          next: (res: any) => {
-            this.myProfile = res;
-            this.editProfile = false;
-            this.userService.getInfoUser(id).subscribe({
-              next: (response: any) => {
-                this.prueba = response.empresas;
-                this.getUser.empresas = Object.assign([], response.empresas);
-                this.enterpriseNew = Object.assign([], response.empresas);
-
-                this.validChangeEnterprise();
-              },
-            });
+            this.validChangeEnterprise();
           },
         });
       },

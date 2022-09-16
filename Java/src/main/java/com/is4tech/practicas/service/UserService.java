@@ -74,49 +74,54 @@ public class UserService {
 
     public void verification(Integer id, UserDTO userDTO) {
         UserDTO user = findById(id);
-        if (!userDTO.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-            throw new ExistingRegisterException("El email ingresado no es valido.");
-        }else if(!userDTO.getName().matches("^[A-Za-z]$")){
+        if (!userDTO.getName().matches("([a-zA-z]{1,50})([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?$")) {
             throw new EmptyProfileException("El nombre no puede contener caracteres especiales");
-        }else if (user.getName().equals(userDTO.getName())) {
-            editUser(id, userDTO);
-        } else if (findByName(userDTO.getName()) != null || findByName(userDTO.getName().trim()) != null || findByName(userDTO.getName().toLowerCase()) != null || findByName(userDTO.getName().toUpperCase()) != null) {
-            throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
         } else {
-            editUser(id, userDTO);
+            if (!userDTO.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                throw new ExistingRegisterException("El email ingresado no es valido.");
+            } else if (user.getName().equals(userDTO.getName())) {
+                editUser(id, userDTO);
+            } else if (findByName(userDTO.getName()) != null || findByName(userDTO.getName().trim()) != null || findByName(userDTO.getName().toLowerCase()) != null || findByName(userDTO.getName().toUpperCase()) != null) {
+                throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
+            } else {
+                editUser(id, userDTO);
+            }
         }
     }
 
     public void saveUser(UserDTO userdto) {
-        if (findByName(userdto.getName()) != null || findByName(userdto.getName().trim()) != null || findByName(userdto.getName().toLowerCase()) != null || findByName(userdto.getName().toUpperCase()) != null) {
-            throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
-        }else if(!userdto.getName().matches("^[A-Za-z]$")){
+        if (!userdto.getName().matches("([a-zA-z]{1,50})([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?$")) {
             throw new EmptyProfileException("El nombre no puede contener caracteres especiales");
-        }else if (userdto.getProfile() == 0) {
-            throw new EmptyProfileException("Debes asignarte un perfil.");
-        } else if (!userdto.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-            throw new ExistingRegisterException("El email ingresado no es valido.");
         } else {
-            Users bo = mapper.mapeo(userdto);
-            bo = this.usersRepository.save(bo);
-            if (userdto.getEmpresas() != null && !userdto.getEmpresas().isEmpty()) {
-                List<UsersEnterprises> enterpirses = new ArrayList<>();
-                for (int i = 0; i < userdto.getEmpresas().size(); i++) {
-                    UsersEnterprises usersEnterprises = new UsersEnterprises();
-                    usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
-                    usersEnterprises.setUserId(bo.getId());
-                    usersEnterprises.setUserName(bo.getName());
-                    usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
-                    enterpirses.add(usersEnterprises);
-                    for (int j = i + 1; j < userdto.getEmpresas().size(); j++) {
-                        if (userdto.getEmpresas().get(i).getEnterpriseName().equals(userdto.getEmpresas().get(j).getEnterpriseName())) {
-                            throw new ExistingRegisterException("Te has asignado la misma empresa mas de una vez, edita tu perfil para asignarte las empresas que deseas.");
+            if (findByName(userdto.getName()) != null || findByName(userdto.getName().trim()) != null || findByName(userdto.getName().toLowerCase()) != null || findByName(userdto.getName().toUpperCase()) != null) {
+                throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
+            } else if (userdto.getProfile() == 0) {
+                throw new EmptyProfileException("Debes asignarte un perfil.");
+            } else if (!userdto.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                throw new ExistingRegisterException("El email ingresado no es valido.");
+            } else {
+                Users bo = mapper.mapeo(userdto);
+                bo = this.usersRepository.save(bo);
+                if (userdto.getEmpresas() != null && !userdto.getEmpresas().isEmpty()) {
+                    List<UsersEnterprises> enterpirses = new ArrayList<>();
+                    for (int i = 0; i < userdto.getEmpresas().size(); i++) {
+                        UsersEnterprises usersEnterprises = new UsersEnterprises();
+                        usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
+                        usersEnterprises.setUserId(bo.getId());
+                        usersEnterprises.setUserName(bo.getName());
+                        usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
+                        enterpirses.add(usersEnterprises);
+                        for (int j = i + 1; j < userdto.getEmpresas().size(); j++) {
+                            if (userdto.getEmpresas().get(i).getEnterpriseName().equals(userdto.getEmpresas().get(j).getEnterpriseName())) {
+                                throw new ExistingRegisterException("Te has asignado la misma empresa mas de una vez, edita tu perfil para asignarte las empresas que deseas.");
+                            }
                         }
                     }
+                    this.userEnterpriseRepository.saveAll(enterpirses);
                 }
-                this.userEnterpriseRepository.saveAll(enterpirses);
             }
         }
+
     }
 
     public void deleteUserEnterpriseRegister(Integer id) {

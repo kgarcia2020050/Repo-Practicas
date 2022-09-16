@@ -8,6 +8,7 @@ export class User {
     public name: string,
     public status: Byte,
     public profile: number,
-    public empresas:UserEnterprise[]
+    public empresas:UserEnterprise[],
+    public profilesByProfile:{id:number, status:number, name:string}
   ) {}
 }

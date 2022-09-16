@@ -24,14 +24,12 @@ public class EntrerprisesService {
 
     private final MapperEnterprises mapperEnterprises;
 
-    private final UserEnterpriseRepository userEnterpriseRepository;
 
     private static final String MESSAGE = "No se encuentra al perfil con el id ";
 
-    public EntrerprisesService(EnterpriseRepository enterpriseRepository, MapperEnterprises mapperEnterprises, UserEnterpriseRepository userEnterpriseRepository) {
+    public EntrerprisesService(EnterpriseRepository enterpriseRepository, MapperEnterprises mapperEnterprises) {
         this.enterpriseRepository = enterpriseRepository;
         this.mapperEnterprises = mapperEnterprises;
-        this.userEnterpriseRepository = userEnterpriseRepository;
     }
 
     public Enterprises findByName(String name) {
@@ -43,13 +41,17 @@ public class EntrerprisesService {
     }
 
     public void save(EnterpriseDTO enterprisesModeDto) {
-        if (findByName(enterprisesModeDto.getName()) != null || findByName(enterprisesModeDto.getName().trim()) != null || findByName(enterprisesModeDto.getName().toUpperCase()) != null || findByName(enterprisesModeDto.getName().toLowerCase()) != null) {
-            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-        }else if (!enterprisesModeDto.getName().matches("^[\\w-]+$")){
-            throw new ExistingRegisterException("El nombre de la empresa no puede contener caracteres especiales")
-;        }else {
-            Enterprises model = mapperEnterprises.mapeo(enterprisesModeDto);
-            enterpriseRepository.save(model);
+        if(!enterprisesModeDto.getName().matches("([a-zA-z]{1,50})([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?$")){
+            throw new ExistingRegisterException("El nombre no puede contener caracteres especiales.");
+        }else{
+            if (findByName(enterprisesModeDto.getName()) != null || findByName(enterprisesModeDto.getName().trim()) != null || findByName(enterprisesModeDto.getName().toUpperCase()) != null || findByName(enterprisesModeDto.getName().toLowerCase()) != null) {
+                throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
+            }else if (!enterprisesModeDto.getName().matches("^[\\w-]+$")){
+                throw new ExistingRegisterException("El nombre de la empresa no puede contener caracteres especiales")
+                        ;        }else {
+                Enterprises model = mapperEnterprises.mapeo(enterprisesModeDto);
+                enterpriseRepository.save(model);
+            }
         }
     }
 
@@ -63,18 +65,22 @@ public class EntrerprisesService {
     }
 
     public void verification(Integer id, EnterpriseDTO enterpriseDTO) {
-        Enterprises entereprise = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
-        Byte status = (enterpriseDTO.isStatus() ? (byte) 1 : (byte) 0);
-        if (enterpriseDTO.getName().equals(entereprise.getName()) && entereprise.getStatus().equals(status)) {
-            throw new InformationNotChangedException("No has cambiado la información de la empresa.");
-        } else if (entereprise.getName().equals(enterpriseDTO.getName())) {
-            editEnterprise(id, enterpriseDTO);
-        } else if (findByName(enterpriseDTO.getName()) != null && findByName(enterpriseDTO.getName().trim()) != null && findByName(enterpriseDTO.getName().toUpperCase()) != null && findByName(enterpriseDTO.getName().toLowerCase()) != null) {
-            throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-        }else if(!enterpriseDTO.getName().matches("^[\\w-]+$")){
-            throw new ExistingRegisterException("El nombre de la empresa no puede contener caracteres especiales");
-        }else {
-            editEnterprise(id, enterpriseDTO);
+        if(!enterpriseDTO.getName().matches("([a-zA-z]{1,50})([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?$")){
+            throw new ExistingRegisterException("El nombre no puede contener caracteres especiales.");
+        }else{
+            Enterprises entereprise = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
+            Byte status = (enterpriseDTO.isStatus() ? (byte) 1 : (byte) 0);
+            if (enterpriseDTO.getName().equals(entereprise.getName()) && entereprise.getStatus().equals(status)) {
+                throw new InformationNotChangedException("No has cambiado la información de la empresa.");
+            } else if (entereprise.getName().equals(enterpriseDTO.getName())) {
+                editEnterprise(id, enterpriseDTO);
+            } else if (findByName(enterpriseDTO.getName()) != null && findByName(enterpriseDTO.getName().trim()) != null && findByName(enterpriseDTO.getName().toUpperCase()) != null && findByName(enterpriseDTO.getName().toLowerCase()) != null) {
+                throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
+            }else if(!enterpriseDTO.getName().matches("^[\\w-]+$")){
+                throw new ExistingRegisterException("El nombre de la empresa no puede contener caracteres especiales");
+            }else {
+                editEnterprise(id, enterpriseDTO);
+            }
         }
     }
 

@@ -244,7 +244,15 @@ justify-content: space-between;
             cursor:context-menu;
 
           }
-      
+          .scro{
+            overflow: auto;
+          }
+          .roud{
+            max-width: 19rem;
+            padding-left: 5%;
+          }
+
+        
       .cdk-drag-preview {
         box-sizing: border-box;
         border-radius: 4px;
