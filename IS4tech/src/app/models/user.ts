@@ -1,4 +1,3 @@
-import { Byte } from '@angular/compiler/src/util';
 import { UserEnterprise } from './user-enterprise';
 
 export class User {
@@ -6,7 +5,7 @@ export class User {
     public id:number,
     public email: string,
     public name: string,
-    public status: Byte,
+    public status: any,
     public profile: number,
     public empresas:UserEnterprise[],
     public profilesByProfile:{id:number, status:number, name:string}

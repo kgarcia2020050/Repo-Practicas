@@ -15,7 +15,7 @@ export class ProfilesComponent implements OnInit {
   public postProfile: Profile;
   public addProfile: boolean = true;
   public getProfile: Profile;
-  public totalPages:number;
+  public totalPages: number;
   public asc: boolean = true;
   public isFirst: boolean;
   public isLast: boolean;
@@ -116,7 +116,7 @@ export class ProfilesComponent implements OnInit {
         this.profiles = response.content;
         this.isFirst = response.first;
         this.isLast = response.last;
-        this.totalPages=response.totalPages;
+        this.totalPages = response.totalPages;
       },
     });
   }
@@ -145,6 +145,11 @@ export class ProfilesComponent implements OnInit {
   }
 
   equals(source: Profile, target: Profile): boolean {
+    if (source.status) {
+      source.status = 1;
+    } else {
+      source.status = 0;
+    }
     return source.name === target.name && source.status === target.status;
   }
 

@@ -46,6 +46,8 @@ public class UserService {
         return usersRepository.findAll(pageable);
     }
 
+    private static final String EXPRESSION = "([a-zA-z]{1,50})(([\\s][a-zA-z]{1,50})?){50}$";
+
 
     public UserDTO findById(Integer id) {
         Optional<Users> users = this.usersRepository.findById(id);
@@ -74,8 +76,8 @@ public class UserService {
 
     public void verification(Integer id, UserDTO userDTO) {
         UserDTO user = findById(id);
-        if (!userDTO.getName().matches("([a-zA-z]{1,50})([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?$")) {
-            throw new EmptyProfileException("El nombre no puede contener caracteres especiales");
+        if (!userDTO.getName().matches(EXPRESSION)) {
+            throw new EmptyProfileException("El nombre no puede contener caracteres especiales ni espacios dobles.");
         } else {
             if (!userDTO.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
                 throw new ExistingRegisterException("El email ingresado no es valido.");
@@ -90,8 +92,8 @@ public class UserService {
     }
 
     public void saveUser(UserDTO userdto) {
-        if (!userdto.getName().matches("([a-zA-z]{1,50})([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?$")) {
-            throw new EmptyProfileException("El nombre no puede contener caracteres especiales");
+        if (!userdto.getName().matches(EXPRESSION)) {
+            throw new EmptyProfileException("El nombre no puede contener caracteres especiales ni espacios dobles.");
         } else {
             if (findByName(userdto.getName()) != null || findByName(userdto.getName().trim()) != null || findByName(userdto.getName().toLowerCase()) != null || findByName(userdto.getName().toUpperCase()) != null) {
                 throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
@@ -127,6 +129,7 @@ public class UserService {
     public void deleteUserEnterpriseRegister(Integer id) {
         this.userEnterpriseRepository.deleteById(id);
     }
+
 
     public void editUser(Integer id, UserDTO userDTO) {
         Users model = usersRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));

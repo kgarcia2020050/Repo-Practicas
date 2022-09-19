@@ -1,14 +1,12 @@
 package com.is4tech.practicas.service;
 
 import com.is4tech.practicas.dto.EnterpriseDTO;
-import com.is4tech.practicas.exception.EmptyProfileException;
 import com.is4tech.practicas.exception.ExistingRegisterException;
 import com.is4tech.practicas.exception.InformationNotChangedException;
 import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperEnterprises;
 import com.is4tech.practicas.bo.Enterprises;
 import com.is4tech.practicas.repository.EnterpriseRepository;
-import com.is4tech.practicas.repository.UserEnterpriseRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,6 +19,8 @@ public class EntrerprisesService {
 
 
     private final EnterpriseRepository enterpriseRepository;
+
+    private static final String EXPRESSION = "([a-zA-z]{1,50})(([\\s][a-zA-z]{1,50})?){50}$";
 
     private final MapperEnterprises mapperEnterprises;
 
@@ -40,15 +40,14 @@ public class EntrerprisesService {
         return enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException("No se encuentra la empresa con el ID " + id));
     }
 
+
     public void save(EnterpriseDTO enterprisesModeDto) {
-        if(!enterprisesModeDto.getName().matches("([a-zA-z]{1,50})([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?$")){
-            throw new ExistingRegisterException("El nombre no puede contener caracteres especiales.");
-        }else{
+        if (!enterprisesModeDto.getName().matches(EXPRESSION)) {
+            throw new ExistingRegisterException("El nombre no puede contener caracteres especiales ni espacios dobles.");
+        } else {
             if (findByName(enterprisesModeDto.getName()) != null || findByName(enterprisesModeDto.getName().trim()) != null || findByName(enterprisesModeDto.getName().toUpperCase()) != null || findByName(enterprisesModeDto.getName().toLowerCase()) != null) {
                 throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-            }else if (!enterprisesModeDto.getName().matches("^[\\w-]+$")){
-                throw new ExistingRegisterException("El nombre de la empresa no puede contener caracteres especiales")
-                        ;        }else {
+            } else {
                 Enterprises model = mapperEnterprises.mapeo(enterprisesModeDto);
                 enterpriseRepository.save(model);
             }
@@ -65,9 +64,9 @@ public class EntrerprisesService {
     }
 
     public void verification(Integer id, EnterpriseDTO enterpriseDTO) {
-        if(!enterpriseDTO.getName().matches("([a-zA-z]{1,50})([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?([\\s][a-zA-z]{1,50})?$")){
-            throw new ExistingRegisterException("El nombre no puede contener caracteres especiales.");
-        }else{
+        if (!enterpriseDTO.getName().matches(EXPRESSION)) {
+            throw new ExistingRegisterException("El nombre no puede contener caracteres especiales ni espacios dobles.");
+        } else {
             Enterprises entereprise = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
             Byte status = (enterpriseDTO.isStatus() ? (byte) 1 : (byte) 0);
             if (enterpriseDTO.getName().equals(entereprise.getName()) && entereprise.getStatus().equals(status)) {
@@ -76,9 +75,7 @@ public class EntrerprisesService {
                 editEnterprise(id, enterpriseDTO);
             } else if (findByName(enterpriseDTO.getName()) != null && findByName(enterpriseDTO.getName().trim()) != null && findByName(enterpriseDTO.getName().toUpperCase()) != null && findByName(enterpriseDTO.getName().toLowerCase()) != null) {
                 throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");
-            }else if(!enterpriseDTO.getName().matches("^[\\w-]+$")){
-                throw new ExistingRegisterException("El nombre de la empresa no puede contener caracteres especiales");
-            }else {
+            } else {
                 editEnterprise(id, enterpriseDTO);
             }
         }

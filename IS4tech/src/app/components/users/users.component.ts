@@ -326,6 +326,11 @@ export class UsersComponent implements OnInit {
   }
 
   equals(source: User, target: User): boolean {
+    if (source.status) {
+      source.status = 1;
+    } else {
+      source.status = 0;
+    }
     return (
       source.id === target.id &&
       source.name === target.name &&

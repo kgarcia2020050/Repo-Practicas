@@ -41,7 +41,7 @@ export class EnterpriseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEnterprises();
-   
+
   }
 
   openDialog() {
@@ -63,7 +63,7 @@ export class EnterpriseComponent implements OnInit {
         },
       });
   }
-  
+
   findById(id) {
     this.enterpriseService.getEnterprise(id).subscribe({
       next: (response: any) => {
@@ -71,7 +71,6 @@ export class EnterpriseComponent implements OnInit {
         this.itemSelected = id;
         this.dataServiceEnterprise = Object.assign({}, response);
         this.getEnterprise = Object.assign({}, response);
-        console.log(response)
 
         this.validChangeForm();
       },
@@ -105,6 +104,11 @@ export class EnterpriseComponent implements OnInit {
   }
 
   equals(source: Enterprise, target: Enterprise): boolean {
+    if (source.status) {
+      source.status = 1;
+    } else {
+      source.status = 0;
+    }
     return source.name === target.name && source.status === target.status;
   }
 
@@ -112,7 +116,6 @@ export class EnterpriseComponent implements OnInit {
   validChangeForm() {
     if (!this.addEnterprise) {
       this.changeForm = this.equals(this.getEnterprise, this.dataServiceEnterprise);
-      console.log(this.changeForm)
     }
   }
 
