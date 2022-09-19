@@ -41,7 +41,7 @@
         <div class="card" *ngFor="let enterp of enterprises | search: search">
           <div class="card-body hoved"
           (click)="findById(enterp.id)"
-          [ngClass]="{itemSelected: enterp?.id === itemSelected}"
+          [ngClass]="{ itemSelected: enterp?.id === itemSelected }"
           >
             <em
               *ngIf="enterp.status == 1"
@@ -122,7 +122,7 @@
     
     <form #addForm="ngForm" class="padd">
       <div class="resp ">
-        <div class="card  border-primary ">
+        <div class="card cardHei  border-primary ">
 
           <div class="card-body ">
             <div style="padding: 20%">
@@ -136,7 +136,6 @@
             class="slide "
             *ngIf="getEnterprise.name"
             (change)="validChangeForm()"
-            color="primary"
           >
             <div *ngIf="getEnterprise.status == 1">Activo</div>
             <div *ngIf="getEnterprise.status == 0">Inactivo</div>

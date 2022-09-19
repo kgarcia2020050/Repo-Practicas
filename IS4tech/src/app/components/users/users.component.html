@@ -17,7 +17,7 @@
           <input
             type="search"
             class="form-control rounded"
-            placeholder="Buscar"
+            placeholder="Buscar Usuario"
             aria-label="Buscar"
             aria-describedby="search-addon"
             [(ngModel)]="search"
@@ -82,7 +82,11 @@
     <div class="col-sm p-3 min-vh-100 dim2 " *ngIf="addUser == true">
       <div class="card border-primary cardHei resp">
         <div class="card-body">
-          <p class=" coll">Agregar</p>
+          <div class="flex-container">
+          <p class="coll">Agregar</p>
+          <mat-slide-toggle class="" [checked]="true" [disabled]="true" color="primary" >
+            <div>Activo</div>
+          </mat-slide-toggle></div>
 
           <br />
 
@@ -174,9 +178,11 @@
           <div cdkDropListGroup>
             <div class="example-container">
               <div
+              style="height: 150px;" 
+
                 cdkDropList
                 [cdkDropListData]="listNumbers1"
-                class="example-list over"
+                class="example-list scro"
                 (cdkDropListDropped)="drop($event)"
               >
                 <div
@@ -231,7 +237,6 @@
             class=""
             *ngIf="getUser.name && getUser.email"
             (change)="validChangeForm()"
-            color="primary"
           >
             <div *ngIf="getUser.status == 1">Activo</div>
             <div *ngIf="getUser.status == 0">Inactivo</div>
@@ -340,9 +345,11 @@
               <!--OTRO DRAG-->
               <div class="example-container">
                 <div
+                style="height: 150px;" 
+
                   cdkDropList
                   [cdkDropListData]="listNumbers1"
-                  class="example-list over"
+                  class="example-list scros"
                   (cdkDropListDropped)="drop($event)"
                 >
                   <div
@@ -377,10 +384,12 @@
               <!--OTRO DRAG-->
               <div class="example-container">
                 <div
+                style="height: 150px;" 
+
                   cdkDropList
                   [cdkDropListData]="listNumbers1"
                   [cdkDropListConnectedTo]="[ln2]"
-                  class="example-list"
+                  class="example-list scro"
                   (cdkDropListDropped)="drop($event)"
                 >
                   <div
@@ -397,10 +406,12 @@
               <!--OTRO DRAG-->
               <div class="example-container">
                 <div
+                style="height: 150px;" 
+
                   cdkDropList
                   [cdkDropListData]="getUser.empresas"
                   [cdkDropListConnectedTo]="[ln1]"
-                  class="example-list"
+                  class="example-list scro"
                   (cdkDropListDropped)="drop($event); validChangeEnterprise()"
                 >
                   <div

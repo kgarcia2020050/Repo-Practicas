@@ -89,7 +89,6 @@
 
 .butt2 {
     background-color: #12579C;
-    height: 45px;
 }
 
 .butt3 {
@@ -218,16 +217,16 @@ justify-content: space-between;
       }
 
       .example-list:hover{
-        background-color: rgb(113, 147, 240);
+        background-color: rgb(255, 255, 255);
         transition: background-color .5s;  }
       
         .example-box:hover{
-          background-color: rgb(111, 145, 238);
+          background-color: rgb(177, 220, 231);
           transition: background-color .5s;  }
       
           .example-box {
             padding: 8px 8px;
-            border-bottom: solid 1px rgb(4, 81, 153);
+            border-bottom: solid 1px rgb(0, 60, 116);
             color: rgba(0, 0, 0, 0.87);
             font-family: 'Lato', sans-serif;
           

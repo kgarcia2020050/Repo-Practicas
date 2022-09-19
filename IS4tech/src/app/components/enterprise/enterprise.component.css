@@ -57,7 +57,18 @@
   height: 45px;
 }
 
-  .hoved:hover{
-    background-color: rgb(199, 202, 202);
-    transition: background-color .5s;
+.hoved:hover{
+  background-color: rgb(199, 202, 202);
+  transition: background-color .5s;
+}
+
+.hoved{
+  font-size: medium;
+}
+
+
+  @media  (min-width: 415px ) {
+    .cardHei{
+      height: calc(100vh - (2px + 3px + 3px  + 2.5rem));
+    }
   }

@@ -98,7 +98,7 @@ public class UserService {
             } else if (userdto.getProfile() == 0) {
                 throw new EmptyProfileException("Debes asignarte un perfil.");
             } else if (!userdto.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-                throw new ExistingRegisterException("El email ingresado no es valido.");
+                throw new ExistingRegisterException("El email ingresado no es valido. ejemploCorreo@gmail.com");
             } else {
                 Users bo = mapper.mapeo(userdto);
                 bo = this.usersRepository.save(bo);

@@ -10,27 +10,32 @@ import Swal from 'sweetalert2';
   styleUrls: ['./enterprise.component.css'],
 })
 export class EnterpriseComponent implements OnInit {
-  public getEnterprise: Enterprise;
+  public enterprises: Enterprise;
+
   public asc: boolean = true;
   public isFirst: boolean;
   public isLast: boolean;
   public page: number = 0;
   public totalPages: number;
-  public enterprises: Enterprise;
   public search: any;
   public postEnterprise: Enterprise;
   public addEnterprise: boolean = true;
-  public itemSelected: number;
-  public dataServiceEnterprise: Enterprise;
+  public getEnterprise: Enterprise;
+
   public changeForm: boolean = false;
+  public dataServiceEnterprise: Enterprise;
+  public itemSelected: number;
+
+
 
 
   constructor(
     private enterpriseService: EnterpriseService,
     private router: Router
   ) {
-    this.postEnterprise = new Enterprise(0, '', 1);
     this.getEnterprise = new Enterprise(0, '', 1);
+
+    this.postEnterprise = new Enterprise(0, '', 1);
 
   }
 
@@ -58,6 +63,7 @@ export class EnterpriseComponent implements OnInit {
         },
       });
   }
+  
   findById(id) {
     this.enterpriseService.getEnterprise(id).subscribe({
       next: (response: any) => {
@@ -65,6 +71,7 @@ export class EnterpriseComponent implements OnInit {
         this.itemSelected = id;
         this.dataServiceEnterprise = Object.assign({}, response);
         this.getEnterprise = Object.assign({}, response);
+        console.log(response)
 
         this.validChangeForm();
       },
@@ -105,6 +112,7 @@ export class EnterpriseComponent implements OnInit {
   validChangeForm() {
     if (!this.addEnterprise) {
       this.changeForm = this.equals(this.getEnterprise, this.dataServiceEnterprise);
+      console.log(this.changeForm)
     }
   }
 
