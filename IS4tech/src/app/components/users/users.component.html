@@ -94,7 +94,7 @@
             <div class="container card-0 justify-content-center">
               <div class="row">
                 <div class="col-sm-6">
-                
+
                   <mat-form-field class="other" appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <mat-label *ngIf="!name.valid && name.touched">
@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="col-sm-6">
-               
+
 
                   <mat-form-field class="" appearance="outline">
                     <mat-label>Correo</mat-label>
@@ -178,7 +178,7 @@
           <div cdkDropListGroup>
             <div class="example-container">
               <div
-              style="height: 150px;" 
+              style="height: 150px;"
 
                 cdkDropList
                 [cdkDropListData]="listNumbers1"
@@ -197,7 +197,7 @@
 
             <div class="example-container" >
               <div
-              style="height: 150px;" 
+              style="height: 150px;"
                 cdkDropList
                 [cdkDropListData]="empresas"
                 class="example-list scro"
@@ -219,7 +219,7 @@
             >
               Guardar
             </button>
-           
+
           </div>
         </div>
       </div>
@@ -244,7 +244,7 @@
         </div>
           <br /><br />
 
-        
+
 
           <form #addForm="ngForm">
             <div class="container card-0 justify-content-center">
@@ -345,7 +345,7 @@
               <!--OTRO DRAG-->
               <div class="example-container">
                 <div
-                style="height: 150px;" 
+                style="height: 150px;"
 
                   cdkDropList
                   [cdkDropListData]="listNumbers1"
@@ -384,7 +384,7 @@
               <!--OTRO DRAG-->
               <div class="example-container">
                 <div
-                style="height: 150px;" 
+                style="height: 150px;"
 
                   cdkDropList
                   [cdkDropListData]="listNumbers1"
@@ -406,7 +406,7 @@
               <!--OTRO DRAG-->
               <div class="example-container">
                 <div
-                style="height: 150px;" 
+                style="height: 150px;"
 
                   cdkDropList
                   [cdkDropListData]="getUser.empresas"
@@ -446,7 +446,7 @@
             >
               Guardar
             </button>
-           
+
             <button
               (click)="asignarEmpresas()"
               [disabled]="!name.valid || !email.valid"
