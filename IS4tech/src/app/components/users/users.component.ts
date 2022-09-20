@@ -28,6 +28,7 @@ export class UsersComponent implements OnInit {
   public getUser: User;
   public profiles: Profile;
   public asc: boolean = true;
+  public miArray = [];
   public totalPages: number;
   public isFirst: boolean;
   public isLast: boolean;
@@ -149,6 +150,11 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  habilitar(){
+    this.addUser=true;
+    this.getEnterprises()
+  }
+
   findById(id) {
     this.addUser = false;
     this.getEnterprises();
@@ -166,6 +172,15 @@ export class UsersComponent implements OnInit {
             this.prueba = response.empresas;
             this.getUser.empresas = Object.assign([], response.empresas);
             this.enterpriseNew = Object.assign([], response.empresas);
+
+            if (this.getUser.empresas.length > 0) {
+              for (const element of this.getUser.empresas) {
+                this.miArray = this.listNumbers1.filter(
+                  (obj) => obj.name !== element.enterpriseName
+                );
+                this.listNumbers1 = this.miArray;
+              }
+            }
 
             this.validChangeEnterprise();
           },
