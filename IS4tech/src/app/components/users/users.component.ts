@@ -7,7 +7,6 @@ import {
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 import { Profile } from 'src/app/models/profile';
 import { ProfileService } from 'src/app/services/profile.service';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
@@ -33,14 +32,9 @@ export class UsersComponent implements OnInit {
   public isFirst: boolean;
   public nuevoArray = [];
   public isLast: boolean;
-  public p: number = 1;
-  public p2: number = 1;
   public page: number = 0;
   public search: any;
-  public prueba;
   public search2: any;
-  public editProfile = false;
-  public userId: any;
 
   public addUser: boolean = true;
 
@@ -62,7 +56,6 @@ export class UsersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private profileService: ProfileService,
-    private router: Router,
     private enterpriseService: EnterpriseService
   ) {
     this.getUser = new User(0, '', '', 1, 0, [], {
@@ -94,10 +87,6 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  addEnterprise() {
-    this.router.navigate(['/openEnterprise']);
-  }
-
   drop($event: CdkDragDrop<number[]>) {
     if ($event.previousContainer === $event.container) {
       moveItemInArray(
@@ -127,7 +116,6 @@ export class UsersComponent implements OnInit {
     this.profileService.getStatusProfile().subscribe({
       next: (response: any) => {
         this.profiles = response;
-        this.editProfile = true;
       },
     });
   }
@@ -165,7 +153,6 @@ export class UsersComponent implements OnInit {
         this.validChangeForm();
         this.userService.getInfoUser(id).subscribe({
           next: (response: any) => {
-            this.prueba = response.empresas;
             this.getUser.empresas = Object.assign([], response.empresas);
             this.enterpriseNew = Object.assign([], response.empresas);
 
@@ -181,14 +168,6 @@ export class UsersComponent implements OnInit {
             this.validChangeEnterprise();
           },
         });
-      },
-    });
-  }
-
-  pruebaFuncion(id) {
-    this.userService.getInfoUser(id).subscribe({
-      next: (response: any) => {
-        this.prueba = response.empresas;
       },
     });
   }
@@ -233,13 +212,6 @@ export class UsersComponent implements OnInit {
             icon: 'error',
             text: error.error.message,
           });
-          if (
-            error.error.message ==
-            'Te has asignado la misma empresa mas de una vez.'
-          ) {
-            this.pruebaFuncion(id);
-            this.getUser.empresas = this.prueba;
-          }
         }
       },
     });
@@ -289,7 +261,6 @@ export class UsersComponent implements OnInit {
             this.findById(userId);
           },
           error: (error: any) => {
-            console.log(error)
             Swal.fire({
               icon: 'error',
               text: error.error.message,
@@ -321,7 +292,6 @@ export class UsersComponent implements OnInit {
       },
       error: (error: any) => {
         this.postUser.empresas = [];
-        this.getUsers();
         if (error.error.errors) {
           Swal.fire({
             icon: 'error',
@@ -332,13 +302,6 @@ export class UsersComponent implements OnInit {
             icon: 'error',
             text: error.error.message,
           });
-          if (
-            error.error.message ==
-            'Te has asignado la misma empresa mas de una vez, edita tu perfil para asignarte las empresas que deseas.'
-          ) {
-            this.getUsers();
-            addForm.reset();
-          }
         }
       },
     });

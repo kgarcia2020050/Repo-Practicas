@@ -82,17 +82,17 @@
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == true">
       <div class="card border-primary cardHei resp">
         <div class="card-body">
-          <div class="flex-container">
-            <p class="coll">Agregar</p>
-            <mat-slide-toggle
-              class=""
-              [checked]="true"
-              [disabled]="true"
-              color="primary"
-            >
-              <div>Activo</div>
-            </mat-slide-toggle>
-          </div>
+            <div class="flex-container">
+              <p class="coll">Agregar</p>
+              <mat-slide-toggle
+                class=""
+                [checked]="true"
+                [disabled]="true"
+                color="primary"
+              >
+                <div>Activo</div>
+              </mat-slide-toggle>
+            </div>
 
           <br />
 
@@ -140,8 +140,8 @@
                     <mat-label>Selecciona tu perfil</mat-label>
                     <mat-select
                       matNativeControl
-                      name="status"
-                      #status="ngModel"
+                      name="profile"
+                      #profile="ngModel"
                       [(ngModel)]="postUser.profile"
                     >
                       <mat-option
@@ -217,9 +217,9 @@
           <div class="flex-container">
             <button
               (click)="postUsers(addForm)"
-              [disabled]="!name.valid || !email.valid"
+              [disabled]="!name.valid || !email.valid || postUser.profile == 0"
               type="button"
-              class="btn btn-primary butt2"
+              class="btn btn-primary butt"
             >
               Guardar
             </button>
@@ -289,31 +289,7 @@
                 </div>
 
                 <div class="col-sm-6 fort">
-                  <mat-form-field
-                    appearance="outline"
-                    *ngIf="this.editProfile == false"
-                  >
-                    <mat-label>Mi perfil</mat-label>
-                    <select
-                      (dblclick)="cambiarPerfil()"
-                      matNativeControl
-                      name="profile"
-                      #profile="ngModel"
-                      [(ngModel)]="getUser.profile"
-                    >
-                      <option
-                        [disabled]="true"
-                        [value]="this.getUser.profilesByProfile.id"
-                        [selected]="this.getUser.profilesByProfile.name"
-                      >
-                        {{ this.getUser.profilesByProfile.id }}
-                      </option>
-                    </select>
-                  </mat-form-field>
-                  <mat-form-field
-                    appearance="outline"
-                    *ngIf="this.editProfile == true"
-                  >
+                  <mat-form-field appearance="outline">
                     <mat-label>Mi perfil</mat-label>
                     <mat-select
                       matNativeControl
@@ -342,7 +318,7 @@
           <br /><br />
 
           <br />
-          <div class="row" *ngIf="this.editEnterprises == true">
+          <div class="row">
             <div cdkDropListGroup>
               <!--OTRO DRAG-->
               <div class="example-container">
@@ -350,7 +326,7 @@
                   style="height: 150px"
                   cdkDropList
                   [cdkDropListData]="listNumbers1"
-                  class="example-list scros"
+                  class="example-list scro"
                   (cdkDropListDropped)="drop($event)"
                 >
                   <div
@@ -373,10 +349,10 @@
                   (cdkDropListDropped)="drop($event); validChangeEnterprise()"
                 >
                   <div
-                    cdkDragDisabled
                     class="example-box"
                     *ngFor="let n of getUser.empresas"
                     cdkDrag
+                    [cdkDragDisabled]="n.enterpriseName"
                   >
                     {{ n.enterpriseName || n.name }}
                     <div
