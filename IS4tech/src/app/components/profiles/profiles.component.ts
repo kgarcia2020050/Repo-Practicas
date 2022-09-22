@@ -37,6 +37,7 @@ export class ProfilesComponent implements OnInit {
   openDialog() {
     this.addProfile = true;
     this.dataServiceProfile = null;
+    this.itemSelected=0;
     this.getProfile = null;
     this.changeForm = false;
   }
@@ -80,9 +81,6 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
-  cancelar() {
-    this.addProfile = false;
-  }
 
   putProfile(id) {
     this.profileService.putProfile(this.getProfile, id).subscribe({

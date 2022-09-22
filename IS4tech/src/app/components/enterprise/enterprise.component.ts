@@ -46,6 +46,7 @@ export class EnterpriseComponent implements OnInit {
 
   openDialog() {
     this.addEnterprise = true;
+    this.itemSelected=0;
     this.dataServiceEnterprise = null;
     this.getEnterprise = null;
     this.changeForm = false;

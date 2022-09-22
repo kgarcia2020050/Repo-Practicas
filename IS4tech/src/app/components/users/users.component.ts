@@ -134,6 +134,7 @@ export class UsersComponent implements OnInit {
 
   habilitar() {
     this.addUser = true;
+    this.itemSelected=0 
     this.getEnterprises();
   }
 
