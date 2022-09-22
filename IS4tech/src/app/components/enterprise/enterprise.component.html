@@ -80,8 +80,14 @@
           <form #addForm="ngForm" class="padd">
 
           <div class="card-body ">
-            <div style="padding: 20%">
-            <h5 class="card-title fs-1  colla" >Agregar Empresa</h5><br><br>
+            <div style="padding: 3%">
+              <div class="flex-container">
+            <h5 class="card-title fs-1  colla" >Agregar Empresa</h5><br>
+            <mat-slide-toggle class="" [checked]="true" [disabled]="true" color="primary" >
+              <div>Activo</div>
+            </mat-slide-toggle>
+          </div><br>
+
             <mat-form-field class="" appearance="outline">
               <mat-label>Nombre</mat-label>
               <mat-label> requerido</mat-label>
@@ -93,8 +99,180 @@
                 name="nombre"
                 required="true"
               />
-            </mat-form-field> <br><br>
-            <div class="flex-container buttons">
+            </mat-form-field> <br>
+            <p class="fs-2 coll">Accesos</p>
+          <div class="card-header coll">Configuración</div>
+
+          <div class="card-body border-primary">
+            <blockquote class="blockquote mb-0">
+              <table class="table" aria-describedby="mydesc">
+                <tbody>
+                  <!--Opciones-->
+
+                  <tr>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 1</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 2</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 3</label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 4</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 5</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 6</label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </blockquote>
+          </div>
+                    <div class="card-header coll">Operaciones</div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <table class="table" aria-describedby="mydesc">
+                <tbody>
+                  <!--Opciones-->
+
+                  <tr>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 1</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 2</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 3</label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 4</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 5</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 6</label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </blockquote>
+          </div>
+            <div class="flex-container buttons" style="padding: 0%;">
             <button
               [disabled]="!addForm.form.valid"
               type="button"
@@ -125,7 +303,7 @@
         <div class="card cardHei  border-primary ">
 
           <div class="card-body ">
-            <div style="padding: 20%">
+            <div style="padding: 3%">
               <div class="flex-container">
             <h5 class="card-title fs-1  colla" >Editar Empresa</h5>
 
@@ -139,7 +317,7 @@
           >
             <div *ngIf="getEnterprise.status == 1">Activo</div>
             <div *ngIf="getEnterprise.status == 0">Inactivo</div>
-          </mat-slide-toggle></div><br><br>
+          </mat-slide-toggle></div><br>
 
           <mat-form-field class="matb" appearance="outline">
             <mat-label>Nombre</mat-label>
@@ -154,8 +332,180 @@
               required="true"
               (change)="validChangeForm()"
             />
-          </mat-form-field><br><br>
-            <div class="flex-container buttons">
+          </mat-form-field><br>
+          <p class="fs-2 coll">Accesos</p>
+          <div class="card-header coll">Configuración</div>
+
+          <div class="card-body border-primary">
+            <blockquote class="blockquote mb-0">
+              <table class="table" aria-describedby="mydesc">
+                <tbody>
+                  <!--Opciones-->
+
+                  <tr>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 1</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 2</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 3</label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 4</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 5</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 6</label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </blockquote>
+          </div>
+                    <div class="card-header coll">Operaciones</div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <table class="table" aria-describedby="mydesc">
+                <tbody>
+                  <!--Opciones-->
+
+                  <tr>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 1</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 2</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 3</label>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 4</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 5</label>
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="form-check form-switch">
+                        <input
+                          type="checkbox"
+                          class="form-check-input"
+                          value=""
+                          id="check1"
+                        />
+                        <label for="check1" class="form-check-label"> 6</label>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </blockquote>
+          </div>
+            <div class="flex-container buttons" style="padding: 0%">
             <button
             [disabled]="!addForm.form.valid || !getEnterprise.name || changeForm"
             type="button"

@@ -72,3 +72,10 @@
       height: calc(100vh - (2px + 3px + 3px  + 2.5rem));
     }
   }
+
+  .coll{
+    color: #2B638C;
+    font-family: 'Lato', sans-serif;
+  
+  
+  }
