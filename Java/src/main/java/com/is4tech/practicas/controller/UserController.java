@@ -2,6 +2,7 @@ package com.is4tech.practicas.controller;
 
 import com.is4tech.practicas.dto.UserDTO;
 import com.is4tech.practicas.bo.Users;
+import com.is4tech.practicas.dto.UsersEnterprisesDTO;
 import com.is4tech.practicas.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -53,9 +55,9 @@ public class UserController {
         userService.verification(id, userDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable("id") Integer id) {
-        this.userService.deleteUserEnterpriseRegister(id);
+    @DeleteMapping("/delete")
+    public void deleteById(@RequestBody List<UsersEnterprisesDTO> empresas) {
+        this.userService.deleteUserEnterpriseRegister(empresas);
     }
 
 

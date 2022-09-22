@@ -1,8 +1,8 @@
 package com.is4tech.practicas.service;
 
+import com.is4tech.practicas.ProyectoParaPracticasApplication;
 import com.is4tech.practicas.dto.ProfilesDTO;
 import com.is4tech.practicas.exception.ExistingRegisterException;
-import com.is4tech.practicas.exception.InformationNotChangedException;
 import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperProfile;
 import com.is4tech.practicas.bo.Profiles;
@@ -24,7 +24,6 @@ public class ProfilesService {
     private static final String MESSAGE = "No se encuentra al perfil con el id ";
 
 
-    private static final String EXPRESSION = "([a-zA-z]{1,50})(([\\s][a-zA-z]{1,50})?){50}$";
 
 
     public ProfilesService(ProfileRepository profileRepository, MapperProfile mapperProfile) {
@@ -48,7 +47,7 @@ public class ProfilesService {
 
 
     public void saveProfile(ProfilesDTO profilesDTO) {
-        if (!profilesDTO.getName().matches(EXPRESSION)) {
+        if (!profilesDTO.getName().matches(ProyectoParaPracticasApplication.NAME_EXPRESSION)) {
             throw new ExistingRegisterException("El nombre no puede contener caracteres especiales ni espacios dobles.");
         } else {
             if (findByName(profilesDTO.getName()) != null || findByName(profilesDTO.getName().trim()) != null || findByName(profilesDTO.getName().toLowerCase()) != null || findByName(profilesDTO.getName().toUpperCase()) != null) {
@@ -67,14 +66,11 @@ public class ProfilesService {
 
 
     public void verification(Integer id, ProfilesDTO profilesDTO) {
-        if (!profilesDTO.getName().matches(EXPRESSION)) {
+        if (!profilesDTO.getName().matches(ProyectoParaPracticasApplication.NAME_EXPRESSION)) {
             throw new ExistingRegisterException("El nombre no puede contener caracteres especiales ni espacios dobles.");
         } else {
             Profiles profile = findById(id);
-            Byte status = (profilesDTO.isStatus() ? (byte) 1 : (byte) 0);
-            if (profilesDTO.getName().equals(profile.getName()) && profile.getStatus().equals(status)) {
-                throw new InformationNotChangedException("No has cambiado la información del perfil.");
-            } else if (profilesDTO.getName().equals(profile.getName())) {
+            if (profilesDTO.getName().equals(profile.getName())) {
                 editProfile(id, profilesDTO);
             } else if (findByName(profilesDTO.getName()) != null || findByName(profilesDTO.getName().trim()) != null || findByName(profilesDTO.getName().toLowerCase()) != null || findByName(profilesDTO.getName().toUpperCase()) != null) {
                 throw new ExistingRegisterException("Ya existe un perfil con el mismo nombre.");

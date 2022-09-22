@@ -82,17 +82,17 @@
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == true">
       <div class="card border-primary cardHei resp">
         <div class="card-body">
-            <div class="flex-container">
-              <p class="coll">Agregar</p>
-              <mat-slide-toggle
-                class=""
-                [checked]="true"
-                [disabled]="true"
-                color="primary"
-              >
-                <div>Activo</div>
-              </mat-slide-toggle>
-            </div>
+          <div class="flex-container">
+            <p class="coll">Agregar</p>
+            <mat-slide-toggle
+              class=""
+              [checked]="true"
+              [disabled]="true"
+              color="primary"
+            >
+              <div>Activo</div>
+            </mat-slide-toggle>
+          </div>
 
           <br />
 
@@ -327,14 +327,19 @@
                   cdkDropList
                   [cdkDropListData]="listNumbers1"
                   class="example-list scro"
-                  (cdkDropListDropped)="drop($event)"
+                  (cdkDropListDropped)="drop($event); validChangeEnterprise()"
                 >
                   <div
                     class="example-box"
                     *ngFor="let n of listNumbers1 | search: search2"
                     cdkDrag
                   >
-                    {{ n.name }}
+                    {{ n.name || n.enterpriseName }}
+                    <div class="forev">
+                      <mat-icon *ngIf="n.enterpriseName" class="dragg"
+                        >check</mat-icon
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
@@ -352,17 +357,11 @@
                     class="example-box"
                     *ngFor="let n of getUser.empresas"
                     cdkDrag
-                    [cdkDragDisabled]="n.enterpriseName"
                   >
                     {{ n.enterpriseName || n.name }}
-                    <div
-                      (click)="
-                        deleteUserEnterprise(n.id, n.enterpriseName, n.userId)
-                      "
-                      class="forev"
-                    >
+                    <div class="forev">
                       <mat-icon *ngIf="n.enterpriseName" class="dragg"
-                        >delete_forever</mat-icon
+                        >check</mat-icon
                       >
                     </div>
                   </div>
@@ -374,9 +373,7 @@
           <div class="flex-container">
             <button
               (click)="putProfile(getUser.id)"
-              [disabled]="
-                !name.valid || !email.valid || (changeForm && changeEnterprise)
-              "
+              [disabled]="changeForm && changeEnterprise"
               type="button"
               class="btn btn-primary butt2"
             >

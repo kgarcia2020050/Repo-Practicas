@@ -22,4 +22,6 @@ public interface UserEnterpriseRepository extends JpaRepository<UsersEnterprises
             "where ue.userId = :id ")
     List<UsersEnterprisesDTO> findAllDtoByUserId(Integer id);
 
+
+
 }

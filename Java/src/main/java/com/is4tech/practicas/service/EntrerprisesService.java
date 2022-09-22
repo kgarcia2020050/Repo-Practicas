@@ -1,8 +1,8 @@
 package com.is4tech.practicas.service;
 
+import com.is4tech.practicas.ProyectoParaPracticasApplication;
 import com.is4tech.practicas.dto.EnterpriseDTO;
 import com.is4tech.practicas.exception.ExistingRegisterException;
-import com.is4tech.practicas.exception.InformationNotChangedException;
 import com.is4tech.practicas.exception.NotFoundException;
 import com.is4tech.practicas.mapper.MapperEnterprises;
 import com.is4tech.practicas.bo.Enterprises;
@@ -20,7 +20,6 @@ public class EntrerprisesService {
 
     private final EnterpriseRepository enterpriseRepository;
 
-    private static final String EXPRESSION = "([a-zA-z]{1,50})(([\\s][a-zA-z]{1,50})?){50}$";
 
     private final MapperEnterprises mapperEnterprises;
 
@@ -42,7 +41,7 @@ public class EntrerprisesService {
 
 
     public void save(EnterpriseDTO enterprisesModeDto) {
-        if (!enterprisesModeDto.getName().matches(EXPRESSION)) {
+        if (!enterprisesModeDto.getName().matches(ProyectoParaPracticasApplication.NAME_EXPRESSION)) {
             throw new ExistingRegisterException("El nombre no puede contener caracteres especiales ni espacios dobles.");
         } else {
             if (findByName(enterprisesModeDto.getName()) != null || findByName(enterprisesModeDto.getName().trim()) != null || findByName(enterprisesModeDto.getName().toUpperCase()) != null || findByName(enterprisesModeDto.getName().toLowerCase()) != null) {
@@ -64,14 +63,11 @@ public class EntrerprisesService {
     }
 
     public void verification(Integer id, EnterpriseDTO enterpriseDTO) {
-        if (!enterpriseDTO.getName().matches(EXPRESSION)) {
+        if (!enterpriseDTO.getName().matches(ProyectoParaPracticasApplication.NAME_EXPRESSION)) {
             throw new ExistingRegisterException("El nombre no puede contener caracteres especiales ni espacios dobles.");
         } else {
             Enterprises entereprise = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
-            Byte status = (enterpriseDTO.isStatus() ? (byte) 1 : (byte) 0);
-            if (enterpriseDTO.getName().equals(entereprise.getName()) && entereprise.getStatus().equals(status)) {
-                throw new InformationNotChangedException("No has cambiado la información de la empresa.");
-            } else if (entereprise.getName().equals(enterpriseDTO.getName())) {
+            if (entereprise.getName().equals(enterpriseDTO.getName())) {
                 editEnterprise(id, enterpriseDTO);
             } else if (findByName(enterpriseDTO.getName()) != null && findByName(enterpriseDTO.getName().trim()) != null && findByName(enterpriseDTO.getName().toUpperCase()) != null && findByName(enterpriseDTO.getName().toLowerCase()) != null) {
                 throw new ExistingRegisterException("Ya existe una empresa con el mismo nombre.");

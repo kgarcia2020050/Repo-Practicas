@@ -40,8 +40,6 @@ export class UsersComponent implements OnInit {
 
   public pageEnterprise = 0;
 
-  public editEnterprises: boolean = false;
-
   public firstEnterprise: boolean;
 
   public lastEnterprise: boolean;
@@ -144,7 +142,6 @@ export class UsersComponent implements OnInit {
     this.getEnterprises();
     this.userService.getUser(id).subscribe({
       next: (response: any) => {
-        this.editEnterprises = true;
         this.getUser = response;
         this.itemSelected = id;
 
@@ -173,20 +170,35 @@ export class UsersComponent implements OnInit {
   }
 
   putProfile(id) {
-    if (this.editEnterprises) {
-      this.nuevoArray = this.getUser.empresas;
-      this.getUser.empresas = [];
+    let userId: UserEnterprise[] = [];
 
-      this.empresas = this.nuevoArray.filter((obj) => {
-        return obj.status >= 0;
+    let arr: any = this.listNumbers1;
+    userId = arr.filter((id) => {
+      return id.userId != null && id.userId != undefined;
+    });
+    this.nuevoArray = this.getUser.empresas;
+    this.getUser.empresas = [];
+
+    this.empresas = this.nuevoArray.filter((obj) => {
+      return obj.status >= 0;
+    });
+
+    this.empresas.forEach((empresa) => {
+      this.getUser.empresas.push({
+        enterpriseId: empresa.id,
+        id: 0,
+        enterpriseName: empresa.name,
       });
+    });
 
-      this.empresas.forEach((empresa) => {
-        this.getUser.empresas.push({
-          enterpriseId: empresa.id,
-          id: 0,
-          enterpriseName: empresa.name,
-        });
+    if (userId.length > 0) {
+      this.enterpriseService.deleteUserEnterprise(userId).subscribe({
+        next: () => {
+          console.log('exito');
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
       });
     }
 
@@ -238,37 +250,6 @@ export class UsersComponent implements OnInit {
       this.asc = true;
     }
     this.getUsers();
-  }
-
-  deleteUserEnterprise(id, name, userId) {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Ya no estarás asignado a la empresa ' + name + '.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Borrar asignación.',
-      cancelButtonText: 'Cancelar.',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.enterpriseService.deleteUserEnterprise(id).subscribe({
-          next: () => {
-            Swal.fire({
-              icon: 'success',
-              text: 'Asignación eliminada exitosamente.',
-            });
-            this.findById(userId);
-          },
-          error: (error: any) => {
-            Swal.fire({
-              icon: 'error',
-              text: error.error.message,
-            });
-          },
-        });
-      }
-    });
   }
 
   postUsers(addForm) {
@@ -333,19 +314,22 @@ export class UsersComponent implements OnInit {
   }
 
   validChangeEnterprise() {
-    if (!this.addUser && this.editEnterprises) {
-      if (this.enterpriseNew.length > 0) {
-        let empresas = [];
-        this.enterpriseNew.map((value: UserEnterprise) => {
-          empresas.push({
-            id: value.enterpriseId,
-            name: value.enterpriseName,
-          });
+    if (!this.addUser) {
+      let empresas = [];
+      let arr = [];
+      this.getUser.empresas.forEach((empresas: UserEnterprise) => {
+        arr.push({
+          id: empresas.enterpriseId,
+          name: empresas.enterpriseName,
         });
-        this.changeEnterprise = this.equalsEnterprise(this.empresas, empresas);
-      }
-    } else if (!this.addUser && !this.editEnterprises) {
-      this.changeEnterprise = true;
+      });
+      this.enterpriseNew.forEach((value: UserEnterprise) => {
+        empresas.push({
+          id: value.enterpriseId,
+          name: value.enterpriseName,
+        });
+      });
+      this.changeEnterprise = this.equalsEnterprise(arr, empresas);
     }
   }
 }

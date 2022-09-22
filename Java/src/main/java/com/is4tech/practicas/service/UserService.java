@@ -1,5 +1,6 @@
 package com.is4tech.practicas.service;
 
+import com.is4tech.practicas.ProyectoParaPracticasApplication;
 import com.is4tech.practicas.dto.UserDTO;
 
 import com.is4tech.practicas.dto.UsersEnterprisesDTO;
@@ -46,8 +47,6 @@ public class UserService {
         return usersRepository.findAll(pageable);
     }
 
-    private static final String EXPRESSION = "([a-zA-z]{1,50})(([\\s][a-zA-z]{1,50})?){50}$";
-
 
     public UserDTO findById(Integer id) {
         Optional<Users> users = this.usersRepository.findById(id);
@@ -58,11 +57,7 @@ public class UserService {
             userDTO.setName(users.get().getName());
             userDTO.setProfile(users.get().getProfile());
             userDTO.setEmail(users.get().getEmail());
-            if (users.get().getStatus() == (byte) 1) {
-                userDTO.setStatus(true);
-            } else {
-                userDTO.setStatus(false);
-            }
+            userDTO.setStatus(users.get().getStatus() == (byte) 1);
             userDTO.setEmpresas(enterprisesDTOS);
             return userDTO;
         } else {
@@ -76,10 +71,10 @@ public class UserService {
 
     public void verification(Integer id, UserDTO userDTO) {
         UserDTO user = findById(id);
-        if (!userDTO.getName().matches(EXPRESSION)) {
+        if (!userDTO.getName().matches(ProyectoParaPracticasApplication.NAME_EXPRESSION)) {
             throw new EmptyProfileException("El nombre no puede contener caracteres especiales ni espacios dobles.");
         } else {
-            if (!userDTO.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            if (!userDTO.getEmail().matches(ProyectoParaPracticasApplication.EMAIL_EXPRESSION)) {
                 throw new ExistingRegisterException("El email ingresado no es valido.");
             } else if (user.getName().equals(userDTO.getName())) {
                 editUser(id, userDTO);
@@ -92,42 +87,31 @@ public class UserService {
     }
 
     public void saveUser(UserDTO userdto) {
-        if (!userdto.getName().matches(EXPRESSION)) {
-            throw new EmptyProfileException("El nombre no puede contener caracteres especiales ni espacios dobles.");
+        if (findByName(userdto.getName()) != null || findByName(userdto.getName().trim()) != null || findByName(userdto.getName().toLowerCase()) != null || findByName(userdto.getName().toUpperCase()) != null) {
+            throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
         } else {
-            if (findByName(userdto.getName()) != null || findByName(userdto.getName().trim()) != null || findByName(userdto.getName().toLowerCase()) != null || findByName(userdto.getName().toUpperCase()) != null) {
-                throw new ExistingRegisterException("Ya existe un usuario con el mismo nombre.");
-            } else if (userdto.getProfile() == 0) {
-                throw new EmptyProfileException("Debes asignarte un perfil.");
-            } else if (!userdto.getEmail().matches("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-                throw new ExistingRegisterException("El email ingresado no es valido. ejemploCorreo@gmail.com");
-            } else {
-                Users bo = mapper.mapeo(userdto);
-                bo = this.usersRepository.save(bo);
-                if (userdto.getEmpresas() != null && !userdto.getEmpresas().isEmpty()) {
-                    List<UsersEnterprises> enterpirses = new ArrayList<>();
-                    for (int i = 0; i < userdto.getEmpresas().size(); i++) {
-                        UsersEnterprises usersEnterprises = new UsersEnterprises();
-                        usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
-                        usersEnterprises.setUserId(bo.getId());
-                        usersEnterprises.setUserName(bo.getName());
-                        usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
-                        enterpirses.add(usersEnterprises);
-                        for (int j = i + 1; j < userdto.getEmpresas().size(); j++) {
-                            if (userdto.getEmpresas().get(i).getEnterpriseName().equals(userdto.getEmpresas().get(j).getEnterpriseName())) {
-                                throw new ExistingRegisterException("Te has asignado la misma empresa mas de una vez, edita tu perfil para asignarte las empresas que deseas.");
-                            }
-                        }
-                    }
-                    this.userEnterpriseRepository.saveAll(enterpirses);
+            Users bo = mapper.mapeo(userdto);
+            bo = this.usersRepository.save(bo);
+            if (userdto.getEmpresas() != null && !userdto.getEmpresas().isEmpty()) {
+                List<UsersEnterprises> enterpirses = new ArrayList<>();
+                for (int i = 0; i < userdto.getEmpresas().size(); i++) {
+                    UsersEnterprises usersEnterprises = new UsersEnterprises();
+                    usersEnterprises.setEnterpriseId(userdto.getEmpresas().get(i).getEnterpriseId());
+                    usersEnterprises.setUserId(bo.getId());
+                    usersEnterprises.setUserName(bo.getName());
+                    usersEnterprises.setEnterpriseName(userdto.getEmpresas().get(i).getEnterpriseName());
+                    enterpirses.add(usersEnterprises);
                 }
+                this.userEnterpriseRepository.saveAll(enterpirses);
             }
         }
 
     }
 
-    public void deleteUserEnterpriseRegister(Integer id) {
-        this.userEnterpriseRepository.deleteById(id);
+    public void deleteUserEnterpriseRegister(List<UsersEnterprisesDTO> misEmpresas) {
+        for (UsersEnterprisesDTO misEmpresa : misEmpresas) {
+            userEnterpriseRepository.deleteById(misEmpresa.getId());
+        }
     }
 
 
@@ -157,13 +141,6 @@ public class UserService {
                 usersEnterprises.setEnterpriseId(userDTO.getEmpresas().get(i).getEnterpriseId());
                 usersEnterprises.setEnterpriseName(userDTO.getEmpresas().get(i).getEnterpriseName());
                 enterpirses.add(usersEnterprises);
-
-                for (int j = i + 1; j < userDTO.getEmpresas().size(); j++) {
-                    if (userDTO.getEmpresas().get(i).getEnterpriseName().equals(userDTO.getEmpresas().get(j).getEnterpriseName())) {
-                        throw new ExistingRegisterException("Te has asignado la misma empresa mas de una vez.");
-                    }
-                }
-
             }
             this.userEnterpriseRepository.saveAll(enterpirses);
         }
