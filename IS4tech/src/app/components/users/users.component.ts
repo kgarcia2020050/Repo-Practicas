@@ -31,6 +31,7 @@ export class UsersComponent implements OnInit {
   public miArray = [];
   public totalPages: number;
   public isFirst: boolean;
+  public nuevoArray = [];
   public isLast: boolean;
   public p: number = 1;
   public p2: number = 1;
@@ -97,11 +98,6 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/openEnterprise']);
   }
 
-  asignarEmpresas() {
-    this.empresas = [];
-    this.editEnterprises = true;
-  }
-
   drop($event: CdkDragDrop<number[]>) {
     if ($event.previousContainer === $event.container) {
       moveItemInArray(
@@ -150,9 +146,9 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  habilitar(){
-    this.addUser=true;
-    this.getEnterprises()
+  habilitar() {
+    this.addUser = true;
+    this.getEnterprises();
   }
 
   findById(id) {
@@ -160,7 +156,7 @@ export class UsersComponent implements OnInit {
     this.getEnterprises();
     this.userService.getUser(id).subscribe({
       next: (response: any) => {
-        this.editEnterprises = false;
+        this.editEnterprises = true;
         this.getUser = response;
         this.itemSelected = id;
 
@@ -199,6 +195,13 @@ export class UsersComponent implements OnInit {
 
   putProfile(id) {
     if (this.editEnterprises) {
+      this.nuevoArray = this.getUser.empresas;
+      this.getUser.empresas = [];
+
+      this.empresas = this.nuevoArray.filter((obj) => {
+        return obj.status >= 0;
+      });
+
       this.empresas.forEach((empresa) => {
         this.getUser.empresas.push({
           enterpriseId: empresa.id,
@@ -286,6 +289,7 @@ export class UsersComponent implements OnInit {
             this.findById(userId);
           },
           error: (error: any) => {
+            console.log(error)
             Swal.fire({
               icon: 'error',
               text: error.error.message,
@@ -351,8 +355,7 @@ export class UsersComponent implements OnInit {
       source.name === target.name &&
       source.status === target.status &&
       source.email === target.email &&
-      source.profile === target.profile &&
-      source.empresas === target.empresas
+      source.profile === target.profile
     );
   }
 

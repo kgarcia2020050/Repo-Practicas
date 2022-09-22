@@ -79,14 +79,20 @@
         ></em>
       </div>
     </div>
-    <div class="col-sm p-3 min-vh-100 dim2 " *ngIf="addUser == true">
+    <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == true">
       <div class="card border-primary cardHei resp">
         <div class="card-body">
           <div class="flex-container">
-          <p class="coll">Agregar</p>
-          <mat-slide-toggle class="" [checked]="true" [disabled]="true" color="primary" >
-            <div>Activo</div>
-          </mat-slide-toggle></div>
+            <p class="coll">Agregar</p>
+            <mat-slide-toggle
+              class=""
+              [checked]="true"
+              [disabled]="true"
+              color="primary"
+            >
+              <div>Activo</div>
+            </mat-slide-toggle>
+          </div>
 
           <br />
 
@@ -94,7 +100,6 @@
             <div class="container card-0 justify-content-center">
               <div class="row">
                 <div class="col-sm-6">
-
                   <mat-form-field class="other" appearance="outline">
                     <mat-label>Nombre</mat-label>
                     <mat-label *ngIf="!name.valid && name.touched">
@@ -113,8 +118,6 @@
                 </div>
 
                 <div class="col-sm-6">
-
-
                   <mat-form-field class="" appearance="outline">
                     <mat-label>Correo</mat-label>
                     <mat-label *ngIf="!name.valid && name.touched">
@@ -152,16 +155,18 @@
                 </div>
               </div>
             </div>
-          </form><br>
-          <div>
-            <p class=" dragd">Asignación de empresas</p>
-          </div><br>
+          </form>
           <br />
           <div>
-            <div class="input-group roud" >
+            <p class="dragd">Asignación de empresas</p>
+          </div>
+          <br />
+          <br />
+          <div>
+            <div class="input-group roud">
               <input
                 type="search"
-                class="form-control   "
+                class="form-control"
                 placeholder="Buscar Empresa"
                 aria-label="Buscar"
                 aria-describedby="search-addon"
@@ -178,8 +183,7 @@
           <div cdkDropListGroup>
             <div class="example-container">
               <div
-              style="height: 150px;"
-
+                style="height: 150px"
                 cdkDropList
                 [cdkDropListData]="listNumbers1"
                 class="example-list scro"
@@ -195,9 +199,9 @@
               </div>
             </div>
 
-            <div class="example-container" >
+            <div class="example-container">
               <div
-              style="height: 150px;"
+                style="height: 150px"
                 cdkDropList
                 [cdkDropListData]="empresas"
                 class="example-list scro"
@@ -219,32 +223,29 @@
             >
               Guardar
             </button>
-
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm p-3 min-vh-100 dim2 " *ngIf="addUser == false">
+    <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == false">
       <div class="card border-primary cardHei resp">
         <div class="card-body">
           <!--Titulos y nombres-->
           <div class="flex-container">
-          <p class="coll">Editar</p>
-          <mat-slide-toggle
-            name="status"
-            #status="ngModel"
-            [(ngModel)]="getUser.status"
-            class=""
-            *ngIf="getUser.name && getUser.email"
-            (change)="validChangeForm()"
-          >
-            <div *ngIf="getUser.status == 1">Activo</div>
-            <div *ngIf="getUser.status == 0">Inactivo</div>
-          </mat-slide-toggle>
-        </div>
+            <p class="coll">Editar</p>
+            <mat-slide-toggle
+              name="status"
+              #status="ngModel"
+              [(ngModel)]="getUser.status"
+              class=""
+              *ngIf="getUser.name && getUser.email"
+              (change)="validChangeForm()"
+            >
+              <div *ngIf="getUser.status == 1">Activo</div>
+              <div *ngIf="getUser.status == 0">Inactivo</div>
+            </mat-slide-toggle>
+          </div>
           <br /><br />
-
-
 
           <form #addForm="ngForm">
             <div class="container card-0 justify-content-center">
@@ -332,12 +333,13 @@
                 </div>
               </div>
             </div>
-          </form><br>
+          </form>
+          <br />
 
           <div>
             <p class="dragd">Asignación de empresas</p>
           </div>
-          <br /><br>
+          <br /><br />
 
           <br />
           <div class="row" *ngIf="this.editEnterprises == true">
@@ -345,8 +347,7 @@
               <!--OTRO DRAG-->
               <div class="example-container">
                 <div
-                style="height: 150px;"
-
+                  style="height: 150px"
                   cdkDropList
                   [cdkDropListData]="listNumbers1"
                   class="example-list scros"
@@ -362,52 +363,9 @@
                 </div>
               </div>
 
-              <!--OTRO DRAG-->
               <div class="example-container">
                 <div
-                style="height: 150px;"
-                  cdkDropList
-                  [cdkDropListData]="empresas"
-                  [cdkDropListConnectedTo]="[ln1]"
-                  class="example-list scro"
-                  (cdkDropListDropped)="drop($event); validChangeEnterprise()"
-                >
-                  <div class="example-box" *ngFor="let n of empresas" cdkDrag>
-                    {{ n.name }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row" *ngIf="this.editEnterprises == false">
-            <div cdkDropListGroup>
-              <!--OTRO DRAG-->
-              <div class="example-container">
-                <div
-                style="height: 150px;"
-
-                  cdkDropList
-                  [cdkDropListData]="listNumbers1"
-                  [cdkDropListConnectedTo]="[ln2]"
-                  class="example-list scro"
-                  (cdkDropListDropped)="drop($event)"
-                >
-                  <div
-                    cdkDragDisabled
-                    class="example-box"
-                    *ngFor="let n of listNumbers1"
-                    cdkDrag
-                  >
-                    {{ n.name }}
-                  </div>
-                </div>
-              </div>
-
-              <!--OTRO DRAG-->
-              <div class="example-container">
-                <div
-                style="height: 150px;"
-
+                  style="height: 150px"
                   cdkDropList
                   [cdkDropListData]="getUser.empresas"
                   [cdkDropListConnectedTo]="[ln1]"
@@ -420,14 +378,16 @@
                     *ngFor="let n of getUser.empresas"
                     cdkDrag
                   >
-                    {{ n.enterpriseName }}
+                    {{ n.enterpriseName || n.name }}
                     <div
                       (click)="
                         deleteUserEnterprise(n.id, n.enterpriseName, n.userId)
                       "
                       class="forev"
                     >
-                      <mat-icon class="dragg">delete_forever</mat-icon>
+                      <mat-icon *ngIf="n.enterpriseName" class="dragg"
+                        >delete_forever</mat-icon
+                      >
                     </div>
                   </div>
                 </div>
@@ -445,15 +405,6 @@
               class="btn btn-primary butt2"
             >
               Guardar
-            </button>
-
-            <button
-              (click)="asignarEmpresas()"
-              [disabled]="!name.valid || !email.valid"
-              type="button"
-              class="btn btn-primary asignEnt"
-            >
-              Asignarme empresas
             </button>
             <button
               mat-mini-fab

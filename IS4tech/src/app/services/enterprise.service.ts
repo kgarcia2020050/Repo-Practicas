@@ -45,6 +45,6 @@ export class EnterpriseService {
   }
 
   deleteUserEnterprise(id: number): Observable<any> {
-    return this.http.delete(url + 'enterprise/delete/' + id);
+    return this.http.delete(url + 'user/delete/' + id);
   }
 }
