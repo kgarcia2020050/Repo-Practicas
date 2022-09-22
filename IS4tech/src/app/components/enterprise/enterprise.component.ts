@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Enterprise } from 'src/app/models/enterprise';
 import { EnterpriseService } from 'src/app/services/enterprise.service';
 import Swal from 'sweetalert2';
@@ -31,7 +30,6 @@ export class EnterpriseComponent implements OnInit {
 
   constructor(
     private enterpriseService: EnterpriseService,
-    private router: Router
   ) {
     this.getEnterprise = new Enterprise(0, '', 1);
 

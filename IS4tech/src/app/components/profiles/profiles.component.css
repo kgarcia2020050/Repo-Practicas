@@ -1,45 +1,36 @@
-
-.example-button-container{
+.example-button-container {
   padding-top: 50%;
 }
 
-.positionn{
+.positionn {
   position: relative;
 }
 
-.title{
+.title {
   padding: 3%;
   font-size: 65px;
-  color: #2B638C;
-  font-family: 'Lato', sans-serif;
-
+  color: #2b638c;
+  font-family: "Lato", sans-serif;
 }
 
-.coll{
-  color: #2B638C;
-  font-family: 'Lato', sans-serif;
-
-
+.coll {
+  color: #2b638c;
+  font-family: "Lato", sans-serif;
 }
 
 .coll2 {
-  color: #2B638C;
-  font-family: 'Lato', sans-serif;
+  color: #2b638c;
+  font-family: "Lato", sans-serif;
   font-size: 50px;
-
-
 }
 
-.colla{
-  color: #2B638C;
-  font-family: 'Lato', sans-serif;
+.colla {
+  color: #2b638c;
+  font-family: "Lato", sans-serif;
   font-size: 65px;
-
 }
 
-
-
-.perf{
+.perf {
   padding-top: 100%;
 }
 .img-profile {
@@ -48,90 +39,88 @@
   border-radius: 50%;
 }
 
-.dimen{
+.dimen {
   padding: 100%;
 }
 
-.tabod{
+.tabod {
   border-radius: 50%;
 }
 
-.hoved:hover{
+.hoved:hover {
   background-color: rgb(199, 202, 202);
-  transition: background-color .5s;
+  transition: background-color 0.5s;
 }
 
-::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+::ng-deep
+  .mat-slide-toggle.mat-checked:not(.mat-disabled)
+  .mat-slide-toggle-thumb {
   background-color: #12579c; /*replace with your color*/
 }
-::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-background-color: rgb(118, 129, 233);  /*replace with your color*/
+::ng-deep
+  .mat-slide-toggle.mat-checked:not(.mat-disabled)
+  .mat-slide-toggle-bar {
+  background-color: rgb(118, 129, 233); /*replace with your color*/
 }
 
-.itemSelected{
+.itemSelected {
   background-color: rgb(199, 202, 202);
-  transition: background-color .5s;
+  transition: background-color 0.5s;
 }
 
-
-  .btnn:hover{
-      background-color: rgb(199, 202, 202);
-      transition: background-color .5s;  }
-
-      .hoved{
-          font-size: medium;
-      }
-
-
-.princ{
-  background-color: #F0F0F0;
+.btnn:hover {
+  background-color: rgb(199, 202, 202);
+  transition: background-color 0.5s;
 }
 
-.sidenav{
-  background-color: #12579C;
+.hoved {
+  font-size: medium;
 }
 
-.butt{
-
-background-color: #12579C   ;
-
+.princ {
+  background-color: #f0f0f0;
 }
 
-.butt2{
-  background-color: #12579C   ;
+.sidenav {
+  background-color: #12579c;
 }
 
+.butt {
+  background-color: #12579c;
+}
 
-.heed{
+.butt2 {
+  background-color: #12579c;
+}
+
+.heed {
   position: absolute;
-left: 20%;
-color: #12579C;
-
+  left: 20%;
+  color: #12579c;
 }
-.heed2{
+.heed2 {
   position: absolute;
-left: 16%;
-color: #12579C;
+  left: 16%;
+  color: #12579c;
 }
 
-.fa-sort{
+.fa-sort {
   position: relative;
   left: 95%;
-  color: #12579C;
+  color: #12579c;
 }
 
-.slide{
-color: #12579C;
-position: absolute;
-left: 60%;
+.slide {
+  color: #12579c;
+  position: absolute;
+  left: 60%;
 }
 
-@media  (min-width: 415px ) {
-  .cardHei{
-    height: calc(100vh - (2px + 3px + 3px  + 2.5rem));
+@media (min-width: 415px) {
+  .cardHei {
+    height: calc(100vh - (2px + 3px + 3px + 2.5rem));
   }
 }
-
 
 .mat-form-field {
   width: 50%;
@@ -139,10 +128,5 @@ left: 60%;
 
 .flex-container {
   display: flex;
-justify-content: space-between;
-
+  justify-content: space-between;
 }
-
-
-
-
