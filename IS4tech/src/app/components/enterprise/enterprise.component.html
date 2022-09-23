@@ -124,7 +124,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -138,7 +140,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -152,7 +156,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -167,7 +173,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -181,7 +189,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -195,7 +205,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -221,7 +233,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -235,7 +249,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -249,7 +265,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -264,7 +282,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -278,7 +298,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -292,7 +314,9 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postEnterprise.permission"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -355,14 +379,13 @@
                 <mat-label>Nombre</mat-label>
                 <mat-label> requerido</mat-label>
                 <input
-                  [disabled]="!getEnterprise.name"
                   matInput
                   placeholder="Nombre"
                   name="name"
                   #name="ngModel"
                   [(ngModel)]="getEnterprise.name"
                   required="true"
-                  (change)="validChangeForm()"
+                  (ngModelChange)="validChangeForm()"
                 /> </mat-form-field
               ><br />
               <p class="fs-2 coll">Accesos</p>
@@ -380,7 +403,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -394,7 +420,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -408,7 +437,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -423,7 +455,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -437,7 +472,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -451,7 +489,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -477,7 +518,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -491,7 +535,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -505,7 +552,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -520,7 +570,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -534,7 +587,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">
@@ -548,7 +604,10 @@
                             <input
                               type="checkbox"
                               class="form-check-input"
-                              value=""
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getEnterprise.permission"
+                              (ngModelChange)="validChangeForm()"
                               id="check1"
                             />
                             <label for="check1" class="form-check-label">

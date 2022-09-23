@@ -80,11 +80,8 @@ public class EntrerprisesService {
     public void editEnterprise(Integer id, EnterpriseDTO enterpriseDTO) {
         Enterprises model = enterpriseRepository.findById(id).orElseThrow(() -> new NotFoundException(MESSAGE + id));
         model.setName(enterpriseDTO.getName());
-        if (enterpriseDTO.isStatus()) {
-            model.setStatus((byte) 1);
-        } else {
-            model.setStatus((byte) 0);
-        }
+        model.setPermission(enterpriseDTO.isPermission() ? (byte) 1 : (byte) 0);
+        model.setStatus(enterpriseDTO.isStatus() ? (byte) 1 : (byte) 0);
         enterpriseRepository.save(model);
     }
 

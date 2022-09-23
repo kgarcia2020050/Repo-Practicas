@@ -26,8 +26,8 @@ export class ProfilesComponent implements OnInit {
   public itemSelected: number;
 
   constructor(private profileService: ProfileService, private router: Router) {
-    this.getProfile = new Profile(0, '', 1);
-    this.postProfile = new Profile(0, '', 1);
+    this.getProfile = new Profile(0, '', 1, 0);
+    this.postProfile = new Profile(0, '', 1, 0);
   }
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class ProfilesComponent implements OnInit {
   openDialog() {
     this.addProfile = true;
     this.dataServiceProfile = null;
-    this.itemSelected=0;
+    this.itemSelected = 0;
     this.getProfile = null;
     this.changeForm = false;
   }
@@ -81,16 +81,15 @@ export class ProfilesComponent implements OnInit {
     });
   }
 
-
   putProfile(id) {
     this.profileService.putProfile(this.getProfile, id).subscribe({
       next: () => {
+        this.addProfile = true;
         Swal.fire({
           icon: 'success',
           text: 'Perfil modificado exitosamente.',
-        }).then(() => {
-          this.getProfiles();
         });
+        this.getProfiles();
       },
       error: (error: any) => {
         if (error.error.errors) {
@@ -143,12 +142,13 @@ export class ProfilesComponent implements OnInit {
   }
 
   equals(source: Profile, target: Profile): boolean {
-    if (source.status) {
-      source.status = 1;
-    } else {
-      source.status = 0;
-    }
-    return source.name === target.name && source.status === target.status;
+    source.permission = source.permission ? 1 : 0;
+    source.status = source.status ? 1 : 0;
+    return (
+      source.name === target.name &&
+      source.status === target.status &&
+      source.permission === target.permission
+    );
   }
 
   validChangeForm() {

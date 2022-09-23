@@ -16,6 +16,9 @@ public class Profiles {
     @Basic
     @Column(name = "STATUS", nullable = true)
     private Byte status;
+    @Basic
+    @Column(name = "PERMISSION", nullable = true)
+    private Byte permission;
 
     public int getId() {
         return id;
@@ -41,7 +44,6 @@ public class Profiles {
         this.status = status;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -53,5 +55,13 @@ public class Profiles {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getName(), getStatus());
+    }
+
+    public Byte getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Byte permission) {
+        this.permission = permission;
     }
 }

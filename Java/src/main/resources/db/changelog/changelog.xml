@@ -80,4 +80,13 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="seventhChangeSet" author="Kenneth Garcia">
+        <addColumn tableName="ENTERPRISES">
+            <column name="PERMISSION" type="tinyint(1)" remarks="PERMISSION_COLUMN"></column>
+        </addColumn>
+        <addColumn tableName="PROFILES">
+            <column name="PERMISSION" type="tinyint(1)" remarks="PERMISSION_COLUMN"></column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

@@ -5,11 +5,16 @@ import com.is4tech.practicas.bo.Profiles;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MapperProfile implements MapperDTO<ProfilesDTO, Profiles>{
+public class MapperProfile implements MapperDTO<ProfilesDTO, Profiles> {
     @Override
     public Profiles mapeo(ProfilesDTO objeto) {
-        Profiles model=new Profiles();
+        Profiles model = new Profiles();
         model.setName(objeto.getName());
+        if (objeto.isPermission()) {
+            model.setPermission((byte) 1);
+        } else {
+            model.setPermission((byte) 0);
+        }
         model.setStatus((byte) 1);
         return model;
     }

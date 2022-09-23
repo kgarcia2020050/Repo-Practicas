@@ -21,7 +21,7 @@ export class EnterpriseDialogComponent implements OnInit {
     private dialog: MatDialogRef<EnterpriseDialogComponent>,
     private enterpriseService: EnterpriseService
   ) {
-    this.postEnterprise = new Enterprise(0, '',1);
+    this.postEnterprise = new Enterprise(0, '',1,0);
 
   }
 

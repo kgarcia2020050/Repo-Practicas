@@ -80,485 +80,577 @@
     </div>
   </div>
 
-
-
-
-
-  <div class="col-sm p-3  "   style="max-width: 60rem"  *ngIf="addProfile == true">
-
+  <div class="col-sm p-3" style="max-width: 60rem" *ngIf="addProfile == true">
     <div class="resp hei">
-      <div class="card cardHei border-primary ">
+      <div class="card cardHei border-primary">
         <form #addForm="ngForm" class="padd">
+          <div class="card-body">
+            <div style="padding: 3%">
+              <div class="flex-container">
+                <h5 class="card-title fs-1 colla">Agregar Perfil</h5>
+                <br />
+                <mat-slide-toggle
+                  class=""
+                  [checked]="true"
+                  [disabled]="true"
+                  color="primary"
+                >
+                  <div>Activo</div>
+                </mat-slide-toggle>
+              </div>
+              <br />
 
-        <div class="card-body ">
-          <div style="padding: 3%">
-            <div class="flex-container">
-          <h5 class="card-title fs-1  colla" >Agregar Perfil</h5><br>
-          <mat-slide-toggle class="" [checked]="true" [disabled]="true" color="primary" >
-            <div>Activo</div>
-          </mat-slide-toggle>
-        </div><br>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <mat-label *ngIf="!name.valid && name.touched">
+                  requerido</mat-label
+                >
+                <input
+                  #name="ngModel"
+                  [(ngModel)]="postProfile.name"
+                  matInput
+                  placeholder="Nombre"
+                  name="nombre"
+                  required="true"
+                />
+              </mat-form-field>
+              <br />
+              <p class="fs-2 coll">Accesos</p>
+              <div class="card-header coll">Configuración</div>
 
-        <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Nombre</mat-label>
-          <mat-label *ngIf="!name.valid && name.touched">
-            requerido</mat-label
-          >
-          <input
-            #name="ngModel"
-            [(ngModel)]="postProfile.name"
-            matInput
-            placeholder="Nombre"
-            name="nombre"
-            required="true"
-          />
-        </mat-form-field>
-         <br>
-          <p class="fs-2 coll">Accesos</p>
-        <div class="card-header coll">Configuración</div>
+              <div class="card-body border-primary">
+                <blockquote class="blockquote mb-0">
+                  <table class="table" aria-describedby="mydesc">
+                    <tbody>
+                      <!--Opciones-->
 
-        <div class="card-body border-primary">
-          <blockquote class="blockquote mb-0">
-            <table class="table" aria-describedby="mydesc">
-              <tbody>
-                <!--Opciones-->
+                      <tr>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              1</label
+                            >
+                          </div>
+                        </td>
 
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 1</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              2</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 2</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              3</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              4</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 3</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 4</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              5</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 5</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              6</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </blockquote>
+              </div>
+              <div class="card-header coll">Operaciones</div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <table class="table" aria-describedby="mydesc">
+                    <tbody>
+                      <!--Opciones-->
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 6</label>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </blockquote>
-        </div>
-                  <div class="card-header coll">Operaciones</div>
-        <div class="card-body">
-          <blockquote class="blockquote mb-0">
-            <table class="table" aria-describedby="mydesc">
-              <tbody>
-                <!--Opciones-->
+                      <tr>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              1</label
+                            >
+                          </div>
+                        </td>
 
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 1</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              2</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 2</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              3</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              4</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 3</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 4</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              5</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 5</label>
-                    </div>
-                  </td>
-
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 6</label>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </blockquote>
-        </div>
-          <div class="flex-container buttons" >
-          
-       
-            <button
-            [disabled]="!addForm.form.valid"
-            type="button"
-            class="btn btn-primary butt2"
-            type="button"
-            (click)="newProfile(addForm)"
-            style="background-color: #12579c"
-          >
-            Guardar
-          </button>
-          
-
-        </div>
-        </div>
-
-      </div></form>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="postProfile.permission"
+                              id="check1"
+                            />
+                            <label for="check1" class="form-check-label">
+                              6</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </blockquote>
+              </div>
+              <div class="flex-container buttons">
+                <button
+                  [disabled]="!addForm.form.valid"
+                  type="button"
+                  class="btn btn-primary butt2"
+                  type="button"
+                  (click)="newProfile(addForm)"
+                  style="background-color: #12579c"
+                >
+                  Guardar
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
-
-</div>
-
-
-
-
- 
-
-
-
-  <div class="col-sm p-3  "       *ngIf="addProfile == false"  >
-
+  <div class="col-sm p-3" *ngIf="addProfile == false">
     <div class="resp hei">
-      <div class="card cardHei border-primary ">
+      <div class="card cardHei border-primary">
         <form #addForm="ngForm" class="padd">
+          <div class="card-body">
+            <div style="padding: 3%">
+              <div class="flex-container">
+                <h5 class="card-title fs-1 colla">Editar Perfil</h5>
+                <br />
+                <mat-slide-toggle
+                  name="status"
+                  #status="ngModel"
+                  [(ngModel)]="getProfile.status"
+                  class=""
+                  *ngIf="getProfile.name"
+                  (ngModelChange)="validChangeForm()"
+                  color="primary"
+                >
+                  <div *ngIf="getProfile.status == 1">Activo</div>
+                  <div *ngIf="getProfile.status == 0">Inactivo</div>
+                </mat-slide-toggle>
+              </div>
+              <br />
 
-        <div class="card-body ">
-          <div style="padding: 3%">
-            <div class="flex-container">
-          <h5 class="card-title fs-1  colla" >Editar Perfil</h5><br>
-          <mat-slide-toggle
-              name="status"
-              #status="ngModel"
-              [(ngModel)]="getProfile.status"
-              class=""
-              *ngIf="getProfile.name"
-              (change)="validChangeForm()"
-              color="primary"
-            >
-              <div *ngIf="getProfile.status == 1">Activo</div>
-              <div *ngIf="getProfile.status == 0">Inactivo</div>
-            </mat-slide-toggle>
-        </div><br>
+              <mat-form-field class="matb" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <mat-label> requerido</mat-label>
+                <input
+                  [disabled]="!getProfile.name"
+                  matInput
+                  placeholder="Nombre"
+                  name="name"
+                  #name="ngModel"
+                  [(ngModel)]="getProfile.name"
+                  required="true"
+                  (ngModelChange)="validChangeForm()"
+                />
+              </mat-form-field>
+              <br />
+              <p class="fs-2 coll">Accesos</p>
+              <div class="card-header coll">Configuración</div>
 
-        <mat-form-field class="matb" appearance="outline">
-          <mat-label>Nombre</mat-label>
-          <mat-label> requerido</mat-label>
-          <input
-            [disabled]="!getProfile.name"
-            matInput
-            placeholder="Nombre"
-            name="name"
-            #name="ngModel"
-            [(ngModel)]="getProfile.name"
-            required="true"
-            (change)="validChangeForm()"
-          />
-        </mat-form-field>
-         <br>
-          <p class="fs-2 coll">Accesos</p>
-        <div class="card-header coll">Configuración</div>
+              <div class="card-body border-primary">
+                <blockquote class="blockquote mb-0">
+                  <table class="table" aria-describedby="mydesc">
+                    <tbody>
+                      <!--Opciones-->
 
-        <div class="card-body border-primary">
-          <blockquote class="blockquote mb-0">
-            <table class="table" aria-describedby="mydesc">
-              <tbody>
-                <!--Opciones-->
+                      <tr>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              1</label
+                            >
+                          </div>
+                        </td>
 
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 1</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              2</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 2</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              3</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              4</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 3</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 4</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              5</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 5</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              6</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </blockquote>
+              </div>
+              <div class="card-header coll">Operaciones</div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <table class="table" aria-describedby="mydesc">
+                    <tbody>
+                      <!--Opciones-->
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 6</label>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </blockquote>
-        </div>
-                  <div class="card-header coll">Operaciones</div>
-        <div class="card-body">
-          <blockquote class="blockquote mb-0">
-            <table class="table" aria-describedby="mydesc">
-              <tbody>
-                <!--Opciones-->
+                      <tr>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              1</label
+                            >
+                          </div>
+                        </td>
 
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 1</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              2</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 2</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              3</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              4</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 3</label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 4</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              5</label
+                            >
+                          </div>
+                        </td>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 5</label>
-                    </div>
-                  </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              name="permission"
+                              #permission="ngModel"
+                              [(ngModel)]="getProfile.permission"
+                              id="check1"
+                              (ngModelChange)="validChangeForm()"
+                            />
+                            <label for="check1" class="form-check-label">
+                              6</label
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </blockquote>
+              </div>
+              <div class="flex-container buttons" style="padding: 0%">
+                <button
+                  (click)="putProfile(getProfile.id)"
+                  [disabled]="
+                    !addForm.form.valid || !getProfile.name || changeForm
+                  "
+                  type="button"
+                  class="btn btn-primary butt2"
+                >
+                  Guardar
+                </button>
 
-                  <td>
-                    <div class="form-check form-switch">
-                      <input
-                        type="checkbox"
-                        class="form-check-input"
-                        value=""
-                        id="check1"
-                      />
-                      <label for="check1" class="form-check-label"> 6</label>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </blockquote>
-        </div>
-          <div class="flex-container buttons" style="padding: 0%;">
-          
-              <button
-                (click)="putProfile(getProfile.id)"
-                [disabled]="!addForm.form.valid || !getProfile.name || changeForm"
-                type="button"
-                class="btn btn-primary butt2"
-              >
-                Guardar
-              </button>
-  
-              <button
-                mat-mini-fab
-                (click)="openDialog()"
-                color="black"
-                type="button"
-                class="btn btn-primary butt"
-              >
-                <mat-icon>note_add</mat-icon>
-              </button>
-          
-
-        </div>
-        </div>
-
-      </div></form>
+                <button
+                  mat-mini-fab
+                  (click)="openDialog()"
+                  color="black"
+                  type="button"
+                  class="btn btn-primary butt"
+                >
+                  <mat-icon>note_add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-
-
-</div>
-
 </div>

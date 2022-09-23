@@ -11,6 +11,11 @@ public class MapperEnterprises implements MapperDTO<EnterpriseDTO, Enterprises> 
     public Enterprises mapeo(EnterpriseDTO objeto) {
         Enterprises model = new Enterprises();
         model.setName(objeto.getName());
+        if (objeto.isPermission()) {
+            model.setPermission((byte) 1);
+        } else {
+            model.setPermission((byte) 0);
+        }
         model.setStatus((byte) 1);
         return model;
     }

@@ -16,6 +16,9 @@ public class Enterprises {
     @Basic
     @Column(name = "STATUS", nullable = true)
     private Byte status;
+    @Basic
+    @Column(name = "PERMISSION", nullable = true)
+    private Byte permission;
 
     public int getId() {
         return id;
@@ -52,5 +55,13 @@ public class Enterprises {
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public Byte getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Byte permission) {
+        this.permission = permission;
     }
 }

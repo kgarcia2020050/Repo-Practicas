@@ -25,26 +25,19 @@ export class EnterpriseComponent implements OnInit {
   public dataServiceEnterprise: Enterprise;
   public itemSelected: number;
 
+  constructor(private enterpriseService: EnterpriseService) {
+    this.getEnterprise = new Enterprise(0, '', 1, 0);
 
-
-
-  constructor(
-    private enterpriseService: EnterpriseService,
-  ) {
-    this.getEnterprise = new Enterprise(0, '', 1);
-
-    this.postEnterprise = new Enterprise(0, '', 1);
-
+    this.postEnterprise = new Enterprise(0, '', 1, 0);
   }
 
   ngOnInit(): void {
     this.getEnterprises();
-
   }
 
   openDialog() {
     this.addEnterprise = true;
-    this.itemSelected=0;
+    this.itemSelected = 0;
     this.dataServiceEnterprise = null;
     this.getEnterprise = null;
     this.changeForm = false;
@@ -79,12 +72,12 @@ export class EnterpriseComponent implements OnInit {
   putEnterprise(id) {
     this.enterpriseService.putEnterprise(this.getEnterprise, id).subscribe({
       next: () => {
+        this.addEnterprise = true;
         Swal.fire({
           icon: 'success',
           text: 'Perfil modificado exitosamente.',
-        }).then(() => {
-          this.getEnterprises();
         });
+        this.getEnterprises();
       },
       error: (error: any) => {
         if (error.error.errors) {
@@ -103,18 +96,21 @@ export class EnterpriseComponent implements OnInit {
   }
 
   equals(source: Enterprise, target: Enterprise): boolean {
-    if (source.status) {
-      source.status = 1;
-    } else {
-      source.status = 0;
-    }
-    return source.name === target.name && source.status === target.status;
+    source.status = source.status ? 1 : 0;
+    source.permission = source.permission ? 1 : 0;
+    return (
+      source.name === target.name &&
+      source.status === target.status &&
+      source.permission === target.permission
+    );
   }
-
 
   validChangeForm() {
     if (!this.addEnterprise) {
-      this.changeForm = this.equals(this.getEnterprise, this.dataServiceEnterprise);
+      this.changeForm = this.equals(
+        this.getEnterprise,
+        this.dataServiceEnterprise
+      );
     }
   }
 

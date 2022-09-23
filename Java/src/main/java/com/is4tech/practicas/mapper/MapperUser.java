@@ -20,7 +20,6 @@ public class MapperUser implements MapperDTO<UserDTO, Users> {
     @Override
     public Users mapeo(UserDTO objeto) {
         if (!objeto.getEmail().matches(ProyectoParaPracticasApplication.EMAIL_EXPRESSION)) {
-            System.out.println(objeto.getEmail().matches(ProyectoParaPracticasApplication.EMAIL_EXPRESSION));
             throw new ExistingRegisterException("El email ingresado no es válido.");
         } else if (objeto.getProfile() == 0 || objeto.getProfile() == null) {
             throw new EmptyProfileException("Debes asignarte un perfil.");
