@@ -366,7 +366,6 @@
                   #status="ngModel"
                   [(ngModel)]="getEnterprise.status"
                   class="slide"
-                  *ngIf="getEnterprise.name"
                   (change)="validChangeForm()"
                 >
                   <div *ngIf="getEnterprise.status == 1">Activo</div>

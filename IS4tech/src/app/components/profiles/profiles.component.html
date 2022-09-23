@@ -368,7 +368,6 @@
                   #status="ngModel"
                   [(ngModel)]="getProfile.status"
                   class=""
-                  *ngIf="getProfile.name"
                   (ngModelChange)="validChangeForm()"
                   color="primary"
                 >
@@ -382,7 +381,6 @@
                 <mat-label>Nombre</mat-label>
                 <mat-label> requerido</mat-label>
                 <input
-                  [disabled]="!getProfile.name"
                   matInput
                   placeholder="Nombre"
                   name="name"

@@ -240,7 +240,6 @@
               #status="ngModel"
               [(ngModel)]="getUser.status"
               class=""
-              *ngIf="getUser.name && getUser.email"
               (ngModelChange)="validChangeForm()"
             >
               <div *ngIf="getUser.status == 1">Activo</div>
@@ -259,7 +258,6 @@
                       requerido</mat-label
                     >
                     <input
-                      [disabled]="!getUser.name"
                       #name="ngModel"
                       [(ngModel)]="getUser.name"
                       matInput
@@ -367,6 +365,7 @@
                   [cdkDropListData]="getUser.empresas"
                   [cdkDropListConnectedTo]="[ln1]"
                   class="example-list scro"
+                  cdkDropListSortingDisabled
                   (cdkDropListDropped)="drop($event); validChangeEnterprise()"
                 >
                   <div
