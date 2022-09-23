@@ -82,8 +82,10 @@
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == true">
       <div class="card border-primary cardHei resp">
         <div class="card-body">
+
+          <div style="padding: 3%;">
           <div class="flex-container">
-            <p class="coll">Agregar</p>
+            <p class="fs-1 coll">Agregar</p>
             <mat-slide-toggle
               class=""
               [checked]="true"
@@ -224,13 +226,15 @@
           </div>
         </div>
       </div>
+      </div>
     </div>
     <div class="col-sm p-3 min-vh-100 dim2" *ngIf="addUser == false">
       <div class="card border-primary cardHei resp">
         <div class="card-body">
+          <div style="padding: 3%;">
           <!--Titulos y nombres-->
           <div class="flex-container">
-            <p class="coll">Editar</p>
+            <p class="fs-1 coll">Editar</p>
             <mat-slide-toggle
               name="status"
               #status="ngModel"
@@ -308,14 +312,27 @@
               </div>
             </div>
           </form>
-          <br />
 
-          <div>
+          <div style="padding: 2%;">
             <p class="dragd">Asignación de empresas</p>
           </div>
-          <br /><br /><br>
-
-          <br />
+        
+          <div>
+            <div class="input-group roud ">
+              <input
+                type="search"
+                class="form-control"
+                placeholder="Buscar Empresa"
+                aria-label="Buscar"
+                aria-describedby="search-addon"
+                [(ngModel)]="search2"
+                style="align-items: center"
+              />
+              <span class="input-group-text border-0 sear" id="search-addon">
+                <mat-icon>search</mat-icon>
+              </span>
+            </div>
+          </div><br>
           <div class="row">
             <div cdkDropListGroup>
               <!--OTRO DRAG-->
@@ -389,6 +406,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </div>

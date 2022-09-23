@@ -286,18 +286,19 @@
             </table>
           </blockquote>
         </div>
-          <div class="flex-container buttons" style="padding: 0%;">
+          <div class="flex-container buttons" >
           
-          <button
-              [disabled]="!addForm.form.valid"
-              type="button"
-              (click)="newProfile(addForm)"
-              class="btn btn-primary butt2"
-              style="background-color:#12579c ;"
-
-            >
-              Guardar
-            </button>
+       
+            <button
+            [disabled]="!addForm.form.valid"
+            type="button"
+            class="btn btn-primary butt2"
+            type="button"
+            (click)="newProfile(addForm)"
+            style="background-color: #12579c"
+          >
+            Guardar
+          </button>
           
 
         </div>
@@ -317,7 +318,7 @@
 
 
 
-  <div class="col-sm p-3  "   style="max-width: 60rem"      *ngIf="addProfile == false"  >
+  <div class="col-sm p-3  "       *ngIf="addProfile == false"  >
 
     <div class="resp hei">
       <div class="card cardHei border-primary ">
