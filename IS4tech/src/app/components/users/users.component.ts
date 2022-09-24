@@ -134,13 +134,14 @@ export class UsersComponent implements OnInit {
 
   habilitar() {
     this.addUser = true;
-    this.itemSelected=0 
+    this.itemSelected = 0;
     this.getEnterprises();
   }
 
   findById(id) {
     this.addUser = false;
     this.getEnterprises();
+    this.empresas = [];
     this.userService.getUser(id).subscribe({
       next: (response: any) => {
         this.getUser = response;
