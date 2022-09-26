@@ -4,6 +4,7 @@ import com.is4tech.practicas.ProyectoParaPracticasApplication;
 import com.is4tech.practicas.dto.ProfilesDTO;
 import com.is4tech.practicas.exception.ExistingRegisterException;
 import com.is4tech.practicas.exception.NotFoundException;
+import com.is4tech.practicas.exception.SyntaxErrorException;
 import com.is4tech.practicas.mapper.MapperProfile;
 import com.is4tech.practicas.bo.Profiles;
 import com.is4tech.practicas.repository.ProfileRepository;
@@ -45,15 +46,11 @@ public class ProfilesService {
 
 
     public void saveProfile(ProfilesDTO profilesDTO) {
-        if (!profilesDTO.getName().matches(ProyectoParaPracticasApplication.NAME_EXPRESSION)) {
-            throw new ExistingRegisterException("El nombre no puede contener caracteres especiales ni espacios dobles.");
+        if (findByName(profilesDTO.getName()) != null || findByName(profilesDTO.getName().trim()) != null || findByName(profilesDTO.getName().toLowerCase()) != null || findByName(profilesDTO.getName().toUpperCase()) != null) {
+            throw new ExistingRegisterException("Ya existe un perfil con el mismo nombre.");
         } else {
-            if (findByName(profilesDTO.getName()) != null || findByName(profilesDTO.getName().trim()) != null || findByName(profilesDTO.getName().toLowerCase()) != null || findByName(profilesDTO.getName().toUpperCase()) != null) {
-                throw new ExistingRegisterException("Ya existe un perfil con el mismo nombre.");
-            } else {
-                Profiles model = mapperProfile.mapeo(profilesDTO);
-                profileRepository.save(model);
-            }
+            Profiles model = mapperProfile.mapeo(profilesDTO);
+            profileRepository.save(model);
         }
     }
 
@@ -65,7 +62,7 @@ public class ProfilesService {
 
     public void verification(Integer id, ProfilesDTO profilesDTO) {
         if (!profilesDTO.getName().matches(ProyectoParaPracticasApplication.NAME_EXPRESSION)) {
-            throw new ExistingRegisterException("El nombre no puede contener caracteres especiales ni espacios dobles.");
+            throw new SyntaxErrorException("El nombre no puede contener caracteres especiales ni espacios dobles.");
         } else {
             Profiles profile = findById(id);
             if (profilesDTO.getName().equals(profile.getName())) {

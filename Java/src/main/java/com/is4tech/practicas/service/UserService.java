@@ -7,6 +7,7 @@ import com.is4tech.practicas.dto.UsersEnterprisesDTO;
 import com.is4tech.practicas.exception.EmptyProfileException;
 import com.is4tech.practicas.exception.ExistingRegisterException;
 import com.is4tech.practicas.exception.NotFoundException;
+import com.is4tech.practicas.exception.SyntaxErrorException;
 import com.is4tech.practicas.mapper.MapperUser;
 import com.is4tech.practicas.bo.Users;
 import com.is4tech.practicas.bo.UsersEnterprises;
@@ -72,7 +73,7 @@ public class UserService {
     public void verification(Integer id, UserDTO userDTO) {
         UserDTO user = findById(id);
         if (!userDTO.getName().matches(ProyectoParaPracticasApplication.NAME_EXPRESSION)) {
-            throw new EmptyProfileException("El nombre no puede contener caracteres especiales ni espacios dobles.");
+            throw new SyntaxErrorException("El nombre no puede contener caracteres especiales, espacios dobles ni espacios al inicio o al final.");
         } else {
             if (!userDTO.getEmail().matches(ProyectoParaPracticasApplication.EMAIL_EXPRESSION)) {
                 throw new ExistingRegisterException("El email ingresado no es valido.");

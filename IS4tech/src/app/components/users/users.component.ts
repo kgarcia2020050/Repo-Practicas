@@ -173,12 +173,13 @@ export class UsersComponent implements OnInit {
 
   putProfile(id) {
     let userId: UserEnterprise[] = [];
-
+    this.nuevoArray = this.getUser.empresas;
     let arr: any = this.listNumbers1;
+
     userId = arr.filter((id) => {
       return id.userId != null && id.userId != undefined;
     });
-    this.nuevoArray = this.getUser.empresas;
+
     this.getUser.empresas = [];
 
     this.empresas = this.nuevoArray.filter((obj) => {
@@ -193,23 +194,15 @@ export class UsersComponent implements OnInit {
       });
     });
 
-    if (userId.length > 0) {
-      this.enterpriseService.deleteUserEnterprise(userId).subscribe({
-        next: () => {
-          console.log('exito');
-        },
-        error: (error: any) => {
-          console.log(error);
-        },
-      });
-    }
-
     this.userService.putUser(this.getUser, id).subscribe({
       next: () => {
         Swal.fire({
           icon: 'success',
           text: 'Usuario modificado exitosamente.',
         });
+        if (userId.length > 0) {
+          this.enterpriseService.deleteUserEnterprise(userId).subscribe();
+        }
         this.getUsers();
         this.empresas = [];
         this.getEnterprises();
@@ -255,13 +248,15 @@ export class UsersComponent implements OnInit {
   }
 
   postUsers(addForm) {
-    this.empresas.forEach((empresa) => {
-      this.postUser.empresas.push({
-        enterpriseId: empresa.id,
-        id: 0,
-        enterpriseName: empresa.name,
+    if (this.empresas.length > 0) {
+      this.empresas.forEach((empresa) => {
+        this.postUser.empresas.push({
+          enterpriseId: empresa.id,
+          id: 0,
+          enterpriseName: empresa.name,
+        });
       });
-    });
+    }
     this.userService.postUser(this.postUser).subscribe({
       next: () => {
         addForm.reset();
@@ -291,11 +286,7 @@ export class UsersComponent implements OnInit {
   }
 
   equals(source: User, target: User): boolean {
-    if (source.status) {
-      source.status = 1;
-    } else {
-      source.status = 0;
-    }
+    source.status = source.status ? 1 : 0;
     return (
       source.id === target.id &&
       source.name === target.name &&
